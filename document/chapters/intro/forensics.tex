@@ -1,0 +1,38 @@
+The process of nuclear forensics includes the analysis and interpretation of
+nuclear material to determine its history, whether that be intercepted spent
+nuclear fuel, uranium ore concentrate, or the debris from an exploded nuclear
+device. After the technical portion is complete, intelligence data can be used
+to aid in material attribution; this is the overall goal of nuclear forensics. 
+
+This study focuses on non-detonated materials, specifically, spent nuclear
+fuel. It is important to determine if some intercepted material is from a
+commercial fuel cycle or if it is meant for weapons production (and where the
+material was obtained from). 
+
+\todo{Workflow for determining SNF quantities of interest}: measure material, use
+isotope content and/or isotope ratios to determine things like reactor type,
+fuel type and enrichment at beginning of irradiation, cooling time, burnup.
+(Classification, Characterization, Interpretation (Analysis), Reconstruction
+(Attribution) - from the New Nuclear Forensics book) (Char methods to get
+isotopic ratios or use S/ML, Interp examples) After the material
+characteristics are measured, they are matched in a forensics database that
+includes some or all this information for pre-existing/pre-measured SNF. These
+databases are kept by individual countries, and a given database will have
+widely varying uncertainty depending where the material was measured as well as
+missing data in some fields.  Therefore, matching can be difficult.
+
+A lofty goal for the forensics community would be to develop methods that
+provide instantaneous information that is reliable enough to guide an
+investigation (e.g., within 24 hours). Fast measurements to provide isotopic
+ratios to calculate the above-mentioned fuel parameters of interest would
+provide this via some form of a handheld detector that measures gamma spectra.
+However, while this nondestructive analysis is rapid, it is also difficult to
+evaluate because of the presence of overlapping peaks.  Thus, gamma spectra
+give less information at a higher uncertainty than the near-perfect results of
+some destructive mass spectroscopy techniques, like TIMS\todo{find MS technique
+and citation}.  Additionally, within gamma spectroscopy techniques (e.g., field
+vs. lab detectors), uncertainties can vary significantly because of the
+detector reponse, environment, storage, electronics, etc.  However, using a
+well-trained machine-learned model may be able to overcome these inherent
+issues with gamma spectra. The current and future work of this study is
+designed with this in mind. 

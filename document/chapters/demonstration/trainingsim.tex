@@ -1,0 +1,20 @@
+This work begins by simulating the training and test sets described in ref
+(cite Dayman). As with the previous work, this will be done using SCALE 6.2
+\todo{cite}. Specifically, the ARP module of the activation and depletion code
+ORIGEN was used. \todo{add deets and citations}
+
+\todo{show table of training set space}
+The parameters of the training set are defined as follows. A smaller burnup
+than is typical for spent fuel from a commercial reactor is used in the
+previous work likely because stolen fuel pins for weapons use would not likely
+be at the end of their lifetime, as the plutonium of interest has decreased by
+then. A truly i.i.d. training set would go beyond this, but this is purely for
+demonstration with a single use case in mind. 
+
+\todo{show table of test set space}
+The previous work also used an external test set, designed to have values in
+between the trained values of burnup. This is implemented in this study but it
+is expected that cross-validation will better indicate the model performance.
+More specifically, using k-fold cross-validation is a common method to use in
+the application of machine learning to create more confidence in the resulting
+model. \todo{either explain or cite cross validation next}

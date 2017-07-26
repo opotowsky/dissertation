@@ -1,0 +1,51 @@
+\chapter{Introduction}
+\label{ch:intro}
+
+Fill me in, yo.
+
+\section{Motivation}
+\label{sec:motivation}
+
+In the event of a nuclear incident, such as the retrieval of stolen nuclear
+material or the detonation of a dirty bomb, it is necessary to learn as much as
+possible about the source of the materials in a timely manner. In the case of
+non-detonated special nuclear material, knowing the reactor parameters that
+produced it can point investigators in the right direction in order to
+determine the chain of custody of the interdicted material. Determining these
+parameters (e.g., reactor type, cooling time, burnup) requires first
+characterizing and calculating certain isotopic ratios, chemical compounds, or
+trace elements.  Both radiological methods (e.g., gamma spectroscopy) and
+ionization methods (e.g., mass spectroscopy) measure these quantities. Although
+both measurement techniques have a multitude of techniques within them and thus
+varying strengths and weaknesses, the main tradeoff is between time/cost and
+amount of information gained. 
+
+The results of these analytic techniques are then compared against existing
+databases to obtain the desired reactor parameters. These databases are highly
+multidimensional, and furthermore, are rife with missing data entries and
+inconsistent uncertainties. Direct comparison between measurement results and a
+database therefore may not yield accurate results. Thus, computational
+techniques have been developed by nuclear engineers to calculate the parameters
+relevant to nuclear forensics analysis. \todo{Cite inverse stuff, possibly
+adjoint?} Another approach with the uniqueness of requiring minimal domain
+knowledge is the use of statistical methods via machine learning algorithms to
+predict these characteristics or values. These algorithms can create a model
+using the database entries that enables "filling between the lines" of its
+entries. Additionally, having a machine-learned model may overcome the above
+challenges of multidimensionality, missing data, and irregular uncertainty.
+
+\subsection{Needs in Nuclear Forensics}
+\input{chapters/intro/forensics}
+
+\subsection{Contribution of Statistical Methods}
+\input{chapters/intro/statlearning}
+
+\section{Methodology}
+\label{sec:methodology}
+
+Talk about workflow here. Might need separate tex file. Prob should keep pretty
+simple since everything is discussed later in the demonstration part of the
+prelim. 
+
+\section{Goals}
+\input{chapters/intro/goals}
