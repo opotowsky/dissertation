@@ -14,9 +14,16 @@
 % You, the user, still hold the copyright to any document you produce
 % with this software (like your dissertation).
 
+
+%% To use the glossaries acronym package, you'll need to define any acronyms you intend to 
+%% use. You can define acronyms with \newacronym{label}[acronym]{written out form}
+%% To refer to them in the text use \gls{label}
+\usepackage[acronym,toc]{glossaries}
+\makeglossaries
+
 %% You should use natbib
 \IfFileExists{natbib.sty}{%
-\usepackage{natbib}%
+\usepackage[numbers,sort]{natbib}%
 }{}
 
 %% You probably need appendix, if you want appendices
@@ -26,7 +33,11 @@
 
 %% the spacing in memoir is weird, you'll need to use this
 \DisemulatePackage{setspace}
-\usepackage[onehalfspacing]{setspace}
+%\usepackage[onehalfspacing]{setspace}
+%\onehalfspacing
+% The above was the standard withesis spacing. For double spacing, which is 
+% required in the dissertation, do the following
+\usepackage[doublespacing]{setspace}
 
 %% List setup; the ``hanglist`` environment will allow you to have
 %% nicely-typeset enumerated lists (i.e. with the numbers hanging in
@@ -48,6 +59,7 @@
 \usepackage{amsthm}
 %\usepackage{theorem}
 \usepackage{hyperref}
+\usepackage[usenames]{color}
 
 \IfFileExists{mathpartir.sty}{%
 \usepackage{mathpartir}%
@@ -59,6 +71,16 @@
 }{}
 
 
+%% Custom Katy Huff Commands
+%% need xspace
+\usepackage{xspace}
+\newcommand{\fluxJ}{\overrightarrow{J} }
+\newcommand{\Cyclus}{\textsc{Cyclus}\xspace}
+\newcommand{\Cyder}{\textsc{Cyder}\xspace}
+\newcommand{\nucl}[2]{
+\ensuremath{^{#1}}\mbox{#2}
+}
+\usepackage{bigints}
 
 %% Get rid of ugly borders around PDF hyperlinks (e.g. for cross-references, bib entries, or URLs)
 \hypersetup{pdfborder = 0 0 0}
@@ -87,12 +109,12 @@
 \usepackage[LY1]{fontenc}
 
 %% Substitute your favorite serif and sans fonts here....
-\IfFileExists{tgpagella.sty}{%
+%\IfFileExists{tgpagella.sty}{%
 % TeX Gyre pagella, like Palatino
-\usepackage{tgpagella}%
-}{}
+%\usepackage{tgpagella}%
+%}{}
 
-\usepackage[LY1]{eulervm}
+%\usepackage[LY1]{eulervm}
 
 \ifpdf
 \usepackage[pdftex]{graphicx}
@@ -190,3 +212,12 @@
     \renewcommand{\bibsection}{\@memb@bsec}}{}
 }
 \makeatother
+
+%% Katy Huff Additions
+\DeclareMathOperator{\erf}{erf}
+\DeclareMathOperator{\erfc}{erfc}
+\usepackage{verbatim}
+\usepackage{tabularx}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{placeins}
