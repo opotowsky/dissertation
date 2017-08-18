@@ -11,8 +11,8 @@ While its use has been increasing in the commercial sector, there is also much
 anecdotal evidence to support the existence of a rapid increase of \gls{AI} use
 in academic research across many disciplines beyond robotics. \gls{AI} systems
 have been used in detection (e.g., fraud or spam), medical diagnostics, user
-analytics, and a host of scientific disciplines that have increasing amounts of
-multivariate data.
+analysis (e.g., Netflix ratings), and a host of scientific disciplines that
+have increasing amounts of multivariate data.
 
 Much of the recent advances to the field of \gls{AI} have occured in the
 statistical realm, which forgoes domain knowledge in favor of large data sets.
@@ -22,40 +22,86 @@ learning research focuses on the underlying algorithms using mathematical
 optimization, methods for pattern recognition, and computational statistics.
 As an application, however, this study is not concerned with computational
 time, but rather the ability to correctly predict values and categories
-relevant to the nuclear forensics mission. However, differences among the
-algorithms do impact the performance of a machine-learned model. Therefore the
-algorithms used in this study will be discussed.  
+relevant to the nuclear forensics mission. This restricts the relevancy of the
+algorithms to the underlying theory and its impact on the resulting model's
+accuracy. 
 
-Machine learning tools or no? (supervised learning, anomaly detection,
-clustering, ANNs, dim reduction)
+Machine learning algorithms can be separated into two main categories:
+unsupervised and supervised learning.  The former groups or interprets a set of
+input data, predicting patterns or structures. The latter includes both the
+input and output data, enabling the trained model to predict future outputs.
+Broadly speaking, the unsupervised learning algorithms are designed for
+clustering data sets or dimensionality reduction (i.e., determining some subset
+or linear combination of features most relevant to the input data) of data
+sets.  Supervised learning algorithms predict both discrete and continuous
+values via classification and regression, respectively. Some algorithms can
+perform both classification and regression, and neural networks can even be
+modified to perform either supervised or unsupervised learning. Additionally,
+various algorithms can be strung together, which is referred to as ensemble
+methods. One common way of doing this is performing deimensionality reduction
+prior to supervised learning.\todo{check that this common workflow qualifies as
+ensemble} 
+
+This study performs both classification and regression tasks using supervised
+learning algorithms.  Differences among the underlying mathematics \todo{phrase
+better} of the algorithms do impact the performance of a machine-learned model.
+Therefore the algorithms used in this study will be discussed in
+\ref{sec:algs}. Additionally, evaluating algorithm performance and robustly
+comparing them is important, and this discussion is in \ref{sec:selection}.
 
 \subsection{Classification and Regression Algorithms}
 \label{sec:algs}
 
-Blah blah I know it's only regression right now
+For relevant nuclear forensics predictions, both classification and regression
+algorithms must be used.  For example, one may want to predict the reactor type
+based on some measurements (referred to as features) of spent fuel of an
+unknown source, and this would require a classification algorithm. Or perhaps
+the input fuel composition is relevant to an investigation on weapons intent,
+so a regression algorithm would be used to train a model based on some set of
+features.  Since algorithm formulation impacts the resulting performance, they
+are discussed in detail below.  
 
-\subsubsection{Nearest Neighbor Regression}
-\label{sec:nnreg}
+\todo{should add useful vocab: training data X and y, instances, features, etc}
 
-\todo{intro, alg math, explain distance metrics} 
+\subsubsection{Linear Models}
+\label{sec:linear}
+
+One of the simplest and most obvious methods of prediction is a linear model using a least-squares 
+fit. 
+
+\subsubsubsection{Ridge Regression}
+\label{sec:ridge}
+
+not sure about this organization
+
+\subsubsubsection{Other Linear Stuff?}
+%\label{sec:other}
+
+\todo{intro, alg math, explain regularization} 
+
+not sure about this organization
+
+\subsubsection{Nearest Neighbor Methods}
+\label{sec:neighbor}
+
+Nearest neighrbor is 
+
+\todo{explain distance metrics} 
+
+
+\begin{equation}
+\hat{Y}(x) = \frac{1}{k} \sum_{x_i \in N_k(x)} y_i
+\end{equation}
 
 Nearest neighbor regression calculates a value based on the instance that is
 closest to it. The metrics for distance differ, but in this study, Euclidian
 distance was used. There is no learning in this regression, per se; the
 training set populates a space and the testing set is compared directly to
-that. 
+that. \cite{elements_stats} 
 
-\subsubsection{Ridge Regression}
-\label{sec:rreg}
 
-\todo{intro, alg math, explain regularization} 
-
-Ridge regression utilizes normal linear least squares regression, but with a
-parameter that penalizes correct answers to prevent overfitting, which is
-referred to as regularization. 
-
-\subsubsection{Support Vector Regression}
-\label{sec:svr}
+\subsubsection{Support Vector Machines}
+\label{sec:svm}
 
 \todo{add schematics from pres...or diff pics with the math?} 
 
@@ -98,3 +144,16 @@ is common to run the algorithm on a logarithmic grid from 10'-3 to 10'3 for
 each parameter. If plotted on a heatmap of accuracies given gamma and C, there
 will be a diagonal of ideal combinations that emerges. The lowest of these is
 usually chosen. 
+
+
+\subsubsection{Artificial Neural Networks}
+\label{sec:neural}
+
+dllllll
+
+
+\subsection{Comparing Models and Model Selection}
+\label{sec:selection}
+
+bias-variance tradeoff???
+
