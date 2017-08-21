@@ -1,1 +1,34 @@
-I have many goals. And chapter descriptions go here.
+The main purpose of this work is to evaluate the utility of statistical methods
+as an approach to determine nuclear forensics-relevant quantities as less
+information is available. Machine learning algorithms will be used to train
+models to provide these values (e.g., reactor type, time since irradiation,
+burnup) from the available information. The training data will be simulated
+using the ORIGEN tool \todo{cite}, which will provide an array of nuclide
+concentrations as the features ($X$) and the value of interest ($y$) is
+provided from the simulation inputs.  Information reduction will be carried out
+using computationally generated gamma spectra; the radionuclide concentrations
+from the simulations can be converted into gamma energies, which then undergo a
+detector response calculation to represent real gamma spectra as closely as
+possible. Machine learning best practices will be used to evaluate the
+performance of the chosen algorithms, and established statistical methods will
+be used to provide an interval of confidence in the model predictions
+\todo{correct lang?}.
+
+The necessary background is covered in Chapter \ref{ch:litrev}.  First, an
+introduction to the broader field of nuclear forensics is in Section
+\ref{sec:nfoverview} to place this work in the context of the technical mission
+areas. After that, a short discussion of the field of machine learning, the
+algorithms used, and validation methods are in Section \ref{sec:mlback}. A
+review of statistical methods being used in studies of forensics analysis is
+covered next in Section \ref{sec:stats4nf}. Lastly, Section \ref{sec:fcsim}
+includes information about the codes used to generate the training data, via
+fuel cycle simulation, detector response function, and isotope identification
+of gamma spectra. 
+
+After the existing work is discussed and the gap that this work will fill is
+identified, the experimental components are introduced next in Chapter
+\ref{ch:method}. A demonstration of the methodology is presented next in Chapter
+\ref{ch:demo}. Following these two chapters, Chapter xx %\ref{ch:proposal} 
+describes the thesis research proposal and corresponding hypotheses. 
+Finally, future directions and alternative directions are identified in 
+Chapter xx. %\ref{ch:future}
