@@ -1,29 +1,114 @@
 Nuclear forensics comprises a large part of an investigation into a nuclear
 incident, such as interdicted nuclear material or the detonation of a weapon
-containing radioactive components.  The forensics portion of the investivation
+containing radioactive components.  The forensics portion of the investigation
 encompasses both the analysis of nuclear material and/or related paraphrenalia
 as well as the interpretation of these results to establish nuclear material
 provenance. The former has many technical aspects, relying on a range of
 nuclear science and chemistry.  The latter involves intelligence and political
-considerations of the material analyses. This review will only consider the
-technical portion of the nuclear forensics workflow.
+considerations of the material analyses for attribution. This review will only
+consider the technical portion of the nuclear forensics workflow.
 
 Furthermore, the technical programs researching improvements to the \gls{US}'s
 nuclear forensics capabilities are split between the type of material being
 investigated. The analysis of irradiated debris from a weapon has different
-collection and measurement requirements from recovered \gls{SNF} stolen from a
-commercial reactor. This separates the field into post-detonation and pre-detonation 
-nuclear forensics. While both are discussed in Sections \ref{sec:postdet} 
-and \ref{sec:predet}, respectively, there is more focus on pre-detonation 
-topics since this work is based on \gls{SNF}.
+collection and measurement requirements than recovered \gls{SNF} from a
+commercial reactor. This separates the field into post-detonation and
+pre-detonation nuclear forensics. While both are discussed in Sections
+\ref{sec:postdet} and \ref{sec:predet}, respectively, there is more focus on
+pre-detonation topics since this work is based on \gls{SNF}.
 
-\subsection{Post-Detonation Nuclear Forensics}
+Additionally, nuclear forensics is a traditional inverse problem, which has
+been well documented in mathematics and many scientific disciplines.
+Understanding inverse problem theory can help systematically define both the
+solution methods and their limitations. An introduction to the topic as well as
+its application to nuclear forensics is discussed in \ref{sec:inverse}
+
+\subsection{Types of Nuclear Forensics Investigations}
+\label{sec:types}
+
+\subsubsection{Post-Detonation}
 \label{sec:postdet}
 
+Post-det
 
-\subsection{Pre-Detonation Nuclear Forensics}
+\subsubsection{Pre-Detonation}
 \label{sec:predet}
 
+Pre-det
 
+\subsection{Nuclear Forensics as an Inverse Problem}
+\label{sec:inverse}
 
+More inverse intro here.
 
+As outlined in \todo{cite inverse theory text}, the study of a typical physical
+system encompasses three areas/steps?:
+\begin{enumerate}[(i)]
+\setlength{\itemsep}{1pt}
+\item model parameterization 
+\item forward problem predicting measurement values given model parameters 
+\item inverse problem predicting model parameters given measurement values 
+\end{enumerate}
+
+This shows that it is important to consider the parameters that comprise a
+model; this is denoted as the \textit{model space}. This is not every
+measurable quantity; domain knowledge is necessary to determine the model
+space. In the nuclear forensics context for spent nuclear fuel, this would
+consist of, e.g., several isotopic ratios because they are known to have a
+relationship with the reactor parameters that created the fuel of interest.
+Understanding the physical system also requires an understanding of the forward
+problem: predicting how a certain set of model parameters will affect the
+resulting measurements. The breadth of these end measurements provides the
+\textit{data space}, which are all the conceivable results of a given forward
+problem. So for spent nuclear fuel this would be, perhaps, the range of
+isotopic ratios typical of a commercial reactor. Lastly, the inverse problem is
+statistical in nature: given some solution, there is a probability that the
+data measured is caused by some value(s) of a model parameter. Additionally,
+including measurement uncertainties broadens the linear model to a probability
+density of the parameters. The opposite is also true in the forward case:
+including parameter uncertainties broadens the forward problem results to a
+probability density of the potential measurement values.
+
+In this way, we can define some probability that the answer is correct, given a
+set of measurements and their uncertainty. Inverse problem theory states that
+this follows the general form of Bayes' theorem, which is commonly expressed as
+follows:
+\begin{equation}
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+\end{equation}
+where $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that events
+$A$ and $B$ will occur, respectively, $P(B|A)$ is the prior probability that event 
+$B$ will occur given a known result for $A$, and $P(A|B)$ is the posterior 
+probability that event $A$ will occur given a known result for $B$.
+
+This is can be mapped easily to the inverse physical system problem scenario.
+$A$ would represent an occurence of a parameter in the model space, and $B$
+would represent the measurement of some value. Thus, $P(A)$ is the probability
+of a parameter existing without any knowledge of $B$. This is known as the
+likelihood, usually given by some theory about the system. $P(B)$ is the
+probability of some measurement existing without any knowledge of $A$. This is
+known as the marginal likelihood, which is some homogeneous concept for the
+potential measurements that could be made (this only serves to scale to
+absolute probabilities and does not affect the relative probabilities). The
+prior probability $P(B|A)$ is the chance that a measurement is observed from a
+given parameter, representing the forward problem.  Lastly, the posterior
+probability is the chance of some parameter existing given some measurement,
+representing the inverse problem solution.  It may be more intuitive to
+consider the conceptual version of Bayes' theorem below.  
+\begin{equation}
+Posterior = \frac{Prior * Likelihood}{Marginal \ Likelihood} 
+\end{equation} 
+A discussion of how these values are obtained takes place in Section
+\ref{sec:selection}.
+
+This framework is helpful for an experiment that intends to compare different
+methods for calculating the posterior probability of a system given some
+measurements.  In the nuclear forensics context of pre-detonated materials,
+this would be a a set of probabilities for different parameters of interest,
+e.g., reactor type, burnup, cooling time, and enrichment of some interdicted
+spent fuel. The prior probabilities are obtained by a large set of forward
+problems, e.g., a database of spent fuel recipes and parameters. The
+likelihoods are obtained in differing ways. One method is expert-elicited
+values. Another is a predicted model from some theory or previously known
+relationship, e.g., empirical relations between isotopic ratios and certain
+reactor parameters. 

@@ -46,8 +46,10 @@ This study performs both classification and regression tasks using supervised
 learning algorithms.  Differences among the underlying mathematics \todo{phrase
 better} of the algorithms do impact the performance of a machine-learned model.
 Therefore the algorithms used in this study will be discussed in
-\ref{sec:algs}. Additionally, evaluating algorithm performance and robustly
-comparing them is important, and this discussion is in \ref{sec:selection}.
+Section \ref{sec:algs}. Additionally, evaluating algorithm performance is 
+important and will be covered in Section \ref{sec:diagnostics}. Finally, 
+robustly comparing different algorithms continues the previous discussion on 
+inverse problem theory and is in Section \ref{sec:selection}.
 
 \subsection{Classification and Regression Algorithms}
 \label{sec:algs}
@@ -152,8 +154,22 @@ usually chosen.
 dllllll
 
 
-\subsection{Comparing Models and Model Selection}
+\subsection{Model Diagnostics}
+\label{sec:diagnostics}
+
+bias-variance tradeoff
+
+diagnostic and learning curves
+
+\subsection{Model Selection}
 \label{sec:selection}
 
-bias-variance tradeoff???
 
+All methods:
+Priors given by set of forward problems (input data space - ORIGEN sims)
+Likelihood given by model space, e.g.: 
+Model params as determined from ML alg
+(related) MLE from bayesian inference
+Direct inversion of matrix A
+Expert-elicited params (i.e. initial guesses for INDEPTH? Or optimized ones?)
+Marginal likelihood only needed for absolute measures - doesn’t affect relative probabilities
