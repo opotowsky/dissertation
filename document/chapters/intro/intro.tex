@@ -9,7 +9,7 @@ nuclear forensics. All of these efforts have been continually improving, but
 there was a gap regarding the ability of the \gls{US} to coordinate and respond
 to a nuclear incident, especially with the technical portion of nuclear
 forensics: characterization and analysis. After all, the first textbook on the
-topic was published in 2005 \todo{cite text}. In 2006, the \gls{US} \gls{DHS}
+topic was published in 2005 \cite{nftext_2005}. In 2006, the \gls{US} \gls{DHS}
 founded the \gls{NTNFC} within the \gls{DNDO}. The mission of the \gls{NTNFC}
 is to establish a robust nuclear forensics capability to attribute radioactive
 materials with demonstrable proof.
@@ -18,9 +18,9 @@ There are many fields that contribute to the nuclear forensics capability, such
 as radiochemical separations, material collection techniques, improving
 detector technology, material library development, and identifying forensic
 signatures. These needs vary based on whether the material being collected is
-post-detonation (i.e., bomb debris) or pre-detonation (i.e., spent nuclear
-fuel). In the pre-detonation realm, this project focuses on statistical methods
-to identify correlated material characteristics, which can lead to new forensic
+post-detonation (e.g., bomb debris) or pre-detonation (e.g., \gls{SNF}).  In
+the pre-detonation realm, this project focuses on statistical methods to
+identify correlated material characteristics, which can lead to new forensic
 signatures. 
 
 
@@ -28,22 +28,36 @@ signatures.
 \label{sec:motivation}
 
 Nuclear forensics is an important aspect of deterring nuclear terrorism even
-though it is not, at first glance, thought to be preventative nuclear security. 
+though it is not, at first glance, thought to be preventative nuclear security.
+The most common defense of the field is that nuclear forensics capability
+deters state actors, not terrorist organizations. While it is true that a
+strong capability encourages governments to be more active in prevention of
+nuclear terrorism, it can also deter the terrorist organizations as well by
+increasing their chances of failure. Less destructive success tends to be more
+valued than high-risk mass destruction. In addition to influencing governments
+and making nuclear terrorism higher risk for organizations, nuclear forensics
+can assist in cutting off certain suppliers of nuclear materials or
+technologies (e.g., nuclear specialists that are only involved for financial
+reasons, access to state suppliers).  Shutting off the sources builds a
+concrete barrier to nuclear terrorism.  Therefore, nuclear forensics is
+considered impede this form of terrorism in both tangible and abstract ways.
+\cite{aps_aaas_forensics}
 
-
-In the event of a nuclear incident, such as the retrieval of stolen nuclear
-material or the detonation of a dirty bomb, it is necessary to learn as much as
-possible about the source of the materials in a timely manner. In the case of
-non-detonated special nuclear material, knowing the reactor parameters that
-produced it can point investigators in the right direction in order to
-determine the chain of custody of the interdicted material. Determining these
-parameters (e.g., reactor type, cooling time, burnup) requires first
-characterizing and calculating certain isotopic ratios, chemical compounds, or
-trace elements.  Both radiological methods (e.g., gamma spectroscopy) and
-ionization methods (e.g., mass spectrometry) measure these quantities. Although
-both measurement techniques have a multitude of techniques within them and thus
-varying strengths and weaknesses, the main tradeoff is between time/cost and
-amount of information gained. 
+Following the prevention value of nuclear forensics, it is important to
+understand the process of the technical portion of the investigation and how
+that can be improved.  In the event of a nuclear incident, such as the
+retrieval of stolen \gls{SNM} or the detonation of a dirty bomb, it is
+necessary to learn as much as possible about the source of the materials in a
+timely manner. In the case of non-detonated \gls{SNM}, knowing the reactor
+parameters that produced it can point investigators in the right direction in
+order to determine the chain of custody of the interdicted material.
+Determining these parameters (e.g., reactor type, cooling time, burnup)
+requires first characterizing and calculating certain isotopic ratios, chemical
+compounds, or trace elements.  Both radiological methods (e.g., gamma
+spectroscopy) and ionization methods (e.g., mass spectrometry) measure these
+quantities. Although both measurement techniques have a multitude of techniques
+within them and thus varying strengths and weaknesses, the main tradeoff is
+between time/cost and amount of information gained. 
 
 The results of these analytic techniques are then compared against existing
 databases to obtain the desired reactor parameters. These databases are highly
@@ -51,26 +65,28 @@ multidimensional, and furthermore, are rife with missing data entries and
 inconsistent uncertainties. Direct comparison between measurement results and a
 database therefore may not yield accurate results. Thus, computational
 techniques have been developed by nuclear engineers to calculate the parameters
-relevant to nuclear forensics analysis. \todo{Cite inverse stuff, possibly
-adjoint?} Another approach with the uniqueness of requiring minimal domain
+relevant to nuclear forensics analysis \cite{weber_2006, weber_2010,
+weber_2011}. Another approach with the uniqueness of requiring minimal domain
 knowledge is the use of statistical methods via machine learning algorithms to
-predict these characteristics or values. These algorithms can create a model
-using the database entries that enables "filling between the lines" of its
-entries. Additionally, having a machine-learned model may overcome the above
-challenges of multidimensionality, missing data, and irregular uncertainty.
+predict these characteristics or values \cite{dayman_feasibility_2013,
+robel_2009, nicolaou_2006, nicolaou_2009, nicolaou_2014, jones_snf_2014,
+jones_viz_2014}. These algorithms can create a model using the database entries
+that enables "filling between the lines" of its entries. Additionally, having a
+machine-learned model may overcome the above challenges of multidimensionality,
+missing data, and irregular uncertainty.
 
 \subsection{Needs in Nuclear Forensics}
 \input{chapters/intro/forensics}
+\label{sec:nfneeds}
 
 \subsection{Contribution of Statistical Methods}
 \input{chapters/intro/statlearning}
+\label{sec:statscontrib}
 
 \section{Methodology}
 \label{sec:methodology}
 
-Talk about workflow here. Might need separate tex file. Prob should keep pretty
-simple since everything is discussed later in the demonstration part of the
-prelim. 
+Talk about workflow here.
 
 \section{Goals}
 \input{chapters/intro/goals}

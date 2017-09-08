@@ -6,51 +6,53 @@ to aid in material attribution; this is the overall goal of nuclear forensics.
 
 After a nuclear incident, the material or debris is sampled and evaluated
 through many techniques that provide the following information: material
-structure, chemical and elemental measurements, and radioisotope measurements.
-These measurements or calculated ratios comprise the forensic signatures of the
-sample in question. These signatures can be analyzed with specific domain
-knowledge; for example, \gls{UOC} will have trace elements depending on where
-it was mined from.  They can also be analyzed against a forensics database, in
-the case of \gls{SNF}.
+structure, chemical and elemental compositions, and radioisotopic compositions
+and/or ratios.  These measurements or ratios comprise the forensic signatures
+of the sample in question. These signatures can be analyzed with specific
+domain knowledge; for example, \gls{UOC} will have trace elements depending on
+where it was mined from.  They can also be analyzed against a forensics
+database in the case of \gls{SNF}.
 
 Measurement needs and techniques vary vastly depending on the material, as does
 the type of signature. This study focuses on non-detonated materials,
 specifically, \gls{SNF}. It is important to determine if some intercepted
-material is from an undisclosed reactor or a commercial fuel cycle to attribute
-it to an entity or state. This is typically done by obtaining chemical and
-elemental signatures as well as isotopic ratios, and comparing these
-measurements to those in an existing forensics database of reference \gls{SNF}. 
-
-The signatures for \gls{SNF} correlate to several characteristics of quantities
-that can, in a best case scenario, point to the exact reactor from which the
-fuel was intercepted. The reactor parameters of interest are the reactor type,
-fuel type and enrichment at beginning of irradiation, cooling time, burnup.
-\todo{need citation, prob ORNL paper} \todo{more deets here? prob better later}
+\gls{SNF} is from an undisclosed reactor or a commercial fuel cycle to
+attribute it to an entity or state. This is typically done by obtaining select
+chemical and elemental signatures and isotopic ratios, and comparing these
+measurements to those in an existing forensics database of reference \gls{SNF}.
+The signatures for \gls{SNF} correlate to characteristics that can, in a best
+case scenario, point to the exact reactor from which the fuel was intercepted.
+The reactor parameters of interest are the reactor type, fuel type and
+enrichment at beginning of irradiation, cooling time, burnup \cite{weber_2006,
+weber_2010, weber_2011}.
 
 The current and future work of this study are designed based on two primary
 needs to bolster the \gls{US} nuclear forensics capability: forensics databases
 are imperfect, and our best measurement techniques are not always feasible in
 an emergency scenario. It is proposed that using a machine-learned model may be
-able to combat these issues, discussed in Section \todo{ref}. 
+able to combat these issues; this is introduced next in Section
+\ref{sec:statscontrib}. 
 
-Forensics databases are kept by individual countries, and a given database will
-have widely varying uncertainty depending where and on what instrument the
-material was measured. Additionally, some fields have missing data. This
-presents issues with matching and characterizing \gls{SNF} based on
-interpolating between entries. \todo{more deets and cite}
+\gls{SNF} database imperfection is three-fold. First, forensics databases are
+kept by individual countries, and thus do not include a measurements from other
+reactor technologies around the world. Additionally, a given database will have
+widely varying uncertainty depending where and on what instrument the material
+was measured. Lastly, some fields in these databases have missing entries,
+which presents issues with matching and characterizing \gls{SNF} based on
+interpolating between entries. \todo{cite}
 
-A lofty goal for the forensics community would be to develop methods that
-provide instantaneous information, reliable enough to guide an investigation
-(e.g., within 24 hours). In the case of \gls{SNF}, it takes weeks in a lab to
-measure isotopes via advanced gamma spectroscopy and mass spectrometry
-equipment. Thus, fast measurements to provide isotopic ratios to calculate the
-above-mentioned fuel parameters of interest would provide this via some form of
-a handheld detector that measures gamma spectra.  However, while this
+The second broad need within the forensics community is post-incident rapid
+characterization. A lofty goal would be to develop methods that provide
+instantaneous information, reliable enough to guide an investigation (e.g.,
+within 24 hours). In the case of \gls{SNF}, it takes weeks in a lab to measure
+isotopes via advanced (cooled detector) gamma spectroscopy and mass
+spectrometry equipment. A handheld detector that measures gamma spectra could
+provide the fast measurements to calculate isotopic ratios for the
+above-mentioned fuel parameters of interest.  However, while this
 nondestructive analysis is rapid, it is also difficult to evaluate because of
-the presence of overlapping peaks. Thus, gamma spectra give less information at
-a higher uncertainty than the near-perfect results of some destructive mass
+the presence of overlapping peaks and the fact that uncertainties differ
+significantly because of the detector reponse, environment, storage,
+electronics, etc. Broadly speaking, gamma spectra give less information at a
+higher uncertainty than the near-perfect results of some destructive mass
 spectrometry techniques, like TIMS\todo{find MS technique and citation}.
-Additionally, within gamma spectroscopy techniques (e.g., field vs. lab
-detectors), uncertainties can vary significantly because of the detector
-reponse, environment, storage, electronics, etc. \todo{fix up and summary}
 

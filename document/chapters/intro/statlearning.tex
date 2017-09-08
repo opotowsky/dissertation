@@ -1,53 +1,21 @@
-While different machine learning algorithms and parameters will be
-investigated, it is first important to determine if statistical methods can
-overcome the inherent database deficiencies. Thus, this paper focuses on
-probing the amount of information required to obtain realistic results.  This
-can be best understood as the analgous real-world scenario. Although mass
-spectroscopy techniques provide extremely accurate isotopic information, they
-are time-consuming and more expensive. And although gamma spectroscopy can give
-extremely fast results cheaply, it only measures certain radiological signals
-and is influenced by many environmental factors, storage, and self-attenuation.
-
-\todo{assumes previous section on fuel cycle sim} In the simulation and machine
-learning paradigm, we need to determine what exactly is needed to train a
-machine-learned model. Of interest to an entity trying to create a weapon is
-partially irradiated fuel if they have plutonium separations capabilities or
-any radioactive substance in the case of a dirty bomb. Addressing the former,
-we used a set of simulations of spent nuclear fuel at different burnups and
-cooling times. 
-
-Can the algorithm overcome the deficiencies of gamma detection and still
-provide useful results? Or does it need more information, e.g., exact
-isotopics? Thus, ultimately, the goal is to answer the question \textit{How
-does the ability to determine forensic-relevant spent nuclear fuel attributes
-degrade as less information is available?}. 
-
-But first, we must establish some baseline expectations of reactor parameter
-prediction and algorithms to use.  This work is based off previous work on the
-subject (cite Dayman) regarding machine learning performace with respect to
-information reduction, and expands upon it by also evaluating a more advanced
-machine learning algorithm: support vector regression. Below is a more in depth
-discussion of nuclear forensics and how machine learning can contribute to this
-research area. After that, an experimental design is outlined. Lastly, the
-results are presented and discussed. 
-
-
-%%%%%
-
-Given imperfect data with varying amounts of uncertainty as well as the
-required comparison to highly multidimensional databases with missing entries,
-many have begun considering computational approaches to nuclear forensics
-problems, such as the INDEPTH\todo{cite and discuss}
+As previously mentioned, there are two main issues that are being addressed for
+forensics of \gls{SNF}: database issues and speed of characterization. Many
+have begun considering computational approaches to nuclear forensics problems,
+such as the INDEPTH tool for inverse depletion and decay analysis
+\cite{weber_2006, weber_2010, weber_2011}. This tool uses an iterative
+optimization method involving many forward simulations to obtain reactor
+parameters of interest given some initial values. 
 
 Another approach utilizes artificial intelligence to solve nuclear forensics
-problems, such as implementing searching algorithms for database comparison and
-machine learning for determining spent fuel characteristics \todo{cite
-hungarian guy, viz guy, dayman paper}.  A variety of statistical and machine
-learning tools have been used to characterize spent fuel by predicting
-categories or labels (reactor type, fuel type) as well as predicting values
-(burnup, initial enrichment, or cooling time) The former uses classification
-algorithms and the latter uses regression algorithms. Many algorithms can be
-applied to both cases.
+problems, such as implementing searching algorithms for the database comparison
+step \cite{gey_search} and machine learning for determining reactor parameters
+from \gls{SNF} characteristics \cite{dayman_feasibility_2013, nicolaou_2006,
+nicolaou_2009, nicolaou_2014, robel_2009, jones_viz_2014, jones_snf_2014}.  A
+variety of statistical and machine learning tools have been used to
+characterize spent fuel by predicting categories or labels (reactor type, fuel
+type) as well as predicting values (burnup, initial enrichment, or cooling
+time) The former uses classification algorithms and the latter uses regression
+algorithms. Many algorithms can be applied to both cases.
 
 A typical (supervised) machine learning workflow would take a set of training
 data with labels or values inserted into some statistical learner, calculate
@@ -73,9 +41,57 @@ diagnostic plot?}
 
 Algorithm choice is usually based on what is being predicted and intuition
 regarding strengths and weaknesses.  For the sake of comparison (i.e. weak
-validation), some machine learning approaches here are based on previous
-work\todo{cite dayaman} while also extending to a more complex model via an
-algorithm that is known to handle highly dimensional data sets well. Thus, this
-paper investigates three regression algorithms: nearest neighbor, ridge, and
-support vectors.
+validation), some machine learning approaches here are based on previous work
+\cite{dayman_feasibility_2013} while also extending to a more complex model
+via an algorithm that is known to handle highly dimensional data sets well.
+Thus, this paper investigates three regression algorithms: nearest neighbor,
+ridge, and support vectors.
+
+
+It is first important to determine if statistical methods can
+overcome the inherent database deficiencies. Next, the statistical methods must
+be considered in such a way as to represent a real-world scenario. Although
+mass spectrometry techniques provide extremely accurate isotopic information
+for analytical methods, they are time-consuming and more expensive. And
+although gamma spectroscopy can give extremely fast results cheaply, it only
+measures certain radiological signals and is influenced by many environmental
+factors, storage, and self-attenuation. As different machine learning
+algorithms and parameters are investigated, this work focuses on probing the
+amount of information required to obtain realistic results.
+
+Because creating databases from real measurements to represent reactor
+technologies from around the world is impossible, the database in this study
+will be created from high-fidelity simulations via ORIGEN irradiation and
+depletion \todo{check actual name of code part used}. In the simulation and
+statistical learning paradigm, we need to determine how much information to
+what quality is needed to train a machine-learned model; the model must give
+appropriate predictions of reactor parameters given a set of measurements from
+a test sample of interdicted \gls{SNF}. Of interest to an entity trying to
+create a weapon is partially irradiated fuel if they have plutonium separations
+capabilities or any radioactive substance in the case of a dirty bomb.
+Addressing the former, a set of simulations of \gls{SNF} at different burnups
+and cooling times will comprise the database.\todo{rewrite to be clearer}
+
+Can the algorithm overcome the deficiencies of gamma detection and still
+provide useful results? Or does it need more information, e.g., exact
+isotopics? First, we must establish some baseline expectations of reactor
+parameter prediction and how different algorithms perform. This work is based
+off previous work on the subject \cite{dayman_feasibility_2013} regarding
+machine learning performace with respect to information reduction, and expands
+upon it by also evaluating a more advanced machine learning algorithm: support
+vector regression. 
+
+
+
+Below is a more in depth discussion of nuclear forensics and
+how machine learning can contribute to this research area. After that, an
+experimental design is outlined. Lastly, the results are presented and
+discussed. 
+
+Thus, ultimately, the goal is to answer the question \textit{How
+does the ability to determine forensic-relevant spent nuclear fuel attributes
+degrade as less information is available?}. 
+
+%%%%%
+
 
