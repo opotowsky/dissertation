@@ -1,3 +1,9 @@
+I am SCALE \cite{scale}, an experimental component!
+
+I am \gls{ORIGEN-ARP} \cite{origen}, another experimental component!
+
+I am \gls{GADRAS-DRF} \cite{gadras}, yet another experimental component!
+
 This work begins by simulating the training and test sets described in ref
 (cite Dayman). As with the previous work, this will be done using SCALE 6.2
 \todo{cite}. Specifically, the ARP module of the activation and depletion code
@@ -18,3 +24,16 @@ is expected that cross-validation will better indicate the model performance.
 More specifically, using k-fold cross-validation is a common method to use in
 the application of machine learning to create more confidence in the resulting
 model. \todo{either explain or cite cross validation next}
+
+\subsection{Information Reduction}
+
+This study evaluates the impact of randomly introduced error of varying amounts
+on the ability of the algorithms to correctly predict the burnup. Thus, first
+investigated are the three algorithms with no error introduced, and next with
+the random errors applied uniformly to each nuclide vector. Since error in a
+nuclide vector is not random, in fact it is systematic and dependent on a
+number of known sources of uncertainty, the next study will introduce error by
+limiting the nuclides to only those that can be measured with a gamma
+spectrometer (future work).
+
+
