@@ -86,7 +86,52 @@ missing data, and irregular uncertainty.
 \section{Methodology}
 \label{sec:methodology}
 
-Talk about workflow here.
+\todo{more deets, this is just copied from too-lengthy intro}
+
+Training Data: Because creating databases from real measurements to represent reactor
+technologies from around the world is impossible, the database in this study
+will be created from high-fidelity simulations via ORIGEN irradiation and
+depletion \todo{check actual name of code part used}. In the simulation and
+statistical learning paradigm, we need to determine how much information to
+what quality is needed to train a machine-learned model; the model must give
+appropriate predictions of reactor parameters given a set of measurements from
+a test sample of interdicted \gls{SNF}. Of interest to an entity trying to
+create a weapon is partially irradiated fuel if they have plutonium separations
+capabilities or any radioactive substance in the case of a dirty bomb.
+Addressing the former, a set of simulations of \gls{SNF} at different burnups
+and cooling times will comprise the database.\todo{rewrite to be clearer}
+
+Choice: Algorithm choice is usually based on what is being predicted and intuition
+regarding strengths and weaknesses of different optimizations.  For a
+benchmarking excercise, some machine learning approaches here were chosen based
+on previous work \cite{dayman_feasibility_2013}: nearest neighbor and ridge
+regression. This work will also extend to a more complex model via an algorithm
+that is known to handle highly dimensional data sets well: support vector
+regression.  These algorithms are introduced in \label{sec:algs}.
+
+Evaluation and Diagnostics: To obtain reliable models, one must both choose or create a training set
+carefully and study the impact of various algorithm parameters on the error.
+Many algorithms are developed on an assumption that the training set will be
+independent and identially distributed (i.i.d.). This is important so that the
+model does not overvalue or overfit a certain area in the training space. The
+testing error can therefore be tabulated with respect to training set size,
+number of features, or algorithm parameters (regularization terms, etc). The
+results are broadly known as diagnostic plots. 
+
+Validation: inverse prob theory
+
+Can the algorithm overcome the deficiencies of gamma detection and still
+provide useful results? Or does it need more information, e.g., exact
+isotopics? First, we must establish some baseline expectations of reactor
+parameter prediction and how different algorithms perform. This work is based
+off previous work on the subject \cite{dayman_feasibility_2013} regarding
+machine learning performace with respect to information reduction, and expands
+upon it by also evaluating a more advanced machine learning algorithm: support
+vector regression. 
+
+Thus, ultimately, the goal is to answer the question \textit{How
+does the ability to determine forensic-relevant spent nuclear fuel attributes
+degrade as less information is available?}. 
 
 \section{Goals}
 \input{chapters/intro/goals}

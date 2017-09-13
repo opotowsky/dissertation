@@ -12,86 +12,35 @@ step \cite{gey_search} and machine learning for determining reactor parameters
 from \gls{SNF} characteristics \cite{dayman_feasibility_2013, nicolaou_2006,
 nicolaou_2009, nicolaou_2014, robel_2009, jones_viz_2014, jones_snf_2014}.  A
 variety of statistical and machine learning tools have been used to
-characterize spent fuel by predicting categories or labels (reactor type, fuel
-type) as well as predicting values (burnup, initial enrichment, or cooling
-time) The former uses classification algorithms and the latter uses regression
-algorithms. Many algorithms can be applied to both cases.
+characterize spent fuel by predicting categories or labels (e.g., reactor type, fuel
+type) as well as predicting values (e.g., burnup, initial enrichment, cooling
+time). The former uses classification algorithms and the latter uses regression
+algorithms, many of which can be altered to perform both classification and 
+regression.
 
-A typical (supervised) machine learning workflow would take a set of training
-data with labels or values inserted into some statistical learner, calculate
-some objective, minimize or maximize that objective, and provide some model
-based on that output. Then a test set (with known values) is provided to the
-model so that its performance can be evaluated and finalized. After model
-finalization, a user can provide a single instance and a value can be predicted
-from that. \todo{insert ML schematic}
+As shown in Figure \ref{fig:supervised}, a typical (supervised) machine
+learning workflow begins with a training data set, which has a number of
+instances.  Each instance has some attributes (aka features) and a label, which
+can be a categorical label or discrete/continuous values.  The training data
+are then inserted into a statistical learner; this calculates some objective,
+minimizes or maximizes that objective, and provides some model. This model is
+typically evaluated using a test set that has the same set of attributes and
+labels (but different instances). The comparison of what the model predicts and
+the actual label gives the \textit{testing error}. Depending on the performance
+and application, the model may need improvement from more training and/or some
+changes in the algorithm parameters. Once the model is performing well enough,
+it is finalized; then a user can provide a single instance and a value can be
+predicted from that. 
 
-To obtain reliable models, one must 1. choose/create a training set carefully
-and 2. study the impact of various algorithm parameters on the error. Many
-algorithms are developed on an assumption that the training set will be
-independent and identially distributed (i.i.d.). [Aside: there are ways to
-handle skewed data sets] This is important so that the model does not overvalue
-or overfit a certain area in the training space. Additionally, algorithm
-performance (or error) can be optimized with respect to training set size,
-number of features, or algorithm parameters (regularization terms, etc).  These
-are known as diagnostic plots. When plotting the training and testing error
-with respect to the number of instances, this is known as a learning curve.
-When plotting these errors with respect to the number or features or algorithm
-parameters, this is known as a validation curve. \todo{insert example
-diagnostic plot?}
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{./chapters/intro/SupervisedRegression.png}
+  \caption{Schematic represnting the typical workflow of a statistical learning regression algorithm.}
+  \label{fig:supervised}
+\end{figure}
 
-Algorithm choice is usually based on what is being predicted and intuition
-regarding strengths and weaknesses.  For the sake of comparison (i.e. weak
-validation), some machine learning approaches here are based on previous work
-\cite{dayman_feasibility_2013} while also extending to a more complex model
-via an algorithm that is known to handle highly dimensional data sets well.
-Thus, this paper investigates three regression algorithms: nearest neighbor,
-ridge, and support vectors.
-
-
-It is first important to determine if statistical methods can
-overcome the inherent database deficiencies. Next, the statistical methods must
-be considered in such a way as to represent a real-world scenario. Although
-mass spectrometry techniques provide extremely accurate isotopic information
-for analytical methods, they are time-consuming and more expensive. And
-although gamma spectroscopy can give extremely fast results cheaply, it only
-measures certain radiological signals and is influenced by many environmental
-factors, storage, and self-attenuation. As different machine learning
-algorithms and parameters are investigated, this work focuses on probing the
-amount of information required to obtain realistic results.
-
-Because creating databases from real measurements to represent reactor
-technologies from around the world is impossible, the database in this study
-will be created from high-fidelity simulations via ORIGEN irradiation and
-depletion \todo{check actual name of code part used}. In the simulation and
-statistical learning paradigm, we need to determine how much information to
-what quality is needed to train a machine-learned model; the model must give
-appropriate predictions of reactor parameters given a set of measurements from
-a test sample of interdicted \gls{SNF}. Of interest to an entity trying to
-create a weapon is partially irradiated fuel if they have plutonium separations
-capabilities or any radioactive substance in the case of a dirty bomb.
-Addressing the former, a set of simulations of \gls{SNF} at different burnups
-and cooling times will comprise the database.\todo{rewrite to be clearer}
-
-Can the algorithm overcome the deficiencies of gamma detection and still
-provide useful results? Or does it need more information, e.g., exact
-isotopics? First, we must establish some baseline expectations of reactor
-parameter prediction and how different algorithms perform. This work is based
-off previous work on the subject \cite{dayman_feasibility_2013} regarding
-machine learning performace with respect to information reduction, and expands
-upon it by also evaluating a more advanced machine learning algorithm: support
-vector regression. 
-
-
-
-Below is a more in depth discussion of nuclear forensics and
-how machine learning can contribute to this research area. After that, an
-experimental design is outlined. Lastly, the results are presented and
-discussed. 
-
-Thus, ultimately, the goal is to answer the question \textit{How
-does the ability to determine forensic-relevant spent nuclear fuel attributes
-degrade as less information is available?}. 
-
-%%%%%
-
-
+This work evaluates to what degree statistical methods will be able to predict
+reactor parameters with respect to the type of training data used.  There is
+some promising work discussed in Section \ref{sec:stats4nf} that shows certain
+applications of machine learning can provide an additional tool for solving the
+forensics problem, both qualitatively (for visualization) and quantitatively
+(for prediction).
