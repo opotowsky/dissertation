@@ -18,26 +18,6 @@ time). The former uses classification algorithms and the latter uses regression
 algorithms, many of which can be altered to perform both classification and 
 regression.
 
-As shown in Figure \ref{fig:supervised}, a typical (supervised) machine
-learning workflow begins with a training data set, which has a number of
-instances.  Each instance has some attributes (aka features) and a label, which
-can be a categorical label or discrete/continuous values.  The training data
-are then inserted into a statistical learner; this calculates some objective,
-minimizes or maximizes that objective, and provides some model. This model is
-typically evaluated using a test set that has the same set of attributes and
-labels (but different instances). The comparison of what the model predicts and
-the actual label gives the \textit{testing error}. Depending on the performance
-and application, the model may need improvement from more training and/or some
-changes in the algorithm parameters. Once the model is performing well enough,
-it is finalized; then a user can provide a single instance and a value can be
-predicted from that. 
-
-\begin{figure}[h!]
-  \includegraphics[width=\linewidth]{./chapters/intro/SupervisedRegression.png}
-  \caption{Schematic represnting the typical workflow of a statistical learning regression algorithm.}
-  \label{fig:supervised}
-\end{figure}
-
 This work evaluates to what degree statistical methods will be able to predict
 reactor parameters with respect to the type of training data used.  There is
 some promising work discussed in Section \ref{sec:stats4nf} that shows certain

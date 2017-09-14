@@ -37,10 +37,30 @@ sets.  Supervised learning algorithms predict both discrete and continuous
 values via classification and regression, respectively. Some algorithms can
 perform both classification and regression, and neural networks can even be
 modified to perform either supervised or unsupervised learning. Additionally,
-various algorithms can be strung together, which is referred to as ensemble
-methods. One common way of doing this is performing deimensionality reduction
+various algorithms can be strung together, which is referred to as \textit{ensemble
+methods}. One common way of doing this is performing deimensionality reduction
 prior to supervised learning.\todo{check that this common workflow qualifies as
 ensemble} 
+
+As shown in Figure \ref{fig:supervised}, a typical (supervised) machine
+learning workflow begins with a training data set, which has a number of
+\textit{instances}, or rows of observations of .  Each instance has some \textit{attributes}, also referred to as \textit{features}, and a label, which
+can be a categorical label or discrete/continuous values.  The training data
+are then inserted into a statistical learner; this calculates some objective,
+minimizes or maximizes that objective, and provides some model. This model is
+typically evaluated using a test set that has the same set of attributes and
+labels (but different instances). The comparison of what the model predicts and
+the actual label gives the \textit{testing error}. Depending on the performance
+and application, the model may need improvement from more training and/or some
+changes in the algorithm parameters. Once the model is performing well enough,
+it is finalized; then a user can provide a single instance and a value can be
+predicted from that. 
+
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{./chapters/intro/SupervisedRegression.png}
+  \caption{Schematic represnting the typical workflow of a statistical learning regression algorithm.}
+  \label{fig:supervised}
+\end{figure}
 
 This study performs both classification and regression tasks using supervised
 learning algorithms.  Differences among the underlying mathematics \todo{phrase
