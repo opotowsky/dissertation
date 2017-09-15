@@ -1,13 +1,19 @@
-I am SCALE \cite{scale}, an experimental component!
+\subsubsection{\gls{SNF} Simulations}
+\label{sec:snfsim}
 
-I am \gls{ORIGEN-ARP} \cite{origen}, another experimental component!
+Because creating databases from real measurements to represent reactor
+technologies from around the world is impossible, the database in this study
+will be created from high-fidelity simulations via \gls{ORIGEN} \cite{origen},
+an activation and depletion code within the SCALE 6.2 modeling and simulation
+suite \cite{scale}. Specifically, the ARP module of the activation and
+depletion code ORIGEN was used: \gls{ORIGEN-ARP}.
 
-I am \gls{GADRAS-DRF} \cite{gadras}, yet another experimental component!
-
-This work begins by simulating the training and test sets described in ref
-(cite Dayman). As with the previous work, this will be done using SCALE 6.2
-\todo{cite}. Specifically, the ARP module of the activation and depletion code
-ORIGEN was used. \todo{add deets and citations}
+Of interest to an entity trying to create a weapon is partially irradiated fuel
+if they have plutonium separations capabilities or any radioactive substance in
+the case of a dirty bomb.  Addressing the former, a set of simulations of
+\gls{SNF} at different burnups and cooling times will comprise the database.
+The training database is constructed by simulating the same training set space
+as described in Ref. \cite{dayman_feasibility_2013}. 
 
 \todo{show table of training set space}
 The parameters of the training set are defined as follows. A smaller burnup
@@ -25,7 +31,15 @@ More specifically, using k-fold cross-validation is a common method to use in
 the application of machine learning to create more confidence in the resulting
 model. \todo{either explain or cite cross validation next}
 
-\subsection{Information Reduction}
+\subsubsection{Information Reduction}
+\label{sec:inforeduc}
+
+In the simulation and statistical learning paradigm, we need to determine how
+much information to what quality is needed to train a machine-learned model;
+the model must give appropriate predictions of reactor parameters given a set
+of measurements from a test sample of interdicted \gls{SNF}. 
+
+I am \gls{GADRAS-DRF} \cite{gadras}, yet another experimental component!
 
 This study evaluates the impact of randomly introduced error of varying amounts
 on the ability of the algorithms to correctly predict the burnup. Thus, first
