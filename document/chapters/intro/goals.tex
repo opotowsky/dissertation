@@ -3,15 +3,15 @@ as an approach to determine nuclear forensics-relevant quantities as less
 information is available. Machine learning algorithms will be used to train
 models to provide these values (e.g., reactor type, time since irradiation,
 burnup) from the available information. The training data will be simulated
-using the ORIGEN tool \todo{cite}, which will provide an array of nuclide
-concentrations as the features ($X$) and the parameters of interest ($y$) are
-provided from the simulation inputs.  Information reduction will be carried out
-using computationally generated gamma spectra; the radionuclide concentrations
-from the simulations can be converted into gamma energies, which then undergo a
-detector response calculation to represent real gamma spectra as closely as
-possible. Machine learning best practices will be used to evaluate the
-performance of the chosen algorithms, and inverse problem theory will
-be used to provide an interval of confidence in the model predictions.
+using the SCALE 6.2 code suite \cite{scale}, which will provide an array of
+nuclide concentrations as the features ($X$) and the parameters of interest
+($y$) are provided from the simulation inputs.  Information reduction will be
+carried out using computationally generated gamma spectra; the radionuclide
+concentrations from the simulations can be converted into gamma energies, which
+then undergo a detector response calculation to represent real gamma spectra as
+closely as possible. Machine learning best practices will be used to evaluate
+the performance of the chosen algorithms, and inverse problem theory will be
+used to provide an interval of confidence in the model predictions.
 
 The necessary background is covered in Chapter \ref{ch:litrev}.  First, an
 introduction to the broader field of nuclear forensics is in Section
