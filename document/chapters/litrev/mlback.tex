@@ -56,7 +56,7 @@ changes in the algorithm parameters. Once the model is performing well enough,
 it is finalized; then a user can provide a single instance and a value can be
 predicted from that. 
 
-\begin{figure}[h!]
+\begin{figure}[!htb]
   \includegraphics[width=\linewidth]{./chapters/intro/SupervisedRegression.png}
   \caption{Schematic representing the workflow of a statistical learning regression algorithm.}
   \label{fig:supervised}
@@ -174,19 +174,12 @@ usually chosen.
 dllllll
 
 
-\subsection{Model Diagnostics}
+\subsection{Model Diagnostics and Evaluation}
 \label{sec:diagnostics}
 
-It is first important to determine if statistical methods can overcome the
-inherent database deficiencies. After that, the statistical methods must be
-considered in such a way as to represent a real-world scenario. Although mass
-spectrometry techniques provide extremely accurate isotopic information for
-analytical methods, they are time-consuming and more expensive. And although
-gamma spectroscopy can give extremely fast results cheaply, it only measures
-certain radiological signals and is influenced by many environmental factors,
-storage, and self-attenuation. As different machine learning algorithms and
-parameters are investigated, this work focuses on probing the amount of
-information required to obtain realistic results.
+Because the creation of statistically learned models essentially occurs in a black-box,
+it is important to have  
+
 
 When plotting the training and testing error
 with respect to the number of instances, this is known as a learning curve.
@@ -194,11 +187,27 @@ When plotting these errors with respect to the number or features or algorithm
 parameters, this is known as a validation curve. \todo{insert example
 diagnostic plot?}
 
+Explain types of error (train, test, cv)
+
+Measure/metric of success of machine learning tool via 3 different types of error 
+
+Cross-Validation Error: error of model predictions versus cross-validation data (during training)
+
+Testing Error: error of model predictions versus test data
+
+Training Error: error of model predictions versus training data
+
+\begin{figure}[!htb]
+  \includegraphics[width=\linewidth]{./chapters/litrev/cverror.png}
+  \caption{Illustration of how a dataset can be split up for model evaluation.}
+  \label{fig:cverror}
+\end{figure}
+
 bias-variance tradeoff
 
 diagnostic and learning curves
 
-\subsection{Model Selection}
+\subsection{Model Comparison and Validation}
 \label{sec:selection}
 
 
