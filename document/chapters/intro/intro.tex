@@ -50,42 +50,11 @@ retrieval of stolen \gls{SNM} or the detonation of a dirty bomb, it is
 necessary to learn as much as possible about the source of the materials in a
 timely manner. In the case of non-detonated \gls{SNM}, knowing the reactor
 parameters that produced it can point investigators in the right direction in
-order to determine the chain of custody of the interdicted material.
-Determining these parameters (e.g., reactor type, cooling time, burnup)
-requires first characterizing and calculating certain isotopic ratios, chemical
-compounds, or trace elements.  Both radiological methods (e.g., gamma
-spectroscopy) and ionization methods (e.g., mass spectrometry) measure these
-quantities. Although both measurement techniques have a multitude of techniques
-within them and thus varying strengths and weaknesses, the main tradeoff is
-between time/cost and amount of information gained. 
-
-\begin{figure}[!htb]
-  \includegraphics[width=\linewidth]{./chapters/intro/ForensicsWorkflows.png}
-  \caption{Diagram showing how research on experimental and computational methodologies parallel the typical real-world scenario.}
-  \label{fig:nfworkflow}
-\end{figure}
-
-\begin{figure}[!htb]
-  \includegraphics[width=\linewidth]{./chapters/intro/CompStatForensicsWorkflow.png}
-  \caption{Diagram showing examples of forensics research using computational methodologies.}
-  \label{fig:nfworkflow}
-\end{figure}
-
-The results of these analytic techniques are then compared against existing
-databases to obtain the desired reactor parameters. These databases are highly
-multidimensional, and furthermore, are rife with missing data entries and
-inconsistent uncertainties. Direct comparison between measurement results and a
-database therefore may not yield accurate results. Thus, computational
-techniques have been developed by nuclear engineers to calculate the parameters
-relevant to nuclear forensics analysis \cite{weber_2006, weber_2010,
-weber_2011}. Another approach with the uniqueness of requiring minimal domain
-knowledge is the use of statistical methods via machine learning algorithms to
-predict these characteristics or values \cite{dayman_feasibility_2013,
-robel_2009, nicolaou_2006, nicolaou_2009, nicolaou_2014, jones_snf_2014,
-jones_viz_2014}. These algorithms can create a model using the database entries
-that enables "filling between the lines" of its entries. Additionally, having a
-machine-learned model may overcome the above challenges of multidimensionality,
-missing data, and irregular uncertainty.
+order to determine the chain of custody of the interdicted material.  Section
+\ref{sec:nfneeds} covers the specific needs of the nuclear forensics community
+for \gls{SNF} provenance, and Section \ref{sec:statscontrib} discusses how
+alternative computational approaches are useful, with a focus on why
+statistical methods in particular are being pursued. 
 
 \subsection{Needs in Nuclear Forensics}
 \input{chapters/intro/forensics}
@@ -151,4 +120,39 @@ does the ability to determine forensic-relevant spent nuclear fuel attributes
 degrade as less information is available?}. 
 
 \section{Goals}
-\input{chapters/intro/goals}
+
+The main purpose of this work is to evaluate the utility of statistical methods
+as an approach to determine nuclear forensics-relevant quantities as less
+information is available. Machine learning algorithms will be used to train
+models to provide these values (e.g., reactor type, time since irradiation,
+burnup) from the available information. The training data will be simulated
+using the SCALE 6.2 code suite \cite{scale}, which will provide an array of
+nuclide concentrations as the features ($X$) and the parameters of interest
+($y$) are provided from the simulation inputs.  Information reduction will be
+carried out using computationally generated gamma spectra; the radionuclide
+concentrations from the simulations can be converted into gamma energies, which
+then undergo a detector response calculation to represent real gamma spectra as
+closely as possible. Machine learning best practices will be used to evaluate
+the performance of the chosen algorithms, and inverse problem theory will be
+used to provide an interval of confidence in the model predictions.
+
+The necessary background is covered in Chapter \ref{ch:litrev}.  First, an
+introduction to the broader field of nuclear forensics is in Section
+\ref{sec:nfoverview} to place this work in the context of the technical mission
+areas. After that, a short discussion of the field of machine learning, the
+algorithms used, and validation methods are in Section \ref{sec:mlback}.
+Section \ref{sec:fcsim} includes information about the codes used to generate
+the training data, via fuel cycle simulation, detector response function, and
+isotope identification of gamma spectra.  Lastly, a review of statistical
+methods being used in studies of forensics analysis is covered next in Section
+\ref{sec:stats4nf}. 
+
+
+After the existing work is discussed and the gap that this work will fill is
+identified, the methodology is introduced next in Chapter \ref{ch:demo_method}.
+First, the experimental components and methods for validation are shown in
+Section \ref{sec:expmeth}, followed by demonstrations of the methodology in
+Section \ref{sec:expdemo}.  Chapter \ref{ch:proposal} summarizes the official
+thesis research proposal and corresponding hypotheses. Finally, future
+directions and alternative directions are identified in Chapter
+\ref{ch:future}.

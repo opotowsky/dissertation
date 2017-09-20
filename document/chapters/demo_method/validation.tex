@@ -1,33 +1,15 @@
-Evaluation and Diagnostics: To obtain reliable models, one must both choose or create a training set
-carefully and study the impact of various algorithm parameters on the error.
-Many algorithms are developed on an assumption that the training set will be
-independent and identially distributed (i.i.d.). This is important so that the
-model does not overvalue or overfit a certain area in the training space. The
-testing error can therefore be tabulated with respect to training set size,
-number of features, or algorithm parameters (regularization terms, etc). The
-results are broadly known as diagnostic plots. 
+\subsubsection{Model Diagnostics}
+\label{sec:algeval}
 
-Alg Compare: inverse prob theory
-
-As previously mentioned in the \todo{add label} demonstration section, the
-validation was carried out as a comparison of accuracies of the predicted
-classes (reactor type, \todo{other classification tasks?}) and values
-(enrichment amount \todo{or burnup?}) to the classes and values in the
-predetermined test data set (discussed in \todo{add label when this section is
-done}). 
-
-However, because it is difficult to ensure consistently representative testing
-data, the accuracy of a learned model should not depend on only one testing set
-\todo{general knowledge or citation?}. The learned model's accuracy can be
-better evaluated as discussed in \todo{the algorithm validation section} by
-using cross validation \todo{should this be introduced in the background?}.
-Other additional evaluation methods will be discussed here as well.  \todo{ROC
-curves, confidence intervals on error, confusion matrix if necessary}
-
-In addition to evaluating a single learned model, it may be beneficial to
-compare models. As discussed in \todo{the algorithm comparison section}, there
-are three methods that will be used: comparison of \gls{ROC} curves, scatter
-plots, and pairwise \textit{t}-tests.
+After training a model using a machine learning toolkit, 
+Want to show the difference between test/train error plots and CV/train error
+plots.  Determine some argument that perfers the latter. For the above
+categories in the validation section, can show plots directly next to each
+other (for 1, 2, 3) to hopefully show that cross validation provides better
+generalizability.
+1. Learning curve
+2. Validation curve
+3. Random error curve
 
 Additionally, machine learning algorithms are heavily dependent on the inputs
 and parameters given to them, such as training set sizes, learning rates,
@@ -52,31 +34,45 @@ averaged. The learning curves help determine if we are over- or under-training.
 The validation curves help determine the optimal way to be robust to over- and
 under-fitting. 
 
-%2. Regression Training Error: Confidence intervals on predictions to understand
-%true error versus sample error Test set must be > 30 instances, Can easily
-%calculate N\% confidence interval.
-1. Learning curve
-2. Validation curve
-3. Random error curve
+Evaluation and Diagnostics: To obtain reliable models, one must both choose or create a training set
+carefully and study the impact of various algorithm parameters on the error.
+Many algorithms are developed on an assumption that the training set will be
+independent and identially distributed (i.i.d.). This is important so that the
+model does not overvalue or overfit a certain area in the training space. The
+testing error can therefore be tabulated with respect to training set size,
+number of features, or algorithm parameters (regularization terms, etc). The
+results are broadly known as diagnostic plots. 
 
-Want to show the difference between test/train error plots and CV/train error
-plots.  Determine some argument that perfers the latter. For the above
-categories in the validation section, can show plots directly next to each
-other (for 1, 2, 3) to hopefully show that cross validation provides better
-generalizability.
+As previously mentioned in the \todo{add label} demonstration section, the
+validation was carried out as a comparison of accuracies of the predicted
+classes (reactor type, \todo{other classification tasks?}) and values
+(enrichment amount \todo{or burnup?}) to the classes and values in the
+predetermined test data set (discussed in \todo{add label when this section is
+done}). 
+
+However, because it is difficult to ensure consistently representative testing
+data, the accuracy of a learned model should not depend on only one testing set
+\todo{general knowledge or citation?}. The learned model's accuracy can be
+better evaluated as discussed in \todo{the algorithm validation section} by
+using cross validation \todo{should this be introduced in the background?}.
+Other additional evaluation methods will be discussed here as well.  \todo{ROC
+curves, confidence intervals on error, confusion matrix if necessary}
+
+\subsubsection{Model Comparison}
+\label{sec:algcompare}
+
+Regression Training Error: Confidence intervals on predictions to understand
+true error versus sample error Test set must be > 30 instances, Can easily
+calculate N\% confidence interval.
 
 Options for comparison of algorithms: inverse bayesian stuff, comparing
 classification of 2 classes on same ROC plot with multiple ML systems, Scatter
 plots, Pairwise t-tests.
 \todo{Discuss understanding confidence intervals in predictions.}
 
-\subsubsection{Algorithm Evaluation}
-\label{sec:algeval}
-
-Discuss
-
-\subsubsection{Algorithm Comparison}
-\label{sec:algcompare}
-
-Discuss
+Alg Compare: inverse prob theory
+In addition to evaluating a single learned model, it may be beneficial to
+compare models. As discussed in \todo{the algorithm comparison section}, there
+are three methods that will be used: comparison of \gls{ROC} curves, scatter
+plots, and pairwise \textit{t}-tests.
 
