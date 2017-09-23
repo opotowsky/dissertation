@@ -37,24 +37,25 @@ sets.  Supervised learning algorithms predict both discrete and continuous
 values via classification and regression, respectively. Some algorithms can
 perform both classification and regression, and neural networks can even be
 modified to perform either supervised or unsupervised learning. Additionally,
-various algorithms can be strung together, which is referred to as \textit{ensemble
-methods}. One common way of doing this is performing deimensionality reduction
-prior to supervised learning.\todo{check that this common workflow qualifies as
-ensemble} 
+various algorithms can be strung together, which is referred to as
+\textit{ensemble methods}. One common way of doing this is performing
+deimensionality reduction prior to supervised learning.\todo{check that this
+common workflow qualifies as ensemble} 
 
 As shown in Figure \ref{fig:supervised}, a typical (supervised) machine
 learning workflow begins with a training data set, which has a number of
-\textit{instances}, or rows of observations of .  Each instance has some \textit{attributes}, also referred to as \textit{features}, and a label, which
+\textit{instances}, or rows of observations of .  Each instance has some
+\textit{attributes}, also referred to as \textit{features}, and a label, which
 can be a categorical label or discrete/continuous values.  The training data
 are then inserted into a statistical learner; this calculates some objective,
 minimizes or maximizes that objective, and provides some model. This model is
 typically evaluated using a test set that has the same set of attributes and
 labels (but different instances). The comparison of what the model predicts and
-the actual label gives the \textit{testing error}. Depending on the performance
-and application, the model may need improvement from more training and/or some
-changes in the algorithm parameters. Once the model is performing well enough,
-it is finalized; then a user can provide a single instance and a value can be
-predicted from that. 
+the actual label gives the \textit{generalization error}. Depending on the
+performance and application, the model may need improvement from more training
+and/or some changes in the algorithm parameters. Once the model is performing
+well enough and validated, it is finalized; then a user can provide a single
+instance and a value can be predicted from that. 
 
 \begin{figure}[!htb]
   \includegraphics[width=\linewidth]{./chapters/intro/SupervisedRegression.png}
@@ -65,11 +66,11 @@ predicted from that.
 This study performs both classification and regression tasks using supervised
 learning algorithms.  Differences among the underlying mathematics \todo{phrase
 better} of the algorithms do impact the performance of a machine-learned model.
-Therefore the algorithms used in this study will be discussed in
-Section \ref{sec:algs}. Additionally, evaluating algorithm performance is 
-important and will be covered in Section \ref{sec:diagnostics}. Finally, 
-robustly comparing different algorithms continues the previous discussion on 
-inverse problem theory and is in Section \ref{sec:selection}.
+Therefore the algorithms used in this study will be discussed in Section
+\ref{sec:algs}. Additionally, evaluating algorithm performance is important and
+will be covered in Section \ref{sec:diagnostics}. Finally, robustly comparing
+different algorithms continues the previous discussion on inverse problem
+theory and is in Section \ref{sec:validation}.
 
 \subsection{Classification and Regression Algorithms}
 \label{sec:algs}
@@ -88,8 +89,8 @@ are discussed in detail below.
 \subsubsection{Linear Models}
 \label{sec:linear}
 
-One of the simplest and most obvious methods of prediction is a linear model using a least-squares 
-fit. 
+One of the simplest and most obvious methods of prediction is a linear model
+using a least-squares fit. 
 
 %\subsubsubsection{Ridge Regression}
 %\label{sec:ridge}
@@ -124,8 +125,6 @@ that. \cite{elements_stats}
 
 \subsubsection{Support Vector Machines}
 \label{sec:svm}
-
-\todo{add schematics from pres...or diff pics with the math?} 
 
 Support vector regression (SVR) is an extension of the popular classification
 algorithm, support vector machine (SVM).  This algorithm was chosen because of
@@ -171,31 +170,52 @@ usually chosen.
 \subsubsection{Artificial Neural Networks}
 \label{sec:neural}
 
-dllllll
+prob will delete
 
+\subsection{Model Selection and Assessment}
+\label{sec:selectass}
 
-\subsection{Model Diagnostics and Evaluation}
-\label{sec:diagnostics}
+Step 1 is model selection then assessment. Selection is estimating model
+performance (via CV set) among a set of trained models. After one model is
+chosen, assessment takes place by determining the prediction capability on new
+data (via a testing set).  Why have two?  Validation set can be re-used on all
+models, test set can only be used once (it should be invisible prior to the
+testing phase).  In k-fold cross val, this is done all at once (selection is
+pretty much based on the average performance of each fold's model). 
 
-Because the creation of statistically learned models essentially occurs in a black-box,
-it is important to have  
+MATHS: Somewhere, discuss J functions (target function, objective function) and
+how that is essentially error the alg is trying to minimize. Also need to
+discuss the concept of regularization.
 
+\begin{figure}[!htb]
+  \includegraphics[width=\linewidth]{./chapters/litrev/BVtradeoff.png}
+  \caption{Optimize that.}
+  \label{fig:bvtradeoff}
+\end{figure}
 
-When plotting the training and testing error
-with respect to the number of instances, this is known as a learning curve.
-When plotting these errors with respect to the number or features or algorithm
-parameters, this is known as a validation curve. \todo{insert example
-diagnostic plot?}
+Evaluating the \textit{generalization} (i.e., prediction capability) of a
+machine-learned model is important because the creation of statistically
+learned models is a hidden process. This is done by taking a small portion of
+the data set, and setting it aside as a testing set.  The rest of the data set
+is known as the training set and is used to train a model. After training, the
+test set is used to test the model.  
 
-Explain types of error (train, test, cv)
+The generalization error is typically referred to as the \textit{testing
+error}, as it is measuring the ability of the model to predict future cases
+that were not introduced in the training phase (i.e., the test set entries).
+Next, the \textit{training error} is provided by comparing the model
+predictions to the training set, as the model would likely be smoother than the
+potential noise the training set would include. This is useful to determine the
+fitness of the model, the application of which is discussed below in Section
+\ref{sec:inputs}.
 
-Measure/metric of success of machine learning tool via 3 different types of error 
-
-Cross-Validation Error: error of model predictions versus cross-validation data (during training)
-
-Testing Error: error of model predictions versus test data
-
-Training Error: error of model predictions versus training data
+Although one could just train and test their model, there is a way to test the
+model while still in the training phase. A testing set that would be used
+during training to give feedback, a \textit{cross-validation} set, can provide
+a faster convergence to a satisfactory model. As shown in Figure
+\ref{fig:cverror}, this can be done by splitting the data set into three
+groups: a large training set, a small cross-validation set, and a small testing
+set. 
 
 \begin{figure}[!htb]
   \includegraphics[width=\linewidth]{./chapters/litrev/cverror.png}
@@ -203,12 +223,91 @@ Training Error: error of model predictions versus training data
   \label{fig:cverror}
 \end{figure}
 
+However, in practice, multiple rounds of cross-validation steps are used,
+referred to as \textit{k-fold cross-validation}. This allows a user to use all
+data entries as a testing entry once.  As illustrated in \ref{fig:cverror},
+this splits the dataset into \textit{k} subsets. One set is designated as the
+testing set (more correctly, the \textit{validation set}), and a model is
+trained with the rest. Following the first training phase, another begins, this
+time with a different subset as the validation set.  This process is performed
+\textit{k} times to give \textit{k} models, and the models are then averaged,
+providing an additional level of model validation than can be achieved with a
+single testing set.
+
+Next is more assessment/diagnosis (field lingo for this?). First comes the
+learning curve, to test the model for high bias or high variance by plotting
+the prediction error with respect to the training set size (i.e., number of
+instances/examples in the training set). (explain mathematically, include
+schematic). Talk about three scenarios for learning curves. 
+
+\begin{figure}[!hp]
+  \begin{subfigure}[h]{0.65\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{./chapters/litrev/LearningCurve-bias.png}
+    \caption{High bias}
+    \label{fig:bias}
+  \end{subfigure}
+  \begin{subfigure}[h]{0.65\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{./chapters/litrev/LearningCurve-ideal.png}
+    \caption{Ideal}
+    \label{fig:ideal}
+  \end{subfigure}
+  \begin{subfigure}[h]{0.65\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{./chapters/litrev/LearningCurve-variance.png}
+    \caption{High variance}
+    \label{fig:variance}
+  \end{subfigure}
+  \caption{Learning curvesssss}
+  \label{fig:learning}
+\end{figure}
+
+After ensuring the appropriate training set size is selected, the models must
+be further assessed and/or optimized using diagnostic and/or validation plots.
+These also provide information on the bias-variance tradeoff with respect to
+model complexity. Model complexity can be captured in the number of features
+included in the training set and regularization parameters that can be varied
+within the algorithm. 
+
+\begin{figure}[!htb]
+  \includegraphics[width=\linewidth]{./chapters/litrev/ValidationCurve.png}
+  \caption{Optimize that.}
+  \label{fig:validation}
+\end{figure}
+
+\subsubsection{Evaluating the Algorithm Inputs}
+\label{sec:inputs}
+
+It is unlikely to have a model perform as one expects the first time. There is
+therefore a few techniques for optimizing the performance. It is important to
+not optimize too much, however, because the performance could be linked to the
+training set and might not generalize outside of the specific type of input
+data used.  A workaround for this scenario is to obtain more data for the set
+or to obtain a completely different data set altogether. 
+
+First discussed is diagnosing underfitness or overfitness of a model. 
+
+Various
+factors can cause the model to be under- or overfit to the data, both of which
+impact generalization: training set size, number of features in the data set,
+aglorithm parameters
+
+
+Plotting these two errors with respect to the model complexity gives what is known as 
+a \textit{learning curve}. This is usually the first
+
 bias-variance tradeoff
 
 diagnostic and learning curves
+When plotting the training and testing error
+with respect to the number of instances, this is known as a learning curve.
+When plotting these errors with respect to the number or features or algorithm
+parameters, this is known as a validation curve. \todo{insert example
+diagnostic plot?}
 
-\subsection{Model Comparison and Validation}
-\label{sec:selection}
+\subsection{Model Validation}
+\label{sec:validation}
 
 
 All methods:
@@ -219,3 +318,4 @@ Model params as determined from ML alg
 Direct inversion of matrix A
 Expert-elicited params (i.e. initial guesses for INDEPTH? Or optimized ones?)
 Marginal likelihood only needed for absolute measures - doesn’t affect relative probabilities
+
