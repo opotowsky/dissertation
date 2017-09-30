@@ -1,19 +1,33 @@
-\subsubsection{Algorithm Choice}
+\subsection{Algorithms Chosen}
 \label{sec:choice}
 
-Choice: Algorithm choice is usually based on what is being predicted and intuition
-regarding strengths and weaknesses of different optimizations.  For a
-benchmarking excercise, some machine learning approaches here were chosen based
-on previous work \cite{dayman_feasibility_2013}: nearest neighbor and ridge
-regression. This work will also extend to a more complex model via an algorithm
-that is known to handle highly dimensional data sets well: support vector
-regression.  These algorithms are introduced in \label{sec:algs}.
+Choosing which algorithms to test is usually based on what is being predicted
+and intuition regarding strengths and weaknesses of different optimization
+methods.  
 
-Many algorithms are developed on an assumption that the training set will be
-\gls{i.i.d.}. This is important so that the model does not overvalue or overfit
-a certain area in the training space. The testing error can therefore be
+For a benchmarking excercise, some machine learning approaches here were chosen
+based on previous work \cite{dayman_feasibility_2013}: nearest neighbor and
+ridge regression. These are useful because they are simple, providing a
+dissimilarity-based model and a linear regression-based model, respectively. If
+more complex algorithms are not required to obtain useful results, then there
+is no need to use more computationally expensive options. However, hedging on
+the fact that more complex models will be needed, this work will also employ an
+algorithm that is known to handle highly dimensional data sets well: support
+vector regression. These algorithms were introduced in Section \ref{sec:algs}. 
 
-\subsubsection{Reactor Parameter Prediction}
+A python-based machine learning toolkit, scikit-learn, \todo{cite{}} is used to 
+train the models. The default parameters for all employed algorithms are in Table %\ref{tbl:defaults}
+
+\todo{Next include table of alg parameters named defaults}
+
+\subsection{Reactor Parameter Prediction}
 \label{sec:rxtrparam}
 
-Discuss
+The results of each model's prediction accuracy are shown in Table
+%\ref{tbl:acc} This mimics the ability of a model to provide reactor parameters
+given a set of measurements from a test sample of interdicted \gls{SNF}.
+Initially, burnup is used to indicate algorithm and corresponding model
+generalizability.  However, reactor type and enrichment (if applicable) have
+also been tested, not shown here.  \todo{more deets}
+
+\todo{Show accuracy results here using default params named acc}

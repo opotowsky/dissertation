@@ -2,96 +2,60 @@
 \label{ch:demo_method}
 
 This chapter first covers the methodology of the proposed work by introducing
-each experimental component in Section \ref{sec:expmeth}. Section
-\ref{sec:training} discusses how the training data is simulated for input to
-the machine learning algorithms.  Section \ref{sec:statmodel} is about how
-these will use the features and labels of the training data to statistically
-formulate a model for prediction of a new instance, which has only features and
-no label.  The algorithms will be evaluated for accuracy and validated, as
-shown in Section \ref{sec:valid}.
+each experimental component and a demonstration of each component. This has been 
+split into three sections, summarized below.
 
-Next is the demonstration of these experimental components, by first showing in
-Section \ref{sec:results} how the initial results guided the next steps for
-future experiments, discussed in Section \ref{sec:newtrain}.  Steps taken
-towards model comparison (or even comparison against non-statistical methods)
-are shown in \ref{sec:compare}.\todo{update me if necessary}
+Section \ref{sec:training} discusses how the training data is obtained.  After
+the initial training data is simulated in Section \ref{sec:snfsim}, with a
+possible information reduction step in Section \ref{sec:inforeduc}, it will be
+input to a statistical learner. 
 
-\section{Experimental Methodology}
-\label{sec:expmeth}
+Section \ref{sec:statmodel} is about algorithms that use the features and
+labels of the training data to statistically formulate a model. Algorithm
+choice and parameters are discussed in Section \ref{sec:choice}.  Next, the
+main goal for these machine-learned models is to supply reactor parameters
+associated with some unknown \gls{SNF}. Section \ref{sec:rxtrparam} shows the
+results of testing this goal: the prediction of a new instance that has only
+features and no label.  
+
+Finally, the algorithms are evaluated for accuracy and validated, as shown
+in Section \ref{sec:valid}.  To both understand the performance and validate
+the models, the results are then evaluated for over- or under-fitting, which is
+in Section \ref{sec:algeval}.  But validation is more than just making sure the
+models are properly fit to the data.  Perhaps the training set was not
+representative of the actual data space, whereas other methods do not rely on
+the data space for results. So, lastly, comparison against other algorithms as
+well as other methods is described in Section \ref{sec:algcompare}.
 
 This work incorporates some methods and suggestions from previous work on the
 subject \cite{dayman_feasibility_2013} regarding machine learning model
-performance with respect to information reduction, and expands upon it in two
-ways. The first is adding a different information reduction technique via
-applying a gamma spectroscopy \gls{DRF} to the \gls{SNF} nuclide recipes, which
-can calculate various spectra based on the types of gamma detectors available
-to the forensics community.  Secondly, a more advanced machine learning
-algorithm, support vector regression, is included so as to compare more complex
-models against the simpler models.  A schematic of the workflow involving
-the experimental components is shown here in Figure \ref{fig:method}.  This
-section covers each of them as follows.
+performance with respect to information reduction.  This is to establish some
+baseline expectations of reactor parameter prediction and how the different
+algorithms perform. 
 
-\begin{figure}[!htb]
+\begin{figure}[H]
   \includegraphics[width=0.9\linewidth]{./chapters/demo_method/methodology.png}
   \caption{Methodology of the proposed experiment.}
   \label{fig:method}
 \end{figure}
 
-After the initial training data is simulated in Section \ref{sec:snfsim}, with
-a possible information reduction step in Section \ref{sec:inforeduc}, it will
-be input to a statistical learner. While algorithm choice is discussed in
-Section \ref{sec:choice}, the main goal for these machine-learned models is to
-predict reactor parameters associated with some unknown \gls{SNF}. This is
-shown in Section \ref{sec:rxtrparam}. To both understand the performance and
-validate the models, the results are then evaluated for over- or under-fitting,
-which is in Section \ref{sec:algeval}.  But validation is more than just making
-sure the models are properly fit to the data.  Perhaps the training set was not
-representative of the actual data space, whereas other methods do not rely on
-the data space for results. So, lastly, comparison against other algorithms as
-well as other methods is described in Section \ref{sec:algcompare}.
+Next, this work will expand upon the previous work in two ways.  The first is
+adding a different information reduction technique via applying a gamma
+spectroscopy \gls{DRF} to the \gls{SNF} nuclide recipes, which can calculate
+various spectra based on the types of gamma detectors available to the
+forensics community.  Secondly, a more advanced machine learning algorithm,
+support vector regression, is included so as to compare more complex models
+against simpler models.  A schematic of the workflow involving the experimental
+components is shown in Figure \ref{fig:method}.
 
-\subsection{Training Data}
+\section{Training Data}
 \label{sec:training}
 \input{chapters/demo_method/training}
 
-\subsection{Statistical Learning for Models}
+\section{Statistical Learning for Models}
 \label{sec:statmodel}
 \input{chapters/demo_method/statmodels}
 
-\subsection{Validation}
+\section{Validation}
 \label{sec:valid}
 \input{chapters/demo_method/validation}
-
-\section{Experimental Demonstration}
-\label{sec:expdemo}
-\todo{redo outline/section titles here later}
-
-The first steps of this work include a loose replication of the previously
-mentioned work studying the effect of information reduction on predictions
-\cite{dayman_feasibility_2013}, and comparing this to the more complex algorithm chosen.
-This helped to establish some baseline expectations of reactor
-parameter prediction and how the different algorithms perform. 
-
-First discussed are the preliminary results in Section \ref{sec:results}, which
-indicated the models were severely underfitted. Following that, the next step
-was to provide a larger, more diverse training set to the algorithms so they
-could predict better when faced with new instances. This is shown in Section
-\ref{sec:newtrain}. 
-
-\todo{Not sure about last section yet}
-
-\subsection{Results}
-\label{sec:results}
-
-Some kind of results section here with validation, or just eval and conclusions.
-
-\subsection{Expanding the Training Set Space}
-\label{sec:newtrain}
-
-This is what I did based on the results, and here are more results and validation.
-Dayman training/test set -> sfcompo-like sims and testing set
-
-\subsection{Comparing Different Models}
-\label{sec:compare}
-
-Will I have prob density for prelim? Prob not?

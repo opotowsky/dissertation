@@ -1,64 +1,50 @@
-\subsubsection{Model Diagnostics}
+\subsection{Model Diagnostics}
 \label{sec:algeval}
 
-After training a model using a machine learning toolkit, 
-Want to show the difference between test/train error plots and CV/train error
-plots.  Determine some argument that perfers the latter. For the above
-categories in the validation section, can show plots directly next to each
-other (for 1, 2, 3) to hopefully show that cross validation provides better
-generalizability.
-1. Learning curve
-2. Validation curve
-3. Random error curve
+Machine learning algorithms are heavily dependent on the inputs and parameters
+given to them, such as training set sizes, regularization, learning rates, etc.
+From the results shown in Section \ref{sec:statmodel}, it is clear there is
+room for improvement.  The diagnostic plots show the errors of the predicted
+burnup values to the actual burnup values with respect to some variable on the
+\textit{x}-axis.  As previously introduced in Section \ref{sec:optvalid}, the
+errors are compared to the training error to understand the generalization
+strength with respect to training set size (learning curves) and the algorithm
+parameters governing model complexity (validation curves). 
 
-Additionally, machine learning algorithms are heavily dependent on the inputs
-and parameters given to them, such as training set sizes, learning rates,
-regularization, etc. To evaluate the performance or tweak the model from an
-algorithm, diagnostic plots will be used. Learning and validation curves will
-indicate how the models are performing, initially both with respect to the
-testing error and the cross validation error. As previously mentioned, these
-two errors are to be compared to the training error to understand the
-prediction and generalization strength with respect to training set size and
-the algorithm parameters governing model complexity. 
+In addition to machine learning best practices, another layer of comparison is
+added here.  Because it is difficult to ensure consistently representative
+testing data, the accuracy of a learned model should not depend on only one
+testing set.  The learned model's accuracy is better estimated by using a
+validation set, or even better, \textit{k}-fold cross-validation, introduced in
+Section \ref{sec:selectass} This work includes both the testing error (using
+the testing set described in Section \ref{sec:training}) and cross-validation
+error. The predetermined testing set will allow for comparison against the
+previous work it was obtained from, but it is assumed that cross-validation
+will provide a better indication of model performance.
 
-The learning curves were obtained as follows. For a given (randomly chosen)
-training set size between 15 and 100\% of the total data set, several training
-and prediction rounds were performed. The repetition for obtaining the testing
-error is the same value as the \textit{k} in k-fold cross validation. The
-testing error scenario averages the values of the obtained errors whereas the
-k-fold cross-validation performs this automatically.  The validation curves
-were obtained as follows. For a given parameter, the value of the parameter is
-varied and \textit{k} training and prediction phases are completed, and their
-errors averaged. Again, for k-fold cross-validation, these errors are already
-averaged. The learning curves help determine if we are over- or under-training.
-The validation curves help determine the optimal way to be robust to over- and
-under-fitting. 
+The learning curves are obtained as follows, shown in Figure %\ref{fig:lc1}.
+For a given (randomly chosen) training set size between 15 and 100\% of the
+total data set, training and prediction rounds were performed for each. The
+testing error scenario performs this \textit{k} times and averages those
+results.  This is equivalent to the \textit{k} in \textit{k}-fold
+cross-validation to provide some semblance of equivalent statistics.  The
+cross-validation error scenario has no need for averaging because it is
+performed automatically.  In both cases, the learning curves do not provide a
+clear picture of over- or undertraining. This peculiar behavior is caused by
+severely biased model, as the training error should never be higher than the
+testing error.
 
-Evaluation and Diagnostics: To obtain reliable models, one must both choose or create a training set
-carefully and study the impact of various algorithm parameters on the error.
-Many algorithms are developed on an assumption that the training set will be
-independent and identially distributed (i.i.d.). This is important so that the
-model does not overvalue or overfit a certain area in the training space. The
-testing error can therefore be tabulated with respect to training set size,
-number of features, or algorithm parameters (regularization terms, etc). The
-results are broadly known as diagnostic plots. 
+The validation curves are obtained as follows, shown in Figure %\ref{fig:vc1}.
+For a given range of some algorithm parameter influencing model complexity,
+training and prediction rounds were performed for different values within the
+range.  Again, the testing and cross-validation errors are both used as
+described above. As with the above training curve, determining the robustness
+to over- or undertraining is difficult here although there is some minima seen
+at \todo{finish when plot is selected}
 
-As previously mentioned in the \todo{add label} demonstration section, the
-validation was carried out as a comparison of accuracies of the predicted
-classes (reactor type, \todo{other classification tasks?}) and values
-(enrichment amount \todo{or burnup?}) to the classes and values in the
-predetermined test data set (discussed in \todo{add label when this section is
-done}). 
+The resolution to the underfitting is discussed later in \ref{sec:newtrain}.
 
-However, because it is difficult to ensure consistently representative testing
-data, the accuracy of a learned model should not depend on only one testing set
-\todo{general knowledge or citation?}. The learned model's accuracy can be
-better evaluated as discussed in \todo{the algorithm validation section} by
-using cross validation \todo{should this be introduced in the background?}.
-Other additional evaluation methods will be discussed here as well.  \todo{ROC
-curves, confidence intervals on error, confusion matrix if necessary}
-
-\subsubsection{Model Comparison}
+\subsection{Model Comparison}
 \label{sec:algcompare}
 
 Regression Training Error: Confidence intervals on predictions to understand
