@@ -15,12 +15,6 @@
 % with this software (like your dissertation).
 
 
-%% To use the glossaries acronym package, you'll need to define any acronyms you intend to 
-%% use. You can define acronyms with \newacronym{label}[acronym]{written out form}
-%% To refer to them in the text use \gls{label}
-\usepackage[acronym,toc]{glossaries}
-\makeglossaries
-
 %% You should use natbib
 \IfFileExists{natbib.sty}{%
 \usepackage[numbers,sort]{natbib}%
@@ -60,6 +54,13 @@
 %\usepackage{theorem}
 \usepackage{hyperref}
 %\usepackage[usenames]{color}
+
+%% To use the glossaries acronym package, you'll need to define any acronyms you intend to 
+%% use. You can define acronyms with \newacronym{label}[acronym]{written out form}
+%% To refer to them in the text use \gls{label}
+\usepackage[acronym,toc]{glossaries}
+\makeglossaries
+
 
 \IfFileExists{mathpartir.sty}{%
 \usepackage{mathpartir}%
