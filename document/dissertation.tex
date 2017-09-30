@@ -21,9 +21,12 @@
 
 % See if this fixes error
 \usepackage[usenames]{color}
-
+% Other helpful things to prevent errors and warnings
 \usepackage{subcaption}
-
+\usepackage{etoolbox}
+\apptocmd{\sloppy}{\hbadness 10000\relax}{}{}
+\usepackage{float}
+% to not leave 'notes to self' behind
 \usepackage{todonotes}
 
 \input{includes/preamble}

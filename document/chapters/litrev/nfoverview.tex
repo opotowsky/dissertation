@@ -150,7 +150,7 @@ set of measurements and their uncertainty. Inverse problem theory states that
 this follows the general form of Bayes' theorem, which is commonly expressed as
 follows:
 \begin{equation}
-P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+  P(A|B) = \frac{P(B|A)P(A)}{P(B)}
 \end{equation}
 where $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that events
 $A$ and $B$ will occur, respectively, $P(B|A)$ is the prior probability that event 
@@ -171,11 +171,11 @@ given parameter, representing the forward problem.  Lastly, the posterior
 probability is the chance of some parameter existing given some measurement,
 representing the inverse problem solution \cite{inverse_theory}.  It may be
 more intuitive to consider the conceptual version of Bayes' theorem below.  
-\begin{equation}
-Posterior = \frac{Prior * Likelihood}{Marginal \ Likelihood} 
-\end{equation} 
 A discussion of how these values are obtained takes place in Section
-\ref{sec:selection}.
+\ref{sec:optvalid}.
+\begin{equation}
+  Posterior = \frac{Prior * Likelihood}{Marginal \ Likelihood} 
+\end{equation} 
 
 This framework is helpful for an experiment that intends to compare different
 methods for calculating the posterior probability of a system given some

@@ -67,10 +67,10 @@ This study performs both classification and regression tasks using supervised
 learning algorithms.  Differences among the underlying mathematics \todo{phrase
 better} of the algorithms do impact the performance of a machine-learned model.
 Therefore the algorithms used in this study will be discussed in Section
-\ref{sec:algs}. Additionally, evaluating algorithm performance is important and
-will be covered in Section \ref{sec:diagnostics}. Finally, robustly comparing
-different algorithms continues the previous discussion on inverse problem
-theory and is in Section \ref{sec:validation}.
+\ref{sec:algs}. Additionally, algorithm selection and assessment is covered in
+Section \ref{sec:selectass}.  Evaluating and optimizing algorithm performance
+is discussed in Section \ref{sec:optvalid}, as well as robustly comparing
+different algorithms for validation.
 
 \subsection{Classification and Regression Algorithms}
 \label{sec:algs}
@@ -167,14 +167,15 @@ will be a diagonal of ideal combinations that emerges. The lowest of these is
 usually chosen. 
 
 
-\subsubsection{Artificial Neural Networks}
-\label{sec:neural}
-
-prob will delete
+%\subsubsection{Artificial Neural Networks}
+%\label{sec:neural}
+%
+%prob will delete
 
 \subsection{Model Selection and Assessment}
 \label{sec:selectass}
 
+Brain dump:
 Step 1 is model selection then assessment. Selection is estimating model
 performance (via CV set) among a set of trained models. After one model is
 chosen, assessment takes place by determining the prediction capability on new
@@ -207,7 +208,7 @@ Next, the \textit{training error} is provided by comparing the model
 predictions to the training set, as the model would likely be smoother than the
 potential noise the training set would include. This is useful to determine the
 fitness of the model, the application of which is discussed below in Section
-\ref{sec:inputs}.
+\ref{sec:optvalid}.
 
 Although one could just train and test their model, there is a way to test the
 model while still in the training phase. A testing set that would be used
@@ -234,13 +235,25 @@ time with a different subset as the validation set.  This process is performed
 providing an additional level of model validation than can be achieved with a
 single testing set.
 
-Next is more assessment/diagnosis (field lingo for this?). First comes the
-learning curve, to test the model for high bias or high variance by plotting
-the prediction error with respect to the training set size (i.e., number of
-instances/examples in the training set). (explain mathematically, include
-schematic). Talk about three scenarios for learning curves. 
+\subsection{Model Optimization and Validation}
+\label{sec:optvalid}
+
+It is unlikely to have a model perform as one expects the first time. There is
+therefore a few techniques for optimizing the performance. It is important to
+not optimize too much, however, because the performance could be linked to the
+training set and might not generalize outside of the specific type of input
+data used.  A workaround for this scenario is to obtain more data for the set
+or to obtain a completely different data set altogether. 
+
+Next is more diagnostics, the first of which is the learning curve. This tests
+the model for high bias or high variance by plotting the prediction error with
+respect to the training set size (i.e., number of instances/examples in the
+training set). (explain mathematically, include schematic). Talk about three
+scenarios for learning curves. Include reference from which the figures were
+adapted.
 
 \begin{figure}[!hp]
+  \centering
   \begin{subfigure}[h]{0.65\linewidth}
     \centering
     \includegraphics[width=\linewidth]{./chapters/litrev/LearningCurve-bias.png}
@@ -259,34 +272,24 @@ schematic). Talk about three scenarios for learning curves.
     \caption{High variance}
     \label{fig:variance}
   \end{subfigure}
-  \caption{Learning curvesssss}
+  \caption{Learning curves for three training scenarios.}
   \label{fig:learning}
 \end{figure}
 
 After ensuring the appropriate training set size is selected, the models must
-be further assessed and/or optimized using diagnostic and/or validation plots.
+be further optimized using model diagnostics, known as learning curves and validation plots.
+
 These also provide information on the bias-variance tradeoff with respect to
 model complexity. Model complexity can be captured in the number of features
 included in the training set and regularization parameters that can be varied
 within the algorithm. 
 
 \begin{figure}[!htb]
-  \includegraphics[width=\linewidth]{./chapters/litrev/ValidationCurve.png}
-  \caption{Optimize that.}
+  \centering
+  \includegraphics[width=1.05\linewidth]{./chapters/litrev/ValidationCurve.png}
+  \caption{Validation curve showing examples of different fittings.}
   \label{fig:validation}
 \end{figure}
-
-\subsubsection{Evaluating the Algorithm Inputs}
-\label{sec:inputs}
-
-It is unlikely to have a model perform as one expects the first time. There is
-therefore a few techniques for optimizing the performance. It is important to
-not optimize too much, however, because the performance could be linked to the
-training set and might not generalize outside of the specific type of input
-data used.  A workaround for this scenario is to obtain more data for the set
-or to obtain a completely different data set altogether. 
-
-First discussed is diagnosing underfitness or overfitness of a model. 
 
 Various
 factors can cause the model to be under- or overfit to the data, both of which
@@ -305,10 +308,6 @@ with respect to the number of instances, this is known as a learning curve.
 When plotting these errors with respect to the number or features or algorithm
 parameters, this is known as a validation curve. \todo{insert example
 diagnostic plot?}
-
-\subsection{Model Validation}
-\label{sec:validation}
-
 
 All methods:
 Priors given by set of forward problems (input data space - ORIGEN sims)
