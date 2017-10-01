@@ -116,34 +116,38 @@ Nuclear forensics is a traditional inverse problem, which has been well
 documented in mathematics and many scientific disciplines.  Understanding
 inverse problem theory can help systematically define both the solution methods
 and their limitations. This section provides an introduction to the topic as
-well as its application to nuclear forensics.
+well as its application to nuclear forensics. 
 
 As outlined in a textbook on the formal approach to inverse problem theory
 \cite{inverse_theory}, the study of a typical physical system encompasses three
 areas:
-\begin{hanglist}[itemsep=0pt, parsep=0pt, partopsep=0pt, topsep=0pt, leftmargin=15pt]
-    \item Model parameterization 
-    \item Forward problem predicting measurement values given model parameters 
-    \item Inverse problem predicting model parameters given measurement values 
-\end{hanglist}
+\begin{enumerate}
+  \itemsep-0.75em
+  \item \textit{Model parameterization}
+  \item \textit{Forward problem:} predict measurement values given model parameters
+  \item \textit{Inverse problem:} predict model parameters given measurement values
+\end{enumerate}
+
 First, this shows that it is important to consider the parameters that comprise
 a model; this is denoted as the \textit{model space}. This is not every
 measurable quantity; domain knowledge is necessary to determine the model
 space. In the nuclear forensics context for spent nuclear fuel, this would
 consist of, e.g., several isotopic ratios because they are known to have a
 relationship with the reactor parameters that created the fuel of interest.
+
 Second, understanding the physical system also requires an understanding of the
 forward problem: predicting how a certain set of model parameters will affect
 the resulting measurements. The breadth of these end measurements provides the
 \textit{data space}, which are all the conceivable results of a given forward
 problem. So for spent nuclear fuel this would be, perhaps, the range of
-isotopic ratios typical of a commercial reactor. Lastly, the inverse problem is
-statistical in nature: given some solution, there is a probability that the
-data measured is caused by some value(s) of a model parameter. Additionally,
-including measurement uncertainties broadens the linear model to a probability
-density of the parameters. The opposite is also true in the forward case:
-including parameter uncertainties broadens the forward problem results to a
-probability density of the potential measurement values.
+isotopic ratios typical of a commercial reactor. 
+
+Lastly, the inverse problem is statistical in nature: given some solution,
+there is a probability that the data measured is caused by some value(s) of a
+model parameter. Including measurement uncertainties broadens the linear model
+to a probability density of the parameters. The opposite is also true in the
+forward case: including parameter uncertainties broadens the forward problem
+results to a probability density of the potential measurement values.
 
 In this way, we can define some probability that the answer is correct, given a
 set of measurements and their uncertainty. Inverse problem theory states that
@@ -172,7 +176,7 @@ probability is the chance of some parameter existing given some measurement,
 representing the inverse problem solution \cite{inverse_theory}.  It may be
 more intuitive to consider the conceptual version of Bayes' theorem below.  
 A discussion of how these values are obtained takes place in Section
-\ref{sec:optvalid}.
+\ref{sec:invcompare}.
 \begin{equation}
   Posterior = \frac{Prior * Likelihood}{Marginal \ Likelihood} 
 \end{equation} 

@@ -1,0 +1,91 @@
+For relevant nuclear forensics predictions, both classification and regression
+algorithms must be used.  For example, one may want to predict the reactor type
+based on some measurements (referred to as features) of spent fuel of an
+unknown source, and this would require a classification algorithm. Or perhaps
+the input fuel composition is relevant to an investigation on weapons intent,
+so a regression algorithm would be used to train a model based on some set of
+features.  Since algorithm formulation impacts the resulting performance, they
+are discussed in detail below.  
+
+\todo{should add useful vocab: training data X and y, instances, features, etc}
+
+\subsubsection{Linear Models}
+\label{sec:linear}
+
+One of the simplest and most obvious methods of prediction is a linear model
+using a least-squares fit. 
+
+%\subsubsubsection{Ridge Regression}
+%\label{sec:ridge}
+
+%not sure about this organization
+
+%\subsubsubsection{Other Linear Stuff?}
+%\label{sec:other}
+
+\todo{intro, alg math, explain regularization} 
+
+not sure about this organization
+
+\subsubsection{Nearest Neighbor Methods}
+\label{sec:neighbor}
+
+Nearest neighrbor is 
+
+\todo{explain distance metrics} 
+
+
+\begin{equation}
+  \hat{Y}(x) = \frac{1}{k} \sum_{x_i \in N_k(x)} y_i
+\end{equation}
+
+Nearest neighbor regression calculates a value based on the instance that is
+closest to it. The metrics for distance differ, but in this study, Euclidian
+distance was used. There is no learning in this regression, per se; the
+training set populates a space and the testing set is compared directly to
+that. \cite{elements_stats} 
+
+
+\subsubsection{Support Vector Machines}
+\label{sec:svm}
+
+Support vector regression (SVR) is an extension of the popular classification
+algorithm, support vector machine (SVM).  This algorithm was chosen because of
+its ability to handle highly dimensional data well, which in this study is
+approximately 300 features. 
+
+SVM classifies two classes by determining an optimal hyperplane, given by wx+b,
+between them.  As seen in Figure ?, the algorithm evaluates the quality of the
+line that separates two classes by maximizing the width of the margin given the
+contraints surrounding the line.  Some problems are not linearly separable, and
+thus a penalty term is introduced to allow for misclassifications. As shown in
+Figure ?, the algorithm then simultaneously minimizes the misclassifications
+while maximizing the margin. 
+
+This can be extended easily to multidimensional analysis via what is called the
+\textit{kernel trick}.  First, using a nonlinear kernel function maps the data
+into higher dimensional feature space. Then the algorithm can find a linear
+separation in this space, as shown in Figure ?. Further, this can be upgraded
+from classification to SVR by doing similar math but instead minimizing the
+margin, as shown in Figure ?. 
+
+The kernel chosen for this study is the Gaussian radial basis function, shown
+below. This has two tuneable parameters, gamma and C. Gamma influences the
+width of influence of individual training instances, and strongly affects the
+fitting of the model. Low values correspond to underfitting because the
+instances have too large of a radius (low influence) and high values correspond
+to overfitting because the instances have a small radius (high influence). 
+
+The C parameter also affects the fitting of the model by allowing more or less
+support vectors, corresponding to more or less misclassification. A lower C
+smooths the surface of the model by allowing more misclassifications, whereas a
+higher C classifies more training examples by allowing fewer
+misclassifications. Too low and too high of a C can cause under- and
+overfitting, respoectively. 
+
+Since there is a tradeoff of fitting strength provided by both parameters, it
+is common to run the algorithm on a logarithmic grid from 10'-3 to 10'3 for
+each parameter. If plotted on a heatmap of accuracies given gamma and C, there
+will be a diagonal of ideal combinations that emerges. The lowest of these is
+usually chosen. 
+
