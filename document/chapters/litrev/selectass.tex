@@ -1,42 +1,47 @@
-After a model is trained, the first following step is model selection then
-assessment.  Selection is estimating model performance among a set of trained
-models using a single validation set.  After one model is chosen, assessment
-takes place by determining the prediction capability on new data via a
-previously unseen testing set. Both selection and assessment can be done in a
-single step using \textit{k}-fold cross-validation, which is described below.
+After a model is trained, the first step is model selection and assessment.
+Selection is estimating model performance among a set of trained models using a
+single validation set.  After one model is chosen, assessment takes place by
+determining the prediction capability on new data via a previously unseen
+testing set. Both selection and assessment can be done in a single step using
+\textit{k}-fold cross-validation, which is described below.
 
 \subsubsection{Sources of Error} 
 
-The bias is error from erroneous
-assumptions in the learning algorithm. High bias can cause an algorithm to miss
-the relevant relations between features and target outputs (underfitting).  
+In statistical learning, there are two sources of error that need to be
+simultaneously minimized: bias and variance. Bias is caused by simplifications
+in the model, so the error is caused by missed relationships in the data; an
+underfit model is due to high bias.  Variance is caused by including random
+noise in the model, so the error is caused by oversensitivity to that noise; an
+overfit model is due to high variance. 
 
-The
-variance is error from sensitivity to small fluctuations in the training set.
-High variance can cause an algorithm to model the random noise in the training
-data, rather than the intended outputs (overfitting).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Include math or just reference it?
+Talk about irreducible error too?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[!htb]
   \includegraphics[width=\linewidth]{./chapters/litrev/BVtradeoff.png}
-  \caption{Model prediction error shown to be comprised of bias and variance}
+  \caption{Total prediction error comprised of bias and variance}
   \label{fig:bvtradeoff}
 \end{figure}
 
+As shown in Figure \ref{fig:bvtradeoff}, there is a minimum in the total error,
+showing that there is a tradeoff between the bias and variance. Some bias is
+desired in order to generalize to future unknown data. But some variance is
+also positive for the model because it captures the relationships in the data
+that the bias counteracts. 
+
 \subsubsection{Types of Error}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Discuss J functions (target function, objective function) and
-how that is essentially error the alg is trying to minimize. 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Evaluating the generalization (i.e., prediction capability) of a
-machine-learned model is important because the creation of statistically
-learned models is a hidden process. This is done by taking a small portion of
-the data set, and setting it aside as a testing set.  The rest of the data set
-is known as the training set and is used to train a model. After training, the
-test set is used to test the model.  
+While the sources of the model prediction error are well known, the creation of
+a statistically learned model is a hidden process. Although the model emerges
+from a black box, there are ways to evaluate the generalization (i.e.,
+prediction) capability of it.  This is done by removing a small portion of the
+data for use as a testing set.  The rest of the data set is known as the
+training set and is used to train a model. After training, the test set is used
+to test the model.  
 
 The generalization error is typically referred to as the \textit{testing
 error}, as it is measuring the ability of the model to predict future cases

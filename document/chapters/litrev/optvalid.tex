@@ -1,9 +1,15 @@
-It is unlikely to have a model perform as one expects the first time. There is
-therefore a few techniques for optimizing the performance. One should not do
-this too much, however, because the increase in performance from optimization
-could be linked to the training set and might not generalize outside of the
-specific type of input data used.  A workaround for this scenario is to obtain
-more data for the set or to obtain a completely different data set altogether. 
+It is unlikely to have a model perform as one expects the first time. There are
+therefore a few techniques for optimizing the performance. It should be noted
+that much of the discussion here and in Section \ref{sec:validation} focuses on
+the diagnostics aspect rather than the validation aspect of these techniques.
+In practice, these are used for both purposes, but in this work the formal
+comparison of model performance will be used, introduced and demonstrated in
+Sections \ref{sec:invcompare} and \ref{sec:algcompare}, respectively. 
+
+However, the increase in performance from over-optimization could be linked to
+the training set performance and might not generalize outside of the specific
+type of input data used.  A workaround for this scenario is to obtain more data
+for the set or to obtain a completely different data set altogether. 
 
 \subsubsection{Training Set Size}
 
@@ -87,11 +93,7 @@ parameters that vary the regularization.
   \label{fig:validation}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Talk about fig here
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+describe figure
 
 In practice, plotting learning and validation curves can be iterative. But as
 previously mentioned, too many optimizations will result in a poorly performing
