@@ -123,18 +123,18 @@ degrade as less information is available?}.
 
 The main purpose of this work is to evaluate the utility of statistical methods
 as an approach to determine nuclear forensics-relevant quantities as less
-information is available. Machine learning algorithms will be used to train
-models to provide these values (e.g., reactor type, time since irradiation,
-burnup) from the available information. The training data will be simulated
-using the SCALE 6.2 code suite \cite{scale}, which will provide an array of
-nuclide concentrations as the features ($X$) and the parameters of interest
-($y$) are provided from the simulation inputs.  Information reduction will be
-carried out using computationally generated gamma spectra; the radionuclide
-concentrations from the simulations can be converted into gamma energies, which
-then undergo a detector response calculation to represent real gamma spectra as
-closely as possible. Machine learning best practices will be used to evaluate
-the performance of the chosen algorithms, and inverse problem theory will be
-used to provide an interval of confidence in the model predictions.
+information is available. Machine learning algorithms are used to train models
+to provide these values (e.g., reactor type, time since irradiation, burnup)
+from the available information. The training data is simulated using the SCALE
+6.2 code suite \cite{scale}, which provides an array of nuclide concentrations
+as the features ($X$) and the parameters of interest ($y$) are provided from
+the simulation inputs.  Information reduction is carried out using
+computationally generated gamma spectra; the radionuclide concentrations from
+the simulations can be converted into gamma energies, which then undergo a
+detector response calculation to represent real gamma spectra as closely as
+possible. Machine learning best practices are used to evaluate the performance
+of the chosen algorithms, and inverse problem theory is used to provide an
+interval of confidence in the model predictions.
 
 The necessary background is covered in Chapter \ref{ch:litrev}.  First, an
 introduction to the broader field of nuclear forensics is in Section
@@ -155,7 +155,8 @@ the learned models in Section \ref{sec:statmodel}, and the process of model
 evaluation in Section \ref{sec:valid}.  
 
 Finally, Chapter \ref{ch:proposal} summarizes the official thesis research
-proposal and presents the corresponding hypotheses in Sections
-\ref{sec:summary} and \ref{sec:hypotheses}, respectively. Finally, this chapter
-covers future work in Section \ref{sec:expand} and discusses some alternative
-directions for risk mitigation in Section \ref{sec:riskmitig}.
+proposal. After the preparatory tasks are covered in Section \ref{sec:prep},
+there are three experiments outlined in Sections \ref{sec:exp1},
+\ref{sec:exp2}, and \ref{sec:exp3}. Qualitiative hypotheses as well as
+alternativev directions for risk mitgation are discussed throughout this
+chapter as well. 
