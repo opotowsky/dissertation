@@ -68,11 +68,11 @@ set.
 
 However, in practice, multiple rounds of cross-validation steps are used,
 referred to as \textit{k-fold cross-validation}. This allows a user to use all
-data entries as a testing entry once.  As illustrated in \ref{fig:cverror},
-this splits the dataset into \textit{k} subsets. One set is designated as the
-testing set, and a model is trained with the rest. Following the first training
-phase, another begins, this time with a different subset as the testing set.
-This process is performed \textit{k} times to give \textit{k} models, and the
-models are then averaged, providing an additional level of model validation
-than can be achieved with a single testing set.
+data entries as a testing entry once.  As illustrated in Figure
+\ref{fig:cverror}, this splits the dataset into \textit{k} subsets. One set is
+designated as the testing set, and a model is trained with the rest. Following
+the first training phase, another begins, this time with a different subset as
+the testing set.  This process is performed \textit{k} times to give \textit{k}
+models, and the models are then averaged, providing an additional level of
+model validation than can be achieved with a single testing set.
 
