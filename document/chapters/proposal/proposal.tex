@@ -38,7 +38,7 @@ provide a clear estimate of of the model performance.
 The three algorithms in the demonstration (nearest neighbor, ridge, and support
 vector regression) are not necessarily the set that will be evaluated for the
 experiments. After these are used to train new models on a larger training set
-for comparison, other algorithms can be speedily evaluated as well.  Since
+for comparison, other algorithms can be speedily assessed as well.  Since
 support vector-, distance-, and linear-based models are already represented,
 other obvious choices include Bayesian methods, decision trees, neural
 networks, or ensemble methods. 
@@ -50,34 +50,105 @@ Thus far, all simulations and training have not required more processing than
 available on a personal laptop. However, some algorithms do require larger
 amounts of computational time (e.g., artifical neural networks).  If necessary,
 the training stage can be done using the \gls{CHTC}, which is available to
-\gls{UW} researchers. 
+University of Wisconsin researchers. 
 
-\section[Experiment 1: Direct Isotopics]{Experiment 1\\ \large{\textit{Viability of Statistical Learning on Direct Isotopics}}}
+\section[Experiment 1: Direct Isotopics]{Experiment 1\\ 
+\large{\textit{Viability of Statistical Learning on Direct Isotopics}}}
 \label{sec:exp1}
 
-The first experiment will be a purposefully constructed version of the 
-demonstration: evaluating the model performance  
+The first experiment will be a purposefully constructed version of the
+demonstration: evaluating the model performance with known isotopics.  This
+sheds light on how this methodology will perform on the simplest scenario,
+providing an estimate on the maximum level of performance.  \textit{The main
+purpose of this experiment is to iteratively probe the usefulness of
+statistical methods for determining reactor parameters.}
 
-Figure \ref{fig:proposal} blah blah
+Figure \ref{fig:proposal} shows what can be used for training and testing (or
+prediction). The two horizontal boxes show the physical and computational forms
+of what these experiments are simulating, respectively. The lab-measured mass
+spectra correspond to the perfect information being referred to here. In the
+computational context, these measurements instead come from simulations. Mass
+spectra results are thus approximated as the direct isotopics given from the
+simulations, since mass spectrometry provides highly reliable and accurate
+information.
 
-\begin{figure}[!htb]
+The variables for this experiment will include the complexity of the machine
+learning algorithm used, feature reduction (e.g., different subsets of
+isotopes: top \textit{n}, fission products), and different subsets of the
+desicion space (e.g., simplifying the regression task by fixing the reactor
+type). It is expected that a more complex algorithm (e.g., \gls{SVR}) will be
+needed, and that preprocessing and/or manual feature reduction will assist in
+creating higher quality models.  Simplifying the decision space should always 
+improve prediction, but it is not obvious how much it will be needed for burnup
+prediction specifically.
+
+It is possible that statistical models trained on direct isotopic information
+do not perform well enough.  Other than attempting different types of
+algorithms, it is possible to preprocess the data, statistically performing
+feature reduction via \gls{PCA}. If this is not sufficient, it is possible
+\gls{SNF} is has too many or too few correlated features to provide reliable
+models across the space of current reactor technologies. Since separated
+plutonium and \gls{UOC} have been also studied using these techniques, it is
+possible these materials can provide useable learned models. Additionally, this
+methodology would also work if applied to post-detonation materials. There is
+work on creating standard materials to represent the ``urban canyon'', so this
+is another subject that could benefit from statistical correlations. \todo{cite}
+
+\begin{figure}[!hbt]
     \centering
     \includegraphics[width=\linewidth]{./chapters/proposal/proposal.png}
-    \caption{Basis for Experiments 1 and 2.}
+    \caption{Physical and Computational Comparisons for Experiments 1 and 2}
     \label{fig:proposal}
 \end{figure}
 
-
-\section[Experiment 2: Gamma Spectra]{Experiment 2\\ \large{\textit{Viability of Statistical Learning on Gamma Spectra}}}
+\section[Experiment 2: Gamma Spectra]{Experiment 2\\ 
+\large{\textit{Viability of Statistical Learning on Gamma Spectra}}}
 \label{sec:exp2}
 
-hey
+The second experiment will be the previously discussed extension of the
+demonstration by applying detector response functions to the \gls{SNF}
+isotopics: evaluating the model performance with reduced isotopic information.
+This demonstrates the usefulness of this methodology in a real-world scenario
+where exact isotopics are not always known.   \textit{The main objective of
+this experiment is to measure the reduction in statistical model parameter
+prediction reliability as the quality of the training information is reduced.}
 
-hey
+The two bottom portions of the boxes in Figure \ref{fig:proposal} represent a
+more realistic measurement scheme, involving a model trained from gamma
+spectrometers rather than the lengthy process of performing mass spectrometry
+on the samples.  In the physical context, the measurements for training would
+be done using a semiconductor gamma detector, but the testing or prediction
+step may be done outside of the lab on a different detector.  This will be
+captured by applying different detector response functions to the radionuclide
+inventories from the simulations.
 
-\section[Experiment 3: Other Fuel Cycle Flows]{Experiment 3\\ \large{\textit{Viability of Statistical Learning on Other Fuel Cycle Flows}}}
+The variables for this experiment will include the complexity of the machine
+learning algorithm used and quality of the training data set. Feature reduction
+is implicit here, since gamma detection only includes radionuclides within the
+\gls{SNF} isotopics. The indirect isotopic training data are likely going to
+reduce the prediction capability of the models, but it is not yet clear if a
+response function simulating a hand-held NaI gamma detector can provide any
+useful predictions.  And while it is still expected that the complex algorithms
+will perform better, it is not obvious if different algorithms than the ones
+used in Experiment 1 will be needed . 
+
+It is possible that statistical models trained on indirect isotopic information
+do not perform well enough. Again, here, different algorithms may perform
+better than others due to the underlying optimization processes. Further
+feature reduction could also prove useful, focusing on particular energy
+regions or particular peaks throughout the spectrum. The quality of the
+isotopic information can be improved slightly by using an isotope
+identification algorithm; this may improve the performance, as they are
+developed to automatically report isotopics from gamma spectra. If this still
+is not sufficient, it may be that only direct isotopic information (i.e., that
+obtained from mass spectrometry) is required for reliable statistical models of
+\gls{SNF}.  Although preprocessing could also be investigated here, the
+materials discussed above may also be more disposed to defined statistical
+correlations.
+
+\section[Experiment 3: Other Fuel Cycle Flows]{Experiment 3\\ 
+\large{\textit{Viability of Statistical Learning on Other Fuel Cycle Flows}}}
 \label{sec:exp3}
 
-hey 
+Pending success \todo{??} of the above, a 
 
-hey
