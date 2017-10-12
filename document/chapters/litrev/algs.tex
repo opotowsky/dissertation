@@ -4,63 +4,96 @@ based on some measurements (referred to as features) of spent fuel of an
 unknown source, and this would require a classification algorithm. Or perhaps
 the input fuel composition is relevant to an investigation on weapons intent,
 so a regression algorithm would be used to train a model based on some set of
-features.  Since algorithm formulation impacts the resulting performance, they
-are discussed in detail below.  
-
-\todo{should add useful vocab: training data X and y, instances, features, etc}
+features.  Since this work trains models to predict burnup of \gls{SNF}, the 
+algorithms are presented in a regression context.
 
 \subsubsection{Linear Models}
 \label{sec:linear}
 
-One of the simplest and most obvious methods of prediction is a linear model
-using a least-squares fit. 
+One of the simplest and most utilized methods of prediction is a linear model
+from a least-squares fit. Thus, it is the most natural place to begin a
+demonstration of machine learning algorithms. Since linear models must have all
+parameters linearly related, there are many restrictions regarding the shape of
+the model. However, this makes the resulting models stable to peturbations. 
 
-%\subsubsubsection{Ridge Regression}
-%\label{sec:ridge}
+An example of a linear model is below, where the vector of input features of
+size $p$, $\boldsymbol{X}$, provides a model, $F(\boldsymbol{X})$ ($Y$ is the
+known model), by determining the unknown coefficients, or weights,
+$\beta_{j}$'s. The algorithm calculates these by minimizing the value of a loss
+function over all the training data.  This is usually the least squares error
+from minimizing the sum of squared errors, $\sum_{i=1}^{n} (y_i - f(x_i))^2$.
+But it could instead be the least absolute deviations from minimizing the sum
+of absolute error differences, $\sum_{i=1}^{n} |y_i - f(x_i)|$. These are
+referred to as the $L_2$ and $L_1$ norms, respectively.  
 
-%not sure about this organization
+\begin{equation}
+  F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j}
+\end{equation}
 
-%\subsubsubsection{Other Linear Stuff?}
-%\label{sec:other}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{./chapters/litrev/regularization.png}
+  \caption{Illustrtation of the effect of regularization on model prediction}
+  \label{fig:reg}
+\end{figure}
 
-\todo{intro, alg math, explain regularization} 
+The form of linear regression used here is called ridge regression. This
+algorithm performs optimization using the $L_2$ norm, and also uses the form of
+the $L_2$ norm for \textit{regularization}. Regularization, sometimes called
+\textit{shrinkage}, is a term introduced into the predicted model to prevent
+overfitting. (It is used in many machine learning algorithms.) This works by
+further reducing the weights, $\beta_j$, on the input features, $x_j$. This
+shrinkage term also includes a complexity parameter, $\lambda$
+\cite{elements_stats}.  Thus, the predicted linear model from ridge regression
+is updated to the following equation.  A visualization of what this
+regularization can accomplish is in Figure \ref{fig:reg}.
 
-not sure about this organization
+\begin{equation}
+  F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j} + \lambda \sum_{j=1}^{p} \beta_{j}^2
+\end{equation}
 
 \subsubsection{Nearest Neighbor Methods}
 \label{sec:neighbor}
 
-Nearest neighrbor is 
+Nearest neighbor regression is considered to be `model-free' in that it does
+not actually generalize; it tracks the observations in the training set.
+During prediction, the algorithm will calculate a value based on the instance
+that is closest to the current test sample. Thus, there is not any learning,
+but instead a direct comparison between an unknown sample and the space that
+the training set populates. The predictions from nearest neighbors can be quite
+accurate, but are highly unstable to peturbations \cite{elements_stats}.  
 
-\todo{explain distance metrics} 
-
+An extension of nearest neighbor is \textit{k}-nearest neighbor regression.
+The closest \textit{k} neighbors are averaged to provide an estimate of the
+unknown sample. The equation below shows how this algorithm does this to
+determine a predict a value, $Y$, from the input features, $\boldsymbol{X}$, in
+the neighborhood, $N_k (\boldsymbol{X})$ \cite{elements_stats}.  
 
 \begin{equation}
-  \hat{Y}(x) = \frac{1}{k} \sum_{x_i \in N_k(x)} y_i
+  Y(\boldsymbol{X}) = \frac{1}{k} \sum_{x_i \in N_k(\boldsymbol{X})} y_i
 \end{equation}
 
-Nearest neighbor regression calculates a value based on the instance that is
-closest to it. The metrics for distance differ, but in this study, Euclidian
-distance was used. There is no learning in this regression, per se; the
-training set populates a space and the testing set is compared directly to
-that. \cite{elements_stats} 
-
+A measure of distance dictates what the neighborhood is. The metrics for
+distance differ, but in this study, the Euclidian distance was used. Another
+parameter is the population of the neighborhood, \textit{k}. In this initial
+work, $k = 1$ is used. This can perform very well, but can also easily overfit
+the data and thus not generalize well. 
 
 \subsubsection{Support Vector Machines}
 \label{sec:svm}
 
-Support vector regression (SVR) is an extension of the popular classification
-algorithm, support vector machine (SVM).  This algorithm was chosen because of
-its ability to handle highly dimensional data well, which in this study is
-approximately 300 features. 
+\gls{SVR} is an extension of the popular classification algorithm, \gls{SVM}.
+This algorithm was chosen because of its ability to handle highly dimensional
+data well, which in this study is a maximum of approximately 300 features. 
 
-SVM classifies two classes by determining an optimal hyperplane, given by wx+b,
-between them.  As seen in Figure ?, the algorithm evaluates the quality of the
-line that separates two classes by maximizing the width of the margin given the
-contraints surrounding the line.  Some problems are not linearly separable, and
-thus a penalty term is introduced to allow for misclassifications. As shown in
-Figure ?, the algorithm then simultaneously minimizes the misclassifications
-while maximizing the margin. 
+As seen in Figure ?, the \gls{SVM} algorithm separates two classes by
+determining an optimal hyperplane, given by $wx+b = 0$, between them. The
+algorithm evaluates the quality of the line that separates the two classes by
+maximizing the margin width, $w$, given the constrains of the surrouding lines.
+Some problems are not linearly separable, and thus a penalty term, $\xi$, is
+introduced to allow for misclassifications. As shown in Figure ?, the algorithm
+then simultaneously minimizes the misclassifications while maximizing the
+margin. 
 
 This can be extended easily to multidimensional analysis via what is called the
 \textit{kernel trick}.  First, using a nonlinear kernel function maps the data

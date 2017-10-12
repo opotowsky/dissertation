@@ -80,12 +80,6 @@ main factors affecting model complexity can cause the model to be under- or
 overfit to the data: number of features in the data set and algorithm
 parameters that vary the regularization.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textit{Regularization} is a component of many machine learning aglorithms a
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=1.05\linewidth]{./chapters/litrev/ValidationCurve.png}
@@ -93,32 +87,41 @@ parameters that vary the regularization.
   \label{fig:validation}
 \end{figure}
 
-describe figure
+Figure \ref{fig:validation} adapted from Ref. \cite{elements_stats} shows the
+optimum as the minimum of the cross-validation error curve. There is some gap
+between it and the training error, much larger than the left side of the plot
+and much smaller than the right.  The plot above is a visualization of a
+decently fit model.  The left region is marked by both errors being quite high,
+and above is an  illustration of how an underfit plot (high bias) could provide
+high errors. The right region shows the training error being quite low but the
+cross-validation error being high. The diagram above shows that it is obvious
+how the training error would be negligible, but generalizing beyond that
+probably will not yield accurate results. 
 
 In practice, plotting learning and validation curves can be iterative. But as
 previously mentioned, too many optimizations will result in a poorly performing
 model when exposed to data outside of the training set.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Comparison of Methods}
 \label{sec:invcompare}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Inverse stuff.
+In addition to evaluating a single learned model, it may be beneficial to
+compare models. This can be done using Bayesian inference as discussed in
+Section \ref{sec:inverse} \cite{inverse_theory}.  Equations \ref{eq:bayes} and
+\ref{eq:bayes_words} show that there are three values to obtain to calculate a
+probability of a parameter estimated from a machine-learned model being
+correct: the prior probability, the likelihood, and the marginal likelihood.
+The marginal likelihood is only needed for absolute posterior probability
+calculations; it does not affect the relative probabilities, which are all that
+is needed for model comparison.
 
-Priors given by set of forward problems (input data space - ORIGEN sims)
-
-Likelihood given by model space, e.g.: 
-
-Model params as determined from ML alg
-
-(related) MLE from bayesian inference
-
-Direct inversion of matrix A
-
-Expert-elicited params (i.e. initial guesses for INDEPTH? Or optimized ones?)
-
-Marginal likelihood only needed for absolute measures - doesn’t affect relative probabilities
+The prior probabilities are obtained by a large set of forward problems, e.g.,
+a database of spent fuel recipes and parameters. In this study, this is
+provided by the training data set that is comprised of simulated \gls{SNF}
+recipes. The likelihoods are obtained in differing ways from the model space.
+One method is expert-elicited values. Another is a predicted model from some
+established theory or previously known relationship, e.g., empirical relations
+between isotopic ratios and certain reactor parameters or a direct calculation
+of the reactor parameters \cite{inverse_theory}. In this study, it is obtained
+from the estimated model parameters from a given statistical model. 
 

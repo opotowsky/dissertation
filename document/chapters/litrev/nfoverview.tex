@@ -154,6 +154,7 @@ set of measurements and their uncertainty. Inverse problem theory states that
 this follows the general form of Bayes' theorem, which is commonly expressed as
 follows:
 \begin{equation}
+  \label{eq:bayes}
   P(A|B) = \frac{P(B|A)P(A)}{P(B)}
 \end{equation}
 where $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that events
@@ -178,6 +179,7 @@ more intuitive to consider the conceptual version of Bayes' theorem below.
 A discussion of how these values are obtained takes place in Section
 \ref{sec:invcompare}.
 \begin{equation}
+  \label{eq:bayes_words}
   Posterior = \frac{Prior * Likelihood}{Marginal \ Likelihood} 
 \end{equation} 
 
@@ -186,9 +188,4 @@ methods for calculating the posterior probability of a system given some
 measurements.  In the nuclear forensics context of pre-detonated materials,
 this would be a a set of probabilities for different parameters of interest,
 e.g., reactor type, burnup, cooling time, and enrichment of some interdicted
-spent fuel. The prior probabilities are obtained by a large set of forward
-problems, e.g., a database of spent fuel recipes and parameters. The
-likelihoods are obtained in differing ways. One method is expert-elicited
-values. Another is a predicted model from some theory or previously known
-relationship, e.g., empirical relations between isotopic ratios and certain
-reactor parameters. 
+spent fuel. 

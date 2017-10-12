@@ -14,24 +14,17 @@ underfit model is due to high bias.  Variance is caused by including random
 noise in the model, so the error is caused by oversensitivity to that noise; an
 overfit model is due to high variance. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Include math or just reference it?
-Talk about irreducible error too?
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{figure}[!htb]
   \includegraphics[width=\linewidth]{./chapters/litrev/BVtradeoff.png}
   \caption{Total prediction error comprised of bias and variance}
   \label{fig:bvtradeoff}
 \end{figure}
 
-As shown in Figure \ref{fig:bvtradeoff}, there is a minimum in the total error,
-showing that there is a tradeoff between the bias and variance. Some bias is
-desired in order to generalize to future unknown data. But some variance is
-also positive for the model because it captures the relationships in the data
-that the bias counteracts. 
+As shown in Figure \ref{fig:bvtradeoff}, the shape of the total error curve
+shows that there is a tradeoff between the bias and variance that can be
+minimized. Some bias is desired in order to generalize to future unknown data.
+But some variance is also positive for the model because it captures the
+relationships in the data that the bias counteracts. 
 
 \subsubsection{Types of Error}
 
