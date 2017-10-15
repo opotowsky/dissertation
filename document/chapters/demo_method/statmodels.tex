@@ -51,12 +51,31 @@ latter will provide better estimates.  The models evaluated by the testing set
 do not have a validation set for pre-evaluation.  The models that are evaluated
 via cross-validation do not use the testing set. 
 
-Next there are two error types.  For the sake of comparison to previous work
-and convenient interpretation, \gls{MAPE} is tracked. However, \gls{MAPE}
-requires that no true values are $0$.  The preferred method in the community is
-to use \gls{RMSE} for model error estimation, so both are tabulated.  The
-\gls{MAPE} shows that there are some extremely high and extremely low errors
-depending on the algorithm, both of which are quite concerning.  Thus, next
-introduced are some diagnostic and optimization procedures that can shed light
-on the errors shown here.
+Table \ref{tbl:err} includes two error types.  For the sake of comparison to
+previous work and convenient interpretation, \gls{MAPE} is tracked. However,
+\gls{MAPE} requires that no true values are $0$.  The preferred method in the
+community is to use \gls{RMSE} for model error estimation, so both are
+tabulated.  The \gls{MAPE} shows that there are some extremely high and
+extremely low errors depending on the algorithm, both of which are quite
+concerning, as this indicates poor performance.  
 
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{./chapters/demo_method/randerr.png}
+  \caption{Results from information reduction using random error}
+  \label{fig:randerr}
+\end{figure}
+
+Figure \ref{fig:randerr} shows the three algorithm's \gls{MAPE}s with respect
+to the reduction of information by the introduction of random error to the
+nuclide vectors as described in Section \ref{sec:inforeduc}.  \gls{SVR} is
+shown to perform the best, but it quickly reaches 100\% error.  Although ridge
+regression rapidly increases with any amount of error, nearest neighbor
+regression shows more promise, although it reaches 257\% at 10\% error.
+Overall, this performance indicates that these algorithms are unlikely to
+predict burnup when faced with uncertainties in real-world measurements or
+the further reduction in information from gamma detection.
+
+Given the results in Table \ref{tbl:err} and Figure \ref{fig:randerr}, next
+introduced are some diagnostic and optimization procedures that can shed light
+on the performance.
