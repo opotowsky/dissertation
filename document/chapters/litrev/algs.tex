@@ -86,14 +86,14 @@ the data and thus not generalize well.
 This algorithm was chosen because of its ability to handle highly dimensional
 data well, which in this study is a maximum of approximately 300 features. 
 
-As seen in Figure ?, the \gls{SVM} algorithm separates two classes by
-determining an optimal hyperplane, given by $wx+b = 0$, between them. The
-algorithm evaluates the quality of the line that separates the two classes by
-maximizing the margin width, $w$, given the constrains of the surrouding lines.
-Some problems are not linearly separable, and thus a penalty term, $\xi$, is
-introduced to allow for misclassifications. As shown in Figure ?, the algorithm
-then simultaneously minimizes the misclassifications while maximizing the
-margin. 
+As seen in Figure ?\todo{SVR figs or no??}, the \gls{SVM} algorithm separates
+two classes by determining an optimal hyperplane, given by $wx+b = 0$, between
+them. The algorithm evaluates the quality of the line that separates the two
+classes by maximizing the margin width, $w$, given the constrains of the
+surrouding lines.  Some problems are not linearly separable, and thus a penalty
+term, $\xi$, is introduced to allow for misclassifications. As shown in Figure
+?, the algorithm then simultaneously minimizes the misclassifications while
+maximizing the margin. 
 
 This can be extended easily to multidimensional analysis via what is called the
 \textit{kernel trick}.  First, using a nonlinear kernel function maps the data
