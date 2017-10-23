@@ -125,6 +125,63 @@ usually chosen.
 \subsubsection{Dimensionality Reduction Techniques}
 \label{sec:dimreduc}
 
-Factor, discriminant (note it is supervised), and component (principal, independent, dependent) analysis.
-\todo{Add section on dimensionality reduction.}
+In addition to utilizing various algorithm parameters for regularization as
+discussed above, dimensionality reduction can improve generalizability by
+removing the noise of features that do not affect the regression task. This can
+be thought of in the following way: shrinkage techniques reduce the weights of
+noisy features, whereas dimensionality reduction removes them completely.
+Although one could use domain knowledge to manually reduce the number of
+features in a data set (e.g., only including certain nuclide subsets such as
+actinides), statistical feature reduction may also prove helpful in this work.
+The mathematical treatment of the methods described below are in Ref.
+\cite{elements_stats}.
+
+%Another use for the following techniques is the visualization of one's data
+%set, perhaps for data exploration or to show why certain predictions are
+%difficult. 
+
+\vspace{5mm} \noindent \textbf{Principal Components Analysis} \vspace{5mm}
+
+\Gls{PCA} is considered the most common dimensionality reduction technique.
+The \gls{PCA} algorithm learns a linear transformation of a data set
+$\boldsymbol{X}$ with which to construct a transformation matrix according to a
+user-chosen number of variables/components.  This matrix is part of the
+singular value decomposition of the data matrix $\boldsymbol{X}$.  The
+decomposition step is what provides the principal components, which are the
+result of maximizing the variance in the original data while minimizing the
+squared reconstruction error between the original data and the transformed
+data. The mathematical assumptions are that the variables are all Gaussian and
+uncorrelated.
+
+Because the principal components are obtained purely statistically with no
+model assumptions, they are usually uninterpretable. However, they can still
+provide clues with which to obtain new information. In the case of this work,
+this could provide insignt into new forensics signatures.
+
+\vspace{5mm} \noindent \textbf{Factor Analysis} \vspace{5mm}
+
+Factor analysis is similar to \gls{PCA} in that it also calculates linear
+combinations of the data set features using the above-mentioned decomposition
+and the mathematical assumptions are the same.  It is different in that the
+decomposition is rearranged so that it represents \textit{latent variables}
+including random error disturbances rather than principal components.  Latent
+variables are constructed by maximizing the correlation/shared variance among
+the variables rather than the total variance.  However, different optimizations
+can be chosen so that the solutions are parameter-dependent.  Furthermore, the
+initial model assumptions, while enabling interpretable results, also increase
+the dependence of the solutions on the algorithm inputs.
+
+\vspace{5mm} \noindent \textbf{Independent Components Analysis} \vspace{5mm}
+
+\Gls{ICA} has characteristics of both factor analysis and \gls{PCA}, but with
+the goal of finding independent measurements from multiple `sources'.  It uses
+the same form of decomposition as factor analysis but without the inclusion of
+random error. The mathematical assumptions are a bit different: the variables
+are statistically independent and non-Gaussian.  This allows the algorithm to
+minimize higher-order statistics of the data set (\gls{PCA} and factor analysis
+only minimize the first two orders).
+
+Since the independent components are useful in signal processing of multiple
+signals, this technique could prove useful for reprocessed nuclear materials
+where multple source streams converge. 
 

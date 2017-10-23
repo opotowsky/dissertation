@@ -207,17 +207,19 @@ drastically improve the accuracy of burnup prediction.  Feature reduction can
 be carried out via a range of discriminant, component, or factor analyses.
 Multiple studies have demonstrated success with some of these dimensionality
 reduction techniques \cite{nicolaou_2006, nicolaou_2009, nicolaou_2014,
-robel_2009, pu_discrimination, jones_viz_2014, jones_snf_2014}.  \todo{add
-types to test: PLS-DA, PCA/ICA, Factor?} 
+robel_2009, pu_discrimination, jones_viz_2014, jones_snf_2014}. Because
+reprocessing mixes streams of material, \gls{PCA} is not expected to perform as
+well as \gls{ICA}.
 
 \subsection*{Risks}
 
 It is possible that this framework is not the best approach to understand fuel
 cycles with reprocessing. The first action upon poor performance results is to
 try more/different preprocessing tools; this may have to include using domain
-knowledge to manually reduce the dimensions. As nne of the goals within the
+knowledge to manually reduce the dimensions. As one of the goals within the
 nuclear forensics community is to identify new signatures and/or correlated
 measurements, this is not desireable but it could still offer interesting
 results. Also, some creativity could be applied to find a method that works for
 this type of dataset, such as the iterative partial least squares discriminant
-analysis in Refs. \cite{robel_2009, pu_discrimination}.
+analysis used for \gls{UOC} country and source prediction in Refs.
+\cite{robel_2009, pu_discrimination}.

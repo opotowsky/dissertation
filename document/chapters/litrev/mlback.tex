@@ -40,6 +40,12 @@ modified to perform either supervised or unsupervised learning.
 %as \textit{ensemble methods}. One common way of doing this is performing
 %deimensionality reduction prior to supervised learning
 
+\begin{figure}[!htb]
+  \includegraphics[width=\linewidth]{./chapters/intro/SupervisedRegression.png}
+  \caption{Schematic representing the workflow of a statistical learning regression algorithm}
+  \label{fig:supervised}
+\end{figure}
+
 As shown in Figure \ref{fig:supervised}, a typical (supervised) machine
 learning workflow begins with a training data set, which has a number of
 \textit{instances}, or rows of observations.  Each instance has some
@@ -55,12 +61,6 @@ Depending on the performance and application, the model may need improvement
 from more training and/or some changes in the algorithm parameters. Once the
 model is performing well enough and validated, it is finalized; then a user can
 provide a single instance and a value can be predicted from that. 
-
-\begin{figure}[!htb]
-  \includegraphics[width=\linewidth]{./chapters/intro/SupervisedRegression.png}
-  \caption{Schematic representing the workflow of a statistical learning regression algorithm}
-  \label{fig:supervised}
-\end{figure}
 
 This study performs regression tasks using supervised learning algorithms.
 Differences among the underlying mathematics of the algorithms impact the
