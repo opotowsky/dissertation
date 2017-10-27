@@ -18,6 +18,13 @@ demonstration of machine learning algorithms. Since linear models must have all
 parameters linearly related, there are many restrictions regarding the shape of
 the model. However, this makes the resulting models stable to peturbations. 
 
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{./chapters/litrev/regularization.png}
+  \caption{Illustration of the effect of regularization on model prediction}
+  \label{fig:reg}
+\end{figure}
+
 An example of a linear model is below, where the vector of input features of
 size $p$, $\boldsymbol{X}$, provides a model, $F(\boldsymbol{X})$ ($Y$ is the
 known model), by determining the unknown coefficients, or weights,
@@ -30,13 +37,6 @@ referred to as the $L_2$ and $L_1$ norms, respectively.
 \begin{equation}
   F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j}
 \end{equation}
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\linewidth]{./chapters/litrev/regularization.png}
-  \caption{Illustrtation of the effect of regularization on model prediction}
-  \label{fig:reg}
-\end{figure}
 
 The form of linear regression used here is called ridge regression. This
 algorithm performs optimization using the $L_2$ norm, and also uses the form of
@@ -124,7 +124,7 @@ tradeoff.
 \begin{split}
   min\ & \frac{1}{2} \lVert w \rVert ^{2} + C \sum_{i} \xi_i \\
   subject\ to:\ \ & y_i (w x_i + b) > 1 - \xi_i
- \end{split}
+\end{split}
 \end{equation}
 
 Figure \ref{fig:svr}\footnote{These schematics are based on a tutorial on SVR

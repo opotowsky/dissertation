@@ -15,22 +15,22 @@ any radioactive substance in the case of a dirty bomb.  Addressing the former,
 a smaller burnup than is typical for spent fuel from a commercial reactor is
 used in the previous work.  
 
-\begin{table}[H]
+\begin{table}[!hp]
   \centering
   \begin{subtable}{\linewidth}
     \centering
     \includegraphics[height=0.7\textheight]{./chapters/demo_method/TrainData.png}
-    \caption{Reactor types and uranium-235 enrichment [weight\%].}
+    \caption{Reactor types and uranium-235 enrichment [weight\%]}
     \label{tbl:rxtrtype}
     \vspace*{5mm}
   \end{subtable}
   \begin{subtable}{\linewidth}
     \centering
     \includegraphics[width=0.7\linewidth]{./chapters/demo_method/TrainData2.png}
-    \caption{Simulation space defining reactor parameters and cooling time.}
+    \caption{Simulation space defining reactor parameters and cooling time}
     \label{tbl:rxtrparam}
   \end{subtable}%
-  \caption{Design of the training set space.}
+  \caption{Design of the training set space}
   \label{tbl:train}
 \end{table}
 
@@ -41,7 +41,14 @@ overvalue or overfit a certain area in the training space.  A truly
 for demonstration with a single use case in mind.  The training database is
 thus constructed by simulating the same training set space as described in Ref.
 \cite{dayman_feasibility_2013}, shown in Table \ref{tbl:train}. For each entry 
-shown here the simulations included 
+shown here the simulations included\todo{oops, finish!} 
+
+\begin{table}[!hp]
+  \centering
+  \includegraphics[width=0.95\linewidth]{./chapters/demo_method/TestData.png}
+  \caption{Design of the testing set space}
+  \label{tbl:test}
+\end{table}
 
 While in most machine learning studies the testing set is chosen randomly from
 the training set, the previous work used an external one, shown in Table
@@ -50,13 +57,6 @@ the trained values of burnup, it was chosen systematically. Therefore it was
 implemented in this study for comparison, but cross-validation will be used
 moving forward. More specifically, using \textit{k}-fold cross-validation is
 expected to better indicate the model performance. 
-
-\begin{table}[H]
-  \centering
-  \includegraphics[width=0.95\linewidth]{./chapters/demo_method/TestData.png}
-  \caption{Design of the testing set space.}
-  \label{tbl:test}
-\end{table}
 
 \subsection{Information Reduction}
 \label{sec:inforeduc}
