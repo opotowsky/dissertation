@@ -77,6 +77,22 @@ around the world is impossible, the database in this study will be created from
 high-fidelity simulations via \gls{ORIGEN} \cite{origen} within the SCALE code
 system \cite{scale} for modeling and simulation. 
 
+Figure \ref{fig:compworkflow} compares the \gls{INDEPTH} and statistical
+methodologies, both of which use simulated \gls{SNF}.  While not all steps are
+required to be equivalent, the only difference here is the method one chooses
+to obtain reactor parameters. Both workflows address speed of characterization,
+as it is intended to have gamma spectra as the inputs.  Because \gls{INDEPTH}
+is better studied and validated than statistical methods, \todo{cite} this work
+focuses on a statistical approach but with the intention to compare
+methodologies.  Both workflows also address many of the database issues,
+described above. The bottom statistical methodology is described here.
+\\
+\begin{figure}[!tbh]
+  \includegraphics[width=\linewidth]{./chapters/intro/CompStatForensicsWorkflow.png}
+  \caption{Two forensics research workflows using computational methodologies}
+  \label{fig:compworkflow}
+\end{figure}
+
 In the simulation and statistical learning paradigm, we need to determine how
 much information to what quality is needed to train a machine-learned model;
 the model must give appropriate predictions of reactor parameters given a set
@@ -88,17 +104,17 @@ The next step is to choose an algorithm that performs statistical learning.
 Statistical learners have varied strengths and weaknesses based on what is
 being predicted and how they implement optimization.  Chosen for this study are
 simple regression algorithms for burnup prediction: nearest neighbor and ridge
-regression.  For comparison, support vector regression is used because it is
-known to handle highly dimensional data sets well.  These algorithms are
-introduced in Section \ref{sec:algs}.
+regression.  For comparison, \gls{SVR} is used because it is known to handle
+highly dimensional data sets well.  These algorithms are introduced in Section
+\ref{sec:algs}.
 
 After the training is complete, the results of each models' predictions must be
 evaluated.  Typically, a test set is used to compare against the model created
 from the training set.  The testing error can therefore be tabulated with
 respect to various specifications such as the training set size, number of
-features, or algorithm parameters (regularization terms, etc). These results
-are broadly known as diagnostic plots and show if the algorithms' predictions
-are due to good performance or bad fitting. 
+features, or algorithm parameters. These results are broadly known as
+diagnostic plots and show if the algorithms' predictions are due to good
+performance or bad fitting. 
 
 After the models are evaluated using machine learning best practices, it will
 be important to compare them both against each other and against other
@@ -109,11 +125,11 @@ evaluated directly against other solutions, such as optimization-based methods
 or direct computations. 
 
 Next, information reduction (within the training and/or testing data sets) must
-be investigated to extend this workflow to mimic that of the real world. The
-primary example investigated here is the reduction of information quality via
-gamma ray detectors, as they can provide fast results.  If an algorithm could
-overcome the limitations of gamma detection and still provide useful results,
-this would warrant further studies and perhaps be field-applicable.
+be used to investigate the extension of this workflow to the real world. The
+primary example is the reduction of information quality via gamma ray
+detectors, as they can provide fast results.  If an algorithm could overcome
+the limitations of gamma detection and still provide useful results, this would
+warrant further studies and perhaps be field-applicable.
 
 Thus, ultimately, the goal is to answer the question \textit{How
 does the ability to determine forensic-relevant spent nuclear fuel attributes
@@ -125,16 +141,16 @@ The main purpose of this work is to evaluate the utility of statistical methods
 as an approach to determine nuclear forensics-relevant quantities as less
 information is available. Machine learning algorithms are used to train models
 to provide these values (e.g., reactor type, time since irradiation, burnup)
-from the available information. The training data is simulated using the SCALE
-6.2 code suite \cite{scale}, which provides an array of nuclide concentrations
-as the features ($X$) and the parameters of interest ($y$) are provided from
-the simulation inputs.  Information reduction is carried out using
-computationally generated gamma spectra; the radionuclide concentrations from
-the simulations can be converted into gamma energies, which then undergo a
-detector response calculation to represent real gamma spectra as closely as
-possible. Machine learning best practices are used to evaluate the performance
-of the chosen algorithms, and inverse problem theory is used to provide an
-interval of confidence in the model predictions.
+from the available information. The training data is simulated using
+\gls{ORIGEN}, which provides an array of nuclide concentrations as the features
+($X$) and the parameters of interest ($y$) are provided from the simulation
+inputs.  Information reduction is carried out using computationally generated
+gamma spectra; the radionuclide concentrations from the simulations can be
+converted into gamma energies, which then undergo a detector response
+calculation to represent real gamma spectra as closely as possible. Machine
+learning best practices are used to evaluate the performance of the chosen
+algorithms, and inverse problem theory is used to provide an interval of
+confidence in the model predictions.
 
 The necessary background is covered in Chapter \ref{ch:litrev}.  First, an
 introduction to the broader field of nuclear forensics is in Section
