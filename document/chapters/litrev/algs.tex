@@ -1,3 +1,5 @@
+\setlength\abovedisplayskip{2.5pt}
+
 For relevant nuclear forensics predictions, both classification and regression
 algorithms must be used.  For example, one may want to predict the reactor type
 based on some measurements (referred to as features) of spent fuel of an
@@ -25,7 +27,6 @@ from minimizing the sum of squared errors, $\sum_{i=1}^{n} (y_i - f(x_i))^2$.
 But it could instead be the least absolute deviations from minimizing the sum
 of absolute error differences, $\sum_{i=1}^{n} |y_i - f(x_i)|$. These are
 referred to as the $L_2$ and $L_1$ norms, respectively.  
-
 \begin{equation}
   F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j}
 \end{equation}
@@ -47,7 +48,6 @@ shrinkage term also includes a complexity parameter, $\lambda$
 \cite{elements_stats}.  Thus, the predicted linear model from ridge regression
 is updated to the following equation.  A visualization of what this
 regularization can accomplish is in Figure \ref{fig:reg}.
-
 \begin{equation}
   F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j} + \lambda \sum_{j=1}^{p} \beta_{j}^2
 \end{equation}
@@ -63,12 +63,20 @@ but instead a direct comparison between an unknown sample and the space that
 the training set populates. The predictions from nearest neighbors can be quite
 accurate, but are highly unstable to peturbations \cite{elements_stats}.  
 
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.8\linewidth]{./chapters/litrev/nn-fig.png}
+  \caption{Schematic demonstration of regression using \textit{k}-nearest neighbors}
+  \label{fig:nn}
+\end{figure}
+
 An extension of nearest neighbor is \textit{k}-nearest neighbor regression.
 The closest \textit{k} neighbors are averaged to provide an estimate of the
-unknown sample. The equation below shows how this algorithm does this to
-determine a predict a value, $Y$, from the input features, $\boldsymbol{X}$, in
-the neighborhood, $N_k (\boldsymbol{X})$ \cite{elements_stats}.  
-
+unknown sample as shown in the equation below.  Figure \ref{fig:nn} provides a
+pictoral explanation of how this is done for a single prediction.  The equation
+below shows how this algorithm does this to determine a predict a value, $Y$,
+from the input features, $\boldsymbol{X}$, in the neighborhood, $N_k
+(\boldsymbol{X})$ \cite{elements_stats}. 
 \begin{equation}
   Y(\boldsymbol{X}) = \frac{1}{k} \sum_{x_i \in N_k(\boldsymbol{X})} y_i
 \end{equation}
@@ -82,45 +90,98 @@ the data and thus not generalize well.
 \subsubsection{Support Vector Machines}
 \label{sec:svm}
 
-\gls{SVR} is an extension of the popular classification algorithm, \gls{SVM}.
+\Gls{SVR} is an extension of the popular classification algorithm, \gls{SVM}.
 This algorithm was chosen because of its ability to handle highly dimensional
 data well, which in this study is a maximum of approximately 300 features. 
 
-As seen in Figure ?\todo{SVR figs or no??}, the \gls{SVM} algorithm separates
-two classes by determining an optimal hyperplane, given by $wx+b = 0$, between
-them. The algorithm evaluates the quality of the line that separates the two
-classes by maximizing the margin width, $w$, given the constrains of the
-surrouding lines.  Some problems are not linearly separable, and thus a penalty
-term, $\xi$, is introduced to allow for misclassifications. As shown in Figure
-?, the algorithm then simultaneously minimizes the misclassifications while
-maximizing the margin. 
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.8\linewidth]{./chapters/litrev/svm.png}
+  \caption{Schematic demonstration of classification using SVM}
+  \label{fig:svm}
+\end{figure}
 
-This can be extended easily to multidimensional analysis via what is called the
+As seen in Figure \ref{fig:svm}\footnote{This schematic is based on the
+tutorial on SVMs by Dr.\@ Saed Sayad at
+http://www.saedsayad.com/support\_vector\_machine.htm}, the \gls{SVM} algorithm
+separates two classes by determining an optimal hyperplane between them.  The
+algorithm evaluates the quality of the line that separates the two classes by
+maximizing the margin width, $m_w = \frac{2}{\lVert w \rVert}$.  The hyperplane
+is defined in the equation below, where $\boldsymbol{w}$ is the vector that is
+normal to the hyperplane.  
+\begin{equation}
+  \boldsymbol{w \cdot x} + b = 0
+\end{equation}
+
+Figure \ref{fig:svm} also shows a case of soft margins.  Some problems are not
+linearly separable, and thus a penalty term, $\xi_{i}$, is introduced to allow
+for some misclassifications.  The algorithm then simultaneously minimizes the
+misclassifications while maximizing the margin. The objective function of the
+algorithm below shows this as well (using quadratic programming). In the
+equation below, $C$ is responsible for the margin width/misclassification
+tradeoff.
+\begin{equation}
+\begin{split}
+  min\ & \frac{1}{2} \lVert w \rVert ^{2} + C \sum_{i} \xi_i \\
+  subject\ to:\ \ & y_i (w x_i + b) > 1 - \xi_i
+ \end{split}
+\end{equation}
+
+Figure \ref{fig:svr}\footnote{These schematics are based on a tutorial on SVR
+by Dr.\@ Saed Sayad at
+http://www.saedsayad.com/support\_vector\_machine\_reg.htm} demonstrates how
+\gls{SVM} can be altered slightly from classification to nonlinear regression
+with \gls{SVR}.  \Gls{SVR} has a similar objective function but instead
+\textit{minimizes} the margin, as shown in Figure \ref{fig:svr-a}. This changes
+the constraints to the objective function as below:
+\begin{equation}
+\begin{split}
+  min\ & \frac{1}{2} \lVert w \rVert ^{2} + C \sum_{i} \xi_{i} \\
+  subject\ to:\ \ & \lvert y_i - (w x_i + b) \rvert \leq \varepsilon + \xi_i
+\end{split}
+\end{equation} 
+
+Further, this can be extended to nonlinear analysis via what is called the
 \textit{kernel trick}.  First, using a nonlinear kernel function maps the data
 into higher dimensional feature space. Then the algorithm can find a linear
-separation in this space, as shown in Figure ?. Further, this can be upgraded
-from classification to SVR by doing similar math but instead minimizing the
-margin, as shown in Figure ?. 
+separation in this space, as shown in Figure \ref{fig:svr-b}.
+
+\begin{figure}[!hp]
+  \centering
+  \begin{subfigure}[h]{0.8\linewidth}
+    \includegraphics[width=\linewidth]{./chapters/litrev/svr-a.png}
+    \caption{Demonstration of regression with \gls{SVR}}
+    \label{fig:svr-a}
+  \end{subfigure}
+  \begin{subfigure}[h]{0.8\linewidth}
+    \includegraphics[width=\linewidth]{./chapters/litrev/svr-b.png}
+    \caption{The kernel trick with \gls{SVR}}
+    \label{fig:svr-b}
+  \end{subfigure}
+  \caption{Illustrations of how \gls{SVM} can be extended to both regression and nonlinear analysis}
+  \label{fig:svr}
+\end{figure}
 
 The kernel chosen for this study is the Gaussian radial basis function, shown
-below. This has two tuneable parameters, gamma and C. Gamma influences the
-width of influence of individual training instances, and strongly affects the
-fitting of the model. Low values correspond to underfitting because the
-instances have too large of a radius (low influence) and high values correspond
-to overfitting because the instances have a small radius (high influence). 
+below. This has two tuneable parameters, $\gamma$ and $C$. The $\gamma$
+controls the width of influence of individual training instances, which
+strongly affects the fitting of the model. Low values correspond to
+underfitting because the instances have too large of a radius (low influence)
+and high values correspond to overfitting because the instances have a small
+radius (high influence). 
 
-The C parameter also affects the fitting of the model by allowing more or less
-support vectors, corresponding to more or less misclassification. A lower C
-smooths the surface of the model by allowing more misclassifications, whereas a
-higher C classifies more training examples by allowing fewer
-misclassifications. Too low and too high of a C can cause under- and
-overfitting, respoectively. 
+The $C$ parameter also affects the fitting of the model by allowing more or
+less support vectors, corresponding to more or less misclassification,
+respectivey. A lower $C$ smooths the surface of the model by allowing more
+misclassifications, whereas a higher $C$ classifies more training examples by
+allowing fewer misclassifications. Thus, too low or too high of a C can cause
+under- or overfitting, respectively. 
 
 Since there is a tradeoff of fitting strength provided by both parameters, it
-is common to run the algorithm on a logarithmic grid from 10'-3 to 10'3 for
-each parameter. If plotted on a heatmap of accuracies given gamma and C, there
-will be a diagonal of ideal combinations that emerges. The lowest of these is
-usually chosen. 
+is common to run the algorithm on a logarithmic grid from $10^{-3}$ to $10^3$
+for each parameter. If plotted on a heatmap of accuracies given $\gamma$ and
+$C$, there will be a diagonal of ideal combinations that emerges. The element
+with the lowest of each parameter is usually chosen. 
 
 \subsubsection{Dimensionality Reduction Techniques}
 \label{sec:dimreduc}
@@ -167,9 +228,13 @@ decomposition is rearranged so that it represents \textit{latent variables}
 including random error disturbances rather than principal components.  Latent
 variables are constructed by maximizing the correlation/shared variance among
 the variables rather than the total variance.  However, different optimizations
-can be chosen so that the solutions are parameter-dependent.  Furthermore, the
-initial model assumptions, while enabling interpretable results, also increase
-the dependence of the solutions on the algorithm inputs.
+can be chosen so that the solutions are parameter-dependent.  
+
+Furthermore, the initial model assumptions, while enabling interpretable
+results, also increase the dependence of the solutions on the algorithm inputs.
+If \gls{PCA} does not perform well with the type of training data in this work,
+it is possible that factor analysis will, since there are many nuclides in the
+training data set that are in a decay chain together.
 
 \vspace{5mm} \noindent \textbf{Independent Components Analysis} \vspace{5mm}
 
