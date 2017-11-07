@@ -4,9 +4,6 @@ Although the title of this section suggests final steps of confirming a model's
 usefulness for predictions, what follows is more of a troubleshooting exercise. 
 In practice, these analyses are used for both purposes.
 
-\subsection{Model Diagnostics}
-\label{sec:algeval}
-
 Machine learning algorithms are heavily dependent on the inputs and parameters
 given to them, such as training set sizes, regularization, learning rates, etc.
 From the results shown in Section \ref{sec:statmodel}, it is clear there is
@@ -78,14 +75,5 @@ dropping below the training error for extremely small $\gamma$, around where a
 minimum might be.  Since the model suffers from high bias, no amount of model
 complexity can be optimized. The resolution to the underfitting is discussed in
 Section \ref{sec:prep}.
-
-\subsection{Model Comparison}
-\label{sec:algcompare}
-
-Priors given by set of forward problems (input data space - ORIGEN sims), so
-need to eval distribution.\todo{need to fill out, but did not demonstrate?}
-
-Likelihood given by model space, e.g.: Model params as determined from ML alg,
-so these are the cross-validation results.
 
 

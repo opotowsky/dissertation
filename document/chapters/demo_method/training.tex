@@ -72,11 +72,11 @@ vectors in the training set.  A maximum error is ranging from $0 - 10\%$ is
 chosen for each round of training, and a random error within the range of
 $[1-E_{max}, 1+E_{max}]$ is applied to each component of the nuclide vector.
 
-However, since error in a nuclide vector is not random, in fact it is
-systematic and dependent on a number of known sources of uncertainty, the next
-study will introduce error by limiting the nuclides to only those that can be
-measured with a gamma spectrometer. This will use the code \gls{GADRAS-DRF}
-\cite{gadras} to computationally generate gamma spectra from the nuclide
-vectors, and is the next step in the future work. This is discussed in more
-detail in Section \ref{sec:prep}.
+However, error in a nuclide vector is not random, in fact it is systematic and
+dependent on a number of known sources of uncertainty. The next study will
+introduce error by limiting the nuclides to only those that can be measured
+with a gamma spectrometer. Although this is initially done using the
+availability of gamma spectra in \gls{ORIGEN}, \gls{GADRAS} can provide more
+\gls{DRF}s to further reduce information given to the algorithm.
+
 
