@@ -1,25 +1,76 @@
-Intro blurb?\todo{discuss what's needed here with Paul}
+There can be a large number of computational tools within a given field of
+study.  They are typically developed with one aspect of analysis in mind, so
+one must understand the simplifying assumptions the developers made for their
+purposes. Thus, choosing a computational tool is not always obvious. Thus, this
+section both introduces and defends the choices for the various experimental
+components.
 
 \subsection{Fuel Cycle Simulation}
 
-Nuclear fuel cycle studies involve the material flow of nuclear fuel. This can
-be anywhere from mining to waste management, or focus on a process step
-anywhere in between. Fuel cycle studies can be applied to any related subject,
-such as economics, environmental impact, transportation planning, etc. In order
-to draw conclusions from these studies, it is common to use a nuclear fuel
-cycle simulator that tracks the quantities of interest. These allow the
-comparison of different fuel types, reactor technologies, material processing
-steps, etc. 
+Nuclear fuel cycle studies involve tracking the material flow of nuclear fuel.
+This can be anywhere from mining to waste management, or focus on a process
+step anywhere in between. Fuel cycle studies are not necessarily
+nuclear-specific. They can be used to evaluate, e.g., economic predictions,
+environmental impact, transportation planning, etc.  In order to draw
+conclusions from these studies, it is common to use a nuclear fuel cycle
+simulator that tracks the quantities of interest. These allow the comparison of
+different fuel types, reactor technologies, material processing steps, etc. 
 
-\subsection{Data Modification}
+As mentioned, there are simplifications researchers need to make in order to
+experiment in a controlled way. Fuel cycle simulators are built for specific
+needs as well and also must remove complicating factors that are generally less
+relevant to the study.  For example, one tool might be suited well to
+large-scale systems analysis with little nuclear physics included in the
+models, and another might focus on detailed isotopics within a system to track
+plutonium isotopes.
 
-DRF Only?
+\todo{more needed?}
 
-\subsubsection{Detector Response Functions}
+Because a large portion of a nuclear forensics investigation relies on
+measuring isotopics, \gls{ORIGEN-ARP} \cite{origen} within the SCALE code
+system was chosen for its physically detailed models. \gls{ORIGEN} calculates
+time-dependent nuclide concentrations (or quantities derived from these) that
+result from activation and depletion calculations. The physics (i.e., neutron
+transport and decay) calculations are carried out in other SCALE modules that
+solve the depletion equations.  This generates libraries for \gls{ORIGEN} that
+include the probabilities of reaction (i.e., cross sections) for the system.
 
-GADRAS
+To obtain an \gls{SNF} recipe from a reactor simulation, \gls{ORIGEN} uses the
+desired input power generation with the cross section library to calculate a
+flux, the resulting depletion, and the end composition (i.e., isotopics,
+nuclide vector).  Another output is decay; the composition is computed using
+decay equations with nuclear data \cite{endf}. These compositions provide
+source terms for other calculations, such as decay emission spectra from
+neutrons, or alpha, beta, gamma rays, which use the same resource for nuclear
+data. Other quantities like activity, decay heat, or radiological hazard
+factors are also an option.
 
-\subsubsection{Isotope Identification from Gamma Spectra}
+\gls{ORIGEN-ARP} allows users to access a wider range of simulations by
+interpolating between the already calculated libraries for a wide array of
+reactors instead of creating new libraries.  It is known to be validated for
+\gls{LWR} \gls{SNF} \cite{lwr_valid}. Additionally, recycled \gls{SNF} in the
+form of mixed oxide fuel has been benchmarked with the relevant reactors
+\cite{mox_valid}.  Thus, given an initial material composition, some reactor
+operation parameters, and a reactor type, one can quickly perform many
+different nuclear reactor simulations and obtain \gls{SNF} recipes.
 
-Maybe don't need since its usefulness will be evaluated later on post-prelim?
+\subsection{Statistics Toolkit}
+
+The statistics toolkit chosen for this work is scikit-learn \cite{scikit}, a
+machine learning package in python.  Virtually all modern machine learning
+toolkits will have acceptably fast and reliable algorithms, but the use of
+python provides a platform for seamless integration of all the tools in the
+workflow. 
+
+\subsection{Computational Gamma Spectra}
+
+Although the data modification shown later in Section \ref{sec:inforeduc} does
+not use any standalone tool, the code \gls{GADRAS} \cite{gadras} developed at
+Sandia National Laboratories will provide information reduction in a physically
+valid manner.  Test studies will be carried out using the gamma spectra
+available from \gls{ORIGEN} simulations, but the detector response will need to
+be varied more than this tool can provide. Thus, given the nuclide vectors from
+\gls{ORIGEN}, \gls{GADRAS} computationally generates gamma spectra from the
+gamma energies and a chosen \gls{DRF}. This will enable a more robust study of 
+statistical performance with respect to information reduction.
 
