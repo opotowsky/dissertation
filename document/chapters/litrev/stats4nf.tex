@@ -1,22 +1,45 @@
 Although the body of literature on the area of proposed research is not
 expansive, there have been a number of relevant studies on the prediction of
-reactor parameters using statistical methods. This section condenses these
-studies by the materials and methods used.\todo{this ok org or should I do two
-case studies?}
+forensically relevant categories or quantities of nuclear materials using
+statistical methods. 
 
 \subsection{Special Nuclear Materials Studied}
 
-The review on nf for the whole fuel cycle is useful here, perhaps. This is also 
-important when I discuss my risk management section later. 
+With regards to broader forensics capabilities, materials from different steps
+of the nuclear fuel cycle are must be studied.  Even though each material has
+its own forensics signatures, the process of applying statistical methods to
+the analysis of material provenance is similar for each. 
 
-UOC (LLNL)
-Pu - Robel and Kristo (mention reprocessing)
-SNF, a bunch
+For example, on the front end of the fuel cycle, an entity may have obtained
+\gls{UOC} if they have enrichment capabilities.  One study performed
+statistical analyses on \gls{UOC} from 21 sources (throughout seven countries)
+using 30 concentration measurements of various elements, isotopes, and
+compounds, e.g., sodium, magnesium, thorium, uranium-234, or halide compounds
+\cite{robel_2009}.  The goal of classifying the source and the country was
+reached 60\% and 85\% of the time, respectively. 
+% Note: there was a ton of skew in their data and the correction for that was
+% weak sauce
 
-
+On the back end, an organization might have interest in \gls{SNF} if they have
+reprocessing capabilities.  Or, perhaps already separated plutonium from
+\gls{SNF} has been intercepted and needs to be traced. Another study addresses
+this by performing factor analysis on theoretical separated plutonium from
+various sources of \gls{ORIGEN}-simulated \gls{SNF} based on their composition
+at the end of irradiation \cite{nicolaou_pu}.  Since in this study all
+materials are the same age, five plutonium isotopes (238--242) correctly
+predicted a test sample. However, taking different times since irradiation and
+reprocessing into account requires more isotopic measurements. 
 
 \subsection{Statistical Methods Employed}
 
-Very short details from lit review outline and success rates should be 
-discussed here
+All classification:\\
+UOC, 30 features, 3 methods \cite{robel_2009}\\
+Pu, 5 features, 1 method \cite{nicolaou_pu}\\
+SNF, 34 features, 3 methods \cite{jones_snf_2014}\\
+SNF, ~10 (4 papers by nicolaou: 2006, 2009, 2014, 2015)\\
+
+Includes regression:\\
+SNF, ~300 features, 3 methods \cite{dayman_feasibility_2013} (burnup)\\
+SNF, 9 features, 2 methods \cite{pu_discrimination} (fuel enrichment)\\
+
 
