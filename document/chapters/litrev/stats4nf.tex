@@ -32,14 +32,21 @@ reprocessing into account requires more isotopic measurements.
 
 \subsection{Statistical Methods Employed}
 
-All classification:\\
-UOC, 30 features, 3 methods \cite{robel_2009}\\
-Pu, 5 features, 1 method \cite{nicolaou_pu}\\
-SNF, 34 features, 3 methods \cite{jones_snf_2014}\\
-SNF, ~10 (4 papers by nicolaou: 2006, 2009, 2014, 2015)\\
+There are many statistical methods studies that focus on classification,
+usually the prediction of the reactor type for unknown samples
+\cite{robel_2009, nicolaou_pu, jones_snf_2014, nicolaou_2009}.  However, this
+work is focused on burnup prediction as well.  Although the results for both
+regression and classification are based on a number of features that are
+usually isotopic in nature, it is not clear if the regression counterparts of
+these algorithms will perform similarly for this task. 
 
-Includes regression:\\
-SNF, ~300 features, 3 methods \cite{dayman_feasibility_2013} (burnup)\\
-SNF, 9 features, 2 methods \cite{pu_discrimination} (fuel enrichment)\\
 
+
+SNF, ~300 features, 3 methods \cite{dayman_feasibility_2013} (burnup)
+nnl1, nnl1, rr
+
+Nico 2006 predicted enrichment and burnup using factor analysis + nico 2015 - regression only
+factor analysis
+%SNF, 9 features, 2 methods \cite{pu_discrimination} (fuel enrichment)
+%PCA + PLSDA
 

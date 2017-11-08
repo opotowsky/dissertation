@@ -10,24 +10,23 @@ Another approach utilizes artificial intelligence to solve nuclear forensics
 problems, such as implementing searching algorithms for the database comparison
 step \cite{gey_search} and machine learning for determining reactor parameters
 from \gls{SNF} characteristics \cite{dayman_feasibility_2013, nicolaou_2006,
-nicolaou_2009, nicolaou_2014, nicolaou_2015, robel_2009, pu_discrimination,
-jones_viz_2014, jones_snf_2014}.  A variety of statistical and machine learning
-tools have been used to characterize spent fuel by predicting categories or
-labels (e.g., reactor type, fuel type) as well as predicting values (e.g.,
-burnup, initial enrichment, cooling time). The former uses classification
-algorithms and the latter uses regression algorithms, many of which can be
-altered to perform both classification and regression.  There is some promising
-work discussed in Section \ref{sec:stats4nf} that shows certain applications of
-machine learning can provide an additional tool for solving the forensics
-problem, both qualitatively (for visualization) and quantitatively (for
-prediction).
+nicolaou_2009, nicolaou_2015, robel_2009, pu_discrimination, jones_viz_2014,
+jones_snf_2014}.  A variety of statistical and machine learning tools have been
+used to characterize spent fuel by predicting categories or labels (e.g.,
+reactor type, fuel type) as well as predicting values (e.g., burnup, initial
+enrichment, cooling time). The former uses classification algorithms and the
+latter uses regression algorithms, many of which can be altered to perform both
+classification and regression.  There is some promising work discussed in
+Section \ref{sec:stats4nf} that shows certain applications of machine learning
+can provide an additional tool for solving the forensics problem, both
+qualitatively (for visualization) and quantitatively (for prediction).
 
 Statistical methods have the uniqueness of requiring minimal domain knowledge
 via machine learning algorithms that predict the characteristics or values of
 interest \cite{dayman_feasibility_2013, robel_2009, nicolaou_2006,
-nicolaou_2009, nicolaou_2014, nicolaou_2015, jones_snf_2014, jones_viz_2014}.
-They first create a black-box statistical model using the database entries, and
-can predict the reactor parameters of an unknown sample based on that model.
+nicolaou_2009, nicolaou_2015, jones_snf_2014, jones_viz_2014}.  They first
+create a black-box statistical model using the database entries, and can
+predict the reactor parameters of an unknown sample based on that model.
 Having a machine-learned model based on a large number of simulations may also
 overcome the challenges of missing data, irregular uncertainty, or lack of
 information on other fuel cycles.  This logic also follows for other
