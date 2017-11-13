@@ -3,7 +3,7 @@ therefore a few techniques for optimizing the performance. It should be noted
 that much of the discussion here and in Section \ref{sec:valid} focuses on
 the diagnostics aspect rather than the validation aspect of these techniques.
 In practice, these are used for both purposes, but in this work the formal
-comparison of model performance will be used, introduced and demonstrated in
+comparison of model performance will be used, introduced and detailed in
 Sections \ref{sec:invcompare} and \ref{sec:modelcompare}, respectively. 
 
 However, the increase in performance from over-optimization could be linked to
@@ -105,23 +105,65 @@ model when exposed to data outside of the training set.
 \subsubsection{Comparison of Methods}
 \label{sec:invcompare}
 
-In addition to evaluating a single learned model, it may be beneficial to
+In addition to evaluating a single learned model, it will be beneficial to
 compare models. This can be done using Bayesian inference as discussed in
-Section \ref{sec:inverse} \cite{inverse_theory}.  Equations \ref{eq:bayes} and
-\ref{eq:bayes_words} show that there are three values to obtain to calculate a
-probability of a parameter estimated from a machine-learned model being
-correct: the prior probability, the likelihood, and the marginal likelihood.
-The marginal likelihood is only needed for absolute posterior probability
-calculations; it does not affect the relative probabilities, which are all that
-is needed for model comparison.
+Section \ref{sec:inverse}.  Equations \ref{eq:bayes} and \ref{eq:bayes_words}
+show that there are three values to obtain to calculate a posterior
+probability, i.e., the probability of a parameter estimated from a
+machine-learned model being correct: the likelihood, the prior probability, and
+the marginal likelihood. 
 
-The prior probabilities are obtained by a large set of forward problems, e.g.,
-a database of \gls{SNF} recipes and parameters. In this study, this is
-provided by the training data set that is comprised of simulated \gls{SNF}
-recipes. The likelihoods are obtained in differing ways from the model space.
-One method is expert-elicited values. Another is a predicted model from some
-established theory or previously known relationship, e.g., empirical relations
-between isotopic ratios and certain reactor parameters or a direct calculation
-of the reactor parameters \cite{inverse_theory}. In this study, it is obtained
-from the estimated model parameters from a given statistical model. 
+The posterior probability represents the solution to an \textit{inverse}
+problem, where model parameters are predicted from some given measurement
+values. It is not directly computable and thus the remaining probabilities
+discussed below indirectly allow its computation.  In this context, it is the
+probability that a predicted reactor parameter from a chosen method is correct
+given input based on an \gls{SNF} recipe.  For example, it is the probability
+that a plutonium-239 concentration of $y\%$ is attributed to a uranium oxide
+fuel in a \gls{BWR} with a burnup of $x\ GWd/MTU$.  Most inverse problems are
+\textit{ill-posed}, usually because the solution is not guaranteed to be
+unique. The posterior probabilities compared across methods will provide the
+most probable correct answer. This will reveal the superior method versus
+others that have lower posterior probabilities. \cite{inverse_theory}
+
+The likelihood represents the solution to a \textit{forward} problem, where
+measurement values are predicted from some given model parameters.  In this
+context, this is calculated from the instances in the training data set.  The
+likelihood is the probability that the output \gls{SNF} composition of a
+simulation is correct given the input of reactor operation parameters.  In
+practice, it will be calculated from a large number of forward simulations
+using \gls{ORIGEN}, i.e., the training data set. For example, this would be the
+probability that uranium oxide fuel from a \gls{BWR} having a burnup of $x\
+GWd/MTU$ contains $y\%$ of plutonium-239.
+
+The prior probability represents the spread of plausible model parameters, so
+it is a hypothesis based on the breadth of the model space with no evidence
+provided.  In other words, it is given by model parametertization from a number
+of potential sources.  One method is expert-elicited values. Another is a
+predicted model from some established theory or previously known relationship,
+e.g., empirical relations between isotopic ratios and certain reactor
+parameters or a direct calculation of the reactor parameters. In this context,
+it is obtained from the estimated model parameters from a given statistical
+model.  For example, it is the probability that a model from \gls{SVR} predicts
+a burnup of $x\ GWd/MTU$ for uranium oxide fuel from a \gls{BWR} with no other 
+direct measurements provided.
+
+The marginal likelihood represents the spread of plausible measurements, so it
+is based on the breath of the data space with no model-based information
+provided.  In practice, however, it is calculated by summing the joint
+probabilities of all possible model parameter hypotheses and measurements. This
+in essence provides a normalization constant.  Thus, the marginal likelihood is
+only needed for absolute posterior probability calculations; it does not affect
+the relative probabilities, which are all that is needed for model comparison
+\cite{inverse_theory}. 
+
+For reference, Table \ref{tbl:bayes} is a summary of the Bayes' theorem
+components described above as related to this work.
+
+\begin{table}[!hp]
+  \centering
+  \includegraphics[width=\linewidth]{./chapters/litrev/bayes.png}
+  \caption{Summary of contextual explanations of Bayes theorem components}
+  \label{tbl:bayes}
+\end{table}
 
