@@ -8,8 +8,14 @@ understanding the learned model's behavior and thus the quality of the results.
 Moving forward to a set of experiments is now possible.
 
 Before describing the experiments, some topics and issues are addressed in
-Section \ref{sec:prep}.  Finally, the proposed research experimental design is
-presented Sections \ref{sec:exp1}, \ref{sec:exp2}, and \ref{sec:exp3}.
+Section \ref{sec:prep}.  Next, the proposed research experimental design is
+presented. Sections \ref{sec:exp1}, \ref{sec:exp2}, and \ref{sec:exp3} describe
+how this work will probe the viability of statistical learning using direct
+isotopic information, information obtained from gamma spectra, and other fuel
+cycle flows, respectively.  Discussed separately is the planned implementation
+of comparing methods using the Bayesian framework in Section
+\ref{sec:modelcompare}. Finally, the timeline of this project is covered in
+Section \ref{sec:timeline}.
 
 \section{Experiment Preparations}
 \label{sec:prep}
@@ -174,7 +180,7 @@ correlations.
 
 There is already nuclear fuel reprocessing in France for \gls{LWR}s, and
 possibly in the forseeable future in China with fast breeder reactors.  Given
-the inevitablity of reprocessing in fuel cycles, it is important to develop
+the existence of reprocessing in fuel cycles, it is important to develop
 nuclear forensics capabilities on processed \gls{SNF}. This is presents an
 additional prediction challenge because many of the isotopic, chemical, and
 elemental signatures are stripped away in the processing. However, there is a
@@ -184,13 +190,13 @@ Ref. \cite{pu_discrimination} predicts reactor type and enrichment, it is
 enough motivation to pursue burnup as well. 
 
 This experiment is intended to repeat those in Sections \ref{sec:exp1} and
-\ref{sec:exp2} with an added layer of complexity from the reprocessing.  It
-will be carried out using direct isotopics as in Section \ref{sec:exp1}, with a
-goal to use indirect information as in Section \ref{sec:exp2} pending
-performance. The training data set will also be simulated using \gls{ORIGEN}.
-\textit{The main purpose of this experiment is to probe the difficulties of
-reactor parameter prediction when some of the inputs are from a cyclical
-nuclear fuel cycle.}
+\ref{sec:exp2} with an added layer of complexity from the reprocessing by
+including mixed-oxide fuel.  It will be carried out using direct isotopics as
+in Section \ref{sec:exp1}, with a goal to use indirect information as in
+Section \ref{sec:exp2} pending performance. The training data set will also be
+simulated using \gls{ORIGEN}.  \textit{The main purpose of this experiment is
+to probe the difficulties of reactor parameter prediction when some of the
+inputs are from a cyclical nuclear fuel cycle.}
 
 The variables for this experiment will include the following:
 \begin{enumerate}
@@ -227,9 +233,47 @@ analysis used for \gls{UOC} country and source prediction in Refs.
 \section{Model Comparison}
 \label{sec:modelcompare}
 
-Priors given by set of forward problems (input data space - ORIGEN sims), so
-need to eval distribution.
+It is important to be able to compare the methods proposed here against each
+other and against other analagous methods. For example, Experiment 2 (Section
+\ref{sec:exp2}) aims to predict reactor history values using simulated gamma
+spectra, and \gls{INDEPTH} uses gamma spectra as inputs.  These can be directly
+compared using the inverse problem structure introduced in Section
+\ref{sec:inverse}.  A simplified application of Equation \ref{eq:bayes_words}
+is discussed further in Section \ref{sec:invcompare}.  The methods for
+calculating the necessary probability distributions are outlined below.
 
-Likelihood given by model space, e.g.: Model params as determined from ML alg,
-so these are the cross-validation results.
+Here, we change the variables to directly represent probability densities
+\todo{density=distribution?}, as in Equation \ref{eq:rho}.  $C$ is a constant
+given by the marginal likelihood, which can be ignored when calculating
+relative probabilities, and $\boldsymbol{d}$ and $\boldsymbol{m}$.  represent
+the training data set and model parameters, respectively. Thus,
+$\rho(\boldsymbol{d}|\boldsymbol{m})$ is the likelihood function,
+$\rho(\boldsymbol{m}$ is the prior probability density, and
+$\rho(\boldsymbol{m}|\boldsymbol{d})$ is the posterior probability density.
+\begin{equation}
+\label{eq:rho}
+  \rho(\boldsymbol{m}|\boldsymbol{d}) = C \* \rho(\boldsymbol{d}|\boldsymbol{m}) \* \rho(\boldsymbol{m})
+\end{equation}\todo{fix eq mult}
 
+The likelihood function is obtained by a large set of forward problems, e.g.,
+the database of \gls{SNF} recipes and parameters used to train the machine
+learning algorithms.  First, a histogram \todo{is it histogram with continuous
+data?  binned histo?} of the burnup will be plotted over the entire training
+set.  The shape of this provides the likelihood distribution (likely Gaussian).
+***Note: This makes it easy to assume something is known by slicing the input
+to the histogram.
+
+The prior probability distributions are given by the model space, e.g., reactor
+parameters as predicted from the machine-learned models determined.  Thus, the
+burnup predictions from a given statistical model will be \textbf{insert method}
+in order to obtain a function for the prior.
+
+Calculating the likelihood and prior distributions gives a non-normalized
+posterior probability distribution (if $C$ is ignored).  Then, two priors from
+two different methods can be used to calculate the posterior, giving a relative
+probability distrubution for evaluation. 
+
+\section{Timeline}
+\label{sec:timeline}
+
+oh hi
