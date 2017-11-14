@@ -25,7 +25,7 @@ Typically, a learning curve will look somewhat like one of the three examples
 in Figure \ref{fig:learning}\footnote{These schematics are based on hand-drawn
 diagrams by Ritchie Ng on http://www.ritchieng.com/applying-machine-learning/}.
 A learning curve tests the model for high bias or high variance, which can
-correspond to an undefit or overfit model, respectively. 
+correspond to an under- or overfit model, respectively. 
 
 \begin{figure}[!hp]
   \centering
@@ -67,9 +67,11 @@ Figure \ref{fig:ideal} is an example of a more ideal model fit. It is
 characterized by a small gap between the two errors, and they are at a
 reasonable level with respect to the desired performance.  The training error
 should increase with respect to the training set size due to a larger amount of
-bias (preventing overfitting). But the cross-validation error should decrease
+bias (preventing overfitting). However, the cross-validation error should decrease
 quickly with respect to the training set size due to being close to the minimum
 of the bias-variance tradeoff. 
+
+\todo{add description of i.i.d. training set}
 
 \subsubsection{Model Complexity}
 
@@ -90,13 +92,13 @@ parameters that vary the regularization.
 Figure \ref{fig:validation} adapted from Ref. \cite{elements_stats} shows the
 optimum as the minimum of the cross-validation error curve. There is some gap
 between it and the training error, much larger than the left side of the plot
-and much smaller than the right.  The plot above is a visualization of a
-decently fit model.  The left region is marked by both errors being quite high,
-and above is an  illustration of how an underfit plot (high bias) could provide
-high errors. The right region shows the training error being quite low but the
-cross-validation error being high. The diagram above shows that it is obvious
-how the training error would be negligible, but generalizing beyond that
-probably will not yield accurate results. 
+and much smaller than the right.  The plot above is a visualization of an
+approximately well-fit model.  The left region is marked by both errors being
+quite high, and above is an  illustration of how an underfit plot (high bias)
+could provide high errors. The right region shows the training error being
+quite low but the cross-validation error being high. The diagram above shows
+that it is obvious how the training error would be negligible, but generalizing
+beyond that probably will not yield accurate results. 
 
 In practice, plotting learning and validation curves can be iterative. But as
 previously mentioned, too many optimizations will result in a poorly performing
@@ -106,12 +108,18 @@ model when exposed to data outside of the training set.
 \label{sec:invcompare}
 
 In addition to evaluating a single learned model, it will be beneficial to
-compare models. This can be done using Bayesian inference as discussed in
-Section \ref{sec:inverse}.  Equations \ref{eq:bayes} and \ref{eq:bayes_words}
-show that there are three values to obtain to calculate a posterior
-probability, i.e., the probability of a parameter estimated from a
-machine-learned model being correct: the likelihood, the prior probability, and
-the marginal likelihood. 
+compare models. Moreover, there are potential degeneracies in the solution
+space \todo{cite Steve}. This is because most inverse problems are
+\textit{ill-posed}, usually because the solution is not guaranteed to be
+unique. The posterior probabilities compared across methods will provide the
+most probable correct answer. This will reveal the superior method versus
+others that have lower posterior probabilities. \cite{inverse_theory}
+
+This can be done using Bayesian inference as discussed in Section
+\ref{sec:inverse}.  Equations \ref{eq:bayes} and \ref{eq:bayes_words} show that
+there are three values to obtain to calculate a posterior probability, i.e.,
+the probability of a parameter estimated from a machine-learned model being
+correct: the likelihood, the prior probability, and the marginal likelihood. 
 
 The posterior probability represents the solution to an \textit{inverse}
 problem, where model parameters are predicted from some given measurement
@@ -120,11 +128,7 @@ discussed below indirectly allow its computation.  In this context, it is the
 probability that a predicted reactor parameter from a chosen method is correct
 given input based on an \gls{SNF} recipe.  For example, it is the probability
 that a plutonium-239 concentration of $y\%$ is attributed to a uranium oxide
-fuel in a \gls{BWR} with a burnup of $x\ GWd/MTU$.  Most inverse problems are
-\textit{ill-posed}, usually because the solution is not guaranteed to be
-unique. The posterior probabilities compared across methods will provide the
-most probable correct answer. This will reveal the superior method versus
-others that have lower posterior probabilities. \cite{inverse_theory}
+fuel in a \gls{BWR} with a burnup of $x\ GWd/MTU$.  
 
 The likelihood represents the solution to a \textit{forward} problem, where
 measurement values are predicted from some given model parameters.  In this

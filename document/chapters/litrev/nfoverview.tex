@@ -18,11 +18,11 @@ Section \ref{sec:inverse} as a way to evaluate the results of forensic methods.
 The technical programs researching improvements to the \gls{US}'s nuclear
 forensics capabilities are split between the type of material being
 investigated. The analysis of irradiated debris from a weapon has different
-collection and measurement requirements than recovered \gls{SNF} from a
-commercial reactor. This separates the field into post-detonation and
-pre-detonation nuclear forensics. While both are discussed below in Sections
-\ref{sec:postdet} and \ref{sec:predet}, respectively, there is more focus on
-pre-detonation topics since this work is based on \gls{SNF}.
+collection and measurement requirements than a mass of \gls{SNM}. This
+separates the field into post-detonation and pre-detonation nuclear forensics.
+While both are discussed below in Sections \ref{sec:postdet} and
+\ref{sec:predet}, respectively, there is more focus on pre-detonation topics
+since this work is based on \gls{SNF}.
 
 \subsubsection{Post-Detonation}
 \label{sec:postdet}
@@ -85,7 +85,7 @@ the accuracy and/or certainty of a reconstructed set of reactor parameters.
 Another area of research is deeper study of known forensics signatures or
 discovering new signatures with modeling, simulation, or statistical methods. 
 
-The Real World Methodology section in Figure \ref{fig:nfworkflow} shows a
+The `Real World Methodology' section in Figure \ref{fig:nfworkflow} shows a
 typical workflow for the technical portion of a pre-detonation forensics
 investigation.  After a sample is obtained, characterization begins.  Next, the
 results of these techniques are then compared against existing standard
@@ -158,7 +158,7 @@ follows:
   P(A|B) = \frac{P(B|A)P(A)}{P(B)}
 \end{equation}
 where $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that events
-$A$ and $B$ will occur, respectively, $P(B|A)$ is the prior probability that event 
+$A$ and $B$ will occur, respectively, $P(B|A)$ is the likelihood that event 
 $B$ will occur given a known result for $A$, and $P(A|B)$ is the posterior 
 probability that event $A$ will occur given a known result for $B$.
 
@@ -166,21 +166,20 @@ This is can be mapped easily to the inverse physical system problem scenario.
 $A$ would represent an occurence of a parameter in the model space, and $B$
 would represent the measurement of some value. Thus, $P(A)$ is the probability
 of a parameter existing without any knowledge of $B$. This is known as the
-likelihood, usually given by some theory about the system. $P(B)$ is the
+prior probability, usually given by some theory about the system. $P(B)$ is the
 probability of some measurement existing without any knowledge of $A$. This is
 known as the marginal likelihood, which is some homogeneous concept for the
 potential measurements that could be made (this only serves to scale to
 absolute probabilities and does not affect the relative probabilities). The
-prior probability $P(B|A)$ is the chance that a measurement is observed from a
-given parameter, representing the forward problem.  Lastly, the posterior
-probability is the chance of some parameter existing given some measurement,
-representing the inverse problem solution \cite{inverse_theory}.  It may be
-more intuitive to consider the conceptual version of Bayes' theorem below.  
-A discussion of how these values are obtained takes place in Section
-\ref{sec:invcompare}.
+likelihood, $P(B|A)$, is the chance that a measurement is observed from a given
+parameter, representing the forward problem.  Lastly, the posterior probability
+is the chance of some parameter existing given some measurement, representing
+the inverse problem solution \cite{inverse_theory}.  It may be more intuitive
+to consider the conceptual version of Bayes' theorem below.  A discussion of
+how these values are obtained takes place in Section \ref{sec:invcompare}.
 \begin{equation}
   \label{eq:bayes_words}
-  Posterior = \frac{Prior * Likelihood}{Marginal \ Likelihood} 
+  Posterior = \frac{Likelihood * Prior}{Marginal \ Likelihood} 
 \end{equation} 
 
 This framework is helpful for an experiment that intends to compare different

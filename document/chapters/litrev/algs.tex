@@ -25,9 +25,10 @@ the model. However, this makes the resulting models stable to peturbations.
   \label{fig:reg}
 \end{figure}
 
-An example of a linear model is below, where the vector of input features of
-size $p$, $\boldsymbol{X}$, provides a model, $F(\boldsymbol{X})$ ($Y$ is the
-known model), by determining the unknown coefficients, or weights,
+An example of a linear model is in the equation below, where the vector of
+input features of size $p$, $\boldsymbol{X}$, provides a model,
+$F(\boldsymbol{X})$ ($\boldsymbol{Y}$ is the vector of known
+data)\todo{reword}, by determining the unknown coefficients, or weights,
 $\beta_{j}$'s. The algorithm calculates these by minimizing the value of a loss
 function over all the training data.  This is usually the least squares error
 from minimizing the sum of squared errors, $\sum_{i=1}^{n} (y_i - f(x_i))^2$.
@@ -90,7 +91,7 @@ the data and thus not generalize well.
 \subsubsection{Support Vector Machines}
 \label{sec:svm}
 
-\Gls{SVR} is an extension of the popular classification algorithm, \gls{SVM}.
+\Acrfull{SVR} is an extension of the popular classification algorithm, \acrfull{SVM}.
 This algorithm was chosen because of its ability to handle highly dimensional
 data well, which in this study is a maximum of approximately 300 features. 
 
@@ -143,7 +144,7 @@ the constraints to the objective function as below:
 
 Further, this can be extended to nonlinear analysis via what is called the
 \textit{kernel trick}.  First, using a nonlinear kernel function maps the data
-into higher dimensional feature space. Then the algorithm can find a linear
+into higher dimensional\todo{check wording} feature space. Then the algorithm can find a linear
 separation in this space, as shown in Figure \ref{fig:svr-b}.
 
 \begin{figure}[!hp]
@@ -217,7 +218,7 @@ uncorrelated.
 Because the principal components are obtained purely statistically with no
 model assumptions, they are usually uninterpretable. However, they can still
 provide clues with which to obtain new information. In the case of this work,
-this could provide insignt into new forensics signatures.
+this could provide insight into new forensics signatures.
 
 \vspace{5mm} \noindent \textbf{Factor Analysis} \vspace{5mm}
 
@@ -248,5 +249,5 @@ only minimize the first two orders).
 
 Since the independent components are useful in signal processing of multiple
 signals, this technique could prove useful for reprocessed nuclear materials
-where multple source streams converge. 
+where multiple source streams converge. 
 

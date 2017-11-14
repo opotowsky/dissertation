@@ -66,6 +66,8 @@ data entries as a testing entry once.  As illustrated in Figure
 designated as the testing set, and a model is trained with the rest. Following
 the first training phase, another begins, this time with a different subset as
 the testing set.  This process is performed \textit{k} times to give \textit{k}
-models, and the models are then averaged, providing an additional level of
-model validation than can be achieved with a single testing set.
+models. The models are `averaged' by taking the mean of the predictions in the
+case of regression or voting in the case of classification.  This provides an
+additional level of model validation than can be achieved with a single testing
+set.
 
