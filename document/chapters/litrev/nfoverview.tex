@@ -145,9 +145,10 @@ typical of a commercial reactor.
 Lastly, the inverse problem is statistical in nature: given some solution,
 there is a probability that the data measured is caused by some value(s) of a
 model parameter. Including measurement uncertainties broadens the linear model
-to a probability density of the parameters. The opposite is also true in the
+to probability densities of the parameters. The opposite is also true in the
 forward case: including parameter uncertainties broadens the forward problem
-results to a probability density of the potential measurement values.
+results to probability densities of the potential measurement values.
+\cite{inverse_theory}
 
 In this way, we can define some probability that the answer is correct, given a
 set of measurements and their uncertainty. Inverse problem theory states that
@@ -165,18 +166,19 @@ probability that event $A$ will occur given a known result for $B$.
 This is can be mapped easily to the inverse physical system problem scenario.
 $A$ would represent an occurence of a parameter in the model space, and $B$
 would represent the measurement of some value. Thus, $P(A)$ is the probability
-of a parameter existing without any knowledge of $B$. This is known as the
-prior probability, usually given by some theory about the system. $P(B)$ is the
+of a parameter existing without any knowledge of $B$. This is known as the prior
+probability, usually given by some theory about the system. $P(B)$ is the
 probability of some measurement existing without any knowledge of $A$. This is
 known as the marginal likelihood, which is some homogeneous concept for the
-potential measurements that could be made (this only serves to scale to
-absolute probabilities and does not affect the relative probabilities). The
-likelihood, $P(B|A)$, is the chance that a measurement is observed from a given
-parameter, representing the forward problem.  Lastly, the posterior probability
-is the chance of some parameter existing given some measurement, representing
-the inverse problem solution \cite{inverse_theory}.  It may be more intuitive
-to consider the conceptual version of Bayes' theorem below.  A discussion of
-how these values are obtained takes place in Section \ref{sec:invcompare}.
+potential measurements that could be made (this only serves to scale to absolute
+probabilities and does not affect the relative probabilities). The likelihood,
+$P(B|A)$, is the chance that a measurement is observed from a given parameter,
+representing the forward problem.  Lastly, the posterior probability is the
+chance of some parameter existing given some measurement, representing the
+inverse problem solution \cite{inverse_theory, gentle_bayes}.  It may be more
+intuitive to consider the conceptual version of Bayes' theorem below.  A
+discussion of how these values are obtained takes place in Section
+\ref{sec:invcompare}.
 \begin{equation}
   \label{eq:bayes_words}
   Posterior = \frac{Likelihood * Prior}{Marginal \ Likelihood} 
