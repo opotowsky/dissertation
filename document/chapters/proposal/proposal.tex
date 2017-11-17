@@ -244,10 +244,10 @@ further in Section \ref{sec:invcompare}.
 However, the previous discussion excluded some detail for clarity. If the
 training data set includes uncertainties, the values discussed will not just be
 numbers, but probability distributions. 
-While initially uncertainties will be ignored for a broader analysis, they
+While initially uncertainties will be ignored for an approximate analysis, they
 cannot be ignored for long in the nuclear forensics context. These are quite
 important for obtaining some measure of confidence in the solution. 
-Including the uncertainty broadens each value to a range of possible values
+Including the uncertainty broadens each probability to a range of probabilities with respect to the 
 The methods for
 calculating the necessary probability distributions are outlined below.
 
@@ -283,7 +283,7 @@ two different methods can be used to calculate the posterior, giving a relative
 probability distrubution for evaluation. 
 
 \begin{equation}
-  P(\boldsymbol{m}) = \integral_{\boldsymbol{m}} \rho(d) dd
+  P(\boldsymbol{m}) = \int_{\boldsymbol{m}} \rho(d) dd
 \end{equation}
 
 \section{Timeline}
