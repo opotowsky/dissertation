@@ -52,9 +52,9 @@ networks, or ensemble methods \cite{elements_stats}.
 \subsection*{Computational Framework and Resources}
 
 Thus far, all simulations and training have not required more processing than
-available on a personal laptop. However, some algorithms do require larger
-amounts of computational time (e.g., artifical neural networks).  If necessary,
-the training stage can be done using the \gls{CHTC}, which is available to
+available on a personal computer. However, some algorithms do require larger
+amounts of computational time (e.g., neural networks).  If necessary, the
+training stage can be done using the \gls{CHTC}, which is available to
 University of Wisconsin researchers. 
 
 \section[Experiment 1: Direct Isotopics]{Experiment 1\\ 
@@ -64,26 +64,25 @@ University of Wisconsin researchers.
 The first experiment will be a purposefully constructed version of the
 demonstration: evaluating the model performance with known isotopics.  This
 sheds light on how this methodology will perform on the simplest scenario,
-providing an estimate on the maximum level of performance.  \textit{The main
-purpose of this experiment is to iteratively probe the usefulness of
-statistical methods for determining reactor parameters, ultimately choosing the 
-best performing methods.}
-\\
+providing an upper estimate of performance.  \textit{The main purpose of this
+experiment is to probe the usefulness of statistical methods for
+determining reactor parameters, ultimately choosing the best performing
+methods.}
+
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth]{./chapters/proposal/proposal.png}
-    \caption{Physical and Computational Comparisons for Experiments 1 and 2}
+    \includegraphics[width=0.85\linewidth]{./chapters/proposal/proposal.png}
+    \caption{Motivation for Data Sets for Experiments 1 and 2}
     \label{fig:proposal}
 \end{figure}
 
 Figure \ref{fig:proposal} shows what type of input can be used for training and
-testing (or prediction). The two horizontal boxes are the physical and
-computational forms of what these experiments are simulating, respectively. The
-lab-measured mass spectra correspond to the perfect information being referred
-to here. In the computational context, these measurements instead come from
-simulations. Mass spectra results are thus approximated as the direct isotopics
-given from the simulations, since mass spectrometry provides highly reliable
-and accurate information.
+prediction.  The two horizontal boxes are the physical and computational forms
+of what these experiments are simulating, respectively. The lab-measured mass
+spectra correspond to the perfect information being referred to here. In the
+computational context, these measurements instead come from simulations. Mass
+spectra results are thus approximated as the direct isotopics given from the
+simulations, since they provide highly reliable and accurate information.
 
 The variables for this experiment will include the following:
 \begin{enumerate}
@@ -175,7 +174,7 @@ materials discussed above may also be more disposed to defined statistical
 correlations.
 
 \section[Experiment 3: Other Fuel Cycle Flows]{Experiment 3\\ 
-\large{\textit{Viability of Statistical Learning on Other Fuel Cycle Flows}}}
+\large{\textit{Viability of Statistical Learning on Reprocessed Fuel}}}
 \label{sec:exp3}
 
 There is already nuclear fuel reprocessing in France for \gls{LWR}s, and
@@ -348,7 +347,7 @@ of many likelihoods tends towards zero.
 
 \begin{table}[!hbt]
   \centering
-  \includegraphics[width=0.8\linewidth]{./chapters/proposal/evidence-strength.png}
+  \includegraphics[width=0.7\linewidth]{./chapters/proposal/evidence-strength.png}
   \caption{Model Comparison using Likelihood Strength}
   \label{tbl:strength}
 \end{table}
@@ -361,4 +360,18 @@ called the posterior odds, provides the probability of model $i$ being correct.
 \section{Timeline}
 \label{sec:timeline}
 
-oh hi
+Figure \ref{fig:time} is an approximate timeline over which this work will
+occur.  Multiple tasks will be complete before my internship is finished, and
+much of the computational framework is also complete. The experiments are
+expected to take a few weeks each, accounting for time spent on diagnostics and
+readying the results for the next step. Formal validation and model comparison
+will then be carried out. Because of reporting requirements, some preporatory
+writing will also be done during the internship. Thus, final analyses and
+writing are expected to take three months. 
+
+\begin{figure}[!htb]
+  \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{./chapters/proposal/timeline.png}}  
+  \caption{Timeline for Project}
+  \label{fig:time}
+\end{figure}
+

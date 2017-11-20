@@ -15,8 +15,8 @@ noise in the model, so the error is caused by oversensitivity to that noise; an
 overfit model is due to high variance. 
 \\
 \begin{figure}[!htb]
-  \includegraphics[width=\linewidth]{./chapters/litrev/BVtradeoff.png}
-  \caption{Total prediction error comprised of bias and variance}
+  \makebox[\textwidth][c]{\includegraphics[width=\textwidth]{./chapters/litrev/BVtradeoff.png}}
+  \caption{Bias and Variance Comprising Prediction Eror}
   \label{fig:bvtradeoff}
 \end{figure}
 
@@ -54,8 +54,9 @@ groups: a large training set, a small cross-validation set, and a small testing
 set. 
 
 \begin{figure}[!htb]
-  \includegraphics[width=\linewidth]{./chapters/litrev/cverror.png}
-  \caption{Illustration of how a dataset can be split up for model evaluation}
+  \centering
+  \includegraphics[width=0.85\linewidth]{./chapters/litrev/cverror.png}
+  \caption{Illustration of Cross-Validation}
   \label{fig:cverror}
 \end{figure}
 
