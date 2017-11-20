@@ -241,40 +241,67 @@ directly compared using the inverse problem structure introduced in Section
 \ref{sec:inverse}. An application of Equation \ref{eq:bayes_words} is discussed
 further in Section \ref{sec:invcompare}.
 
-However, the previous discussion excluded some detail for clarity. If the
-training data set includes uncertainties, the values discussed will not just be
-numbers, but probability distributions. 
-While initially uncertainties will be ignored for an approximate analysis, they
-cannot be ignored for long in the nuclear forensics context. These are quite
-important for obtaining some measure of confidence in the solution. 
-Including the uncertainty broadens each probability to a range of probabilities with respect to the 
-The methods for
-calculating the necessary probability distributions are outlined below.
+However, the Section \ref{sec:invcompare} discussion excluded some detail for
+clarity. If the training data set includes uncertainties, the values discussed
+will not just be numbers, but probability distributions.  While initially
+uncertainties will be ignored for an approximate analysis, they cannot be
+ignored for long in the nuclear forensics context. These are quite important
+for obtaining some measure of confidence in the solution.  Including the
+uncertainty broadens each predicted parameter to a range of probabilities.
+These are then analyzed to produce ranges of confidence in the predictions
+\cite{bayes_compare}.  The methods for calculating the necessary probability
+distributions are outlined below.
 
-Here, we change the variables to directly represent probability densities, as in
-Equation \ref{eq:rho}.  $C$ is a constant given by the marginal likelihood,
-which can be ignored when calculating relative probabilities, and
-$\boldsymbol{d}$ and $\boldsymbol{m}$ represent the training data set and model
-parameters, respectively. Thus, $\rho(\boldsymbol{d}|\boldsymbol{m})$ is the
-likelihood function, $\rho(\boldsymbol{m})$ is the prior probability density,
-and $\rho(\boldsymbol{m}|\boldsymbol{d})$ is the posterior probability density.
+Here, we change the meaning of the variables to represent probability
+distributions, as in Equation \ref{eq:distrib}.  $C$ is a constant given by the
+marginal likelihood, which can be ignored when calculating relative
+probabilities, and $\boldsymbol{d}$ and $\boldsymbol{m}$ represent the training
+data set and model parameters, respectively. Thus,
+$P(\boldsymbol{d}|\boldsymbol{m})$ is the likelihood distribution function,
+$P(\boldsymbol{m})$ is the prior probability distribution, and
+$P(\boldsymbol{m}|\boldsymbol{d})$ is the posterior probability distribution.
 \begin{equation}
-\label{eq:rho}
-  \rho(\boldsymbol{m}|\boldsymbol{d}) = C\ *\
-  \rho(\boldsymbol{d}|\boldsymbol{m})\ *\ \rho(\boldsymbol{m})
+\label{eq:distrib}
+  P(\boldsymbol{m}|\boldsymbol{d}) = C\ *\
+  P(\boldsymbol{d}|\boldsymbol{m})\ *\ P(\boldsymbol{m})
 \end{equation}
 
-The likelihood function is obtained by a large set of forward problems, e.g.,
-the database of \gls{SNF} recipes and parameters used to train the machine
-learning algorithms.  First, a histogram \todo{is it histogram with continuous
-data?  binned histo?} of the burnup will be plotted over the entire training
-set.  The shape of this provides the likelihood distribution (likely Gaussian).
-***Note: This makes it easy to assume something is known by slicing the input
-to the histogram.
+The distributions are obtained by integrating over the relevant probability
+densities.  For example, the posterior probability distribution can be
+calculated from Equation \ref{eq:rho}, where $\boldsymbol{m}$ is the range of
+predicted burnups, and $d$ is a nuclide vector (set of nuclide vectors? Ah!)
+\begin{equation}
+\label{eq:rho}
+  P(\boldsymbol{m}) = \int_{\boldsymbol{m}} \rho(d) dd
+\end{equation}
+Similarly, the likelihood distribution function is obtained as follows.
+\begin{equation}
+\label{eq:rho-l}
+  P(\boldsymbol{d}|\boldsymbol{m}) = \int_{\boldsymbol{d}, \boldsymbol{m}} \rho(d|m) dm
+\end{equation}
+
+
+The likelihood function is obtained from the probability densities of each
+nuclide vector given some predicted model parameter $m$ (e.g., a burnup) using
+statistical model $i$ (e.g., nearest neighbor regression), denoted as $m_i$.
+In essense, this is a large set of forward problems, e.g., the database of
+\gls{SNF} recipes and parameters used to train the machine learning algorithms.
+The densities are obtained (HOW?!), and integrated as in Equation
+\ref{eq:rho-l}.
+
+Because of the training set design, all burnups are approximately equally
+likely, so the prior distribution is a horizontal line. Or is prior coming from
+CV sets?
+
+Likelihood distribution is prob more...Gaussian? 
+
+***Note: This makes it easy to assume something is known by slicing the PDF.
+***Note: The likelihoods are easier to predict for nested models (i.e. complex, 
+then subsets of the complex model), which applies to the work here.
 
 The prior probability distributions are given by the model space, e.g., reactor
 parameters as predicted from the machine-learned models determined.  Thus, the
-burnup predictions from a given statistical model will be \textbf{insert method}
+burnup predictions from a given statistical model will be integrated over the entire test set
 in order to obtain a function for the prior.
 
 Calculating the likelihood and prior distributions gives a non-normalized
@@ -283,8 +310,20 @@ two different methods can be used to calculate the posterior, giving a relative
 probability distrubution for evaluation. 
 
 \begin{equation}
-  P(\boldsymbol{m}) = \int_{\boldsymbol{m}} \rho(d) dd
+\label{eq:postodds}
+  \frac{\rho(m_i|d)}{\rho(m_j|d)} = B_{ij} \frac{\rho(m_i)}{\rho(m_j)}
 \end{equation}
+where $$B_{ij} = \frac{\rho(d|m_i)}{\rho(d|m_j)}$$
+
+From Table \ref{tbl:strength}\footnote{This table is reproduced from Ref.
+\cite{bayes_compare}.} blah blah blah
+\begin{table}
+  \includegraphics[width=\linewidth]{./chapters/proposal/evidence-strength.png}
+  \caption{Scale for evaluating evidence strength when comparing two models, $i$ and $j$}
+  \label{tbl:strength}
+\end{table}
+
+\cite{inverse_theory, gentle_bayes, bayes_compare}
 
 \section{Timeline}
 \label{sec:timeline}
