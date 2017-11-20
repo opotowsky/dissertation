@@ -266,64 +266,97 @@ $P(\boldsymbol{m}|\boldsymbol{d})$ is the posterior probability distribution.
   P(\boldsymbol{d}|\boldsymbol{m})\ *\ P(\boldsymbol{m})
 \end{equation}
 
-The distributions are obtained by integrating over the relevant probability
-densities.  For example, the posterior probability distribution can be
-calculated from Equation \ref{eq:rho}, where $\boldsymbol{m}$ is the range of
-predicted burnups, and $d$ is a nuclide vector (set of nuclide vectors? Ah!)
+Mathematically speaking, the distributions are obtained by integrating over the
+relevant probability densities.  For example, the prior probability
+distribution can be calculated from Equation \ref{eq:rho}, where
+$\boldsymbol{m}$ is the range of predicted model parameters, i.e. burnup
+values, and $\boldsymbol{d}$ is a set of nuclide vectors. Also, here,
+$\rho(\boldsymbol{x}) = \prod_{i} \rho(x_i)$. 
 \begin{equation}
 \label{eq:rho}
-  P(\boldsymbol{m}) = \int_{\boldsymbol{m}} \rho(d) dd
+  P(\boldsymbol{m}) = \int_{\boldsymbol{m}} \rho(\boldsymbol{d}) d\boldsymbol{d}
 \end{equation}
-Similarly, the likelihood distribution function is obtained as follows.
+Similarly, the likelihood distribution function is obtained as in Equation 
+\ref{eq:rho-l}.
 \begin{equation}
 \label{eq:rho-l}
-  P(\boldsymbol{d}|\boldsymbol{m}) = \int_{\boldsymbol{d}, \boldsymbol{m}} \rho(d|m) dm
+  P(\boldsymbol{d}|\boldsymbol{m}) = \int_{\boldsymbol{d}, \boldsymbol{m}} \rho(\boldsymbol{d}|\boldsymbol{m}) d\boldsymbol{m}
 \end{equation}
+In practice, however, these functions are not calculated directly. Below, the
+methods chosen to estimate the functions in this work are addressed.
 
+\subsection{Estimating Density Functions}
 
-The likelihood function is obtained from the probability densities of each
-nuclide vector given some predicted model parameter $m$ (e.g., a burnup) using
-statistical model $i$ (e.g., nearest neighbor regression), denoted as $m_i$.
-In essense, this is a large set of forward problems, e.g., the database of
-\gls{SNF} recipes and parameters used to train the machine learning algorithms.
-The densities are obtained (HOW?!), and integrated as in Equation
-\ref{eq:rho-l}.
+Estimating a probability density function $\rho(x)$ is not a straightforward
+task.  One must have a `feel' for the shape of this function to predict a
+smooth curve that will represent the probability density over a range of a
+parameter.  One estimation method is binning the parameters in the training set
+over a given width and tallying up each bin to form a histogram; using some
+kernel, Gaussian for example, provides a function that should approximately
+follow the shape of the histogram. The shape of the histogram and function may
+strongly depend on the bin size, but this can be handled as a separate
+optimization step within the sci-kit learn package \cite{scikit}.
 
-Because of the training set design, all burnups are approximately equally
-likely, so the prior distribution is a horizontal line. Or is prior coming from
-CV sets?
+As mentioned, the prior probability distributions are given by the model space,
+e.g., reactor parameters as predicted from the machine-learned models.  The
+above-mentioned method should be utilized to obtain a prior density function
+from the range of burnups.  This will not be necessary because the current
+design of the training set will provide a flat density function (i.e., uniform
+distribution). However, this is not the case in a real-world scenario with
+mostly commercial reactor fuel comprising \gls{SNM} inventories around the
+world.  This topic will only be investigated if the training data set is
+changed. \cite{bayes_compare} Note: This implies the posterior is now only
+dependent on the likelihood.
 
-Likelihood distribution is prob more...Gaussian? 
+The likelihood function can be obtained by summing the probability densities of
+each nuclide vector ($d$) given some predicted model parameter ($m$, e.g., a
+burnup prediction) using some algorithm (e.g., nearest neighbor regression).
+In essence, this is a large set of forward problems; it is information
+including the database of \gls{SNF} recipes, and the known parameter inputs
+compared to the model's parameter predictions.  The goal of this step is to
+find the \textit{maximum} likelihood, usually carried out in a step called
+\gls{MLE}. In this framework, the training phase provides the maximum
+likelihood distribution through the use of cross-validation, since the results
+are reported as a mean error with a standard deviation (which can be
+converted to accuracy for likelihood) \cite{scikit}. 
 
-***Note: This makes it easy to assume something is known by slicing the PDF.
-***Note: The likelihoods are easier to predict for nested models (i.e. complex, 
-then subsets of the complex model), which applies to the work here.
+Unfortunately, \gls{MLE} is not this simple for other methods that do not
+employ cross-validation \cite{gentle_bayes, bayes_compare}. This will indeed
+have to be broached in order to compare the machine-learned models against
+other forensics methods but is beyond the scope of this work.
 
-The prior probability distributions are given by the model space, e.g., reactor
-parameters as predicted from the machine-learned models determined.  Thus, the
-burnup predictions from a given statistical model will be integrated over the entire test set
-in order to obtain a function for the prior.
+\subsection{Posterior Odds}
 
-Calculating the likelihood and prior distributions gives a non-normalized
-posterior probability distribution (if $C$ is ignored).  Then, two priors from
-two different methods can be used to calculate the posterior, giving a relative
-probability distrubution for evaluation. 
-
+Finally, a non-normalized posterior probability distribution, $P(m_i|d)$, can
+be calculated directly from the likelihood and prior distributions. The same
+can be done for a model obtained from a different algorithm, $P(m_j|d)$. The
+relative posterior probability distribution, aka \textit{posterior odds}
+\cite{bayes_compare}, can then be obtained as in Equation \ref{eq:postodds}.
+Here, $B_{ij} = \frac{\rho(d|m_i)}{\rho(d|m_j)}$ and is referred to as the
+\textit{Bayes factor}.
 \begin{equation}
 \label{eq:postodds}
-  \frac{\rho(m_i|d)}{\rho(m_j|d)} = B_{ij} \frac{\rho(m_i)}{\rho(m_j)}
+  \frac{P(m_i|d)}{P(m_j|d)} = B_{ij} \frac{P(m_i)}{P(m_j)}
 \end{equation}
-where $$B_{ij} = \frac{\rho(d|m_i)}{\rho(d|m_j)}$$
 
-From Table \ref{tbl:strength}\footnote{This table is reproduced from Ref.
-\cite{bayes_compare}.} blah blah blah
-\begin{table}
-  \includegraphics[width=\linewidth]{./chapters/proposal/evidence-strength.png}
-  \caption{Scale for evaluating evidence strength when comparing two models, $i$ and $j$}
+Given relatively uniform priors, the Bayes factor is the key component that
+determines relative model performance. Table \ref{tbl:strength}\footnote{This
+table is reproduced from Ref. \cite{bayes_compare}.} shows an approximation of
+posterior probabilities calculated from $\lvert lnB_{ij} \rvert$. Taking the
+logarithm of the Bayes factor is done for convenience, since taking the product
+of many likelihoods tends towards zero.
+
+\begin{table}[!hbt]
+  \centering
+  \includegraphics[width=0.8\linewidth]{./chapters/proposal/evidence-strength.png}
+  \caption{Model Comparison using Likelihood Strength}
   \label{tbl:strength}
 \end{table}
 
-\cite{inverse_theory, gentle_bayes, bayes_compare}
+In summary, given a mean-squared error and its standard deviation from using cross-validation 
+with any machine learning algorithm, the \gls{MLE} can be formed. To compare two models, a ratio of $\text{MLE}_i$ to $\text{MLE}_j$,
+called the posterior odds, provides the probability of model $i$ being correct.
+
 
 \section{Timeline}
 \label{sec:timeline}
