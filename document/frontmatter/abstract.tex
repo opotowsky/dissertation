@@ -1,14 +1,24 @@
-The purpose of this work is to evaluate the utility of statistical methods as
-an approach to determine forensics-relevant quantities for commercial spent
-nuclear fuel as less information is available. Machine learning algorithms will
-be used to train models to provide these values (e.g., reactor type, time since
-irradiation, burnup) from the available information. The training data will be
-simulated using ORIGEN, which will provide an array of nuclide concentrations
-as the features ($X$) and the parameters of interest ($y$) are provided from the
-simulation inputs. Information reduction will be carried out using
-computationally generated gamma spectra; the radionuclide concentrations from
-the simulations can be converted into gamma energies, which then undergo a
-detector response calculation to represent real gamma spectra as closely as
-possible. Machine learning best practices will be used to evaluate the
-performance of the chosen algorithms, and inverse problem theory will be used
-to provide an interval of confidence in the model predictions. \todo{copied from goals, fix up}
+Nuclear forensics is a nuclear security capability that is broadly defined as
+material attribution in the event of a nuclear incident.  Improvement and
+research is needed for both technical and non-technical components of this
+process.  One such technical area is the provenance of non-detonated \gls{SNM};
+studied here is \gls{SNF}, which is applicable in a scenario involving the
+unlawful use of commercial byproducts from nuclear power reactors.  The
+experimental process involves measuring known forensics signatures to ascertain
+the reactor parameters that produced the material. Knowing these assists in
+locating the source of the material. This work is proposing the use of
+statistical methods to determine these quantities instead of evaluating
+empirical relationships. 
+
+The purpose of this work is to probe to what extent this computational workflow
+is feasible. Thus, three experiments have been designed, using nuclide vectors
+as observations and simulation inputs as the prediction goals.  First, machine
+learning algorithms will be employed with training data that is considered to
+be perfect knowledge, i.e., nuclide vectors directly from simulations.  Second,
+machine learning will be performed on less perfect training data, analgous to a
+detector that can only measure certain radionuclides. Third, the previous two
+experiments will include recycled nuclear fuels to evaluate if the workflow is
+useful when many chemical and elemental signatures are lost in processing. The
+results of the experiments will be evaluated by the prediction accuracy as well
+as the prediction confidence.
+
