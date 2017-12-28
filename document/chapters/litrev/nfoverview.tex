@@ -61,11 +61,12 @@ standard materials must be both strengthened and centralized.
 
 Pre-detonation nuclear forensics investigations occur for every scenario in
 which non-detonated nuclear material has been found or intercepted. Although
-this could be an intact bomb, it is more likely that \gls{SNM} intended
-for a weapon would be the target of an investigation. Thus, the range of
-intact materials for measurement could be as small as one fuel rod. The goal is to
-determine the provenance of the \gls{SNM}, which is generally done by 
-reconstructing the irradiation process that created the material. 
+this could be an intact bomb, it is more likely that \gls{SNM} intended for a
+weapon would be the target of an investigation. Thus, the range of intact
+materials for measurement could be as small as a plutonium sample or as large
+as a shipment of \gls{UOC}.  The goal is to determine the provenance of the
+\gls{SNM}, which in the case of \gls{SNF} is generally done by reconstructing
+the irradiation process that created the material. 
 
 For \gls{SNF}, where the material was obtained is the first step of the
 investigation. This would be gleaned from the reactor parameters and storage
@@ -78,20 +79,20 @@ measure these quantities.
 Although this is less of a humanitarian emergency than a post-detonation
 investigation, it is still important to have rapid characterization
 capabilities via on-site non-destructive analyses.  As previously discussed in
-more detail in Section \ref{sec:motivation}, however, the faster measurements
-result in poor measurement quality. Also, there is a need for research to
-combat the database issues, as an insufficient forensics database can reduce
-the accuracy and/or certainty of a reconstructed set of reactor parameters.
-Another area of research is deeper study of known forensics signatures or
-discovering new signatures with modeling, simulation, or statistical methods. 
+Section \ref{sec:motivation}, however, the faster measurements result in poor
+measurement quality. Also, there is a need for research to combat the database
+issues, as an insufficient forensics database can reduce the accuracy and/or
+certainty of a reconstructed set of reactor parameters.  Another area of
+research is deeper study of known forensics signatures or discovering new
+signatures with modeling, simulation, or statistical methods. 
 
-The `Real World Methodology' section in Figure \ref{fig:nfworkflow} shows a
-typical workflow for the technical portion of a pre-detonation forensics
-investigation.  After a sample is obtained, characterization begins.  Next, the
+The top panel in Figure \ref{fig:nfworkflow} shows an example technical nuclear
+forensics workflow as it could occur in the real world for a pre-detonation
+scenario.  After a sample is obtained, characterization begins.  Next, the
 results of these techniques are then compared against existing standard
 materials databases to obtain the desired reactor parameters. These steps would
 be performed iteratively in a real investigation, first using non-destructive
-measurements, and destructive measurements last.  The following steps in Figure
+measurements, and then destructive measurements.  The following steps in Figure
 \ref{fig:nfworkflow} are seeking out reactor history information, if available,
 and reporting all results to the investigators. 
 \\
@@ -101,22 +102,23 @@ and reporting all results to the investigators.
   \label{fig:nfworkflow}
 \end{figure}
 
-Below the example of a real-world workflow in Figure \ref{fig:nfworkflow} are
-analagous experimental workflows, both physical and computational.  
-\todo{Fix up diagram to be more aligned with discussion} 
-For researchers studying
-alternative measurement techniques or a slight difference in the overall
-approach, it is necessary to iterate through multiple studies using known
-materials to probe sensitivities or other weaknesses in the procedure.
+The middle and bottom panels in Figure \ref{fig:nfworkflow} are analagous
+physical and computational experimental workflows, respectively.  Both panels
+would have validated measurements of \gls{SNF}; the middle panel shows this
+being done in the laboratory and the bottom panel shows that these are values
+from a simulation.  For studying alternative measurement techniques or a slight
+difference in the overall approach, a researcher would iterate through multiple
+studies using known materials to probe sensitivities or other weaknesses in the
+procedure.
 
 \subsection{Nuclear Forensics as an Inverse Problem}
 \label{sec:inverse}
 
 Nuclear forensics is a traditional inverse problem, which has been well
-documented in mathematics and many scientific disciplines.  Understanding
-inverse problem theory can help systematically define both the solution methods
-and their limitations. This section provides an introduction to the topic as
-well as its application to nuclear forensics. 
+documented mathematically and applied to a range of scientific disciplines.
+Understanding inverse problem theory can help systematically define the
+limitations of certain solution methods.  This section provides an introduction
+to the topic as well as its application to nuclear forensics. 
 
 As outlined in a textbook on the formal approach to inverse problem theory
 \cite{inverse_theory}, the study of a typical physical system encompasses three
@@ -132,53 +134,70 @@ First, this shows that it is important to consider the parameters that comprise
 a model; this is denoted as the \textit{model space}. This is not every
 measurable quantity; domain knowledge is necessary to determine the model
 space. In the nuclear forensics context for \gls{SNF}, this would consist of,
-e.g., several isotopic ratios because they are known to have a relationship
-with the reactor parameters that created the fuel of interest.
+e.g., the cooling time because the \gls{SNF} decays and material measurements
+are different depending on when the measurement is taken.
 
 Second, understanding the physical system also requires an understanding of the
-forward problem: predicting how a certain set of model parameters will affect
-the resulting measurements. The breadth of these end measurements provides the
-\textit{data space}, which are all the conceivable results of a given forward
-problem. So for \gls{SNF} this would be, perhaps, the range of isotopic ratios
-typical of a commercial reactor. 
+forward problem. Predicting how a certain set of values of model parameters
+will affect the resulting measurements is a problem with a unique solution.
+The breadth of these end measurements provides the \textit{data space}, which
+are all the conceivable results of a given forward problem. So for \gls{SNF}
+this would be, perhaps, the range of isotopic ratios typical of a commercial
+reactor. 
 
-Lastly, the inverse problem is statistical in nature: given some solution,
-there is a probability that the data measured is caused by some value(s) of a
-model parameter. Including measurement uncertainties broadens the linear model
+Lastly, the inverse problem is predicting the model parameters given a
+solution.  It is statistical in nature; there is a probability that the
+measured isotopes are caused by some value of a model parameter. Thus, the
+problem is \textit{ill-posed} because a prediction is not guaranteed to be
+unique. 
+
+Further, including measurement uncertainties broadens the linear model
 to probability densities of the parameters. The opposite is also true in the
 forward case: including parameter uncertainties broadens the forward problem
 results to probability densities of the potential measurement values.
 \cite{inverse_theory}
 
-In this way, we can define some probability that the answer is correct, given a
-set of measurements and their uncertainties. Inverse problem theory states that
-this follows the general form of Bayes' theorem, which is commonly expressed as
-follows:
+In this way, we can define some probability that an answer is correct, given a
+set of measurements and their uncertainties, the calculated model parameters,
+the spread of the data space, and the spread of the model space. Inverse
+problem theory connects these values to the general form of Bayes' theorem,
+which is commonly expressed as follows:
 \begin{equation}
   \label{eq:bayes}
   P(A|B) = \frac{P(B|A)P(A)}{P(B)}
 \end{equation}
-where $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that events
-$A$ and $B$ will occur, respectively, $P(B|A)$ is the likelihood that event 
-$B$ will occur given a known result for $A$, and $P(A|B)$ is the posterior 
-probability that event $A$ will occur given a known result for $B$.
 
-This is can be mapped easily to the inverse physical system problem scenario.
-$A$ would represent an occurence of a parameter in the model space, and $B$
-would represent the measurement of some value. Thus, $P(A)$ is the probability
-of a parameter existing without any knowledge of $B$. This is known as the prior
-probability, usually given by some theory about the system. $P(B)$ is the
-probability of some measurement existing without any knowledge of $A$. This is
-known as the marginal likelihood, which is some homogeneous concept for the
-potential measurements that could be made (this only serves to scale to absolute
-probabilities and does not affect the relative probabilities). The likelihood,
-$P(B|A)$, is the chance that a measurement is observed from a given parameter,
-representing the forward problem.  Lastly, the posterior probability is the
-chance of some parameter existing given some measurement, representing the
-inverse problem solution \cite{inverse_theory, gentle_bayes}.  It may be more
-intuitive to consider the conceptual version of Bayes' theorem below.  A
-discussion of how these values are obtained takes place in Section
-\ref{sec:invcompare}.
+Here, $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that
+events $A$ and $B$ will occur, representing the model and data spaces,
+respectively. $P(A)$ is known as the prior probability and $P(B)$ is known as
+the marginal likelihood. The marginal likelihood is a concept of the data space
+capturing all the possible measurement values. It is ignored here because as a
+homogenous probability, it is only useful for determining absolute
+probabilities and this will only be applied in a relative context.  $P(B|A)$ is
+the likelihood that event $B$ will occur given a known result for $A$, which
+are the measurements given the model parameters (i.e. the forward problem).
+$P(A|B)$ is the posterior probability that event $A$ will occur given a known
+result for $B$, which are the predicted model parameters given the measurements
+(i.e., the inverse problem) \cite{inverse_theory, gentle_bayes}.\todo{check
+condensed text} A discussion of how these values are obtained takes place in
+Section \ref{sec:invcompare}.
+
+%This is can be mapped easily to the inverse physical system problem scenario.
+%$A$ would represent an occurence of a parameter in the model space, and $B$
+%would represent the measurement of some value. Thus, $P(A)$ is the probability
+%of a parameter existing without any knowledge of $B$. This is known as the prior
+%probability, usually given by some theory about the system. $P(B)$ is the
+%probability of some measurement existing without any knowledge of $A$. This is
+%known as the marginal likelihood, which is some homogeneous concept for the
+%potential measurements that could be made (this only serves to scale to absolute
+%probabilities and does not affect the relative probabilities). The likelihood,
+%$P(B|A)$, is the chance that a measurement is observed from a given parameter,
+%representing the forward problem.  Lastly, the posterior probability is the
+%chance of some parameter existing given some measurement, representing the
+%inverse problem solution \cite{inverse_theory, gentle_bayes}.  
+
+Given the above, it is more intuitive to consider the conceptual version of
+Bayes' theorem in Equation \ref{eq:bayes_words}.
 \begin{equation}
   \label{eq:bayes_words}
   Posterior = \frac{Likelihood * Prior}{Marginal \ Likelihood} 
@@ -189,4 +208,4 @@ methods for calculating the posterior probability of a system given some
 measurements \cite{bayes_compare}.  In the nuclear forensics context of
 pre-detonated materials, this would be a a set of probabilities for different
 parameters of interest, e.g., reactor type, burnup, cooling time, and
-enrichment of some interdicted \gls{SNF}. 
+enrichment of some interdicted \gls{SNF}. \todo{any of sec 4.5 to go here?}
