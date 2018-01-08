@@ -2,27 +2,29 @@
 \label{ch:demo_method}
 
 This chapter first covers the methodology of the proposed work by introducing
-each experimental component and a demonstration of each component. This has been 
-split into three sections, summarized below.
+each experimental component and following up with a demonstration of each
+component. This has been split into three sections, summarized below.
 
-Section \ref{sec:training} discusses how the training data is obtained.  After
-the initial training data is simulated in Section \ref{sec:snfsim}, with a
-possible information reduction step in Section \ref{sec:inforeduc}, it will be
-input to a statistical learner. 
+Section \ref{sec:training} discusses how the training data set is obtained.
+This is a set of observations with known inputs, i.e., labels that are to be
+predicted. After the initial training data is simulated in Section
+\ref{sec:snfsim}, with a possible information reduction step in Section
+\ref{sec:inforeduc}, the data set will be input to a statistical learner for
+the next step: training a model.
 
-Section \ref{sec:statmodel} is about algorithms that use the features and
-labels of the training data to statistically formulate a model. Algorithm
-choice and parameters are discussed in Section \ref{sec:choice}.  Next, the
-main goal for these machine-learned models is to supply reactor parameters
-associated with some unknown \gls{SNF}. Section \ref{sec:rxtrparam} shows the
-results of testing this goal: the prediction of a new instance that has only
-features and no label.  
+Section \ref{sec:statmodel} is about which algorithms use the training set.
+They use the features and labels in the training data to formulate a model.
+Algorithm choice and parameters are discussed in Section \ref{sec:choice}.
+Next, the main goal for these machine-learned models is to supply reactor
+parameters associated with some unknown \gls{SNF}. Section \ref{sec:rxtrparam}
+shows the results of testing this goal: the prediction of a new instance that
+has only features and no burnup label.  
 
-Finally, the algorithms are evaluated for accuracy and validated, as shown
-in Section \ref{sec:valid}. In practice, validation is more than just making sure the
-models are properly fit to the data.  Perhaps the training set was not
-representative of the actual data space, whereas other methods do not rely on
-the data space for results. To both understand the performance and validate
+Finally, the algorithms are evaluated for accuracy and validated, as shown in
+Section \ref{sec:valid}. In practice, validation implies more than just
+ensuring the models are properly fit to the data.  Perhaps the training set was
+not representative of the actual data space, whereas non-statistical methods do
+not rely on the data space for results. To both understand the performance of
 the models, the results are then evaluated for over- or under-fitting. 
 
 \begin{figure}[!htb]
@@ -32,19 +34,20 @@ the models, the results are then evaluated for over- or under-fitting.
   \label{fig:method}
 \end{figure}
 
-This work incorporates some methods and suggestions from previous work on the
-subject \cite{dayman_feasibility_2013} regarding machine learning model
-performance with respect to information reduction.  This is to establish some
-baseline expectations of reactor parameter prediction and how the different
-algorithms perform. 
+The demonstrations of the above are based on previous work on the subject
+\cite{dayman_feasibility_2013} regarding machine learning model performance
+with respect to information reduction.  Replicating the methodology helps to
+establish some baseline expectations of reactor parameter prediction and how
+the different algorithms perform. 
 
-Next, this work will expand upon the previous work in two ways.  The first is
-adding a different information reduction technique via applying a gamma
-spectroscopy \gls{DRF} to the \gls{SNF} nuclide recipes, which can calculate
-various spectra based on the types of gamma detectors available to the
-forensics community.  Secondly, a more advanced machine learning algorithm,
-support vector regression, is included so as to compare more complex models
-against simpler models.  A schematic of the workflow involving the experimental
+Next, this work will expand upon the previous work.  The first is adding a
+different information reduction technique via using gamma energies from the
+\gls{SNF} nuclide recipes.  Following this, one could apply a \gls{DRF} that
+calculates various spectra based on the types of gamma detectors available to
+the forensics community (This particular information reduction step is not
+demonstrated here).  Secondly, a more advanced machine learning algorithm,
+support vector regression, is included to compare a complex model against the
+two simpler models.  A schematic of the workflow involving the experimental
 components is shown in Figure \ref{fig:method}.
 
 \section{Training Data}

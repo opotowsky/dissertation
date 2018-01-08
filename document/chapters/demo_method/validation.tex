@@ -1,18 +1,21 @@
 To obtain reliable models, one must both choose or create a training set
 carefully and study the impact of various algorithm parameters on the error.
 Although the title of this section suggests final steps of confirming a model's
-usefulness for predictions, what follows is more of a troubleshooting exercise. 
-In practice, these analyses are used for both purposes.
+usefulness for predictions, what follows is more of a diagnostic exercise. 
+In practice, these analyses can be used for both purposes.
 
-Machine learning algorithms are heavily dependent on the inputs and parameters
-given to them, such as training set sizes, regularization, learning rates, etc.
-From the results shown in Section \ref{sec:statmodel}, it is clear there is
-room for improvement.  Diagnostic plots show the errors of the predicted
-burnup values to the actual burnup values with respect to some variable on the
-\textit{x}-axis.  As previously introduced in Section \ref{sec:optvalid}, the
-errors are compared to the training error to understand the generalization
-strength with respect to training set size (learning curves) and the algorithm
-parameters governing model complexity (validation curves). 
+Machine learning algorithms are heavily dependent on the training inputs and
+algorithm parameters given to them, such as training set sizes, regularization,
+number of features in the training set, optimization parameters, etc.  From the
+results shown in Section \ref{sec:statmodel}, it is clear there is room for
+improvement.  To evaluate these input and parameter variations, diagnostic
+plots show the errors between the predicted burnup values and the actual burnup
+values with respect to some variable on the \textit{x}-axis.  As previously
+introduced in Section \ref{sec:optvalid}, the prediction errors are compared to
+the training error to understand the generalization strength. These two errors
+are plotted with respect to training set size (learning curves) and the
+algorithm parameters governing model complexity (validation curves) to provide
+insight into the model fitness. 
 
 In addition to machine learning best practices, another layer of comparison is
 added here.  Because it is difficult to ensure consistently representative
@@ -20,23 +23,24 @@ testing data, the accuracy of a learned model should not depend on only one
 testing set.  The learned model's accuracy is better estimated by using a
 validation set, or even better, \textit{k}-fold cross-validation, introduced in
 Section \ref{sec:selectass}. This work includes both the testing error (using
-the testing set described in Section \ref{sec:training}) and cross-validation
-error. The predetermined testing set will allow for comparison against the
-previous work it was obtained from \cite{dayman_feasibility_2013}, but it is
-assumed that cross-validation will provide a better indication of model
-performance.
+the testing set described in Section \ref{sec:training}) and 5-fold
+cross-validation error. The predetermined testing set will allow for comparison
+against the previous work it was obtained from \cite{dayman_feasibility_2013},
+but it is assumed that cross-validation will provide a better indication of
+model performance.
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{./chapters/demo_method/lc1.png}
-    \caption{Learning curve for burnup prediction, $\gamma = 0.001$}
+    \caption{\gls{SVR} Learning curve for burnup prediction, $\gamma = 0.001$}
     \label{fig:lc1}
 \end{figure}
+\todo{add other plots and describe}
 
 The learning curves are obtained as follows, shown in Figure \ref{fig:lc1}.
 For a given (randomly chosen) training set size between 15 and 100\% of the
 total data set, training and prediction rounds were performed for each. The
-testing error scenario performs this \textit{k} times and averages those
+testing error scenario performs this $k=5$ times and averages those
 results.  This is equivalent to the \textit{k} in \textit{k}-fold
 cross-validation to provide some semblance of equivalent statistics.  The
 cross-validation error scenario has no need for averaging because it is
@@ -57,9 +61,11 @@ performed for different $\gamma$ values in this range.  Again, the testing and
 cross-validation errors are both used as described above. As with Figure
 \ref{fig:lc1}, determining the robustness to over- or undertraining is
 difficult here although there is possibly a minimum at $\gamma = 0.001$.
+\todo{add other two plots of nn and rr; also add in C plots too}
+\todo{determine if c and gamma have any physical connection to the data}
 
 Although there is no example behavior of Figure \ref{fig:lc1}'s peculiar
-learning curve in Figure \ref{fig:learning}, the curve mimics the squared bias
+learning curve in Figure \ref{fig:learning}, the curves mimic the squared bias
 curve from Figure \ref{fig:bvtradeoff}. This indicates that the bias in the
 model is much higher than the variance.  Next, the testing error is lower than
 the training error; this should never be the case, and indicates an issue with

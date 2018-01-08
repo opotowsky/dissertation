@@ -6,7 +6,7 @@ statistical methods.
 \subsection{Special Nuclear Materials Studied}
 
 With regards to broader forensics capabilities, materials from different steps
-of the nuclear fuel cycle are must be studied.  Even though each material has
+of the nuclear fuel cycle are being studied.  Even though each material has
 its own forensics signatures, the process of applying statistical methods to
 the analysis of material provenance is similar for each. 
 
@@ -16,8 +16,9 @@ statistical analyses on \gls{UOC} from 21 sources (throughout seven countries)
 using 30 concentration measurements of various elements, isotopes, and
 compounds, e.g., sodium, magnesium, thorium, uranium-234, or halide compounds
 \cite{robel_2009}.  The goal of classifying the source and the country was
-reached 60\% and 85\% of the time, respectively.  \todo{Note: there was a ton
-of skew in their data and the correction for that was weak sauce}
+reached 60\% and 85\% of the time, respectively.  
+%Note: there was a ton of skew in their data and the correction for that was
+%weak sauce
 
 On the back end, an organization might have interest in \gls{SNF} if they have
 reprocessing capabilities.  Or, perhaps already separated plutonium from
@@ -25,60 +26,55 @@ reprocessing capabilities.  Or, perhaps already separated plutonium from
 this by performing factor analysis on theoretical separated plutonium from
 various sources of \gls{ORIGEN}-simulated \gls{SNF} based on their composition
 at the end of irradiation \cite{nicolaou_pu}.  Since in this study all
-materials are the same age, five plutonium isotopes (238--242) correctly
+materials are the same age, five plutonium isotopes ($A = 238--242$) correctly
 predicted a test sample. However, taking different times since irradiation and
 reprocessing into account requires more isotopic measurements. 
 
 \subsection{Statistical Methods Employed}
 
-There are statistical methods studies that focus on classification, usually
-focusing on the prediction of the reactor type for unknown samples
-\cite{robel_2009, nicolaou_pu, jones_snf_2014, nicolaou_2009}.  However, this
-work is focused on burnup prediction as well.  Although the results for both
-regression and classification are based on a number of features that are
-usually isotopic in nature, it is not clear if the regression counterparts of
-these algorithms will perform similarly for this task. 
+There are statistical methods studies that focus on the classification of the
+reactor type for unknown samples \cite{robel_2009, nicolaou_pu, jones_snf_2014,
+nicolaou_2009}.  However, this work is focused on burnup prediction.  Although
+the results for both regression and classification are based on a number of
+features that are usually isotopic in nature, it is not clear if the regression
+counterparts of these algorithms will perform similarly for this task. 
 
 Promising regression work using factor analysis has been published
 \cite{nicolaou_2006, nicolaou_2014}.  Although factor analysis explicitly
 requires the input of domain knowledge, it is a valuable first step towards
 understanding how statistical methods can provide insightful models that
-predict fuel enrichment and burnup. In the following cases, the features
+predict fuel enrichment and burnup. In the following two cases, the features
 included for the analysis are only the uranium and plutonium isotopes remaining
-in the \gls{SNF}.  Ref. \cite{nicolaou_2006} shows the initial work done on
-predicting enrichment and burnup from a range of simulated \gls{SNF} recipes
-and comparing an `unknown' sample to the results of the factor analysis. Ref.
-\cite{nicolaou_2014} extends the study to real measured samples from the
-\gls{SFCOMPO} database \cite{sfcompo}. This work also highlights and addresses
-a known problem: reliable discrimination between \gls{SNF} from \gls{PWR}s and
-\gls{BWR}s. 
-
-%SNF, 9 features, 2 methods \cite{pu_discrimination} (fuel enrichment)
-%PCA + PLSDA
-\todo{could also discuss PCA+PLSDA work here?}
+in the \gls{SNF}.  Ref. \cite{nicolaou_2006} covers predicting enrichment and
+burnup from a range of simulated \gls{SNF} recipes and comparing an `unknown'
+sample to the results of the factor analysis. Ref.  \cite{nicolaou_2014}
+extends that study to real measured samples from the \gls{SFCOMPO} database
+\cite{sfcompo}. This work also highlights and addresses a known problem:
+reliable discrimination between \gls{SNF} from \gls{PWR}s and \gls{BWR}s. 
 
 The most closely related work to this study involves not only statistical
 methods but an investigation of those methods when faced with information
 reduction via random nuclide measurement errors in the training data set
 \cite{dayman_feasibility_2013}.  Additionally, feature reduction was
-investigated by using various nuclide compositions: the top 300 by
-concentration, fission products only, and a \gls{PCA}-derived shortened nuclide
-list.  Three methods were compared: nearest neighbor classification and
-regression using both $L_1$ (sum of absolute differences of Cartesian
-coordinates) and $L_2$ norms for reactor type classification and burnup
-prediction, and ridge regression, which uses an $L_2$ norm for regularization,
-for burnup prediction. In both prediction cases, using the fission products
-nuclide list with both nearest neighbor methods performed the best. All other
-nuclide lists quickly devolved to random guesses with an increase in nuclide
-error in the case of reactor prediction, and more than 100\% error in the case
-of burnup prediction.
+investigated by using various nuclide compositions: the top 200 nuclides by
+concentration in each vector, fission products only, and a \gls{PCA}-derived
+shortened nuclide list.  Three methods were compared. First and second, the
+nearest neighbor algorithm using both $L_1$ (sum of absolute differences of
+Cartesian coordinates) and $L_2$ norms for measuring distance between test data
+points classified reactor type and predicted burnup.  Third, ridge regression
+with an $L_2$ norm for regularization was only applied to burnup prediction. In
+both classification and regression cases, using the fission products nuclide
+list with both nearest neighbor methods performed the best. All other nuclide
+lists quickly devolved to random guesses with an increase in nuclide error in
+the case of reactor prediction, and more than 100\% error in the case of burnup
+prediction.
 
 For reliable prediction, it seems to be promising to use actinides
 \cite{nicolaou_2006, nicolaou_2014} and/or fission products
-\cite{dayman_feasibility_2013} for feature reduction using domain knowledge.
+\cite{dayman_feasibility_2013} for domain knowledge-based feature reduction.
 However, this work intends to still investigate statistical methods for
 dimensionality reduction, e.g., \gls{PCA}. This could be beneficial in
-prediction with different parameters, or could be useful in other ways, such as
-visualization or discovering new correlations among \gls{SNF} properties as new
-reactor technologies are deployed.
+prediction of burnup or other reactor parameters, or could be useful in other
+ways, such as visualization or discovering new correlations among \gls{SNF}
+properties as new reactor technologies are deployed.
 

@@ -2,12 +2,12 @@
 
 For relevant nuclear forensics predictions, both classification and regression
 algorithms must be used.  For example, one may want to predict the reactor type
-based on some measurements (referred to as features) of \gls{SNF} of an unknown
-source, and this would require a classification algorithm. Or perhaps the input
-fuel composition is relevant to an investigation on weapons intent, so a
-regression algorithm would be used to train a model based on some set of
-features.  Since this work trains models to predict burnup of \gls{SNF}, the
-algorithms are presented in a regression context.
+label given some measurement-based features of \gls{SNF} of an unknown source.
+This would require a classification algorithm. Or perhaps the input fuel
+composition is relevant to an investigation on weapons intent, so a regression
+algorithm would be used to train a model based on some different set of
+measured features. Since this work trains models to predict burnup of
+\gls{SNF}, the algorithms are presented in a regression context.
 
 \subsubsection{Linear Models}
 \label{sec:linear}
@@ -15,8 +15,9 @@ algorithms are presented in a regression context.
 One of the simplest and most utilized methods of prediction is a linear model
 from a least-squares fit. Thus, it is the most natural place to begin a
 demonstration of machine learning algorithms. Since linear models must have all
-parameters linearly related, there are many restrictions regarding the shape of
-the model. However, this makes the resulting models stable to peturbations. 
+linearly related parameters, there are many restrictions regarding the shape of
+the model. However, this makes the resulting models stable to peturbations.
+\cite{changingml}
 
 \begin{figure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{./chapters/litrev/regularization.png}}
@@ -24,44 +25,51 @@ the model. However, this makes the resulting models stable to peturbations.
   \label{fig:reg}
 \end{figure}
 
-An example of a linear model is in the equation below, where the vector of
+An example of a linear model is in Equation \ref{eq:linreg}. The vector of
 input features of size $p$, $\boldsymbol{X}$, provides a model,
-$F(\boldsymbol{X})$ ($\boldsymbol{Y}$ is the vector of known
-data)\todo{reword}, by determining the unknown coefficients, or weights,
-$\beta_{j}$'s. The algorithm calculates these by minimizing the value of a loss
-function over all the training data.  This is usually the least squares error
-from minimizing the sum of squared errors, $\sum_{i=1}^{n} (y_i - f(x_i))^2$.
-But it could instead be the least absolute deviations from minimizing the sum
-of absolute error differences, $\sum_{i=1}^{n} |y_i - f(x_i)|$. These are
-referred to as the $L_2$ and $L_1$ norms, respectively.  
+$F(\boldsymbol{X})$ by determining the unknown coefficients, or weights,
+$\beta_{j}$'s. A loss function can be calculated by the difference in the
+model-predicted value and $\boldsymbol{Y}$, the vector of actual labels.  The
+algorithm calculates $\beta_{j}$ by minimizing the value of this loss function
+over all the training data.  This is usually the least squares error from
+minimizing the sum of squared errors, $\sum_{i=1}^{n} (y_i - f(x_i))^2$.  But
+it could instead be the least absolute deviations from minimizing the sum of
+absolute error differences, $\sum_{i=1}^{n} |y_i - f(x_i)|$. These are referred
+to as the $L_2$ and $L_1$ norms, respectively.  
 \begin{equation}
   F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j}
+  \label{eq:linreg}
 \end{equation}
 
 The form of linear regression used here is called ridge regression. This
 algorithm performs optimization using the $L_2$ norm, and also uses the form of
 the $L_2$ norm for \textit{regularization}. Regularization, sometimes called
-\textit{shrinkage}, is a term introduced into the predicted model to prevent
-overfitting. (It is used in many machine learning algorithms.) This works by
-further reducing the weights, $\beta_j$, on the input features, $x_j$. This
-shrinkage term also includes a complexity parameter, $\lambda$
-\cite{elements_stats}.  Thus, the predicted linear model from ridge regression
-is updated to the following equation.  A visualization of what this
-regularization can accomplish is in Figure \ref{fig:reg}.
+\textit{shrinkage}, is a term introduced into the trained model to prevent
+overfitting; it is used in many machine learning algorithms. For ridge
+regression, shrinkage further reduces the weights, $\beta_j$, on the input
+features, $x_j$. The shrinkage term also includes a complexity parameter,
+$\lambda$, which governs the strength to which regularization is performed
+\cite{elements_stats}. Thus, the linear model given from ridge regression
+is updated to Equation \ref{eq:ridgereg}.  Figure \ref{fig:reg} is a
+visualization of how applying regularization smooths out a model.
 \begin{equation}
   F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j} + \lambda \sum_{j=1}^{p} \beta_{j}^2
+  \ref{eq:ridgereg}
 \end{equation}
 
 \subsubsection{Nearest Neighbor Methods}
 \label{sec:neighbor}
 
-Nearest neighbor regression is considered to be `model-free' in that it does
-not actually generalize; it tracks the observations in the training set.
-During prediction, the algorithm will calculate a value based on the instance
-that is closest to the current test sample. Thus, there is not any learning,
-but instead a direct comparison between an unknown sample and the space that
-the training set populates. The predictions from nearest neighbors can be quite
-accurate, but are highly unstable to peturbations \cite{elements_stats}.  
+Nearest neighbor regression is a unique algorithm in that it is instance-based;
+it does not actually generalize, but tracks the observations in the training
+set.  The main metric for this algorithm is distance (or dissimilarity) between
+the test sample and the closest training sample(s) in the vicinity.  During
+prediction, the algorithm will calculate a value based on the instance that is
+closest to the current test sample. Thus, there is not any learning, but
+instead a direct comparison between an unknown sample and the space that the
+training set populates. The predictions from nearest neighbors can be quite
+accurate, but are highly unstable to peturbations \cite{elements_stats}.
+\todo{check me}
 
 \begin{figure}[!htb]
   \centering
@@ -71,21 +79,23 @@ accurate, but are highly unstable to peturbations \cite{elements_stats}.
 \end{figure}
 
 An extension of nearest neighbor is \textit{k}-nearest neighbor regression.
-The closest \textit{k} neighbors are averaged to provide an estimate of the
-unknown sample as shown in the equation below.  Figure \ref{fig:nn} provides a
-pictoral explanation of how this is done for a single prediction.  The equation
-below shows how this algorithm does this to determine a predict a value, $Y$,
-from the input features, $\boldsymbol{X}$, in the neighborhood, $N_k
-(\boldsymbol{X})$ \cite{elements_stats}. 
+The closest \textit{k} neighbors are averaged for an estimate of the unknown
+sample, as shown in Equation \ref{eq:knn}.  Figure \ref{fig:nn} provides a
+pictoral explanation of how this is done for a prediction of a single feature.
+For \textit{k}-neighbors, this algorithm predicts a value, $Y$, from the input
+features, $\boldsymbol{X}$, in the neighborhood, $N_k (\boldsymbol{X})$
+\cite{elements_stats}. 
 \begin{equation}
   Y(\boldsymbol{X}) = \frac{1}{k} \sum_{x_i \in N_k(\boldsymbol{X})} y_i
+  \label{eq:knn}
 \end{equation}
 
-A measure of distance dictates what the neighborhood is. The metrics for
-distance differ, but in this study, the Euclidian distance was used. Another
-parameter is the population of the neighborhood, \textit{k}. In this initial
-work, $k = 1$ is used. This can perform very well, but can also easily overfit
-the data and thus not generalize well. 
+There are two tuneable parameters in this algorithm: the distance metric and
+the value of \textit{k}.  The population of the neighborhood, \textit{k},
+affects the number of points being averaged together for a prediction.  The
+metrics for distance differ, but in this study, the Euclidian distance was
+used. In this initial work, $k = 1$ is used. This can perform very well, but
+can also easily overfit the data and thus not generalize well. 
 
 \subsubsection{Support Vector Machines}
 \label{sec:svm}
@@ -107,23 +117,26 @@ http://www.saedsayad.com/support\_vector\_machine.htm}, the \gls{SVM} algorithm
 separates two classes by determining an optimal hyperplane between them.  The
 algorithm evaluates the quality of the line that separates the two classes by
 maximizing the margin width, $m_w = \frac{2}{\lVert w \rVert}$.  The hyperplane
-is defined in the equation below, where $\boldsymbol{w}$ is the vector that is
-normal to the hyperplane.  
+is defined in Equation \ref{eq:plane}, where $\boldsymbol{w}$ is the vector
+that is normal to the hyperplane.  
 \begin{equation}
   \boldsymbol{w \cdot x} + b = 0
+  \label{eq:plane}
 \end{equation}
 
 Figure \ref{fig:svm} also shows a case of soft margins.  Some problems are not
 linearly separable, and thus a penalty term, $\xi_{i}$, is introduced to allow
 for some misclassifications.  The algorithm then simultaneously minimizes the
 misclassifications while maximizing the margin. The objective function of the
-algorithm below shows this as well (using quadratic programming). In the
-equation below, $C$ is responsible for the margin width/misclassification
-tradeoff.
+algorithm shows this as well (using quadratic programming) in Equation
+\ref{eq:svm}. Here, $C$ is responsible for the margin width/misclassification
+tradeoff, and the penalty term is included in the constraint. \cite{scikit,
+elements_stats}
 \begin{equation}
 \begin{split}
   min\ & \frac{1}{2} \lVert w \rVert ^{2} + C \sum_{i} \xi_i \\
   subject\ to:\ \ & y_i (w x_i + b) > 1 - \xi_i
+  \label{eq:svm}
 \end{split}
 \end{equation}
 
@@ -132,18 +145,20 @@ by Dr.\@ Saed Sayad at
 http://www.saedsayad.com/support\_vector\_machine\_reg.htm} demonstrates how
 \gls{SVM} can be altered slightly from classification to nonlinear regression
 with \gls{SVR}.  \Gls{SVR} has a similar objective function but instead
-\textit{minimizes} the margin, as shown in Figure \ref{fig:svr-a}. This changes
-the constraints to the objective function as below:
+\textit{minimizes} the margin, as shown in Figure \ref{fig:svr-a}.  While the
+objective function is the same as in Equation \ref{eq:svm}, the constraint is
+now set to the opposite inequality sign, shown in Equation \ref{eq:svr} 
 \begin{equation}
 \begin{split}
   min\ & \frac{1}{2} \lVert w \rVert ^{2} + C \sum_{i} \xi_{i} \\
   subject\ to:\ \ & \lvert y_i - (w x_i + b) \rvert \leq \varepsilon + \xi_i
+  \label{eq:svr}
 \end{split}
 \end{equation} 
 
 Further, this can be extended to nonlinear analysis via what is called the
-\textit{kernel trick}.  First, using a nonlinear kernel function maps the data
-into higher dimensional\todo{check wording} feature space. Then the algorithm can find a linear
+\textit{kernel trick}.  A nonlinear kernel function maps the data
+into higher order feature space. The algorithm can then find a linear
 separation in this space, as shown in Figure \ref{fig:svr-b}.
 
 \begin{figure}[!hp]
@@ -162,26 +177,35 @@ separation in this space, as shown in Figure \ref{fig:svr-b}.
   \label{fig:svr}
 \end{figure}
 
-The kernel chosen for this study is the Gaussian radial basis function, shown
-below. This has two tuneable parameters, $\gamma$ and $C$. The $\gamma$
-controls the width of influence of individual training instances, which
-strongly affects the fitting of the model. Low values correspond to
-underfitting because the instances have too large of a radius (low influence)
-and high values correspond to overfitting because the instances have a small
-radius (high influence). 
+Chosen for its flexibility, the kernel in this study is the Gaussian radial
+basis function, shown in Equation \ref{eq:svr-rbf}. This has two tuneable
+parameters, $\gamma$ and $C$. The $\gamma$ controls the width of influence of
+individual training instances, which strongly affects the fitting of the model.
+Low values correspond to underfitting because the instances have too large of a
+radius (low influence) and high values correspond to overfitting because the
+instances have a small radius (high influence). 
+\begin{equation}
+\begin{split}
+  min\ & \frac{1}{2} \lVert w \rVert ^{2} + C \sum_{i} \xi_{i} \\
+  subject\ to:\ \ & \lvert y_i - (w \phi(x_i) + b) \rvert \leq \varepsilon + \xi_i
+  where: w = \sum_{i} \alpha_i y_i \phi(x_i) 
+  and: K(x_i, x_j) = \phi(x_i) \phi(x_j) = e^{\gamma \lVert x_i - x_j \rVert ^{2}}
+  \label{eq:svr-rbf}
+\end{split}
+\end{equation} 
 
 The $C$ parameter also affects the fitting of the model by allowing more or
 less support vectors, corresponding to more or less misclassification,
-respectivey. A lower $C$ smooths the surface of the model by allowing more
+respectively. A lower $C$ smooths the surface of the model by allowing more
 misclassifications, whereas a higher $C$ classifies more training examples by
 allowing fewer misclassifications. Thus, too low or too high of a C can cause
 under- or overfitting, respectively. 
 
-Since there is a tradeoff of fitting strength provided by both parameters, it
+Since there is a tradeoff of fitting strength provided by two parameters, it
 is common to run the algorithm on a logarithmic grid from $10^{-3}$ to $10^3$
 for each parameter. If plotted on a heatmap of accuracies given $\gamma$ and
 $C$, there will be a diagonal of ideal combinations that emerges. The element
-with the lowest of each parameter is usually chosen. 
+with the lowest value of each parameter is usually chosen. 
 
 \subsubsection{Dimensionality Reduction Techniques}
 \label{sec:dimreduc}
@@ -190,12 +214,12 @@ In addition to utilizing various algorithm parameters for regularization as
 discussed above, dimensionality reduction can improve generalizability by
 removing the noise of features that do not affect the regression task. This can
 be thought of in the following way: shrinkage techniques reduce the weights of
-noisy features, whereas dimensionality reduction removes them completely.
-Although one could use domain knowledge to manually reduce the number of
-features in a data set (e.g., only including certain nuclide subsets such as
-actinides), statistical feature reduction may also prove helpful in this work.
-The mathematical treatment of the methods described below are in Ref.
-\cite{elements_stats}.
+noisy features, whereas dimensionality reduction removes them completely
+\cite{elements_stats}.  Although one could use domain knowledge to manually
+reduce the number of features in a data set (e.g., only including certain
+nuclide subsets such as actinides), statistical feature reduction may also
+prove helpful in this work.  The mathematical treatment of the methods
+described below are in Ref.  \cite{elements_stats}.
 
 %Another use for the following techniques is the visualization of one's data
 %set, perhaps for data exploration or to show why certain predictions are
@@ -206,7 +230,7 @@ The mathematical treatment of the methods described below are in Ref.
 \Gls{PCA} is considered the most common dimensionality reduction technique.
 The \gls{PCA} algorithm learns a linear transformation of a data set
 $\boldsymbol{X}$ with which to construct a transformation matrix according to a
-user-chosen number of variables/components.  This matrix is part of the
+user-chosen number of variables, i.e., components.  This matrix is part of the
 singular value decomposition of the data matrix $\boldsymbol{X}$.  The
 decomposition step is what provides the principal components, which are the
 result of maximizing the variance in the original data while minimizing the

@@ -1,7 +1,7 @@
 There can be a large number of computational tools within a given field of
-study.  They are typically developed with one aspect of analysis in mind, so
-one must understand the simplifying assumptions the developers made for their
-purposes. Thus, choosing a computational tool is not always obvious. Thus, this
+study.  They are typically developed with a single aspect of analysis in mind,
+so one must understand the simplifying assumptions the developers made for
+their purposes. Thus, choosing a computational tool is not always obvious. This
 section both introduces and defends the choices for the various experimental
 components.
 
@@ -9,22 +9,19 @@ components.
 
 Nuclear fuel cycle studies involve tracking the material flow of nuclear fuel.
 This can be anywhere from mining to waste management, or focus on a process
-step anywhere in between. Fuel cycle studies are not necessarily
-nuclear-specific. They can be used to evaluate, e.g., economic predictions,
-environmental impact, transportation planning, etc.  In order to draw
-conclusions from these studies, it is common to use a nuclear fuel cycle
-simulator that tracks the quantities of interest. These allow the comparison of
-different fuel types, reactor technologies, material processing steps, etc. 
+step in between. Fuel cycle studies are not necessarily nuclear-specific. For
+example, they can be used to evaluate economic predictions, environmental
+impact, transportation planning, etc.  In order to draw conclusions from these
+studies, it is common to use a nuclear fuel cycle simulator that tracks the
+quantities of interest. These allow the comparison of different fuel types,
+reactor technologies, material processing steps, etc. 
 
-As mentioned, there are simplifications researchers need to make in order to
-experiment in a controlled way. Fuel cycle simulators are built for specific
-needs as well and also must remove complicating factors that are generally less
-relevant to the study.  For example, one tool might be suited well to
-large-scale systems analysis with little nuclear physics included in the
-models, and another might focus on detailed isotopics within a system to track
-plutonium isotopes.
-
-\todo{more needed?}
+There are simplifications researchers need to make in order to experiment in a
+controlled way. Fuel cycle simulators, built for a specific needs, must remove
+complicating factors that are less relevant to the study.  For example, one
+tool might be suited well to large-scale systems analysis with little nuclear
+physics included in the models, and another might focus on detailed isotopics
+within a system to track plutonium.
 
 Because a large portion of a nuclear forensics investigation relies on
 measuring isotopics, \gls{ORIGEN-ARP} \cite{origen} within the \gls{SCALE} code
@@ -37,22 +34,22 @@ include the probabilities of reaction (i.e., cross sections) for the system.
 
 To obtain an \gls{SNF} recipe from a reactor simulation, \gls{ORIGEN} uses the
 desired input power generation with the cross section library to calculate a
-flux, the resulting depletion, and the end composition (i.e., isotopics,
-nuclide vector).  Another output is decay; the composition is computed using
-decay equations with nuclear data \cite{endf}. These compositions provide
+flux, the resulting depletion, and the end composition (i.e., isotopic recipes
+or nuclide vectors).  Another output is decay; the composition is computed
+using decay equations with nuclear data \cite{endf}. These compositions provide
 source terms for other calculations, such as decay emission spectra from
-neutrons, or alpha, beta, gamma rays, which use the same resource for nuclear
-data. Other quantities like activity, decay heat, or radiological hazard
-factors are also an option.
+neutrons, alpha particles, beta particles, and gamma rays. Other derived
+quantities like activity, decay heat, or radiological hazard factors are also
+an option.
 
 \gls{ORIGEN-ARP} allows users to access a wider range of simulations by
-interpolating between the already calculated libraries for a wide array of
-reactors instead of creating new libraries.  It is known to be validated for
-\gls{LWR} \gls{SNF} \cite{lwr_valid}. Additionally, recycled \gls{SNF} in the
-form of mixed oxide fuel has been benchmarked with the relevant reactors
-\cite{mox_valid}.  Thus, given an initial material composition, some reactor
-operation parameters, and a reactor type, one can quickly perform many
-different nuclear reactor simulations and obtain \gls{SNF} recipes.
+interpolating between the pre-calculated libraries instead of creating new
+libraries.  It is known to be validated for \gls{LWR} \gls{SNF}
+\cite{lwr_valid}. Additionally, recycled \gls{SNF} in the form of mixed oxide
+fuel has been benchmarked for the relevant reactors \cite{mox_valid}.  Through
+\gls{ORIGEN}, given an initial material composition, some reactor operation
+parameters, and a reactor type, one can quickly perform many different nuclear
+reactor simulations and obtain \gls{SNF} recipes.
 
 \subsection{Statistics Toolkit}
 
@@ -67,10 +64,10 @@ workflow.
 Although the data modification shown later in Section \ref{sec:inforeduc} does
 not use any standalone tool, the code \gls{GADRAS} \cite{gadras} developed at
 Sandia National Laboratories will provide information reduction in a physically
-valid manner.  Test studies will be carried out using the gamma spectra
+valid manner.  Test studies will be carried out using the gamma energies
 available from \gls{ORIGEN} simulations, but the detector response will need to
-be varied more than this tool can provide. Thus, given the nuclide vectors from
-\gls{ORIGEN}, \gls{GADRAS} computationally generates gamma spectra from the
-gamma energies and a chosen \gls{DRF}. This will enable a more robust study of 
-statistical performance with respect to information reduction.
+be varied more than this tool can provide. Thus, given the gamma energies from
+\gls{ORIGEN} and a user-chosen \gls{DRF}, \gls{GADRAS} computationally
+generates gamma spectra.  This will enable a more robust study of statistical
+performance with respect to information reduction.
 
