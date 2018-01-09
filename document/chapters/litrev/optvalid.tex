@@ -76,7 +76,7 @@ quickly with respect to the training set size due to being close to the minimum
 of the bias-variance tradeoff. 
 
 The training set size must be large and diverse enough to be considered
-\gls{i.i.d.} because most machine learning algorithms are developed upon this
+\gls{i.i.d.} because most \gls{ML} algorithms are developed upon this
 assumption. Sometimes this is not possible, and the training data are skewed,
 i.e., a portion of the data is over-represented. This must be handled
 explicitly, but only involves simple parameter changes in scikit-learn
@@ -88,8 +88,8 @@ beyond the scope of this work.
 After ensuring the appropriate training set size is selected, the models must
 be further optimized using \textit{validation curves}.  These provide
 information on the bias-variance tradeoff with respect to model complexity. Two
-main factors affecting model complexity can cause the model to be under- or
-overfit to the data: number of features in the data set and algorithm
+main tuneable factors affecting model complexity can cause the model to be
+under- or overfit to the data: number of features in the data set and algorithm
 parameters that control the regularization.
 
 \begin{figure}[!htb]
@@ -128,7 +128,7 @@ Both solution uncertainty and model comparison can be done using Bayesian
 inference as discussed in Section \ref{sec:inverse}.  Equations \ref{eq:bayes}
 and \ref{eq:bayes_words} show that there are three values to obtain to
 calculate a posterior probability, i.e., the probability of a parameter
-estimated from a machine-learned model being correct: likelihood, prior
+estimated from an \gls{ML} model being correct: likelihood, prior
 probability, and marginal likelihood.  Comparing posterior probabilities among
 different models reveal the most probable correct answer, i.e., the highest
 posterior probability.  \cite{inverse_theory, gentle_bayes} Each of these
@@ -138,7 +138,7 @@ The posterior probability represents the solution to an \textit{inverse}
 problem, where model parameters are predicted from some given measurement
 values. It is not directly computable and thus the remaining probabilities
 discussed below indirectly allow its computation.  In this context, it is the
-probability that a predicted reactor parameter from a chosen machine learning
+probability that a predicted reactor parameter from a chosen \gls{ML}
 algorithm is correct given input based on an \gls{SNF} recipe.  For example, it
 is the probability that a plutonium-239 concentration of $y\%$ is attributed to
 a uranium oxide fuel in a \gls{BWR} with a burnup of $x\ GWd/MTU$.  

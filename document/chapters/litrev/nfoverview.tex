@@ -169,17 +169,17 @@ which is commonly expressed as follows:
 
 Here, $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that
 events $A$ and $B$ will occur, representing the model and data spaces,
-respectively. $P(A)$ is known as the prior probability and $P(B)$ is known as
-the marginal likelihood. The marginal likelihood is a concept of the data space
+respectively. $P(A)$ is known as the likelihood and $P(B)$ is known as the
+marginal likelihood. The marginal likelihood is a concept of the data space
 capturing all the possible measurement values. It is ignored here because as a
 homogenous probability, it is only useful for determining absolute
 probabilities and this will only be applied in a relative context.  $P(B|A)$ is
-the likelihood that event $B$ will occur given a known result for $A$, which
-are the measurements given the model parameters (i.e. the forward problem).
-$P(A|B)$ is the posterior probability that event $A$ will occur given a known
-result for $B$, which are the predicted model parameters given the measurements
-(i.e., the inverse problem) \cite{inverse_theory, gentle_bayes}.\todo{check
-condensed text} A discussion of how these values are obtained takes place in
+the prior probability that event $B$ will occur given a known result for $A$,
+which are the measurements given the model parameters (i.e. the forward
+problem).  $P(A|B)$ is the posterior probability that event $A$ will occur
+given a known result for $B$, which are the predicted model parameters given
+the measurements (i.e., the inverse problem) \cite{inverse_theory,
+gentle_bayes}. A discussion of how these values are obtained takes place in
 Section \ref{sec:invcompare}.
 
 %This is can be mapped easily to the inverse physical system problem scenario.
@@ -208,4 +208,4 @@ methods for calculating the posterior probability of a system given some
 measurements \cite{bayes_compare}.  In the nuclear forensics context of
 pre-detonated materials, this would be a a set of probabilities for different
 parameters of interest, e.g., reactor type, burnup, cooling time, and
-enrichment of some interdicted \gls{SNF}. \todo{any of sec 4.5 to go here?}
+enrichment of some interdicted \gls{SNF}.

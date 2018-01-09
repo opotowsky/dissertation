@@ -1,5 +1,5 @@
 After a model is trained, the first step is model selection and assessment.
-Selection is estimating model performance among a set of trained models using a
+Selection is estimating model performance among a set of \gls{ML} models using a
 single validation set.  After one model is chosen, assessment takes place by
 determining the prediction capability on new data via a previously unseen
 testing set. Both selection and assessment can be done in a single step using
@@ -29,7 +29,7 @@ relationships in the data that the bias counteracts.
 \subsubsection{Types of Error}
 
 While the sources of the model prediction error are well known, the creation of
-a machine-learned model is a hidden process. Although the model emerges
+an \gls{ML} model is a hidden process. Although the model emerges
 from a black box, there are ways to evaluate the generalization (i.e.,
 prediction) capability of it.  This is done by removing a small portion of the
 data for use as a testing set.  The rest of the data set is known as the
@@ -51,10 +51,10 @@ during training to give feedback, a \textit{cross-validation} set, can provide
 a faster convergence to a satisfactory model. As shown in Figure
 \ref{fig:cverror}, this can be done by splitting the data set into three
 groups: a large training set, a small cross-validation set, and a small testing
-set.  However, in practice, multiple rounds of cross-validation steps provide
-the fastest convergence.\todo{check this wording}  This is referred to as
-\textit{k-fold cross-validation} and allows a user to use all data entries as a
-testing entry once, ideally bettering model evaluation. 
+set.  However, in practice, multiple rounds of cross-validation steps are used
+provide the fastest convergence.  This is referred to as \textit{k-fold
+cross-validation} and allows a user to have all training data entries be a
+testing entry once, bettering model evaluation. 
 
 \begin{figure}[!htb]
   \centering

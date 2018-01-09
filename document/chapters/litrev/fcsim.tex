@@ -24,13 +24,19 @@ physics included in the models, and another might focus on detailed isotopics
 within a system to track plutonium.
 
 Because a large portion of a nuclear forensics investigation relies on
-measuring isotopics, \gls{ORIGEN-ARP} \cite{origen} within the \gls{SCALE} code
-system was chosen for its physically detailed models. \gls{ORIGEN} calculates
-time-dependent nuclide concentrations (or quantities derived from these) that
-result from activation and depletion calculations. The physics (i.e., neutron
-transport and decay) calculations are carried out in other \gls{SCALE} modules that
-solve the depletion equations.  This generates libraries for \gls{ORIGEN} that
-include the probabilities of reaction (i.e., cross sections) for the system.
+measuring isotopics, \gls{ORIGEN} \cite{origen} within the \gls{SCALE} code
+system was chosen for its physically detailed models of activation, depletion,
+and decay.  \gls{ORIGEN} is a part of the \gls{SCALE} 6.2 modeling and
+simulation suite of computational tools developed for nuclear design and safety
+\cite{scale}. Specifically, the ARP module of the code was used:
+\gls{ORIGEN-ARP}.
+
+\gls{ORIGEN} calculates time-dependent nuclide concentrations (or quantities
+derived from these) that result from activation and depletion calculations. The
+physics (i.e., neutron transport and decay) calculations are carried out in
+other \gls{SCALE} modules that solve the depletion equations.  This generates
+libraries for \gls{ORIGEN} that include the probabilities of reaction (i.e.,
+cross sections) for the system.
 
 To obtain an \gls{SNF} recipe from a reactor simulation, \gls{ORIGEN} uses the
 desired input power generation with the cross section library to calculate a
@@ -54,7 +60,7 @@ reactor simulations and obtain \gls{SNF} recipes.
 \subsection{Statistics Toolkit}
 
 The statistics toolkit chosen for this work is scikit-learn \cite{scikit}, a
-machine learning package in python.  Virtually all modern machine learning
+machine learning package in python.  Virtually all modern \gls{ML}
 toolkits will have acceptably fast and reliable algorithms, but the use of
 python provides a platform for seamless integration of all the tools in the
 workflow. 

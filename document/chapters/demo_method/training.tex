@@ -2,20 +2,15 @@
 \label{sec:snfsim}
 
 Because creating databases from real measurements to represent reactor
-technologies from around the world is impossible, the database in this study
-will be created from high-fidelity simulations via \gls{ORIGEN} \cite{origen},
-a code used for activation, depletion, and decay of nuclear materials. It is a
-part of the \gls{SCALE} 6.2 modeling and simulation suite of computational
-tools developed for nuclear design and safety \cite{scale}. Specifically, the
-ARP module of the ORIGEN code was used: \gls{ORIGEN-ARP}.
-
-A set of simulations of \gls{SNF} at different burnups and cooling times will
-comprise the database.  Of interest to an entity trying to create a weapon is
-partially irradiated fuel if they have plutonium separations capabilities or
-any radioactive substance in the case of a dirty bomb.  Addressing the former,
-a smaller burnup than is typical for \gls{SNF} from a commercial reactor is
-used in the previous work. This will be repeated here for demonstrative
-purposes, but expanded upon in future work.
+technologies from around the world is impossible, the database in this study is
+created from high-fidelity simulations via \gls{ORIGEN} \cite{origen}.  A set
+of simulations of \gls{SNF} at different burnups and cooling times comprises
+the database.  Of interest to an entity trying to create a weapon is partially
+irradiated fuel if they have plutonium separations capabilities or any
+radioactive substance in the case of a dirty bomb.  Addressing the former, a
+smaller burnup than is typical for \gls{SNF} from a commercial reactor is used
+in the previous work. This will be repeated here for demonstrative purposes,
+but expanded upon in future work.
 
 \begin{table}[!hp]
   \centering
@@ -32,36 +27,48 @@ purposes, but expanded upon in future work.
     \caption{Simulation space defining reactor parameters and cooling time}
     \label{tbl:rxtrparam}
   \end{subtable}%
-  \caption{Design of the training set space}
+  \caption{Design of the Training Set Space}
   \label{tbl:train}
 \end{table}
 
 As mentioned in Section \ref{sec:optvalid}, many algorithms are developed on
-the assumption that the training set will be \gls{i.i.d.}. This is important so
-that the model does not overvalue or overfit a certain area in the training
-space. As this is not easily proven, it requires extensive knowledge of
-worldwide commercial reactors. Most obviously, a truly \gls{i.i.d.} training
+the assumption that the training set will be \acrfull{i.i.d.}. This is
+important so that the model does not overvalue or overfit a certain area in the
+training space. As this is not easily proven, it requires extensive knowledge
+of worldwide commercial reactors. Most obviously, a truly \gls{i.i.d.} training
 set would go beyond the lower burnups, but this is purely for demonstration
-with a single use case in mind.  The training database is thus constructed by
-simulating the same training set space as described in Ref.
-\cite{dayman_feasibility_2013}, shown in Table \ref{tbl:train}. For each entry
-shown here the simulations included the span of cooling times and burnups in
-\ref{tbl:rxtrparam}. 
+with a single use case in mind.  
 
-\begin{table}[!hp]
+The training database is thus constructed by simulating the same training set
+space as described in Ref.  \cite{dayman_feasibility_2013}, shown in Table
+\ref{tbl:train}. For each entry shown here the simulations included the span of
+cooling times and burnups in Table \ref{tbl:rxtrparam}. The power densities,
+listed enrichments, and moderator densities were kept constant. The burnup for
+the \glspl{PWR} was increased in steps of $950\ MWd/MTU$, resulting in 19
+measured time points. The \glspl{BWR} and \glspl{PHWR} had 18 measurements with
+burnup steps of $690\ MWd/MTU$.  This resulted in 2313 observations in the
+training set.
+
+\begin{table}[!hbt]
   \centering
   \includegraphics[width=0.95\linewidth]{./chapters/demo_method/TestData.png}
-  \caption{Design of the testing set space}
+  \caption{Design of the Testing Set Space}
   \label{tbl:test}
 \end{table}
 
-While in typical machine learning studies choose the testing set randomly from
+Feature reduction on the training set is manual in nature: the top 200 nuclides
+by concentration in each observation were retained. Other reduction techniques
+using domain knowledge (e.g., filtering for actinides) and statistical
+dimensionality reduction (e.g., \gls{PCA}) are not addressed in this
+demonstration.
+
+While in typical \gls{ML} studies choose the testing set randomly from
 the training set, the previous work used an external one, shown in Table
 \ref{tbl:test}.  The test set was designed to have values in between the
 trained values of burnup and cooling times for the same set of reactors.
 However, a systematically chosen test set can be problematic since it may not
-cover parts of the training space.  Therefore it was implemented in this study
-for comparison, but cross-validation will be used moving forward. More
+cover parts of the training space.  It is implemented in this study for
+comparison, but cross-validation will be used moving forward. More
 specifically, using \textit{k}-fold cross-validation is expected to better
 indicate the model performance. 
 
@@ -69,7 +76,7 @@ indicate the model performance.
 \label{sec:inforeduc}
 
 Since the overall goal of this project is to determine how much information to
-what quality is needed to train a machine-learned model, there will be an
+what quality is needed to train an \gls{ML} model, there will be an
 information reduction manipulation applied to the training data set. This study
 evaluates the impact of randomly introduced error on the ability of the
 algorithms to correctly predict the burnup. 

@@ -14,7 +14,7 @@ measured features. Since this work trains models to predict burnup of
 
 One of the simplest and most utilized methods of prediction is a linear model
 from a least-squares fit. Thus, it is the most natural place to begin a
-demonstration of machine learning algorithms. Since linear models must have all
+demonstration of \gls{ML} algorithms. Since linear models must have all
 linearly related parameters, there are many restrictions regarding the shape of
 the model. However, this makes the resulting models stable to peturbations.
 \cite{changingml}
@@ -44,8 +44,8 @@ to as the $L_2$ and $L_1$ norms, respectively.
 The form of linear regression used here is called ridge regression. This
 algorithm performs optimization using the $L_2$ norm, and also uses the form of
 the $L_2$ norm for \textit{regularization}. Regularization, sometimes called
-\textit{shrinkage}, is a term introduced into the trained model to prevent
-overfitting; it is used in many machine learning algorithms. For ridge
+\textit{shrinkage}, is a term introduced into the \gls{ML} model to prevent
+overfitting; it is used in many \gls{ML} algorithms. For ridge
 regression, shrinkage further reduces the weights, $\beta_j$, on the input
 features, $x_j$. The shrinkage term also includes a complexity parameter,
 $\lambda$, which governs the strength to which regularization is performed
@@ -54,7 +54,7 @@ is updated to Equation \ref{eq:ridgereg}.  Figure \ref{fig:reg} is a
 visualization of how applying regularization smooths out a model.
 \begin{equation}
   F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j} + \lambda \sum_{j=1}^{p} \beta_{j}^2
-  \ref{eq:ridgereg}
+  \label{eq:ridgereg}
 \end{equation}
 
 \subsubsection{Nearest Neighbor Methods}
@@ -69,7 +69,6 @@ closest to the current test sample. Thus, there is not any learning, but
 instead a direct comparison between an unknown sample and the space that the
 training set populates. The predictions from nearest neighbors can be quite
 accurate, but are highly unstable to peturbations \cite{elements_stats}.
-\todo{check me}
 
 \begin{figure}[!htb]
   \centering
@@ -107,7 +106,7 @@ data well, which in this study is a maximum of approximately 300 features.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.8\linewidth]{./chapters/litrev/svm.png}
-  \caption{Schematic of SVM Classification}
+  \caption{Schematic of \acrshort{SVM} Classification}
   \label{fig:svm}
 \end{figure}
 
@@ -165,15 +164,15 @@ separation in this space, as shown in Figure \ref{fig:svr-b}.
   \centering
   \begin{subfigure}[h]{0.8\linewidth}
     \includegraphics[width=\linewidth]{./chapters/litrev/svr-a.png}
-    \caption{Demonstration of regression with \gls{SVR}}
+    \caption{Demonstration of regression with \acrshort{SVR}}
     \label{fig:svr-a}
   \end{subfigure}
   \begin{subfigure}[h]{0.8\linewidth}
     \includegraphics[width=\linewidth]{./chapters/litrev/svr-b.png}
-    \caption{The kernel trick with \gls{SVR}}
+    \caption{The kernel trick with \acrshort{SVR}}
     \label{fig:svr-b}
   \end{subfigure}
-  \caption{Illustrations of SVR and Nonlinear Analysis}
+  \caption{Illustrations of \acrshort{SVR} and Nonlinear Analysis}
   \label{fig:svr}
 \end{figure}
 
@@ -187,9 +186,9 @@ instances have a small radius (high influence).
 \begin{equation}
 \begin{split}
   min\ & \frac{1}{2} \lVert w \rVert ^{2} + C \sum_{i} \xi_{i} \\
-  subject\ to:\ \ & \lvert y_i - (w \phi(x_i) + b) \rvert \leq \varepsilon + \xi_i
-  where: w = \sum_{i} \alpha_i y_i \phi(x_i) 
-  and: K(x_i, x_j) = \phi(x_i) \phi(x_j) = e^{\gamma \lVert x_i - x_j \rVert ^{2}}
+  subject\ to:\ \ & \lvert y_i - (w \phi(x_i) + b) \rvert \leq \varepsilon + \xi_i \\
+  where:\ & w = \sum_{i} \alpha_i y_i \phi(x_i) \\
+  and:\ & K(x_i, x_j) = \phi(x_i) \phi(x_j) = e^{\gamma \lVert x_i - x_j \rVert ^{2}}
   \label{eq:svr-rbf}
 \end{split}
 \end{equation} 

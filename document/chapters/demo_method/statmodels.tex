@@ -5,14 +5,15 @@ Choosing which algorithms to test is largely intuitive. It is based on the
 strengths and weaknesses of different optimization methods within the
 algorithms as well as what is being predicted.  
 
-For a benchmarking excercise, some machine learning approaches here were chosen
+For a benchmarking excercise, some \gls{ML} approaches here were chosen
 based on previous work \cite{dayman_feasibility_2013}: nearest neighbor and
-ridge regression. These are useful because they are simple, providing distance-based and linear-based models, respectively. If
-more complex algorithms are not required to obtain useful results, then there
-is no need to use more computationally expensive options. However, hedging on
-the fact that more complex models will be needed, this work also employs an
-algorithm that is known to handle highly dimensional data sets well: support
-vector regression. These algorithms were introduced in Section \ref{sec:algs}. 
+ridge regression. These are useful because they are simple, providing
+distance-based and linear-based models, respectively. If more complex
+algorithms are not required to obtain useful results, then there is no need to
+use more computationally expensive options. However, hedging on the fact that
+more complex models will be needed, this work also employs an algorithm that is
+known to handle highly dimensional data sets well: support vector regression.
+These algorithms were introduced in Section \ref{sec:algs}. 
 
 \begin{table}[!htb]
   \centering
@@ -20,36 +21,56 @@ vector regression. These algorithms were introduced in Section \ref{sec:algs}.
   \caption{Algorithm Parameters Used in Demonstration}
   \label{tbl:defaults}
 \end{table}
-\todo{remember to redo with scaled X}
 
 The parameters chosen for the algorithms are shown in Table \ref{tbl:defaults}.
 For many, the default behavior was retained. Prior to training, the data set is
 preprocessed by scaling and normalization because the nuclide concentrations
-vary by many orders of magnitude. A python-based machine learning toolkit,
-scikit-learn \cite{scikit}, is used to train the models.  \todo{note on MAPE
-and RMSE here or no?}
+vary by many orders of magnitude. Algorithm implementations from a python-based
+\gls{ML} toolkit, scikit-learn \cite{scikit}, are used to train the
+models.
 
 \subsection{Reactor Parameter Prediction}
 \label{sec:rxtrparam}
 
 The above was carried out, training various statistical models of \gls{SNF}
-using nuclide correlations with burnup.  Following the training phase, it is
-important to estimate the reactor parameter prediction capabilities of those
-models by testing their generalizability.  This is done with the previously
-described set of measurements from a test data set (shown in Table
-\ref{tbl:test}) with samples that mimic potential interdicted \gls{SNF}. The
-testing set has the same features as the training set, with known burnup labels
-that are compared to the predicted labels. The results of each model's
-prediction errors are shown in Table \ref{tbl:err}. 
+using nuclide correlations with burnup. As a reminder, this is not the entirety
+of the nuclode output from \gls{ORIGEN}; it is the top 200 nuclides by
+concentration in each row. Following the training phase, it is important to
+estimate the reactor parameter prediction capabilities of those models by
+testing their generalizability.  This is done with the previously described set
+of measurements from a test data set (shown in Table \ref{tbl:test}) with
+samples that mimic potential interdicted \gls{SNF}. The testing set has the
+same features as the training set, with known burnup labels that are compared
+to the predicted labels. 
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{./chapters/demo_method/randerr.png}
+  \caption{Prediction Error from Information Reduction via Random Error}
+  \label{fig:randerr}
+\end{figure}
+
+Next, information reduction was carried out with all three \gls{ML} approaches.
+Figure \ref{fig:randerr} shows the three algorithms' \glspl{MAPE} with respect
+to the reduction of information by the introduction of random error to the
+nuclide vectors, as described in Section \ref{sec:inforeduc}.  \gls{SVR} is
+shown to perform the best, but it quickly reaches 100\% error. \todo{Discuss
+mape or change error here?}  Although ridge regression rapidly increases with
+any amount of error, nearest neighbor regression shows more promise, although
+it reaches 257\% at 10\% error.  Overall, this performance indicates that these
+algorithms are unlikely to predict burnup when faced with the uncertainties in
+real-world measurements or the further reduction in information from gamma
+detection.
 
 \begin{table}[!htb]
   \centering
-  \includegraphics[width=0.8\linewidth]{./chapters/demo_method/err.png}
-  \caption{Model burnup prediction errors for three algorithms}
+  \includegraphics[width=0.8\linewidth]{./chapters/demo_method/results1.png}
+  \caption{Three Models' Burnup Prediction Errors}
   \label{tbl:err}
 \end{table}
 
-Shown in Table \ref{tbl:err} are two \textit{sources} of error: from the
+For no introduced error, each model's prediction errors are shown in Table
+\ref{tbl:err}.  First, shown here are two \textit{sources} of error: from the
 testing set and via cross-validation.  Although previous work uses the former,
 it is expected that the latter will provide better estimates of model behavior.
 The models evaluated by the testing set do not have a validation set for
@@ -62,26 +83,10 @@ tracked. However, \gls{MAPE} is not the only error metric. Being that it
 approaches infinity near true values of zero, absolute and squared deviations
 can also be tracked and may provide more information.  Anecdotally, the
 preferred method in the community is to use \gls{RMSE} for model error
-estimation, so both are tabulated.  The \gls{MAPE} shows that there are some
-extremely high and extremely low errors depending on the algorithm, both of
-which are quite concerning, as this indicates poor performance. 
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\linewidth]{./chapters/demo_method/randerr.png}
-  \caption{Results from information reduction using random error}
-  \label{fig:randerr}
-\end{figure}
-
-Figure \ref{fig:randerr} shows the three algorithm's \gls{MAPE}s with respect
-to the reduction of information by the introduction of random error to the
-nuclide vectors, as described in Section \ref{sec:inforeduc}.  \gls{SVR} is
-shown to perform the best, but it quickly reaches 100\% error.  Although ridge
-regression rapidly increases with any amount of error, nearest neighbor
-regression shows more promise, although it reaches 257\% at 10\% error.
-Overall, this performance indicates that these algorithms are unlikely to
-predict burnup when faced with the uncertainties in real-world measurements or
-the further reduction in information from gamma detection.
+estimation, so both are tabulated.  Regardless, the \gls{MAPE} shows that there
+are some extremely high and extremely low errors depending on the algorithm;
+both results indicate poor performance.  This is quite concerning, because
+these results are from error-free data.
 
 Despite this poor initial performance, the results in Table \ref{tbl:err} and
 Figure \ref{fig:randerr} can be evaluated. Next introduced are some diagnostic

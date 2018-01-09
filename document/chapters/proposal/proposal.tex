@@ -1,7 +1,7 @@
 \chapter{Research Proposal}
 \label{ch:proposal}
 
-This document previously demonstrated the performance of machine learning on a
+This document previously demonstrated the performance of \gls{ML} on a
 set of nuclear material isotopics to calculate a reactor parameter of interest:
 burnup.  Additionally, the procedures for understanding the learned model's
 behavior and thus the quality of the results was discussed.  Next, a set of
@@ -37,7 +37,7 @@ chemical assay measurements of \gls{SNF} from 44 reactors. While this is not
 sufficient as a training set, it provides a better framework for a training
 set. It will be simulated with \gls{ORIGEN} as inspired by the breadth of
 values in the \gls{SFCOMPO} database. After cross-validation, diagnostics, and
-optimization, the trained models can be tested against the entries in this
+optimization, the \gls{ML} models can be tested against the entries in this
 database to provide a clear estimate of of the model performance. 
 
 \subsection*{Finalizing Set of Algorithms}
@@ -45,10 +45,12 @@ database to provide a clear estimate of of the model performance.
 The three algorithms in the demonstration (nearest neighbor, ridge, and support
 vector regression) are not necessarily the set that will be evaluated for the
 experiments. After these are used to train new models on a larger training set
-for comparison, other algorithms can be speedily assessed as well.  Since
-support vector-, distance-, and linear-based models are already represented,
-other obvious choices include Bayesian methods, decision trees, neural
-networks, or ensemble methods \cite{elements_stats}. 
+for comparison, other algorithms can be speedily assessed as well. The
+scikit-learn toolkit allows for easy transitions because the algorithms are
+already implemented; applying a new \gls{ML} algorithm involves merely
+changing the method.  Since support vector-, distance-, and linear-based models
+are already represented, other obvious choices include Bayesian methods,
+decision trees, neural networks, or ensemble methods \cite{elements_stats}. 
 
 \subsection*{Computational Framework and Resources}
 
@@ -72,7 +74,7 @@ methods.}
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.85\linewidth]{./chapters/proposal/proposal.png}
+    \includegraphics[width=\linewidth]{./chapters/proposal/proposal.png}
     \caption{Motivation for Data Sets for Experiments 1 and 2}
     \label{fig:proposal}
 \end{figure}
@@ -88,7 +90,7 @@ simulations, since they provide highly reliable and accurate information.
 The variables for this experiment will include the following:
 \begin{enumerate}
   \itemsep-0.75em
-  \item the complexity of the machine learning algorithm used, 
+  \item the complexity of the \gls{ML} algorithm used, 
   \item feature reduction, and 
   \item different subsets of the decision space.
 \end{enumerate}
@@ -119,8 +121,10 @@ separated plutonium and \gls{UOC} have been also studied using these
 techniques, these materials could provide an alternate route to pbtain useable
 learned models. Additionally, this methodology would also work if applied to
 post-detonation materials. There is work on creating standard materials to
-represent the ``urban canyon'', so this is another evolving subject that may
-benefit from statistical correlations \cite{refmaterial}.
+represent the ``urban canyon''. The noise from irradiated concrete, building
+materials, etc. is expected to pose a great challenge to forensics teams. This
+is another evolving subject that may benefit from statistical correlations
+\cite{refmaterial}.
 
 \section[Experiment 2: Gamma Spectra]{Experiment 2\\ 
 \large{\textit{Viability of Statistical Learning on Gamma Spectra}}}
@@ -146,7 +150,7 @@ inventories from the simulations.
 The variables for this experiment will include the following:
 \begin{enumerate}
   \itemsep-0.75em
-  \item the complexity of the machine learning algorithm used, 
+  \item the complexity of the \gls{ML} algorithm used, 
   \item feature reduction (implicit), and 
   \item quality of training and/or testing data set.
 \end{enumerate}
@@ -201,7 +205,7 @@ inputs are from reprocessed nuclear fuel.}
 The variables for this experiment will include the following:
 \begin{enumerate}
   \itemsep-0.75em
-  \item the complexity of the machine learning algorithm used,
+  \item the complexity of the \gls{ML} algorithm used,
   \item quality of training data set, and 
   \item type of preprocessing for feature reduction.
 \end{enumerate}
@@ -299,7 +303,7 @@ depend on the bin size, but this can be handled as a separate optimization step
 within the sci-kit learn package \cite{scikit}.
 
 The prior probability distributions are given by the model space, e.g., reactor
-parameters as predicted from the machine-learned models.  The above-mentioned
+parameters as predicted from the \gls{ML} models.  The above-mentioned
 method should be utilized to obtain a prior density function from the range of
 burnups.  This will not be necessary because the current design of the training
 set will provide a nearly flat density function (i.e., uniform distribution).
@@ -354,10 +358,10 @@ of many likelihoods tends towards zero.
   \label{tbl:strength}
 \end{table}
 
-In summary, given a mean-squared error and its standard deviation from using cross-validation 
-with any machine learning algorithm, the \gls{MLE} can be formed. To compare two models, a ratio of $\text{MLE}_i$ to $\text{MLE}_j$,
-called the posterior odds, provides the probability of model $i$ being correct.
-
+In summary, given a mean-squared error and its standard deviation from using
+cross-validation with any \gls{ML} algorithm, the \gls{MLE} can be formed. To
+compare two models, a ratio of $\text{MLE}_i$ to $\text{MLE}_j$, called the
+posterior odds, provides the probability of model $i$ being correct.
 
 \section{Timeline}
 \label{sec:timeline}

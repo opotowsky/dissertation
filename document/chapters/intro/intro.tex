@@ -95,7 +95,7 @@ below.
 \todo{could simplify this figure a lot}
 
 In the simulation and statistical learning paradigm, we need to determine how
-much information to what quality is needed to train a machine-learned model;
+much information to what quality is needed to train an \gls{ML} model;
 the model must give appropriate predictions of reactor parameters given a set
 of measurements from a \textit{test} sample. 
 
@@ -108,7 +108,7 @@ highly dimensional data sets well.  These algorithms are introduced in Section
 \ref{sec:algs}.
 
 After the training is complete, the results of each models' predictions must be
-evaluated according to machine learning best practices.  The machine-learned
+evaluated according to \gls{ML} best practices.  The machine-learned
 model predicts the parameters of a previously unseen test set.  The difference
 between the model predictions and the actual simulated parameters is known as
 the testing error.  The testing error with respect to various specifications
@@ -139,7 +139,7 @@ machine learning techniques degrade as less information is available?}.
 
 The main purpose of this work is to evaluate the utility of statistical methods
 as an approach to determine nuclear forensics-relevant quantities as less
-information is available. Machine learning algorithms are used to train models
+information is available. \Gls{ML} algorithms are used to train models
 to provide these values (e.g., reactor type, time since irradiation, burnup)
 from the available information. The training data is simulated using
 \gls{ORIGEN}, which provides an array of nuclide concentrations as the features
@@ -148,14 +148,14 @@ inputs.  Information reduction is carried out using computationally generated
 gamma spectra; the radionuclide concentrations from the simulations can be
 converted into gamma energies, which then undergo a detector response
 calculation to represent real as-measured gamma spectra as closely as possible.
-Machine learning best practices are used to evaluate the performance of the
+\Gls{ML} best practices are used to evaluate the performance of the
 chosen algorithms, and inverse problem theory is used to provide an interval of
 confidence in the model predictions.
 
 The necessary background is covered in Chapter \ref{ch:litrev}.  First, an
 introduction to the broader field of nuclear forensics is in Section
 \ref{sec:nfoverview} to place this work in the context of the technical mission
-areas. After that, a short discussion of the field of machine learning, the
+areas. After that, a short discussion of the field of \gls{ML}, the
 algorithms used, and validation methods are in Section \ref{sec:mlback}.
 Section \ref{sec:fcsim} includes information about the software used to generate
 the training data and perform the predictions. Lastly, a review of statistical
@@ -175,4 +175,4 @@ there are three experiments outlined in Sections \ref{sec:exp1},
 alternative directions for risk mitgation are discussed throughout these
 sections.  A detailed explanation of the method comparison step is covered next
 in Section \ref{sec:modelcompare}.  Lastly, a projected timeline for the
-completion of this project is in Section \ref{timeline}.
+completion of this project is in Section \ref{sec:timeline}.

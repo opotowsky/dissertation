@@ -1,7 +1,7 @@
-Machine learning is a sub-field of \gls{AI} within the broad category of
+\glsreset{ML} \Gls{ML} is a sub-field of \gls{AI} within the broad category of
 computer science. The goal of \gls{AI} is to create computer systems that
 respond to their environment according to some set of criteria or goal
-\cite{changingml}. For example, self-driving vehicles have computers on board
+\cite{changingml}.  For example, self-driving vehicles have computers on board
 that learn to avoid curbs and humans. While its use has been increasing in the
 commercial sector, there is also much anecdotal evidence to support the
 existence of a rapid increase of \gls{AI} use in academic research across many
@@ -10,30 +10,29 @@ disciplines beyond robotics. \gls{AI} systems have been used in detection
 ratings), and a host of scientific disciplines that have increasing amounts of
 multivariate data.
 
-Machine learning research focuses on the underlying algorithms using
-mathematical optimization, methods for pattern recognition, and computational
-statistics.  Much of the recent advances to the field of \gls{AI} have occured
-in the statistical realm, which forgoes domain knowledge in favor of large data
-sets.  In this work, there is no distinction made between the terminology of
-machine learning and statistics.  Additionally, this study is not concerned
-with computational time, but rather the ability to correctly predict values and
+\gls{ML} research focuses on the underlying algorithms using mathematical
+optimization, methods for pattern recognition, and computational statistics.
+Much of the recent advances to the field of \gls{AI} have occured in the
+statistical realm, which forgoes domain knowledge in favor of large data sets.
+In this work, there is no distinction made between the terminology of machine
+learning and statistics.  Additionally, this study is not concerned with
+computational time, but rather the ability to correctly predict values and
 categories relevant to the nuclear forensics mission. This restricts the
 relevancy of the algorithms to the underlying theory and its impact on the
 resulting model's accuracy. 
 
-Machine learning algorithms can be separated into two main categories:
-unsupervised and supervised learning.  The former groups or interprets a set of
-input data, predicting patterns or structures. The latter includes both the
-input and output data, enabling the trained model to predict future outputs.
-Broadly speaking, the unsupervised learning algorithms are designed for
-clustering data sets or dimensionality reduction (i.e., determining some subset
-or linear combination of features most relevant to the input data) of data
-sets.  Supervised learning algorithms predict both discrete and continuous
-values via classification and regression, respectively. Some algorithms can
-perform both classification and regression, and neural networks can even be
-modified to perform either supervised or unsupervised
-learning.\cite{elements_stats} 
-\\
+\gls{ML} algorithms can be separated into two main categories: unsupervised and
+supervised learning.  The former groups or interprets a set of input data,
+predicting patterns or structures. The latter includes both the input and
+output data, enabling the \gls{ML} model to predict future outputs.  Broadly
+speaking, the unsupervised learning algorithms are designed for clustering data
+sets or dimensionality reduction (i.e., determining some subset or linear
+combination of features most relevant to the input data) of data sets.
+Supervised learning algorithms predict both discrete and continuous values via
+classification and regression, respectively. Some algorithms can perform both
+classification and regression, and neural networks can even be modified to
+perform either supervised or unsupervised learning.\cite{elements_stats} 
+
 \begin{figure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=1.15\textwidth]{./chapters/intro/SupervisedRegression.png}}
   \caption{Schematic of Regression with Machine Learning}
@@ -58,7 +57,7 @@ provide a single instance and a value can be predicted from that.
 
 This study performs regression tasks using supervised learning algorithms.
 Differences among the structure underlying mathematics of the algorithms impact the
-trained models.  Therefore, the algorithms used in this study will be discussed
+\gls{ML} models.  Therefore, the algorithms used in this study will be discussed
 in Section \ref{sec:algs}. Next, model selection and assessment is covered in
 Section \ref{sec:selectass}.  Evaluating and optimizing algorithm performance
 is discussed in Section \ref{sec:optvalid}, as well as robustly comparing
