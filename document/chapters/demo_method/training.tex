@@ -49,6 +49,12 @@ measured time points. The \glspl{BWR} and \glspl{PHWR} had 18 measurements with
 burnup steps of $690\ MWd/MTU$.  This resulted in 2313 observations in the
 training set.
 
+Feature reduction on the training set is manual in nature: the top 200 nuclides
+by concentration in each observation were retained. Other reduction techniques
+using domain knowledge (e.g., filtering for actinides) and statistical
+dimensionality reduction (e.g., \gls{PCA}) are not addressed in this
+demonstration.
+
 \begin{table}[!hbt]
   \centering
   \includegraphics[width=0.95\linewidth]{./chapters/demo_method/TestData.png}
@@ -56,21 +62,17 @@ training set.
   \label{tbl:test}
 \end{table}
 
-Feature reduction on the training set is manual in nature: the top 200 nuclides
-by concentration in each observation were retained. Other reduction techniques
-using domain knowledge (e.g., filtering for actinides) and statistical
-dimensionality reduction (e.g., \gls{PCA}) are not addressed in this
-demonstration.
-
-While in typical \gls{ML} studies choose the testing set randomly from
-the training set, the previous work used an external one, shown in Table
-\ref{tbl:test}.  The test set was designed to have values in between the
-trained values of burnup and cooling times for the same set of reactors.
-However, a systematically chosen test set can be problematic since it may not
-cover parts of the training space.  It is implemented in this study for
-comparison, but cross-validation will be used moving forward. More
-specifically, using \textit{k}-fold cross-validation is expected to better
-indicate the model performance. 
+While typical \gls{ML} studies choose the testing set randomly from the
+training set, the previous work used an external one, shown in Table
+\ref{tbl:test}.  The simulations retained the default values from the training
+set; only the values shown here were changed. This provided 92 observations for
+testing.  The test set was designed to have values in between the trained
+values of burnup and cooling times for the same set of reactors.  However, a
+systematically chosen test set can be problematic since it may not cover parts
+of the training space.  It is implemented in this study for comparison, but
+cross-validation will be used moving forward. More specifically, using
+\textit{k}-fold cross-validation is expected to better indicate the model
+performance. 
 
 \subsection{Information Reduction}
 \label{sec:inforeduc}
