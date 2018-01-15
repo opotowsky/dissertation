@@ -33,39 +33,37 @@ training set has also been tested.
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{./chapters/demo_method/lc1.png}
-    \caption{\acrshort{SVR} Learning curve for burnup prediction, $\gamma = 0.001$}
+    \caption{\acrshort{SVR} Learning Curve for Burnup Prediction, $TrainSet\ Size = 2313$}
     \label{fig:lc1}
 \end{figure}
-\todo{add other plots and describe}
 
 The learning curves are obtained as follows, shown in Figure \ref{fig:lc1}.
 For a given (randomly chosen) training set size between 15 and 100\% of the
 total data set, training and prediction rounds were performed for each. The
-testing error scenario performs this $n=5$ times and averages those results.
-This is chosen to be equivalent to the \textit{k} in \textit{k}-fold
-cross-validation to ensure comparable statistics.  The cross-validation error
-scenario has no need for averaging because it is performed automatically. The
-learning curve plot does not provide a clear picture of over- or undertraining
-upon first glance. \todo{expand on why}
+testing error scenario performs this $n=10$ times and averages those results.
+The \textit{k} in \textit{k}-fold for cross-validation was chosen to be $5$.
+\todo{dicuss over/under training}
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{./chapters/demo_method/vc1.png}
-    \caption{\acrshort{SVR} Validation Curve for Burnup Prediction, $TrainSize = 2313$}
+    \caption{\acrshort{SVR} Validation Curve for Burnup Prediction, $\gamma = 0.001$}
     \label{fig:vc1}
 \end{figure}
 
 The validation curves are obtained as follows, shown in Figure \ref{fig:vc1}.
-The $\gamma$ parameter in \gls{SVR}, which influences model complexity, was
-varied from $10^{-4}$ to $10^{-1}$. Note that in Figure \ref{fig:vc1} the
-domain has been decreased to show the features close to the \textit{y}-axis.
+The $\gamma$ parameter in \gls{SVR} was varied from $10^{-4} -- 10^{-2}$.
+Training and prediction rounds were carried out for each value of $\gamma$ with
+the number of folds set to $5$ and the number of trials performed set to $10$.
+This was also done for the $C$ parameter, varied from $10^{-2} -- 10^{5}$.
+%Note that in Figure \ref{fig:vc1} the domain has been decreased to show the
+%features close to the \textit{y}-axis.
 Training and prediction rounds were performed for different $\gamma$ values in
 this range.  Again, the testing and cross-validation errors are both used as
 described above. As with Figure \ref{fig:lc1}, determining the robustness to
 over- or undertraining is difficult here although there is possibly a minimum
-at $\gamma = 0.001$.  \todo{add other two plots of nn and rr; also add in C
-plots too} \todo{determine if c and gamma have any physical connection to the
-data}
+at $\gamma=0.001$.  
+\todo{Check NN, RR, and SVR-C LCs and VCs}
 
 Although there is no example behavior of Figure \ref{fig:lc1}'s peculiar
 learning curve in Figure \ref{fig:learning}, the curves mimic the squared bias

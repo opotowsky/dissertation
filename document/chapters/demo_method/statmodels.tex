@@ -12,7 +12,7 @@ distance-based and linear-based models, respectively. If more complex
 algorithms are not required to obtain useful results, then there is no need to
 use more computationally expensive options. However, hedging on the fact that
 more complex models will be needed, this work also employs an algorithm that is
-known to handle highly dimensional data sets well: support vector regression.
+known to handle highly dimensional data sets well: \acrfull{SVR}.
 These algorithms were introduced in Section \ref{sec:algs}. 
 
 \begin{table}[!htb]
@@ -43,25 +43,6 @@ samples that mimic potential interdicted \gls{SNF}. The testing set has the
 same features as the training set, with known burnup labels that are compared
 to the predicted labels. 
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\linewidth]{./chapters/demo_method/randerr.png}
-  \caption{Prediction Error from Information Reduction via Random Error}
-  \label{fig:randerr}
-\end{figure}
-
-Next, information reduction was carried out with all three \gls{ML} approaches.
-Figure \ref{fig:randerr} shows the three algorithms' \glspl{MAPE} with respect
-to the reduction of information by the introduction of random error to the
-nuclide vectors, as described in Section \ref{sec:inforeduc}.  \gls{SVR} is
-shown to perform the best, but it quickly reaches 100\% error. \todo{Discuss
-mape or change error here?}  Although ridge regression rapidly increases with
-any amount of error, nearest neighbor regression shows more promise, although
-it reaches 257\% at 10\% error.  Overall, this performance indicates that these
-algorithms are unlikely to predict burnup when faced with the uncertainties in
-real-world measurements or the further reduction in information from gamma
-detection.
-
 \begin{table}[!htb]
   \centering
   \includegraphics[width=0.8\linewidth]{./chapters/demo_method/results1.png}
@@ -70,10 +51,10 @@ detection.
 \end{table}
 
 For no introduced error, each model's prediction errors are shown in Table
-\ref{tbl:err}.  First, shown here are two \textit{sources} of error: from the
-testing set and via cross-validation.  Although previous work uses the former,
-it is expected that the latter will provide better estimates of model behavior.
-The models evaluated by the testing set do not have a validation set for
+\ref{tbl:err}.  First, shown here are two \textit{types} of error: the testing
+set and via cross-validation.  Although previous work uses the former, it is
+expected that the latter will provide better estimates of model behavior.  The
+models evaluated by the testing set do not have a validation set for
 pre-evaluation.  The models that are evaluated via cross-validation do not use
 the testing set. 
 
@@ -87,6 +68,26 @@ estimation, so both are tabulated.  Regardless, the \gls{MAPE} shows that there
 are some extremely high and extremely low errors depending on the algorithm;
 both results indicate poor performance.  This is quite concerning, because
 these results are from error-free data.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{./chapters/demo_method/randerr.png}
+  \caption{Prediction Error from Information Reduction via Random Error}
+  \label{fig:randerr}
+\end{figure}
+
+Next, information reduction was carried out with all three \gls{ML} approaches.
+Figure \ref{fig:randerr} shows the three algorithms' negative \glspl{MAPE} with
+respect to the reduction of information by the introduction of random error to
+the nuclide vectors, as described in Section \ref{sec:inforeduc}. Negative
+errors are used in this work for plotting to abide by the convention of
+\textit{`the higher, the better'}.  \gls{SVR} is shown to perform the best, but
+it quickly reaches 100\% error. Although ridge regression rapidly increases
+with any amount of error, nearest neighbor regression shows more promise,
+although it reaches 257\% at 10\% error.  Overall, this performance indicates
+that these algorithms are unlikely to predict burnup when faced with the
+uncertainties in real-world measurements or the further reduction in
+information from gamma detection.
 
 Despite this poor initial performance, the results in Table \ref{tbl:err} and
 Figure \ref{fig:randerr} can be evaluated. Next introduced are some diagnostic

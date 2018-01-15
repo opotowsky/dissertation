@@ -1,11 +1,10 @@
 It is unlikely to have a model perform as one expects the first time. There are
 therefore a few techniques for optimizing the performance. It should be noted
 that much of the discussion here and in Section \ref{sec:valid} focuses on the
-diagnostics aspect rather than the validation aspect of these
-techniques.\todo{double check language used here in followup edit} In practice,
-these are used for both purposes: diagnosing fitness problems and proving good fitness. 
-But in this work the formal comparison of
-model performance will be used, introduced and detailed in Sections
+diagnostics aspect rather than the validation aspect of these techniques. In
+practice, these are used for both purposes: diagnosing fitness problems and
+proving good fitness.  But this work uses a formal comparison of model
+performance for validation, introduced and detailed in Sections
 \ref{sec:invcompare} and \ref{sec:modelcompare}, respectively. 
 
 However, there is a risk associated with better prediction after using
@@ -143,6 +142,13 @@ algorithm is correct given input based on an \gls{SNF} recipe.  For example, it
 is the probability that a plutonium-239 concentration of $y\%$ is attributed to
 a uranium oxide fuel in a \gls{BWR} with a burnup of $x\ GWd/MTU$.  
 
+\begin{table}[!hp]
+  \centering
+  \includegraphics[width=\linewidth]{./chapters/litrev/bayes.png}
+  \caption{Summary of Bayes Theorem Components}
+  \label{tbl:bayes}
+\end{table}
+
 The prior probability represents the solution to a \textit{forward} problem,
 where measurement values are predicted from some given model parameters.  In
 this context, this is calculated from the instances in the training data set.
@@ -180,11 +186,4 @@ components described above as related to this work. In the table, \textbf{P} is
 a probability, \textbf{D} is a set of measurements (i.e., data), and \textbf{M}
 is a set of model parameters. The examples used in the discussion above are
 reiterated here.
-
-\begin{table}[!hp]
-  \centering
-  \includegraphics[width=\linewidth]{./chapters/litrev/bayes.png}
-  \caption{Summary of Bayes Theorem Components}
-  \label{tbl:bayes}
-\end{table}
 
