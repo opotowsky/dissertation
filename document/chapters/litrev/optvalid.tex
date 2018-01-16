@@ -78,9 +78,8 @@ The training set size must be large and diverse enough to be considered
 \gls{i.i.d.} because most \gls{ML} algorithms are developed upon this
 assumption. Sometimes this is not possible, and the training data are skewed,
 i.e., a portion of the data is over-represented. This must be handled
-explicitly, but only involves simple parameter changes in scikit-learn
-\cite{scikit}.  Each algorithm handles skewed data differently, so it is
-beyond the scope of this work. 
+explicitly, but since each algorithm handles skewed data differently, it is
+currently beyond the scope of this work. 
 
 \subsubsection{Model Complexity}
 
@@ -99,16 +98,17 @@ parameters that control the regularization.
 \end{figure}
 
 Figure \ref{fig:validation} adapted from Ref. \cite{elements_stats} shows the
-optimum as the minimum of the cross-validation error curve in the main (bottom) plot. There is some gap
-between it and the training error, much larger than the left side of the plot
-and much smaller than the right.  The top-middle plot is a simplified
-visualization of an approximately well-fit model.  The left region is marked by
-both errors being quite high, and above is an  illustration of how an underfit
-plot (high bias) could provide high errors. The right region shows the training
-error being quite low but the cross-validation error being high. The diagram
-differing options with how to adjust to skewed training sets \cite{scikit}.
-above shows that it is obvious how the training error would be negligible, but
-generalizing beyond that probably will not yield accurate results. 
+optimum as the minimum of the cross-validation error curve in the main (bottom)
+plot. There is some gap between it and the training error, much larger than the
+left side of the plot and much smaller than the right.  The top-middle plot is
+a simplified visualization of an approximately well-fit model.  The left region
+is marked by both errors being quite high, and above is an  illustration of how
+an underfit plot (high bias) could provide high errors. The right region shows
+the training error being quite low but the cross-validation error being high.
+The diagram differing options with how to adjust to skewed training sets
+\cite{scikit}.  above shows that it is obvious how the training error would be
+negligible, but generalizing beyond that probably will not yield accurate
+results. 
 
 In practice, plotting learning and validation curves can be iterative. But as
 previously mentioned, too many optimizations will result in a poorly performing
