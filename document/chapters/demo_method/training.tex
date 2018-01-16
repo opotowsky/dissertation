@@ -50,7 +50,9 @@ burnup steps of $690\ MWd/MTU$.  This resulted in 2313 observations in the
 training set.
 
 Feature reduction on the training set is manual in nature: the top 200 nuclides
-by concentration in each observation were retained. Other reduction techniques
+by concentration in each observation were retained. This resulted in 303
+features in total in the training set. All nuclides below the top 200
+concentrations in each observation were set to zero. Other reduction techniques
 using domain knowledge (e.g., filtering for actinides) and statistical
 dimensionality reduction (e.g., \gls{PCA}) are not addressed in this
 demonstration.
@@ -70,9 +72,8 @@ testing.  The test set was designed to have values in between the trained
 values of burnup and cooling times for the same set of reactors.  However, a
 systematically chosen test set can be problematic since it may not cover parts
 of the training space.  It is implemented in this study for comparison, but
-cross-validation will be used moving forward. More specifically, using
-\textit{k}-fold cross-validation is expected to better indicate the model
-performance. 
+\gls{CV} will be used moving forward. More specifically, using \textit{k}-fold
+\gls{CV} is expected to better indicate the model performance. 
 
 \subsection{Information Reduction}
 \label{sec:inforeduc}

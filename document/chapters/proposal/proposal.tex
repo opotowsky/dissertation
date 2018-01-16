@@ -36,7 +36,7 @@ The SFCOMPO-2.0 relational database \cite{sfcompo} has approximately 750
 chemical assay measurements of \gls{SNF} from 44 reactors. While this is not
 sufficient as a training set, it provides a better framework for a training
 set. It will be simulated with \gls{ORIGEN} as inspired by the breadth of
-values in the \gls{SFCOMPO} database. After cross-validation, diagnostics, and
+values in the \gls{SFCOMPO} database. After \acrfull{CV}, diagnostics, and
 optimization, the \gls{ML} models can be tested against the entries in this
 database to provide a clear estimate of of the model performance. 
 
@@ -321,12 +321,12 @@ including the database of \gls{SNF} recipes, and the known parameter inputs
 compared to the model's parameter predictions.  The goal of this step is to
 find the \textit{maximum} likelihood, usually carried out in a step called
 \gls{MLE}. In this framework, the training phase provides the maximum
-likelihood distribution through the use of cross-validation, since the results
+likelihood distribution through the use of \gls{CV}, since the results
 are reported as a mean error with a standard deviation (which can be
 converted to accuracy for likelihood) \cite{scikit}. 
 
 Unfortunately, \gls{MLE} is not this simple for other methods that do not
-employ cross-validation \cite{gentle_bayes, bayes_compare}. This will indeed
+employ \gls{CV} \cite{gentle_bayes, bayes_compare}. This will indeed
 have to be broached in order to compare the machine-learned models against
 other forensics methods but has not yet been demonstrated (in progress).
 
@@ -359,7 +359,7 @@ of many likelihoods tends towards zero.
 \end{table}
 
 In summary, given a mean-squared error and its standard deviation from using
-cross-validation with any \gls{ML} algorithm, the \gls{MLE} can be formed. To
+\gls{CV} with any \gls{ML} algorithm, the \gls{MLE} can be formed. To
 compare two models, a ratio of $\text{MLE}_i$ to $\text{MLE}_j$, called the
 posterior odds, provides the probability of model $i$ being correct.
 

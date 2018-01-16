@@ -17,18 +17,19 @@ are plotted with respect to training set size (learning curves) and the
 algorithm parameters governing model complexity (validation curves) to provide
 insight into the model fitness. 
 
-In addition to \gls{ML} best practices, another layer of comparison is
-added here.  Because it is difficult to ensure consistently representative
-testing data, the accuracy of a learned model should not depend on only one
-testing set.  The learned model's accuracy is better estimated by using a
-validation set. Here, this is implemented as \textit{k}-fold cross-validation,
-introduced in Section \ref{sec:selectass}. This work includes both the testing
-error (using the testing set described in Section \ref{sec:training}) and
-5-fold cross-validation error. The predetermined testing set will allow for
-comparison against the previous work it was obtained from
-\cite{dayman_feasibility_2013}, but it is assumed that cross-validation will
-provide a better indication of model performance because the entirety of the
-training set has also been tested. 
+In addition to \gls{ML} best practices, another layer of comparison is added
+here.  Because it is difficult to ensure consistently representative testing
+data, the accuracy of a learned model should not depend on only one testing
+set.  The learned model's accuracy is better estimated by using a validation
+set. Here, this is implemented as \textit{k}-fold \gls{CV}, introduced
+in Section \ref{sec:selectass}. This work includes both the testing error
+(using the testing set described in Section \ref{sec:training}) and $5$-fold
+\gls{CV} error. The predetermined testing set will allow for comparison
+against the previous work it was obtained from \cite{dayman_feasibility_2013},
+but it is assumed that \gls{CV} will provide a better indication of
+model performance because the entirety of the training set has also been
+tested.  The testing error scenario performs fitting and prediction $n=10$
+times and averages the errors of those results.
 
 \begin{figure}[!htb]
     \centering
@@ -38,11 +39,28 @@ training set has also been tested.
 \end{figure}
 
 The learning curves are obtained as follows, shown in Figure \ref{fig:lc1}.
-For a given (randomly chosen) training set size between 15 and 100\% of the
-total data set, training and prediction rounds were performed for each. The
-testing error scenario performs this $n=10$ times and averages those results.
-The \textit{k} in \textit{k}-fold for cross-validation was chosen to be $5$.
-\todo{dicuss over/under training}
+For a given (randomly chosen) training set size between $15$ and $100\%$ of the
+total data set, training and prediction rounds were performed for each. 
+
+What one seeks from a learning curve is for the training and \gls{CV}/testing
+curves to approach each other, but also for the magnitude of the error to be
+acceptable. As the training set size reaches $100\%$, both the training and
+\gls{CV} errors do approach the training error curve.  However, the testing
+error here is \textbf{lower} than the training error, and this does not happen
+unless there is an issue with the training and/or testing sets. One possible
+explanation is that the testing set, while the values were chosen to be between
+the data points of the training set, somehow fit the model too well. This is
+the danger with systematically choosing a testing set, and why the \gls{CV}
+error is used. 
+
+While the \gls{CV} error performs as expected, in that it approaches and
+remains below the training error curve, but the parallel nature of the plot is
+not typical. There is no example behavior of the exact shape of Figure
+\ref{fig:lc1}'s learning curve in Figure \ref{fig:learning}. This could
+indicate overfitting (high variance) because of the consistent gap.  More
+robust diagnostics are needed to confirm the model is overfit.  It is presumed
+this is not caused by the algorithms, but the training set itself.  It is
+likely covering too small of a range of the simulation space.
 
 \begin{figure}[!htb]
     \centering
@@ -52,35 +70,17 @@ The \textit{k} in \textit{k}-fold for cross-validation was chosen to be $5$.
 \end{figure}
 
 The validation curves are obtained as follows, shown in Figure \ref{fig:vc1}.
-The $\gamma$ parameter in \gls{SVR} was varied from $10^{-4} -- 10^{-2}$.
-Training and prediction rounds were carried out for each value of $\gamma$ with
-the number of folds set to $5$ and the number of trials performed set to $10$.
-This was also done for the $C$ parameter, varied from $10^{-2} -- 10^{5}$.
-%Note that in Figure \ref{fig:vc1} the domain has been decreased to show the
-%features close to the \textit{y}-axis.
-Training and prediction rounds were performed for different $\gamma$ values in
-this range.  Again, the testing and cross-validation errors are both used as
-described above. As with Figure \ref{fig:lc1}, determining the robustness to
-over- or undertraining is difficult here although there is possibly a minimum
-at $\gamma=0.001$.  
-\todo{Check NN, RR, and SVR-C LCs and VCs}
-
-Although there is no example behavior of Figure \ref{fig:lc1}'s peculiar
-learning curve in Figure \ref{fig:learning}, the curves mimic the squared bias
-curve from Figure \ref{fig:bvtradeoff}. This suggests that the bias in the
-model is much higher than the variance.  Next, the testing error is lower than
-the training error; this should never be the case, and indicates an issue with
-the systematically chosen testing set.  While the cross-validation error is
-correctly higher than the training error, it follows along in parallel,
-producing no information on model fitness other than confirming a very high
-bias.  It is presumed this is not the fault of the algorithms, but the training
-set itself.  It is likely covering too small of a range of the simulation
-space.
-
-Additionally, Figure \ref{fig:vc1}'s validation curve shows the testing error
-dropping below the training error for extremely small $\gamma$, around where a
-minimum might be.  Since the model suffers from high bias, no amount of model
-complexity can be optimized. The resolution to the underfitting is discussed in
-Section \ref{sec:prep}.
+The $\gamma$ parameter in \gls{SVR} was varied from $10^{-4}-10^{-2}$.  Note
+that in Figure \ref{fig:vc1} the domain has been decreased to show the features
+close to the \textit{y}-axis.  Training and prediction rounds were carried out
+for each value of $\gamma$ with described above.  $5$ \gls{CV} folds with $10$
+prediction trials.  As with Figure \ref{fig:lc1}, the testing curve is above
+the training curve, but only for small values of $\gamma$.  More work is
+needed, but there is a possible \gls{CV} minimum at $\gamma=0.001$.  This was
+also done for the $C$ parameter, which was varied from $10^{-2}-10^{5}$, not
+pictured. The ideal $C$ in this case was $10^{3}$.  If the model is under- or
+overfit, not much variation will be seen with respect to the algorithm
+parameters. The resolution to the under- or overfitting is discussed in Section
+\ref{sec:prep}.
 
 

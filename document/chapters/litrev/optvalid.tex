@@ -19,7 +19,7 @@ altogether.
 The first diagnostic plot for optimizing the model performance is called a
 \textit{learning curve}, which provides information about the bias-variance
 tradeoff with respect to the data set size. More specifically, learning curves
-compare the training and cross-validation errors to the size of the training
+compare the training and \gls{CV} errors to the size of the training
 set (i.e., number of instances in the training set). This is done by randomly
 selecting a percentage of the the training set, inputting that into a
 statistical learner, and tabulating the error of the learned model. 
@@ -56,21 +56,21 @@ correspond to an under- or overfit model, respectively.
 
 Figure \ref{fig:bias} suggests underfitting because the model is missing
 important features in the data. It is characterized by a small gap between the
-curves but high overall errors. The cross-validation error remains consistently
+curves but high overall errors. The \gls{CV} error remains consistently
 high and the training error increases drastically with increasing data, since
 it is not generalizing well. 
 
 Figure \ref{fig:variance} suggests overfitting because the model has too much
 sensitivity to variations in the data. It is characterized by a very large gap
 between the curves. It has an extremely low training error, as it has taken
-into account every detail of the training set, but a high cross-validation
+into account every detail of the training set, but a high \gls{CV}
 error because it cannot generalize beyond the testing set. 
 
 Figure \ref{fig:ideal} is an example of a more ideal model fit. It is
 characterized by a small gap between the two errors, and they are at a
 reasonable level with respect to the desired performance.  The training error
 should increase with respect to the training set size due to a larger amount of
-bias (preventing overfitting). However, the cross-validation error should decrease
+bias (preventing overfitting). However, the \gls{CV} error should decrease
 quickly with respect to the training set size due to being close to the minimum
 of the bias-variance tradeoff. 
 
@@ -98,13 +98,13 @@ parameters that control the regularization.
 \end{figure}
 
 Figure \ref{fig:validation} adapted from Ref. \cite{elements_stats} shows the
-optimum as the minimum of the cross-validation error curve in the main (bottom)
+optimum as the minimum of the \gls{CV} error curve in the main (bottom)
 plot. There is some gap between it and the training error, much larger than the
 left side of the plot and much smaller than the right.  The top-middle plot is
 a simplified visualization of an approximately well-fit model.  The left region
 is marked by both errors being quite high, and above is an  illustration of how
 an underfit plot (high bias) could provide high errors. The right region shows
-the training error being quite low but the cross-validation error being high.
+the training error being quite low but the \gls{CV} error being high.
 The diagram differing options with how to adjust to skewed training sets
 \cite{scikit}.  above shows that it is obvious how the training error would be
 negligible, but generalizing beyond that probably will not yield accurate
