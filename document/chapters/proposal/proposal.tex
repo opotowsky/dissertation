@@ -1,4 +1,4 @@
-\chapter{Research Proposal}
+{Research Proposal}
 \label{ch:proposal}
 
 This document previously demonstrated the performance of \gls{ML} on a
@@ -7,7 +7,7 @@ burnup.  Additionally, the procedures for understanding the learned model's
 behavior and thus the quality of the results was discussed.  Next, a set of
 experiments are presented here. 
 
-Before describing the experiments, some preporatory topics and issues are
+Before describing the experiments, some preparatory topics and issues are
 addressed in Section \ref{sec:prep}.  Next, the proposed research experimental
 design is presented. Sections \ref{sec:exp1}, \ref{sec:exp2}, and
 \ref{sec:exp3} describe evaluating the viability of statistical learning using
@@ -36,21 +36,21 @@ The SFCOMPO-2.0 relational database \cite{sfcompo} has approximately 750
 chemical assay measurements of \gls{SNF} from 44 reactors. While this is not
 sufficient as a training set, it provides a better framework for a training
 set. It will be simulated with \gls{ORIGEN} as inspired by the breadth of
-values in the \gls{SFCOMPO} database. After \acrfull{CV}, diagnostics, and
+values in the \gls{SFCOMPO} database. After \gls{CV}, diagnostics, and
 optimization, the \gls{ML} models can be tested against the entries in this
 database to provide a clear estimate of of the model performance. 
 
 \subsection*{Finalizing Set of Algorithms}
 
-The three algorithms in the demonstration (nearest neighbor, ridge, and support
-vector regression) are not necessarily the set that will be evaluated for the
+The three algorithms in the demonstration (\textit{k}-nearest neighbor, ridge,
+and \gls{SVR}) are not necessarily the set that will be evaluated for the
 experiments. After these are used to train new models on a larger training set
 for comparison, other algorithms can be speedily assessed as well. The
 scikit-learn toolkit allows for easy transitions because the algorithms are
-already implemented; applying a new \gls{ML} algorithm involves merely
-changing the method.  Since support vector-, distance-, and linear-based models
-are already represented, other obvious choices include Bayesian methods,
-decision trees, neural networks, or ensemble methods \cite{elements_stats}. 
+already implemented; applying a new \gls{ML} algorithm involves merely changing
+the method.  Since support vector-, distance-, and linear-based models are
+already represented, other obvious choices include Bayesian methods, decision
+trees, neural networks, or ensemble methods \cite{elements_stats}. 
 
 \subsection*{Computational Framework and Resources}
 
@@ -118,7 +118,7 @@ statistically performing feature reduction via \gls{PCA}. If this is not
 sufficient, \gls{SNF} may have too many or too few correlated features to
 provide reliable models across the space of current reactor technologies. Since
 separated plutonium and \gls{UOC} have been also studied using these
-techniques, these materials could provide an alternate route to pbtain useable
+techniques, these materials could provide an alternate route to obtain useable
 learned models. Additionally, this methodology would also work if applied to
 post-detonation materials. There is work on creating standard materials to
 represent the ``urban canyon''. The noise from irradiated concrete, building
@@ -229,7 +229,7 @@ cycles with reprocessing. The first action upon poor performance results is to
 try more/different preprocessing tools; this may have to include using domain
 knowledge to manually reduce the dimensions. As one of the goals within the
 nuclear forensics community is to identify new signatures and/or correlated
-measurements, this is not desireable but it could still offer interesting
+measurements, this is not desirable but it could still offer interesting
 results. Also, some creativity could be applied to find a method that works for
 this type of dataset, such as the iterative partial least squares discriminant
 analysis used for determining \gls{UOC} origin country and source prediction in
@@ -371,13 +371,13 @@ occur.  Multiple tasks will be complete before my internship is finished, and
 much of the computational framework is also complete. The experiments are
 expected to take a few weeks each, accounting for time spent on diagnostics and
 readying the results for the next step. Formal validation and model comparison
-will then be carried out. Because of reporting requirements, some preporatory
+will then be carried out. Because of reporting requirements, some preparatory
 writing will also be done during the internship. Thus, final analyses and
 writing are expected to take three months. 
 
-\begin{figure}[!htb]
+\begin{sidewaysfigure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{./chapters/proposal/timeline.png}}  
   \caption{Timeline for Project}
   \label{fig:time}
-\end{figure}
+\end{sidewaysfigure}
 
