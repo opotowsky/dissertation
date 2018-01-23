@@ -1,0 +1,127 @@
+\documentclass[11pt,handout]{beamer}
+%\documentclass[9pt]{beamer}
+\usetheme[white]{Wisconsin}
+%\title[short title]{long title}
+\title[Oh hi]{Why Hello}
+%\subtitle[short subtitle]{long subtitle}
+\subtitle[Preliminary Examination]{Presentation of the Preliminary Report}
+%\author[short name]{long name}
+\author[A. Opotowsky]{Arrielle Opotowsky}
+%\date[short date]{long date}
+\date[29.01.2018]{29 January 2018}
+%\institution[short name]{long name}
+\institute[UW-Madison]{University of Wisconsin-Madison}
+
+\usepackage{listings}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs} % nice rules for tables
+\usepackage{microtype} % if using PDF
+\usepackage{bigints}
+\newcommand{\units}[1] {\:\text{#1}}%
+\setbeamertemplate{footline}[page number]
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{bibliography item}[text]
+
+%try to get rid of header on title page\dots
+\makeatletter
+    \newenvironment{withoutheadline}{
+       \setbeamertemplate{headline}[default]
+       \def\beamer@entrycode{\vspace*{-\headheight}}
+    }{}
+\makeatother
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% From uw-beamer Here's a handy bit of code to place at 
+%% the beginning of your presentation (after \begin{document}):
+\newcommand*{\alphabet}{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz}
+\newlength{\highlightheight}
+\newlength{\highlightdepth}
+\newlength{\highlightmargin}
+\setlength{\highlightmargin}{2pt}
+\settoheight{\highlightheight}{\alphabet}
+\settodepth{\highlightdepth}{\alphabet}
+\addtolength{\highlightheight}{\highlightmargin}
+\addtolength{\highlightdepth}{\highlightmargin}
+\addtolength{\highlightheight}{\highlightdepth}
+\newcommand*{\Highlight}{\rlap{\textcolor{HighlightBackground}{\rule[-\highlightdepth]{\linewidth}{\highlightheight}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%--------------------------------%%
+\begin{withoutheadline}
+\frame{
+  \titlepage
+  }
+\end{withoutheadline}
+
+%%--------------------------------%%
+\AtBeginSection[]{
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+}
+
+%\begin{frame}
+%  \frametitle{X}
+%  \begin{figure}[h!]
+%    \centering
+%    \includegraphics[width=0.9\textwidth]{.png}
+%    \caption{x}
+%    \label{fig:x}
+%  \end{figure}
+%\end{frame}
+
+\section{Introduction}
+\subsection{Motivation}
+\include{motivation}
+%\subsection{Methodology}
+%\include{methodology}
+%\subsection{Goals}
+%\subsection{goals}
+
+\section{Background}
+%\subsection{Nuclear Forensics}
+%\input{forensics}
+%\subsection{Statistical Models}
+%\input{statmods}
+%\subsection{Computational Tools}
+%\input{comptools}
+%\subsection{Previous }
+%\input{statmods}
+
+
+\section{Demonstration}
+%\input{demo}
+
+\section{Research Proposal}
+%\subsection{Experiment 1}
+%\include{exp1}
+%\subsection{Experiment 2}
+%\include{exp2}
+%\subsection{Experiment 3}
+%\include{exp3}
+
+\section{Conclusion}
+%\subsection{Summary}
+%\input{summary}
+%\subsection{Future Work}
+%\input{future}
+
+%%--------------------------------%%
+%%--------------------------------%%
+
+\begin{frame}[allowframebreaks]
+  \frametitle{References}
+  \bibliographystyle{plain}
+  {\footnotesize \bibliography{prelim} }
+\end{frame}
+
+%%--------------------------------%%
+
+\end{document}
+
+
