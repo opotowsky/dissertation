@@ -1,10 +1,10 @@
-\documentclass[11pt,handout]{beamer}
-%\documentclass[9pt]{beamer}
+%\documentclass[11pt,handout]{beamer}
+\documentclass[10pt]{beamer}
 \usetheme[white]{Wisconsin}
 %\title[short title]{long title}
-\title[Oh hi]{Why Hello}
+\title[Nuclear Forensics: Statistical Methods]{Evaluating Statistical Methods for \\Nuclear Forensics Analysis}
 %\subtitle[short subtitle]{long subtitle}
-\subtitle[Preliminary Examination]{Presentation of the Preliminary Report}
+\subtitle[Preliminary Examination]{Preliminary Examination}
 %\author[short name]{long name}
 \author[A. Opotowsky]{Arrielle Opotowsky}
 %\date[short date]{long date}
@@ -12,16 +12,6 @@
 %\institution[short name]{long name}
 \institute[UW-Madison]{University of Wisconsin-Madison}
 
-\usepackage{listings}
-\usepackage{amsfonts}
-\usepackage{amsmath}
-\usepackage{xspace}
-\usepackage{graphicx}
-\usepackage{subfigure}
-\usepackage{booktabs} % nice rules for tables
-\usepackage{microtype} % if using PDF
-\usepackage{bigints}
-\newcommand{\units}[1] {\:\text{#1}}%
 \setbeamertemplate{footline}[page number]
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{bibliography item}[text]
@@ -52,9 +42,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%--------------------------------%%
 \begin{withoutheadline}
-\frame{
-  \titlepage
-  }
+\frame{\titlepage}
 \end{withoutheadline}
 
 %%--------------------------------%%
@@ -78,14 +66,12 @@
 \section{Introduction}
 \subsection{Motivation}
 \include{motivation}
-%\subsection{Methodology}
-%\include{methodology}
-%\subsection{Goals}
-%\subsection{goals}
+\subsection{Methodology}
+\include{methodology}
 
 \section{Background}
-%\subsection{Nuclear Forensics}
-%\input{forensics}
+\subsection{Nuclear Forensics}
+\input{forensics}
 %\subsection{Statistical Models}
 %\input{statmods}
 %\subsection{Computational Tools}
