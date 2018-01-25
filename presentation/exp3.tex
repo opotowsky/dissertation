@@ -1,15 +1,38 @@
 
 \begin{frame}
-  \frametitle{Viability of Statistical Learning on Reprocessed Fuel}
-  Purpose
-
-  Variables
+  \frametitle{Statistical Learning with Reprocessed Fuel}
+  \textbf{Goals} : Probe prediction performace in reprocessing scenario 
+  \begin{enumerate}
+    \item Experiment with both direct and indirect isotopics
+    \item Fresh evaluation of preprocessing 
+    \item Best performing methods for materials with multiple sources
+  \end{enumerate}
+  
+  \textbf{Variables}
+  \begin{enumerate}
+    \item the complexity of the ML algorithm used,
+    \item quality of training data set, and 
+    \item type of preprocessing for feature reduction.
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Viability of Statistical Learning on Reprocessed Fuel}
-  Hypotheses
-
-  Risks
+  \frametitle{Statistical Learning with Reprocessed Fuel}
+  \textbf{Qualitative Hypotheses}
+  \begin{itemize}
+    \item Complex algorithm will provide best behavior
+    \item Reduced information will provide less accurate results
+    \item ICA may outperform PCA, but factor analysis may outperform components
+    analysis \cite{nicolaou_2006, nicolaou_2009, nicolaou_2014, robel_2009,
+    pu_discrimination, jones_viz_2014, jones_snf_2014}
+  \end{itemize}
+ 
+ \textbf{Risk Mitigation}
+  \begin{itemize}
+    \item New algorithms: tree-based, neural nets, Bayesian MLE
+    \item Manual preprocessing
+    \item Results may be interesting even if prediction fails
+    \item Ensemble methods or other creative solutions \cite{robel_2009, pu_discrimination}
+  \end{itemize}
 \end{frame}
 

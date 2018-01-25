@@ -1,15 +1,34 @@
 
 \begin{frame}
-  \frametitle{Viability of Statistical Learning on Gamma Spectra}
-  Purpose
+  \frametitle{Statistical Learning with Gamma Spectra}
+  \textbf{Goals} : Understand limits of real-world scenario
+  \begin{enumerate}
+    \item Level of reduction in reactor parameter prediction
+    \item Best performing methods
+  \end{enumerate}
 
-  Variables
+  \textbf{Variables}
+  \begin{enumerate}
+    \item the complexity of the ML algorithm used, 
+    \item feature reduction (implicit), and 
+    \item quality of training and/or testing data set.
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Viability of Statistical Learning on Gamma Spectra}
-  Hypotheses
+  \frametitle{Statistical Learning with Gamma Spectra}
+  \textbf{Qualitative Hypotheses}
+  \begin{itemize}
+    \item Complex algorithm will provide best behavior
+    \item Indirect isotopics $=$ implicit feature reduction: less accurate
+    \item Higher quality gamma spectra will yield better results
+  \end{itemize}
 
-  Risks
+  \textbf{Risk Mitigation}
+  \begin{itemize}
+    \item New algorithms: tree-based, neural nets, Bayesian MLE
+    \item Further manual or statistical preprocessing
+    \item Add isotope identification step
+  \end{itemize}
 \end{frame}
 

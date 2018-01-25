@@ -1,49 +1,77 @@
 
 \begin{frame}
   \frametitle{Probability Distributions}
-  Here, we change the meaning of the variables to represent probability
-  distributions.  $C$ is a constant given by
-  the marginal likelihood, which can be ignored when calculating relative
-  probabilities, and $\boldsymbol{d}$ and $\boldsymbol{m}$ represent the training
-  data set and model parameters, respectively. Thus,
-  $P(\boldsymbol{d}|\boldsymbol{m})$ is the likelihood distribution function,
-  $P(\boldsymbol{m})$ is the prior probability distribution, and
-  $P(\boldsymbol{m}|\boldsymbol{d})$ is the posterior probability distribution.
-  \begin{equation}
-    P(\boldsymbol{m}|\boldsymbol{d}) = C\ *\
-    P(\boldsymbol{d}|\boldsymbol{m})\ *\ P(\boldsymbol{m})
-  \end{equation}
+  \footnotesize 
+  Include uncertainty for measures of confidence, posterior probs become prob distribs
+
+  $C$ : constant given by marginal likelihood
+  
+  $\boldsymbol{d}$ : training data set
+  
+  $\boldsymbol{m}$ : model parameters
+  
+  $P(\boldsymbol{d}|\boldsymbol{m})$ : likelihood distribution function
+  
+  $P(\boldsymbol{m})$ : prior probability distribution
+  
+  $P(\boldsymbol{m}|\boldsymbol{d})$ : posterior probability distribution
+  $$ P(\boldsymbol{m}|\boldsymbol{d}) = C\ * P(\boldsymbol{d}|\boldsymbol{m})\ *\ P(\boldsymbol{m}) $$
  
-  Mathematically speaking, the distributions are obtained by integrating over the
-  relevant probability densities.  For example, the prior probability
-  distribution can be calculated, where
-  $\boldsymbol{m}$ is the range of predicted model parameters, i.e. burnup
-  values, and $\boldsymbol{d}$ is a set of nuclide vectors. Also, here,
-  $\rho(\boldsymbol{x}) = \prod_{i} \rho(x_i)$. 
-  \begin{equation}
-    P(\boldsymbol{m}) = \int_{\boldsymbol{m}} \rho(\boldsymbol{d}) d\boldsymbol{d}
-  \end{equation}
-  Similarly, the likelihood distribution function is obtained as in Equation 
-  \begin{equation}
-    P(\boldsymbol{d}|\boldsymbol{m}) = \int_{\boldsymbol{d}, \boldsymbol{m}} \rho(\boldsymbol{d}|\boldsymbol{m}) d\boldsymbol{m}
-  \end{equation}
-  In practice, however, these density functions are not calculated directly.
-  Below, the methods chosen to estimate the functions in this work are addressed.
+  Integrate over prob densities to get prob distrib
+  
+  $\boldsymbol{m}$ : range of predicted model parameters
+  
+  $\boldsymbol{d}$ is a set of nuclide vectors
+  $$\rho(\boldsymbol{x}) = \prod_{i} \rho(x_i)$$
+  $$ P(\boldsymbol{m}) = \int_{\boldsymbol{m}} \rho(\boldsymbol{d}) d\boldsymbol{d} $$
+  Likelihood distribution function:
+  $$ P(\boldsymbol{d}|\boldsymbol{m}) = \int_{\boldsymbol{d}, \boldsymbol{m}} \rho(\boldsymbol{d}|\boldsymbol{m}) d\boldsymbol{m} $$
+
+  But, we infer them...
+  \normalsize
 \end{frame}
 
 \begin{frame}
   \frametitle{Estimating Density Functions}
-  Convert wordage to graphic?
+  estimate rho, have a 'sense' or try different 
+
+  prior probability distributions are given by the model space, e.g., reactor
+  parameters as predicted from the ML models. \cite{bayes_compare} 
+  Note: This implies the posterior is now only dependent on the likelihood.
+
+  likelihood function: the training phase provides the maximum likelihood
+  distribution through the use of CV, since the results are reported as a
+  mean error with a standard deviation (which can be converted to accuracy for
+  likelihood) \cite{scikit}
+
+  MLE is not this simple for other methods that do not employ CV \cite{gentle_bayes, bayes_compare}
 \end{frame}
 
 \begin{frame}
   \frametitle{Posterior Odds}
-  \begin{equation}
-    \frac{P(m_i|d)}{P(m_j|d)} = B_{ij} \frac{P(m_i)}{P(m_j)}
-  \end{equation}
+  \footnotesize
+  citations plz
+
+  calc a non-normalized posterior probability distribution, $P(m_i|d)$
+  then do it for a model obtained from a different algorithm, $P(m_j|d)$
+
+  relative posterior probability distribution : \textit{posterior odds}
+  $B_{ij} = \frac{\rho(d|m_i)}{\rho(d|m_j)}$ :  \textit{Bayes factor}.
+  $$ \frac{P(m_i|d)}{P(m_j|d)} = B_{ij} \frac{P(m_i)}{P(m_j)} $$
+  
   \begin{table}
     \centering
-    \includegraphics[width=0.7\linewidth]{./figures/evidence-strength.png}
+    \includegraphics[width=0.4\linewidth]{./figures/evidence-strength.png}
     \caption{Model comparison using likelihood strength}
   \end{table}
+  
+  posterior probabilities calculated from $\lvert lnB_{ij} \rvert$
+  
+  Summarize:
+  
+  Given a mean-squared error and its standard deviation from using CV with any alg, get MLE
+
+  compare two models : $\text{MLE}_i$ to $\text{MLE}_j$
+  
+  posterior odds is probability of model $i$ being correct
 \end{frame}

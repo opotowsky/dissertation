@@ -12,12 +12,14 @@
 %\institution[short name]{long name}
 \institute[UW-Madison]{University of Wisconsin-Madison}
 
+\usepackage{enumerate}
 \usepackage{amsmath}
+\usepackage{multicol}
 \setbeamertemplate{footline}[page number]
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{bibliography item}[text]
 
-%try to get rid of header on title page\dots
+% thanks to katy huff: get rid of header on title page\dots
 \makeatletter
     \newenvironment{withoutheadline}{
        \setbeamertemplate{headline}[default]
@@ -50,7 +52,9 @@
 \AtBeginSection[]{
 \begin{frame}
   \frametitle{Outline}
-  \tableofcontents[currentsection]
+  \begin{multicols}{2}
+    \tableofcontents[currentsection]
+  \end{multicols}
 \end{frame}
 }
 
@@ -76,22 +80,22 @@
 \input{statmods}
 \subsubsection{Algorithms for Prediction}
 \input{algs}
-\subsubsection{ML Model Selection and Assessment}
+\subsubsection{ML Model Assessment}
 \input{errors}
-\subsubsection{ML Model Optimization and Validation}
+\subsubsection{ML Model Validation}
 \input{optvalid}
 \subsection{Computational Tools}
 \input{comptools}
-\subsection{Application of Statistical Methods}
+\subsection{Previous Work}
 \input{prevwk}
 
 \section{Demonstration}
 \input{demometh}
 \subsection{Training Data}
 \input{training}
-\subsection{ML Model Results}
+\subsection{Reactor Parameter Prediction}
 \input{demoresults}
-\subsection{Validation}
+\subsection{ML Model Validation}
 \input{demovalid}
 
 \section{Research Proposal}
@@ -107,11 +111,8 @@
 %\subsection{Timeline}
 %\include{timeline}
 
-\section{Conclusion}
-%\subsection{Summary}
-%\input{summary}
-%\subsection{Future Work}
-%\input{future}
+\section{Summary}
+\input{summary}
 
 %%--------------------------------%%
 %%--------------------------------%%
@@ -119,7 +120,7 @@
 \begin{frame}[allowframebreaks]
   \frametitle{References}
   \bibliographystyle{plain}
-  {\footnotesize \bibliography{prelim} }
+  {\footnotesize \bibliography{pres} }
 \end{frame}
 
 %%--------------------------------%%
