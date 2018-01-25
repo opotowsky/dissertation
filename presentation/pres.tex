@@ -12,6 +12,7 @@
 %\institution[short name]{long name}
 \institute[UW-Madison]{University of Wisconsin-Madison}
 
+\usepackage{amsmath}
 \setbeamertemplate{footline}[page number]
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{bibliography item}[text]
@@ -59,7 +60,6 @@
 %    \centering
 %    \includegraphics[width=0.9\textwidth]{.png}
 %    \caption{x}
-%    \label{fig:x}
 %  \end{figure}
 %\end{frame}
 
@@ -69,27 +69,43 @@
 \subsection{Methodology}
 \include{methodology}
 
-\section{Background}
+\section{Literature Review}
 \subsection{Nuclear Forensics}
 \input{forensics}
-%\subsection{Statistical Models}
-%\input{statmods}
-%\subsection{Computational Tools}
-%\input{comptools}
-%\subsection{Previous }
-%\input{statmods}
-
+\subsection{Statistical Models}
+\input{statmods}
+\subsubsection{Algorithms for Prediction}
+\input{algs}
+\subsubsection{ML Model Selection and Assessment}
+\input{errors}
+\subsubsection{ML Model Optimization and Validation}
+\input{optvalid}
+\subsection{Computational Tools}
+\input{comptools}
+\subsection{Application of Statistical Methods}
+\input{prevwk}
 
 \section{Demonstration}
-%\input{demo}
+\input{demometh}
+\subsection{Training Data}
+\input{training}
+\subsection{ML Model Results}
+\input{demoresults}
+\subsection{Validation}
+\input{demovalid}
 
 \section{Research Proposal}
-%\subsection{Experiment 1}
-%\include{exp1}
-%\subsection{Experiment 2}
-%\include{exp2}
-%\subsection{Experiment 3}
-%\include{exp3}
+\include{propprep}
+\subsection{Experiment 1}
+\include{exp1}
+\subsection{Experiment 2}
+\include{exp2}
+\subsection{Experiment 3}
+\include{exp3}
+\subsection{Method Comparison}
+\include{methcompare}
+%\subsection{Timeline}
+%\include{timeline}
 
 \section{Conclusion}
 %\subsection{Summary}
