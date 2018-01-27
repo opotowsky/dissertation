@@ -1,34 +1,18 @@
 
 \begin{frame}
-  \frametitle{Probability Distributions}
-  \footnotesize 
-  Include uncertainty for measures of confidence, posterior probs become prob distribs
-
-  $C$ : constant given by marginal likelihood
-  
-  $\boldsymbol{d}$ : training data set
-  
-  $\boldsymbol{m}$ : model parameters
-  
-  $P(\boldsymbol{d}|\boldsymbol{m})$ : likelihood distribution function
-  
-  $P(\boldsymbol{m})$ : prior probability distribution
-  
-  $P(\boldsymbol{m}|\boldsymbol{d})$ : posterior probability distribution
+  \frametitle{Probability Distribution Functions}
+  \begin{align*}
+    \boldsymbol{d} &\text{: training data set}\\
+    \boldsymbol{m} &\text{: model parameters}\\
+    C &\text{: constant given by marginal likelihood}\\
+    P(\boldsymbol{m}) &\text{: prior probability distribution}\\
+    P(\boldsymbol{d}|\boldsymbol{m}) &\text{: likelihood distribution function}\\
+    P(\boldsymbol{m}|\boldsymbol{d}) &\text{: posterior probability distribution}
+  \end{align*}
   $$ P(\boldsymbol{m}|\boldsymbol{d}) = C\ * P(\boldsymbol{d}|\boldsymbol{m})\ *\ P(\boldsymbol{m}) $$
- 
-  Integrate over prob densities to get prob distrib
   
-  $\boldsymbol{m}$ : range of predicted model parameters
-  
-  $\boldsymbol{d}$ is a set of nuclide vectors
-  $$\rho(\boldsymbol{x}) = \prod_{i} \rho(x_i)$$
-  $$ P(\boldsymbol{m}) = \int_{\boldsymbol{m}} \rho(\boldsymbol{d}) d\boldsymbol{d} $$
-  Likelihood distribution function:
+  Typically, (cumulative) probability distributions are:
   $$ P(\boldsymbol{d}|\boldsymbol{m}) = \int_{\boldsymbol{d}, \boldsymbol{m}} \rho(\boldsymbol{d}|\boldsymbol{m}) d\boldsymbol{m} $$
-
-  But, we infer them...
-  \normalsize
 \end{frame}
 
 \begin{frame}
