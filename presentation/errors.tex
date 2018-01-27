@@ -1,14 +1,5 @@
 
 \begin{frame}
-  \frametitle{Sources of Error}
-  \begin{figure}[h!]
-    \centering
-    \includegraphics[height=0.7\textheight]{./figures/BVtradeoff.png}
-    \caption{Bias and variance comprise the prediction error}
-  \end{figure}
-\end{frame}
-
-\begin{frame}
   \frametitle{Types of Error}
   \begin{figure}[h!]
     \centering
@@ -19,9 +10,19 @@
 
 \begin{frame}
   \frametitle{Error Metrics}
-  L1, L2: absolute error and squared error
-  
-  Others: r2 score, percent error 
+  \begin{align*}
+    \text{Mean Squared Error (MSE)}\  &:\ \frac{\sum_{i=1}^{n} (y_i - f(x_i))^2}{n} \hspace{2.0cm}\\
+    \text{Mean Absolute Error (MAE)}\ &:\ \frac{\sum_{i=1}^{n} |y_i - f(x_i)|}{n} \hspace{2.0cm}\\
+    \text{Mean Absolute Percentage Error (MAPE)}\ &:\ \frac{\sum_{i=1}^{n} \frac{|y_i - f(x_i)|}{y_i}}{n} \hspace{2.0cm}\\
+    \text{Coefficient of Determination, $R^2$}\ &:\ \frac{\sum_{i=1}^{n} (f(x_i) - \overline{y})^2}{\sum_{i=1}^{n} (y_i - \overline{y})^2} \hspace{2.0cm}
+  \end{align*}
+\end{frame}
 
-  Used for model prediction error and optimization of algs in obj funcs
+\begin{frame}
+  \frametitle{Sources of Error}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[height=0.7\textheight]{./figures/BVtradeoff.png}
+    \caption{Bias and variance comprise the prediction error}
+  \end{figure}
 \end{frame}

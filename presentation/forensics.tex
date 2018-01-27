@@ -33,10 +33,20 @@
 
 \begin{frame}
   \frametitle{Nuclear Forensics as an Inverse Problem}
-  Necessary to determine the quality of prediction
-
-  Use Bayes' Framework:
-  $$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
-  $$ P(M|D) = \frac{P(D|M)P(M)}{P(D)} $$
+  \begin{minipage}[t]{0.5\textwidth}
+  Use Bayes' Framework:\\
+  $ P(M|D) = \frac{P(D|M)P(M)}{P(D)} $
+  \end{minipage}%
+  \begin{minipage}[t]{0.5\textwidth}
+    M : \textbf{M}odel parameters\\
+    D : Measured \textbf{D}ata
+  \end{minipage}
+  \vfill
+  \vfill
+  \begin{table}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/InverseIntro.png}
+    \caption{Mapping the study of a physical system its Bayesian representation}
+  \end{table}
 \end{frame}
 

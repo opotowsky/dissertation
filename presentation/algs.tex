@@ -1,14 +1,20 @@
 \begin{frame}
   \frametitle{Linear Models}
   \begin{multicols}{2}
-    Objective: minimize error over all training data wrt their labels
-    $$ F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j} $$  
-    Regularization using $\lambda$
-    $$ F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j} + \lambda \sum_{j=1}^{p} \beta_{j}^2 $$
+    Objective: minimize error over all training data wrt their labels\\
+    $ F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j} $\\  
+    Smoothing model using regularization by varying $\lambda$\\
+    $ F(\boldsymbol{X}) = \beta_{0} +  \sum_{j=1}^{p} x_{j} \beta_{j} + \lambda \sum_{j=1}^{p} \beta_{j}^2 $
   \end{multicols}
   \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./figures/regularization.png}
+    \begin{minipage}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.85\linewidth]{./figures/regularization_n.png}
+    \end{minipage}%
+    \begin{minipage}{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.85\linewidth]{./figures/regularization_y.png}
+    \end{minipage}
     \caption{How regularization might affect the generalizability of an ML model}
   \end{figure}
 \end{frame}
@@ -29,7 +35,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Support Vector Machines}
+  \frametitle{Support Vector Machines and Regression}
   \begin{figure}
     \centering
     \begin{minipage}{0.5\textwidth}
