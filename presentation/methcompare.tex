@@ -2,60 +2,53 @@
 \begin{frame}
   \frametitle{Probability Distribution Functions}
   \begin{align*}
+    P(\boldsymbol{m}|\boldsymbol{d}) &= C*P(\boldsymbol{d}|\boldsymbol{m})*P(\boldsymbol{m})\\
     \boldsymbol{d} &\text{: training data set}\\
     \boldsymbol{m} &\text{: model parameters}\\
-    C &\text{: constant given by marginal likelihood}\\
+    C &\text{: constant from marginal likelihood}\\
     P(\boldsymbol{m}) &\text{: prior probability distribution}\\
     P(\boldsymbol{d}|\boldsymbol{m}) &\text{: likelihood distribution function}\\
-    P(\boldsymbol{m}|\boldsymbol{d}) &\text{: posterior probability distribution}
+    P(\boldsymbol{m}|\boldsymbol{d}) &\text{: posterior probability distribution}\\
   \end{align*}
-  $$ P(\boldsymbol{m}|\boldsymbol{d}) = C\ * P(\boldsymbol{d}|\boldsymbol{m})\ *\ P(\boldsymbol{m}) $$
-  
-  Typically, (cumulative) probability distributions are:
+  Typically, (cumulative) probability distributions are integrated probability density functions:
   $$ P(\boldsymbol{d}|\boldsymbol{m}) = \int_{\boldsymbol{d}, \boldsymbol{m}} \rho(\boldsymbol{d}|\boldsymbol{m}) d\boldsymbol{m} $$
 \end{frame}
 
 \begin{frame}
   \frametitle{Estimating Density Functions}
-  estimate rho, have a 'sense' or try different 
-
-  prior probability distributions are given by the model space, e.g., reactor
-  parameters as predicted from the ML models. \cite{bayes_compare} 
-  Note: This implies the posterior is now only dependent on the likelihood.
-
-  likelihood function: the training phase provides the maximum likelihood
-  distribution through the use of CV, since the results are reported as a
-  mean error with a standard deviation (which can be converted to accuracy for
-  likelihood) \cite{scikit}
-
-  MLE is not this simple for other methods that do not employ CV \cite{gentle_bayes, bayes_compare}
+  \begin{minipage}{0.4\textwidth} 
+    \small
+    MLE is the CV error because the results are reported as: 
+    $\mu \pm \sigma$ \cite{scikit} \\ \vfill   
+    MLE is not this simple for other methods that do not employ CV
+    \cite{gentle_bayes, bayes_compare}
+  \end{minipage}\hfill
+  \begin{minipage}{0.5\textwidth} 
+    \begin{table}
+      \centering
+      \includegraphics[width=\linewidth]{./figures/bayes-ch4.png}
+      \caption{The density functions that represent each probability are estimated from histograms or the ML model}
+    \end{table}
+    \footnotesize
+    Note: This implies the posterior is now only dependent on the likelihood.
+  \end{minipage}
 \end{frame}
 
 \begin{frame}
   \frametitle{Posterior Odds}
-  \footnotesize
-  citations plz
-
-  calc a non-normalized posterior probability distribution, $P(m_i|d)$
-  then do it for a model obtained from a different algorithm, $P(m_j|d)$
-
-  relative posterior probability distribution : \textit{posterior odds}
-  $B_{ij} = \frac{\rho(d|m_i)}{\rho(d|m_j)}$ :  \textit{Bayes factor}.
-  $$ \frac{P(m_i|d)}{P(m_j|d)} = B_{ij} \frac{P(m_i)}{P(m_j)} $$
-  
+  \textbf{Posterior odds $=$ probability of ML model $i$ being correct}
+  \vfill
+  \begin{enumerate}
+    \item Calculate $MLE_i = P_i (m|d)$ for statistical model $i$
+    \item Calculate $MLE_j = P_j (m|d)$ for statistical model $j$
+    \item Ratio of $MLE_i$ to $MLE_j$ to get Bayes' factor:
+          $B_{ij} = \frac{P_i (d|m)}{P_j (d|m)}$
+    \item Take ratio of both Bayes' relations to get posterior odds:
+          $\frac{P_i (m|d)}{P_j (m|d)} = B_{ij} \frac{P_i(m)}{P_j (m)}$
+  \end{enumerate}
   \begin{table}
     \centering
-    \includegraphics[width=0.4\linewidth]{./figures/evidence-strength.png}
-    \caption{Model comparison using likelihood strength}
+    \includegraphics[width=0.6\linewidth]{./figures/evidence-strength.png}
+    \caption{Model comparison using the Bayes' factor to describe the likelihood strength \cite{gentle_bayes, bayes_compare}}
   \end{table}
-  
-  posterior probabilities calculated from $\lvert lnB_{ij} \rvert$
-  
-  Summarize:
-  
-  Given a mean-squared error and its standard deviation from using CV with any alg, get MLE
-
-  compare two models : $\text{MLE}_i$ to $\text{MLE}_j$
-  
-  posterior odds is probability of model $i$ being correct
 \end{frame}

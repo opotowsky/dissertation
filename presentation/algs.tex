@@ -76,12 +76,16 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Dimensionality Reduction}
-  Manual via domain knowledge or some measure
-  
-  PCA
-
-  Factor Analysis
-
-  ICA
+  \frametitle{Model Smoothing}
+  \begin{enumerate}
+    \item Regularization (reduce weights of features)
+    \item Dimensionality Reduction (delete features)
+    \begin{itemize}
+      \item \makebox[3.25cm]{Manual\hfill : \                } some metric
+      \item \makebox[3.25cm]{Manual\hfill : \                } domain knowledge
+      \item \makebox[3.25cm]{Manual \& Statistical\hfill : \ } factor analysis
+      \item \makebox[3.25cm]{Statistical\hfill : \           } principal components analysis (PCA)
+      \item \makebox[3.25cm]{Statistical\hfill : \           } independent components analysis (ICA)
+    \end{itemize}
+  \end{enumerate}
 \end{frame}
