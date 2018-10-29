@@ -30,7 +30,7 @@
 \newcounter {listofheading}
 
 \newcommand\@thesistitlesmallskip{0.1in}
-\newcommand\@thesistitlemedskip{0.4in}
+\newcommand\@thesistitlemedskip{0.3in}
 \newcommand\@thesistitlebigskip{0.5in}
 \newcommand{\degree}[1]{\gdef\@degree{#1}}
 \newcommand{\project}{\gdef\@doctype{A masters project report}}
@@ -46,10 +46,10 @@
 }{\if@restonecol\twocolumn \else \newpage \fi}
 
 \gdef\@degree{Doctor of Philosophy}    %Default is PhD
-\gdef\@doctype{A preliminary report }         %Default is dissertation
+\gdef\@doctype{A dissertation }         %Default is dissertation
 
 \gdef\@department{Nuclear Engineering \& Engineering Physics} 
-\gdef\@defensedate{11/2017}
+\gdef\@defensedate{05/2019}
 \gdef\@committee{\footnotesize
   Rebecca M. Willet, Professor, Electrical \& Computer Engineering\\
   Charles F. Weber, Distinguished Scientist, Oak Ridge National Laboratory\\
@@ -76,12 +76,12 @@
       {\large \@degree} \\[\@thesistitlesmallskip]
       {\large \@department} \\[\@thesistitlemedskip]
       at the \\[\@thesistitlesmallskip]
-      {\large UNIVERSITY OF WISCONSIN--MADISON} \\ \medskip
+      {\large UNIVERSITY OF WISCONSIN--MADISON} \\[\@thesistitlesmallskip]
       {\large \@date}
-      \\[\@thesistitlebigskip]
+      \\[\@thesistitlemedskip]
     \end{center}
-%    \hspace*{-0.7in}Date of preliminary oral examination: \@defensedate \\[\@thesistitlemedskip]
-    \hspace*{-0.7in}{\small Preliminary Examination Committee:}\\
+    \hspace*{-0.7in}Date of final oral examination: \@defensedate \\%[\@thesistitlemedskip]
+    \hspace*{-0.7in}{\small Oral Examination Committee:}\\
     \@committee
   \end{titlepage}
   \setcounter{footnote}{0}
