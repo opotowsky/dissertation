@@ -7,29 +7,34 @@ example is the \gls{INDEPTH} tool \cite{weber_2006, weber_2010, weber_2011}.
 simulations to obtain reactor parameters of interest given some initial
 guesses. 
 
-Another approach utilizes \gls{AI} to solve nuclear forensics problems, such as
-implementing searching algorithms for the database comparison step
-\cite{gey_search} or \gls{ML} for determining reactor parameters from \gls{SNF}
-characteristics \cite{dayman_feasibility_2013, nicolaou_2006, nicolaou_2009,
-nicolaou_2014, robel_2009, pu_discrimination, jones_viz_2014, jones_snf_2014}.
-A variety of statistical and \gls{ML} tools have been used to characterize
-\gls{SNF} by predicting categories (e.g., reactor type, fuel type) as well as
-predicting values (e.g., burnup, initial enrichment, cooling time). The former
-uses classification algorithms and the latter uses regression algorithms, many
-of which can be altered to perform both classification and regression.  
+Another approach utilizes statistical methods to solve nuclear forensics
+problems, such as implementing searching algorithms for the database comparison
+step \cite{gey_search} or \gls{ML} algorithms for determining reactor
+parameters from \gls{SNF} characteristics \cite{dayman_feasibility_2013,
+nicolaou_2006, nicolaou_2009, nicolaou_2014, robel_2009, pu_discrimination,
+jones_viz_2014, jones_snf_2014}.  A variety of \gls{ML} tools have been used to
+characterize \gls{SNF} by predicting categories (e.g., reactor type, fuel type)
+as well as predicting values (e.g., burnup, initial enrichment, cooling time).
+The former uses classification algorithms and the latter uses regression
+algorithms, many of which can be altered to perform both classification and
+regression.  Interestingly, a statistical approach can be taken that combines
+the database comparison with the reactor parameter prediction via a
+probabilistic matching method \cite{tamu_method}. \todo[inline]{is this the
+proper classification for TAMU work?}
 
 Statistical methods have the uniqueness of requiring minimal domain knowledge
-via \gls{ML} algorithms that predict the characteristics or values of interest
-\cite{dayman_feasibility_2013, pu_discrimination, robel_2009, nicolaou_2006,
-nicolaou_2009, nicolaou_2014, jones_snf_2014, jones_viz_2014}.  They first
-create a black-box statistical model using the entries of measurements in a
-database. From that, they can predict the reactor parameters of an unknown
-sample based on that model.  Having an \gls{ML} model based on a large number
-of simulations may also overcome the challenges of missing data, irregular
-uncertainty, or lack of information on other fuel cycles.  This logic also
-follows for other computational methods using a large number of simulations.
-Although they may not involve a resuable model, they also could overcome
-missing data, irregular uncertainties, or ignorance of different or
-non-commercial fuel cycles.  Also, it is generally known that statistical
-methods will be able to either use or reduce the dimensions in the forensics
-databases, which is another useful characteristic.
+via methods or \gls{ML} algorithms that predict the characteristics or values
+of interest \cite{dayman_feasibility_2013, pu_discrimination, robel_2009,
+nicolaou_2006, nicolaou_2009, nicolaou_2014, jones_snf_2014, jones_viz_2014}.
+In the case of \gls{ML} algorithms, they first create a black-box statistical
+model using the entries of measurements in a database. From that, they can
+predict the reactor parameters of an unknown sample based on that model.
+Having an \gls{ML} model based on a large number of simulations may also
+overcome the challenges of missing data, irregular uncertainty, or lack of
+information on other fuel cycles.  This logic also follows for other
+computational methods using a large number of simulations.  Although they may
+not involve a resuable model, they also could overcome missing data, irregular
+uncertainties, or ignorance of different or non-commercial fuel cycles.  Also,
+it is generally known that statistical methods will be able to either use or
+reduce the dimensions in the forensics databases, which is another valuable
+characteristic. \todo[inline]{this isn't quite right -- figure out how to rephrase}
