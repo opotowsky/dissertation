@@ -34,13 +34,17 @@ Chapter 3
 **Methodology and Implementation**
 
 - Computational Methods
-   - FC Sim: ORIGEN (+ GADRAS)
-   - ML algs: scikit learn, MLL (theory above implementation here)
-   - CHTC
-- Train set (and train set eval / SFCOMPO)
-- Statistical learning and alg eval
-- Validation / Demo?
-- Limitations
+   - Train set / FC Sim
+      - ORIGEN ARP
+      - GADRAS
+      - Train set eval / SFCOMPO
+   - Statistical learning
+      - ML Algs (theory above implementation here)
+         - Scikit Learn
+         - Max Likelihood Calcs
+      - Alg evaluation
+- Where to include: Validation / CHTC / Code testing ?
+- Limitations (include separately or not?)
    - ORIGEN ARP
    - Trainset based on SFCOMPO
    - GADRAS
