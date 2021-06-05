@@ -1,10 +1,9 @@
----------------------------------
-A. Opotowsky's Preliminary Report
----------------------------------
+--------------------------------------------------
+A. Opotowsky's Dissertation & Defense Presentation
+--------------------------------------------------
 
-The document directory holds the preliminary report files and the final pdf.
-The presentation directory holds the files and pdf of the final presentation. 
-
+The document directory holds the disertation files and the final pdf.
+The presentation directory holds the presentation and its pdf.
 
 ------------------
 UW Thesis Template
