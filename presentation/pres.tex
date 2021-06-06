@@ -2,13 +2,13 @@
 \documentclass[10pt]{beamer}
 \usetheme[white]{Wisconsin}
 %\title[short title]{long title}
-\title[Nuclear Forensics: Statistical Methods]{Evaluating Statistical Methods for \\Nuclear Forensics Analysis}
+\title[Information Reduction Impacts on SNF Prediction]{Detector-based Information Reduction \\Impacts on SNF Prediction}
 %\subtitle[short subtitle]{long subtitle}
-\subtitle[Preliminary Examination]{Preliminary Examination}
+\subtitle[Research Overview \& Progress Check-in]{Research Overview \& Progress Check-in}
 %\author[short name]{long name}
 \author[A. Opotowsky]{Arrielle Opotowsky}
 %\date[short date]{long date}
-\date[29.01.2018]{29 January 2018}
+\date[07.06.2021]{7 June 2021}
 %\institution[short name]{long name}
 \institute[UW-Madison]{University of Wisconsin-Madison}
 
@@ -18,9 +18,12 @@
 \usepackage{amsmath}
 \usepackage{multicol}
 \usepackage{lmodern}
+\usepackage{mathtools}
+\usepackage{changepage}
 \setbeamertemplate{footline}[page number]
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{bibliography item}[text]
+\setbeamercolor{page number in head/foot}{fg=gray}
 
 % thanks to katy huff: get rid of header on title page\dots
 \makeatletter
@@ -58,14 +61,14 @@
 \end{withoutheadline}
 
 %%--------------------------------%%
-\AtBeginSection[]{
-\begin{frame}
-  \frametitle{Outline}
-  \begin{multicols}{2}
-    \tableofcontents[currentsection]
-  \end{multicols}
-\end{frame}
-}
+%\AtBeginSection[]{
+%\begin{frame}
+%  \frametitle{Outline}
+%  \begin{multicols}{2}
+%    \tableofcontents[currentsection]
+%  \end{multicols}
+%\end{frame}
+%}
 
 %\begin{frame}
 %  \frametitle{X}
@@ -78,51 +81,61 @@
 
 \section{Introduction}
 \include{intro}
-\subsection{Motivation}
-\include{motivation}
-\subsection{Methodology}
+
+\section{Methodology}
+\subsection{Computational Approach}
 \include{methodology}
+\subsection{Reactor Database}
+\include{training}
+\subsection{Statistical Methods}
+\include{algs}
 
-\section{Literature Review}
-\subsection{Nuclear Forensics}
-\input{forensics}
-\subsection{Statistical Models}
-\input{statmods}
-\subsubsection{Algorithms for Prediction}
-\input{algs}
-\subsubsection{ML Model Assessment}
-\input{errors}
-\subsubsection{ML Model Validation}
-\input{optvalid}
-\subsection{Computational Tools}
-\input{comptools}
-\subsection{Previous Work}
-\input{prevwk}
-
-\section{Demonstration}
-\input{demometh}
-\subsection{Training Data}
-\input{training}
-\subsection{Reactor Parameter Prediction}
-\input{demoresults}
-\subsection{ML Model Validation}
-\input{demovalid}
-
-\section{Research Proposal}
-\include{propprep}
-\subsection{Experiment 1}
-\include{exp1}
-\subsection{Experiment 2}
-\include{exp2}
-\subsection{Experiment 3}
-\include{exp3}
-\subsection{Method Comparison}
-\include{methcompare}
-%\subsection{Timeline}
-%\include{timeline}
+\section{Results}
+\subsection{Direct Isotopics}
+\include{results1}
+\subsection{Gamma Spectra}
+\include{results2}
 
 \section{Summary}
 \input{summary}
+
+%
+%\section{Literature Review}
+%\subsection{Nuclear Forensics}
+%\input{forensics}
+%\subsection{Statistical Models}
+%\input{statmods}
+%\subsubsection{Algorithms for Prediction}
+%\input{algs}
+%\subsubsection{ML Model Assessment}
+%\input{errors}
+%\subsubsection{ML Model Validation}
+%\input{optvalid}
+%\subsection{Computational Tools}
+%\input{comptools}
+%\subsection{Previous Work}
+%\input{prevwk}
+%
+%\section{Demonstration}
+%\input{demometh}
+%\subsection{Training Data}
+%\input{training}
+%\subsection{Reactor Parameter Prediction}
+%\input{demoresults}
+%\subsection{ML Model Validation}
+%\input{demovalid}
+%
+%\section{Research Proposal}
+%\include{propprep}
+%\subsection{Experiment 1}
+%\include{exp1}
+%\subsection{Experiment 2}
+%\include{exp2}
+%\subsection{Experiment 3}
+%\include{exp3}
+%\subsection{Method Comparison}
+%\include{methcompare}
+%
 
 %%--------------------------------%%
 %%--------------------------------%%

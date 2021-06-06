@@ -1,68 +1,40 @@
-
 \begin{frame}
-  \frametitle{Computational Methods}
+  \frametitle{Developing a Computational Methodology}
   \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.9\textwidth]{./figures/ForensicsWorkflows.png}
-    \caption{Nuclear forensics research: physical, experimental, and computational}
+    \includegraphics[width=0.9\textwidth]{./figures/project_design.png}
+    \caption{Illustration of the computational project design rationale}
   \end{figure}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Computational Methods}
-  \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.9\textwidth]{./figures/CompStatForensicsWorkflow.png}
-    \caption{Comparison of two different computational approaches}
-  \end{figure}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Statistical Methods}
-  \begin{minipage}{0.5\textwidth}
+  \frametitle{Experimental Design Overview}
+  \begin{minipage}{0.45\textwidth}
     \begin{figure}
       \centering
-      \includegraphics[height=0.6\textheight]{./figures/statmethodology.png}
-      \caption{Workflow of a  methodology using statistical models}
+      \includegraphics[height=0.5\textheight]{./figures/methodology.png}
+      \caption{Workflow of a computational methodology using statistical models}
     \end{figure}
   \end{minipage}%
-  \begin{minipage}{0.5\textwidth}
+  \begin{minipage}{0.55\textwidth}
     \begin{itemize}
-      \item Training data: large set of SNF measurements
-      \begin{itemize}
-        \item Labels (e.g., burnup)
-        \item Features (e.g., nuclide concs)
-        \item Instances (individual SNF recipe)
-      \end{itemize}
-      \item Statistical learner
-      \begin{itemize}
-        \item Machine learning algorithms
-        \item Algorithm parameters
-        \item Predict label of new instance
-      \end{itemize}
-      \item Model evaluation
-      \begin{itemize}
-        \item Diagnostic curves
+      \item Training Data: SNF recipes from SCALE/ORIGEN-ARP \cite{scale, origen}
+      \item Information Reduction
         \begin{itemize}
-          \item Learning curves
-          \item Validation curves
+          \item Nuclide Masses: Random error injection
+          \item Nuclide Activities: Generate computational gamma spectra from GADRAS \cite{gadras}
         \end{itemize}
-        \item Prediction error
+      \item Statistical Methods
         \begin{itemize}
-          \item Bias versus variance
-          \item Generalizability
+          \item Machine learning algorithms (kNN \& Decision Trees) \cite{scikit}
+          \item Maximum likelihood calculation method \cite{mll_method, mll_sensitivity}
         \end{itemize}
-      \end{itemize}
+      \item Performance
+        \begin{itemize}
+          \item Test cases from SFCOMPO \cite{sfcompo}
+          \item Prediction error analysis
+        \end{itemize}
     \end{itemize}
   \end{minipage}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Statistical Methods}
-  \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.75\textwidth]{./figures/proposal.png}
-    \caption{Illustration of data set modularity}
-  \end{figure}
 \end{frame}
 
