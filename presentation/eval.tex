@@ -1,0 +1,60 @@
+
+\begin{frame}
+  \frametitle{Testing Protocol}
+  \textbf{Maximum Log Likelihood:}
+  \begin{enumerate}
+    \footnotesize
+    \item Training database broken up into 10k segments
+    \item 3 samples from each segment tested (time limitations)
+    \item $7\%$ training database is tested
+    \item Testing sample removed from DB during each calculation
+    \item Entire set of labels (reactor type, burnup, etc) predicted at once
+  \end{enumerate}
+  \textbf{Scikit-Learn Algorithms:}
+  \begin{enumerate}
+    \footnotesize
+    \item \texttt{train\_test\_split} used to break of $7\%$ of the database for testing
+    \item This is done in one step, so entire $7\%$ is missing from the DB 
+    \item Scale training data ($0$ mean and unit variance)
+    \item \texttt{fit} and \texttt{predict} takes place, ground truth and predictions are tracked
+    \item Each label is predicted on its own (thus \texttt{train\_test\_split} unlikely keeps PHWR representation in non-reactor type cases)
+  \end{enumerate}
+  \textbf{SFCOMPO Testing with Nuclide Mass Training Set:}
+  \begin{enumerate}
+    \footnotesize
+    \item After filtering out for irrelevant cases, 505 test entries remain
+    \item In scikit, training units are converted, then the same scaling is applied to the training set and testing set features
+    \item MLL converts the units but doesn't require scaling
+    \item Time since irradiation not included in SFCOMPO
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reactor Type Performance}
+  \textbf{Accuracy Metrics:} \cite{scikit}
+  \begin{itemize}
+    \item $\textit{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)$
+    \item $\textit{balanced-accuracy}(y, \hat{y}, w) = \frac{1}{\sum{\hat{w}_i}} \sum_i 1(\hat{y}_i = y_i) \hat{w}_i$
+    \item $\text{where: } \hat{w}_i = \frac{w_i}{\sum_j{1(y_j = y_i) w_j}}$
+  \end{itemize}
+  \textbf{Other Evaluations:}
+  \begin{itemize}
+    \item Many other classification metrics 
+    \item Confusion matrices (shown in this presentation)
+    \item Reciever operating characteristic curves
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Performance Measures for Regression}
+  \textbf{Regression Metrics:} \cite{scikit}
+  \begin{itemize}
+    \item Mean Absolute Error:
+          $$\textit{MAE}(y, \hat{y}) = \frac{1}{n_{\text{samples}}} \sum_{i=0}^{n_{\text{samples}}-1} \left| y_i - \hat{y}_i \right|$$
+          (Standard deviation for error bars)
+    \item Median Absolute Error:
+          $$\textit{MedAE}(y, \hat{y}) = \text{median}(\mid y_1 - \hat{y}_1 \mid, \ldots, \mid y_n - \hat{y}_n \mid)$$
+          (Interquartile range for error bars)
+  \end{itemize}
+\end{frame}
+

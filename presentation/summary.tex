@@ -1,12 +1,15 @@
 \begin{frame}
   \frametitle{Summary}
-  \textbf{Pre-detonation nuclear forensics analysis on SNF}
+  \begin{adjustwidth}{-10pt}{0pt}
+  \textbf{Pre-detonation nuclear forensics analysis on SNF}\\
+  \medskip
   \begin{minipage}{0.35\textwidth}
     \begin{figure}
       \centering
-      \includegraphics[height=0.7\textheight]{./figures/overview.png}
+      \includegraphics[height=0.75\textheight]{./figures/overview.png}
     \end{figure}
   \end{minipage}%
+  \hfill
   \begin{minipage}{0.65\textwidth}
   \begin{itemize}
     \item Demonstrated:
@@ -23,25 +26,24 @@
     \end{itemize}
     \item Simplifications:
     \begin{itemize}
-    % TODO fix me
-      \item No deep inquiry regarding feature reduction
-      \item No physically based information reduction
-      \item Missing summary metrics for likelihood method
+      \item Simulation fidelity (ORIGEN-ARP, homogenized core)
+      \item Feature reduction lacks deep inquiry
+      \item Simple algorithms, lack of optimization
     \end{itemize}
   \end{itemize}
   \end{minipage}
+  \end{adjustwidth}
 \end{frame}
 
-%\begin{frame}
-%  \frametitle{ddd}
-%  \textbf{dd}\\
-%  dd \\~\\
-%\end{frame}
-
-% feature reduction, and or only using matching nuclides?
-% sfcompo, get to work with new alg?
-% baselines for plots
-% metrics, esp accuracy
-% rerun algs with 100% db tested, or do same small test set across all methods?
-% Energy window discussion: How many to include, How wide for each detector, Manual, semi-manual, automatic
+\begin{frame}
+  \frametitle{Questions \& Next Steps}
+  \begin{itemize}
+    \item Feature reduction, or lack thereof: show approach?
+    \item Improving the comparison/ensuring PHWR representation: redo with same test set for all cases?
+    \item Alternatively, can now run 100\% testing for MLL and can use leave-one-out cross validation in scikit
+    \item SFCOMPO testing: implement with another method that can handle missing values?
+    \item Metrics \& plots: baselines, working on box plots, reactor type accuracy
+    \item Energy windows...
+  \end{itemize}
+\end{frame}
 

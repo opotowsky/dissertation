@@ -1,6 +1,6 @@
 
 \begin{frame}
-  \frametitle{Training Set Database}
+  \frametitle{Training Set Database: Labels}
   \begin{minipage}{0.43\textwidth}
     \begin{table}
       \centering
@@ -19,7 +19,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Dimensionality Reduction: Filtering Nuclides}
+  \frametitle{Training Set Database: Features}
     \begin{table}
       \centering
       \includegraphics[width=\linewidth]{./figures/nuclist_featureset_masses.png}
@@ -56,13 +56,14 @@
   \frametitle{Information Reduction}
   \textbf{\large Random \& Uniform Error} \\
   \bigskip
-  \textit{Machine Learning Algorithms} \\ \smallskip
-  Introduced $0.0 < E_{max} < 0.2$ random error\\
-  Each nuclide measurement receives $[1-E_{max},1+E_{max}]$\\
+  \textit{Machine Learning Algorithms} \\ \medskip
+  Introduced $0.0 < E_{max} < 0.2$ random error\\ \smallskip
+  Each nuclide measurement is altered by a random fraction in the range: $[1-E_{max},1+E_{max}]$\\
   \bigskip
-  \textit{Maximum Likelihood Calculations} \\ \smallskip
-  Introduced uniform simulation uncertainty\\
-  Each nuclide measurement is given a standard deviation of $5\%$, $10\%$, $15\%$, $20\%$ \\
+  \textit{Maximum Likelihood Calculations} \\ \medskip
+  Introduced uniform simulation uncertainty\\ \smallskip
+  Each nuclide measurement is given a standard deviation of $5\%$, $10\%$, $15\%$, and $20\%$ via: \\
+  $\sigma_{Log L}^2 = \sum_j \left( \frac{r_{j,test} - r_{j,sim}}{\sigma_{j,sim}^2} \right)^2 (\sigma_{j,sim}^2 + \sigma_{j,test}^2)$
 \end{frame}
 
 \begin{frame}
@@ -72,7 +73,7 @@
   \begin{enumerate}
     \item Reduced radionuclide observation using nuclide activities to obtain gamma spectra
     \item Choose energy windows / window size
-    \item Counting error ($\sqrt{n}$) injected using method on previous slide
+    \item Counting error ($\sqrt{n}$) injected using methods on previous slide
     \item Decrease detector energy resolution
   \end{enumerate}
   \begin{figure}[h!]

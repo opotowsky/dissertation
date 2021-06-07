@@ -9,14 +9,16 @@
 
 \begin{frame}
   \frametitle{Experimental Design Overview}
+  \begin{adjustwidth}{-10pt}{0pt}
   \begin{minipage}{0.45\textwidth}
     \begin{figure}
       \centering
       \includegraphics[height=0.5\textheight]{./figures/methodology.png}
-      \caption{Workflow of a computational methodology using statistical models}
+      \caption{Workflow of computational methodology using statistical models}
     \end{figure}
   \end{minipage}%
-  \begin{minipage}{0.55\textwidth}
+  \hfill
+  \begin{minipage}{0.58\textwidth}
     \begin{itemize}
       \item Training Data: SNF recipes from SCALE/ORIGEN-ARP \cite{scale, origen}
       \item Information Reduction
@@ -36,5 +38,15 @@
         \end{itemize}
     \end{itemize}
   \end{minipage}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Supervised Regression}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/SupervisedRegression.png}
+    \caption{Schematic of a representative training and predicting workflow}
+  \end{figure}
 \end{frame}
 

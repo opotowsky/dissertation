@@ -2,7 +2,7 @@
 \documentclass[10pt]{beamer}
 \usetheme[white]{Wisconsin}
 %\title[short title]{long title}
-\title[Information Reduction Impacts on SNF Prediction]{Detector-based Information Reduction \\Impacts on SNF Prediction}
+\title[Information Reduction Impacts on SNF Prediction]{Information Reduction Impacts on SNF Prediction for Nuclear Forensics}
 %\subtitle[short subtitle]{long subtitle}
 \subtitle[Research Overview \& Progress Check-in]{Research Overview \& Progress Check-in}
 %\author[short name]{long name}
@@ -12,6 +12,7 @@
 %\institution[short name]{long name}
 \institute[UW-Madison]{University of Wisconsin-Madison}
 
+\usepackage{caption}
 \usepackage{subcaption}
 \usepackage{hyperref}
 \usepackage{enumerate}
@@ -89,6 +90,8 @@
 \include{training}
 \subsection{Statistical Methods}
 \include{algs}
+\subsection{Performance Evaluation}
+\include{eval}
 
 \section{Results}
 \subsection{Direct Isotopics}
@@ -96,8 +99,9 @@
 \subsection{Gamma Spectra}
 \include{results2}
 
-\section{Summary}
+\section{Conclusions}
 \input{summary}
+\input{acks}
 
 %
 %\section{Literature Review}
