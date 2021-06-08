@@ -30,8 +30,8 @@
 \newcounter {listofheading}
 
 \newcommand\@thesistitlesmallskip{0.1in}
-\newcommand\@thesistitlemedskip{0.3in}
-\newcommand\@thesistitlebigskip{0.5in}
+\newcommand\@thesistitlemedskip{0.2in} %was 3
+\newcommand\@thesistitlebigskip{0.3in} %was 5
 \newcommand{\degree}[1]{\gdef\@degree{#1}}
 \newcommand{\project}{\gdef\@doctype{A masters project report}}
 \newcommand{\prelim}{\gdef\@doctype{A preliminary report}}
@@ -46,15 +46,15 @@
 }{\if@restonecol\twocolumn \else \newpage \fi}
 
 \gdef\@degree{Doctor of Philosophy}    %Default is PhD
-\gdef\@doctype{A dissertation }         %Default is dissertation
+\gdef\@doctype{A dissertation }        %Default is dissertation
 
 \gdef\@department{Nuclear Engineering \& Engineering Physics} 
-\gdef\@defensedate{05/2019}
+\gdef\@defensedate{07/2021}
 \gdef\@committee{\footnotesize
-  Rebecca M. Willet, Professor, Electrical \& Computer Engineering\\
-  Charles F. Weber, Distinguished Scientist, Oak Ridge National Laboratory\\
-  Jake P. Blanchard, Professor, Nuclear Engineering \& Engineering Physics\\
+  Sunil S. Chirayath, Professor, Nuclear Engineering, Texas A\&M University\\
   Douglass L. Henderson, Professor, Nuclear Engineering \& Engineering Physics\\
+  Benjamin Lindley, Professor, Nuclear Engineering \& Engineering Physics\\
+  Robert D. Nowak, Professor, Electrical \& Computer Engineering\\
   Paul P.H. Wilson, Professor, Nuclear Engineering \& Engineering Physics
   }
 
@@ -73,8 +73,8 @@
        by \\[\@thesistitlesmallskip]
       {\Large \@author} \\[\@thesistitlemedskip]
       \@doctype submitted in partial fulfillment of \\ the requirements for the degree of \\[\@thesistitlemedskip]
-      {\large \@degree} \\[\@thesistitlesmallskip]
-      {\large \@department} \\[\@thesistitlemedskip]
+      {\Large \@degree} \\[\@thesistitlesmallskip]
+      {\large \@department} \\[\@thesistitlesmallskip] %was med
       at the \\[\@thesistitlesmallskip]
       {\large UNIVERSITY OF WISCONSIN--MADISON} \\[\@thesistitlesmallskip]
       {\large \@date}
