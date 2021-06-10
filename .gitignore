@@ -12,5 +12,6 @@
 *.toc
 *.tdo
 *.swp
+*.synctex.gz
 presentation/pres.pdf
 document/dissertation.pdf

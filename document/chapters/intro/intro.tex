@@ -10,21 +10,41 @@ the ability of the \gls{US} to coordinate and respond to a nuclear incident,
 especially with the technical portion of nuclear forensics: characterization
 and analysis. After all, the first textbook on the topic was published in 2005
 \cite{nftext_2005}. In 2006, the \gls{US} \gls{DHS} founded the \gls{NTNFC}
-within the \gls{DNDO}. The mission of the \gls{NTNFC} is to establish a robust
-nuclear forensics capability to attribute radioactive materials with
-demonstrable proof. In 2017, the \gls{DNDO} was absorbed into the newer
-\gls{CWMD} Office.
+within the \gls{DNDO}, with the mission to establish a robust nuclear forensics
+capability by attributing radioactive materials with demonstrable proof. This
+endeavor was and is highly dependent on inter-agency cooperation. In
+2017 \-- 2018, the \gls{DNDO} was absorbed into the newer \gls{CWMD} office, and
+in 2019, much of the nuclear forensics research operation was moved to multiple
+offices within the \gls{DOE} \gls{NNSA}. 
 
 Multiple fields contribute to a nuclear forensics capability, such as
 radiochemical separations, material collection techniques, detector technology,
 material library development, and identifying forensic signatures. These needs
 vary based on whether the material being collected is post-detonation (e.g.,
-bomb debris) or pre-detonation (e.g., \glsreset{SNF}).  In the pre-detonation
-realm, this project focuses on statistical methods to to model \gls{SNF}
-production history using nondestructive detector measurements. 
+bomb debris) or pre-detonation (e.g., \glsreset{SNF}\gls{SNF}).  In the
+pre-detonation realm, this project focuses on statistical methods to to model
+\gls{SNF} production history using nondestructive detector measurements. 
 
 \section{Motivation}
 \label{sec:motivation}
+
+Preventing nuclear terrorism is important work that has a role along the entire
+lifetime of nuclear material, from the beginning (e.g., enrichment facility
+inspections) to the end (e.g., \gls{SNF} management). The \gls{IAEA} tracks
+reports of radioactive material out of regulatory control via the \gls{ITDB}
+\cite{itdb}, and the incidents that are confirmed or likely to be related to
+trafficking or malicious use are summarized in Figure \ref{fig:incidents}.
+These are the circumstances in which a robust nuclear forensics capability is
+beneficial.
+
+\begin{figure}[!bht]
+  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/intro/nucleartrafficking.png}}
+  \caption{Incidents reported to the \acrshort{IAEA} \acrshort{ITDB} related to 
+           malicious use. Included are highly enriched uranium (12), 
+           plutonium (2), plutonium-beryllium neutron sources (5) 
+           \cite{itdb}}
+  \label{fig:incidents}
+\end{figure}
 
 Nuclear forensics is an important aspect of deterring nuclear terrorism even
 though it is not, at first glance, obvious preventative nuclear security.  The
@@ -43,10 +63,10 @@ considered to impede nuclear terrorism in both tangible and abstract ways
 Following the prevention value of nuclear forensics, it is important to
 understand the process of the technical portion of the investigation and how
 that can be improved.  In the event of a nuclear incident, such as the
-retrieval of stolen \gls{SNM} or the detonation of a dirty bomb, it is
-necessary to learn as much as possible about the source of the materials in a
-timely manner. In the case of non-detonated \gls{SNM}, knowing the processes
-that produced it is crucial to determine the chain of custody of the
+retrieval of stolen \glsreset{SNM}\gls{SNM} or the detonation of a dirty bomb,
+it is necessary to learn as much as possible about the source of the materials
+in a timely manner. In the case of non-detonated \gls{SNM}, knowing the
+processes that produced it is crucial to determine the chain of custody of the
 interdicted material.  Section \ref{sec:nfneeds} covers the specific needs of
 the nuclear forensics community for \gls{SNF} provenance, and Section
 \ref{sec:statscontrib} discusses how computational approaches are useful, with
@@ -64,35 +84,47 @@ a focus on why statistical methods in particular are being pursued.
 \label{sec:methodology}
 
 As previously mentioned, the typical workflow of the technical portion of a
-forensics investigation is to analyze measurements of an unknown material. The
-measurements are compared to databases filled with previously measured standard
-materials with known reactor parameters, and/or the reactor parameters are
-calculated from empirical relationships.  As this work focuses on \gls{SNF},
-these measurements are elemental, chemical, and radiological in nature.
-Because creating databases from real measurements to represent \gls{SNF} from
-reactor technologies from around the world is not within the scope of this
-project, the database in this study will be created from high-fidelity
-simulations via the \gls{SCALE} \cite{scale} system using \gls{ORIGEN}
+forensics investigation is to take and analyze measurements of an unknown
+nuclear material. The measurements are compared to databases filled with
+previously measured standard materials with known reactor parameters, and/or
+the reactor parameters are calculated from empirical relationships.  As this
+work focuses on \gls{SNF}, these measurements are elemental, chemical, and
+radiological in nature.  Because creating databases from real measurements to
+represent \gls{SNF} from reactor technologies from around the world is not
+within the scope of this project, the database in this study will be created
+from simulations via the \gls{SCALE} \cite{scale} system using \gls{ORIGEN}
 \cite{origen}. 
 
+\todo[inline]{transition}
+The top panel in Figure \ref{fig:nfworkflows} shows an example technical nuclear
+forensics workflow as it could occur in the real world for a pre-detonation
+scenario.  After a sample is obtained, characterization begins.  Next, the
+results of these techniques are then compared against existing standard
+materials databases to obtain the desired reactor parameters. These steps would
+be performed iteratively in a real investigation, first using non-destructive
+measurements, and then destructive measurements.  The steps in Figure
+\ref{fig:nfworkflows} are obtaining reactor history information, if available,
+and reporting the results to the investigators. 
 
-To understand how a physics-free model can predict nuclear reactor parameters,
-Figure \ref{fig:compworkflow} introduces two computational workflows. Both the
-\gls{INDEPTH} and statistical methodologies begin with simulated \gls{SNF}.
-While not all steps are required to be equivalent, the only difference here is
-the method one chooses to obtain reactor parameters. Both workflows address
-speed of characterization, as it is intended to have gamma spectra as the
-inputs.  Because \gls{INDEPTH} is better studied and validated than statistical
-methods \cite{weber_2006, weber_2011, weber_2010}, this work focuses on a
-statistical approach but with the intention to compare methodologies.  Both
-workflows also address many of the database issues, described above. The
-statistical methodology using \gls{ML} is described below.
-\\
 \begin{figure}[!tbh]
-  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/intro/CompStatForensicsWorkflow.png}}
-  \caption{Computational Forensics Research Workflows}
-  \label{fig:compworkflow}
+  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/intro/ForensicsWorkflows.png}}
+  \caption{Schematic comparing nuclear forensics workflow in the top panel with 
+           two approaches that a research workflow could follow.}
+  \label{fig:nfworkflows}
 \end{figure}
+
+Next, the middle and bottom panels in Figure \ref{fig:nfworkflows} are
+analagous physical and computational experimental workflows, respectively.
+Both panels would have validated measurements of \gls{SNF}; the middle panel
+shows this being done in the laboratory and the bottom panel shows that these
+are values from a simulation. The goal of an experimental laboratory study is
+to test or develop empirical relationships between forensics signatures and the
+desired reactor parameters. The goal of computational studies can be this,
+finding new empirical relationships, or performing forensics workflows prior to
+the implementation of new reactor technologies.  For studying alternative
+measurement techniques or a slight difference in the overall approach, a
+researcher would iterate through multiple studies using known materials to
+probe sensitivities or other weaknesses in the procedure.
 
 In the simulation and statistical learning paradigm, we need to determine how
 much information to what quality is needed to train an \gls{ML} model;

@@ -31,7 +31,7 @@
 
 \newcommand\@thesistitlesmallskip{0.1in}
 \newcommand\@thesistitlemedskip{0.2in} %was 3
-\newcommand\@thesistitlebigskip{0.3in} %was 5
+\newcommand\@thesistitlebigskip{0.4in} %was 5
 \newcommand{\degree}[1]{\gdef\@degree{#1}}
 \newcommand{\project}{\gdef\@doctype{A masters project report}}
 \newcommand{\prelim}{\gdef\@doctype{A preliminary report}}
@@ -49,8 +49,10 @@
 \gdef\@doctype{A dissertation }        %Default is dissertation
 
 \gdef\@department{Nuclear Engineering \& Engineering Physics} 
-\gdef\@defensedate{07/2021}
-\gdef\@committee{\footnotesize
+\gdef\@defensedate{Day Month 2021}
+\gdef\@committee{
+  \setstretch{1.0}
+  \footnotesize
   Sunil S. Chirayath, Professor, Nuclear Engineering, Texas A\&M University\\
   Douglass L. Henderson, Professor, Nuclear Engineering \& Engineering Physics\\
   Benjamin Lindley, Professor, Nuclear Engineering \& Engineering Physics\\
@@ -74,13 +76,13 @@
       {\Large \@author} \\[\@thesistitlemedskip]
       \@doctype submitted in partial fulfillment of \\ the requirements for the degree of \\[\@thesistitlemedskip]
       {\Large \@degree} \\[\@thesistitlesmallskip]
-      {\large \@department} \\[\@thesistitlesmallskip] %was med
+      {\large \@department} \\[\@thesistitlesmallskip]
       at the \\[\@thesistitlesmallskip]
       {\large UNIVERSITY OF WISCONSIN--MADISON} \\[\@thesistitlesmallskip]
       {\large \@date}
-      \\[\@thesistitlemedskip]
+      \\[\@thesistitlebigskip]
     \end{center}
-    \hspace*{-0.7in}Date of final oral examination: \@defensedate \\%[\@thesistitlemedskip]
+    \hspace*{-0.7in}Date of final oral examination: \@defensedate \\[\@thesistitlesmallskip]
     \hspace*{-0.7in}{\small Oral Examination Committee:}\\
     \@committee
   \end{titlepage}
