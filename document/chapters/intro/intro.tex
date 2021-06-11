@@ -2,20 +2,20 @@
 \label{ch:intro}
 
 The realm of nuclear security involves parallel efforts in nonproliferation
-(verification of treaty compliance, monitoring for smuggling, proper storage
-and transportation of nuclear materials), cyber security, minimizing stocks of
+(verification of treaty compliance, monitoring for smuggling, proper storage and
+transportation of nuclear materials), cyber security, minimizing stocks of
 weaponizable materials, disaster response training, and nuclear forensics. All
 of these efforts have been continually improving, but there was a gap regarding
 the ability of the \gls{US} to coordinate and respond to a nuclear incident,
-especially with the technical portion of nuclear forensics: characterization
-and analysis. After all, the first textbook on the topic was published in 2005
+especially with the technical portion of nuclear forensics: characterization and
+analysis. After all, the first textbook on the topic was published in 2005
 \cite{nftext_2005}. In 2006, the \gls{US} \gls{DHS} founded the \gls{NTNFC}
 within the \gls{DNDO}, with the mission to establish a robust nuclear forensics
 capability by attributing radioactive materials with demonstrable proof. This
-endeavor was and is highly dependent on inter-agency cooperation. In
-2017 \-- 2018, the \gls{DNDO} was absorbed into the newer \gls{CWMD} office, and
-in 2019, much of the nuclear forensics research operation was moved to multiple
-offices within the \gls{DOE} \gls{NNSA}. 
+endeavor was and is highly dependent on inter-agency cooperation. In 2017 \--
+2018, the \gls{DNDO} was absorbed into the newer \gls{CWMD} office, and in 2019,
+much of the nuclear forensics research operation was moved to multiple offices
+within the \gls{DOE} \gls{NNSA}. 
 
 Multiple fields contribute to a nuclear forensics capability, such as
 radiochemical separations, material collection techniques, detector technology,
@@ -23,7 +23,26 @@ material library development, and identifying forensic signatures. These needs
 vary based on whether the material being collected is post-detonation (e.g.,
 bomb debris) or pre-detonation (e.g., \glsreset{SNF}\gls{SNF}).  In the
 pre-detonation realm, this project focuses on statistical methods to to model
-\gls{SNF} production history using nondestructive detector measurements. 
+the production history of a nuclear material using measurements of nuclides
+present in the \gls{SNF}.
+
+\gls{SNF} is identified in this work by focusing on four characteristics in
+particular that can potentially provide material attribution: reactor type,
+burnup, initial \gls{U235} enrichment, and time since fuel irradiation. 
+\todo[inline]{need to introduce this early but not sure I like it here}
+\begin{enumerate}
+  \item The reactor type is classified as one of the three most common types of
+  commercial power reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}. 
+  \item The burnup describes how much energy was produced by the fuel, taking
+  on the units megawatt-days (or gigawatt-days) per metric ton of heavy metal
+  (or initial uranium); it is referred to in this work as $MWd/MTU$, and
+  sometimes $GWd/MTU$.  
+  \item The enrichment is the percentage of \gls{U235} with respect to the
+  entire amount of uranium in the fuel, and is reported as $\%U235$. 
+  \item Lastly, the time since irradiation is defined as how long the fuel has
+  been out of the reactor core, and is discussed usually in $days$, but
+  sometimes $years$. 
+\end{enumerate}
 
 \section{Motivation}
 \label{sec:motivation}
@@ -37,7 +56,7 @@ trafficking or malicious use are summarized in Figure \ref{fig:incidents}.
 These are the circumstances in which a robust nuclear forensics capability is
 beneficial.
 
-\begin{figure}[!bht]
+\begin{figure}[!tbh]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/intro/nucleartrafficking.png}}
   \caption{Incidents reported to the \acrshort{IAEA} \acrshort{ITDB} related to 
            malicious use. Included are highly enriched uranium (12), 
@@ -83,125 +102,133 @@ a focus on why statistical methods in particular are being pursued.
 \section{Methodology}
 \label{sec:methodology}
 
-As previously mentioned, the typical workflow of the technical portion of a
-forensics investigation is to take and analyze measurements of an unknown
-nuclear material. The measurements are compared to databases filled with
-previously measured standard materials with known reactor parameters, and/or
-the reactor parameters are calculated from empirical relationships.  As this
-work focuses on \gls{SNF}, these measurements are elemental, chemical, and
-radiological in nature.  Because creating databases from real measurements to
-represent \gls{SNF} from reactor technologies from around the world is not
-within the scope of this project, the database in this study will be created
-from simulations via the \gls{SCALE} \cite{scale} system using \gls{ORIGEN}
-\cite{origen}. 
-
-\todo[inline]{transition}
-The top panel in Figure \ref{fig:nfworkflows} shows an example technical nuclear
-forensics workflow as it could occur in the real world for a pre-detonation
-scenario.  After a sample is obtained, characterization begins.  Next, the
-results of these techniques are then compared against existing standard
-materials databases to obtain the desired reactor parameters. These steps would
-be performed iteratively in a real investigation, first using non-destructive
-measurements, and then destructive measurements.  The steps in Figure
-\ref{fig:nfworkflows} are obtaining reactor history information, if available,
-and reporting the results to the investigators. 
+The main goal of the technical portion of a forensics investigation is to
+provide a means of nuclear material attribution by taking and analyzing
+measurements of the unknown material.  The methodology of this work is based on
+this process. The top panel in Figure \ref{fig:nfworkflows} shows an example
+technical nuclear forensics workflow as it could occur in the real world for a
+pre-detonation scenario.  After a sample is obtained, characterization begins.
+With a focus on \gls{SNF}, elemental, chemical, and radiological measurements
+are taken.  They are compared to databases filled with previously measured
+standard materials with known reactor parameters, and/or the reactor parameters
+are calculated from empirical relationships.  These steps might be performed
+iteratively in a real investigation, first using non-destructive measurements
+(e.g., gamma spectroscopy), and then destructive measurements (e.g., mass
+spectrometry).  The reactor parameters could then allow the lookup of reactor
+history information, if available, and these results would be provided to
+investigators. 
 
 \begin{figure}[!tbh]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/intro/ForensicsWorkflows.png}}
-  \caption{Schematic comparing nuclear forensics workflow in the top panel with 
-           two approaches that a research workflow could follow.}
+  \caption{Schematic comparing nuclear forensics investigative workflow in the 
+           top panel with research approaches for physical and computational 
+           experiments.}
   \label{fig:nfworkflows}
 \end{figure}
 
-Next, the middle and bottom panels in Figure \ref{fig:nfworkflows} are
-analagous physical and computational experimental workflows, respectively.
-Both panels would have validated measurements of \gls{SNF}; the middle panel
-shows this being done in the laboratory and the bottom panel shows that these
-are values from a simulation. The goal of an experimental laboratory study is
-to test or develop empirical relationships between forensics signatures and the
-desired reactor parameters. The goal of computational studies can be this,
-finding new empirical relationships, or performing forensics workflows prior to
-the implementation of new reactor technologies.  For studying alternative
-measurement techniques or a slight difference in the overall approach, a
-researcher would iterate through multiple studies using known materials to
-probe sensitivities or other weaknesses in the procedure.
+Next, the investigation process can be translated to an experimental workflow.
+The middle and bottom panels in Figure \ref{fig:nfworkflows} are analagous
+physical and computational experiments, respectively.  Both of these
+experimental scenarios would have validated measurements of \gls{SNF}; the
+middle panel shows this being done in the laboratory and the bottom panel shows
+that these are values from a simulation. The goal of an experimental laboratory
+study is to test or develop empirical relationships between forensics
+signatures and the desired reactor parameters. The goal of computational
+studies can be this, finding new empirical relationships, or performing
+forensics workflows prior to the implementation of new reactor technologies.
+For studying alternative measurement techniques or a slight difference in the
+overall approach, a researcher would iterate through multiple studies using
+known materials to probe sensitivities or other weaknesses in the procedure.
 
-In the simulation and statistical learning paradigm, we need to determine how
-much information to what quality is needed to train an \gls{ML} model;
-the model must give appropriate predictions of reactor parameters given a set
-of measurements from a \textit{test} sample. 
-\todo[inline]{a bit out of place; maybe delete} 
+As mentioned, these processes have informed the experimental design of this
+work, which follows the bottom panel in Figure \ref{fig:nfworkflows}. A test
+sample of simulated \gls{SNF} will undergo a measurement that is computed using
+techniques that mimic destructive or non-destructive measurements of nuclides
+present in the sample.  Using a statistical model, the measurements are
+compared to a database of \gls{SNF} entries and their reactor parameters,
+finding a closest match or prediction for the test sample. Since the test
+sample has previously known parameters, the error in the prediction can be
+measured and the method can be tuned. 
 
-After creating a set of gamma spectra corresponding to simulations of \gls{SNF}
-resulting from chosen reactor operation conditions, the next step is to choose
-an algorithm that performs model creation via statistical learning.
-Statistical learners have varied strengths and weaknesses based on what is
-being predicted and how they implement optimization.  Chosen for this study are
-simple regression algorithms for burnup prediction: nearest neighbor and
-decision trees.  For comparison, \acrfull{SVR} is used because it is known to
-handle highly dimensional data sets well.  These algorithms are introduced in
-Section \ref{sec:algs}.
+In addition to the steps of an investigation informing the experimental
+protocol, there are other considerations to take into account. In the
+simulation and statistical learning paradigm, it is important to determine how
+much information to what quality is needed to train an \gls{ML} model. Because
+creating databases from real measurements to represent \gls{SNF} from reactor
+technologies from around the world is not within the scope of this project, the
+database in this study will be created from simulations via the \gls{SCALE}
+\cite{scale} system using \gls{ORIGEN} \cite{origen}. This is the first process
+shown in Figure \ref{fig:intromethod}, referred to as training data because
+this is what input information is called in \gls{ML}. It is covered in Section
+\ref{sec:snfsim}.
+
+\begin{figure}[!hbt]
+  \makebox[\textwidth][c]{\includegraphics[width=0.3\linewidth]{./chapters/intro/methodology_intro.png}}
+  \caption{Flowchart of the steps the experimental methodology for this work.}
+  \label{fig:intromethod}
+\end{figure}
+
+The second process shown in Figure \ref{fig:intromethod} is information
+reduction, and is detailed in Section \ref{sec:inforeduc}.  This refers to
+measurement error and/or the measurement type that provides the nuclide
+information, and allows the extension of this workflow to better mimic
+constraints seen in a real-world setting.  For example, the primary example
+here is the reduction of information quality via gamma ray detector, which
+provide less exact nuclide information than, e.g., mass spectrometry.  The
+radionuclide concentrations from the simulations can be converted into gamma
+energies, which then undergo a detector response calculation to represent real
+as-measured gamma spectra as closely as possible.  If an algorithm could
+overcome the limitations of gamma detection and still provide useful results,
+this would warrant further studies and perhaps be field-applicable.
+
+The third step is to choose a method that performs model creation via
+statistical learning.  Statistical learners have varied strengths and
+weaknesses based on what is being predicted and how they implement
+optimization. Outlined in Section \ref{sec:algs} are three methods:
+\textit{k}-Nearest Neighbors, Decision Trees, and \gls{MLL} calculations. The
+first two are implemented via a python \gls{ML} library, scikit-learn
+\cite{scikit}. The \gls{MLL} method was originally developed for similar
+attribution work in the following studies: \cite{mll_method, mll_sensitivity,
+mll_validate}.
 
 After the training is complete, the results of each models' predictions must be
-evaluated according to \gls{ML} best practices.  The machine-learned
-model predicts the parameters of a previously unseen test set.  The difference
-between the model predictions and the actual simulated parameters is known as
-the testing error.  The testing error with respect to various specifications
-such as the training set size, number of features, or algorithm parameters
-provides insight into the model performance. These results are broadly known as
-diagnostic plots and show if the predictions are due to good performance or bad
-fitting. 
+evaluated according to their prediction performance, denoted as the fourth
+process in Figure \ref{fig:intromethod}.  The machine-learned model predicts
+the parameters of a previously unseen test set.  The difference between the
+model predictions and the actual simulated parameters is known as the testing
+error or prediction error. \todo[inline]{link section} 
 
-After the models are evaluated, it will be important to compare them both
-against each other and against other computational forensics methods. Thus, a
-Bayesian approach from the field of inverse problem theory will be used to give
-the probability distribution of the predictions so that the statistically
-generated predictions can be evaluated directly against other solutions, such
-as the optimization-based method, \gls{INDEPTH}. 
-\todo[inline]{This might not be possible, or robustly possible}
-
-Next, information reduction (within the training and testing data sets) must be
-used to investigate the extension of this workflow to the real world. The
-primary example here is the reduction of information quality via gamma ray
-detectors.  If an algorithm could overcome the limitations of gamma detection
-and still provide useful results, this would warrant further studies and
-perhaps be field-applicable.
-
-Thus, ultimately, the goal is to answer the question \textit{How does the
-ability to determine forensic-relevant spent nuclear fuel attributes using
-statistical techniques degrade as less information is available?}. 
+Thus, ultimately, this research protocol is designed to answer the question
+\textit{How does the ability to determine forensic-relevant spent nuclear fuel
+attributes using machine-learning techniques degrade as less information is
+available?}. 
 
 \section{Goals}
 
 The main purpose of this work is to evaluate the utility of statistical methods
 as an approach to determine nuclear forensics-relevant quantities as less
 information is available. \Gls{ML} algorithms are used to train models to
-provide these values (e.g., reactor type, time since irradiation, burnup) from
-the available information, or statistical methods are used for probabilistic
-matching.  The training data is simulated using \gls{ORIGEN}, which provides an
-array of nuclide concentrations as the features ($X$) and the parameters of
-interest ($y$) are provided from the simulation inputs.  Information reduction
-is carried out using computationally generated gamma spectra; the radionuclide
-concentrations from the simulations can be converted into gamma energies, which
-then undergo a detector response calculation to represent real as-measured
-gamma spectra as closely as possible.  \Gls{ML} best practices are used to
-evaluate the performance of the chosen algorithms, and inverse problem theory
-is used to provide an interval of confidence in the model predictions.
-\todo[inline]{update me if necessary}
+provide these categories (reactor type) and values (burnup, enrichment, and
+time since irradiation) from the available information.  The training data is
+simulated using \gls{ORIGEN}, which provides an array of nuclide measurements
+as the features ($X$) and the parameters of interest ($y$) are provided from
+the simulation inputs. Information reduction is carried out using artificially
+injected random error or computationally generated gamma spectra. The
+prediction errors ($y_{true}$ versus $y_{pred}$) will be studied to draw
+conclusions about the capability of statistical methods to inform nuclear
+material attribution with less precise detection techniques.
+
+\todo[inline]{update everything below} 
 
 The necessary background is covered in Chapter \ref{ch:litrev}.  First, an
 introduction to the broader field of nuclear forensics is in Section
 \ref{sec:nfoverview} to place this work in the context of the technical mission
 areas. After that, a short discussion of the field of \gls{ML}, the algorithms
-used, and validation methods are in Section \ref{sec:mlback}.
-\todo[inline]{this will have to be reworded after the lit review is updated}
-Section \ref{sec:fcsim} includes information about the software used to
-generate the training data and perform the predictions. Lastly, a review of
-statistical methods being used in studies of forensics analysis is covered in
-Section \ref{sec:stats4nf}. 
-
-...........................................................................
-\todo[inline]{Update after research chapters are flushed out}
+used, and validation methods are in Section \ref{sec:mlback}.  Section
+\ref{sec:fcsim} includes information about the software used to generate the
+training data and perform the predictions.  Lastly, a review of statistical
+methods being used in studies of forensics analysis is covered in Section
+\ref{sec:stats4nf}. 
 
 After the existing work is discussed, the methodology and a demonstration of
 the experimental components is introduced next in Chapter \ref{ch:demo_method}.
@@ -209,11 +236,4 @@ This will cover the simulated training data in Section \ref{sec:training}, the
 the details for training models in Section \ref{sec:statmodel}, and the
 process of model evaluation in Section \ref{sec:valid}.  
 
-Finally, Chapter \ref{ch:proposal} summarizes the official thesis research
-proposal. After the preparatory tasks are covered in Section \ref{sec:prep},
-there are three experiments outlined in Sections \ref{sec:exp1},
-\ref{sec:exp2}, and \ref{sec:exp3}. Qualitiative hypotheses as well as
-alternative directions for risk mitgation are discussed throughout these
-sections.  A detailed explanation of the method comparison step is covered next
-in Section \ref{sec:modelcompare}.  Lastly, a projected timeline for the
-completion of this project is in Section \ref{sec:timeline}.
+Finally, 
