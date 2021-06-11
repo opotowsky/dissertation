@@ -49,10 +49,10 @@
 
 %%% Uncomment the following if your .bib contains references that you will not 
 %%% explicitly cite, but that should be in the final bibliography:
-\nocite{*}
+% \nocite{*}
 
 \ifpdf
-\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif, .png}
 \else
 \DeclareGraphicsExtensions{.eps, .jpg}
 \fi
@@ -63,9 +63,8 @@
 
 %% Now include the tex files for each chapter, like so (I put these in separate dirs): 
 \include{chapters/intro/intro}
-\include{chapters/litrev/litrev}
-\include{chapters/demo_method/demo_method}
-%\include{chapters/proposal/proposal}
+%\include{chapters/litrev/litrev}
+\include{chapters/method/method}
 
 %% Do you have appendices?  If so, add them here, just like chapters.
 % \begin{appendices}
