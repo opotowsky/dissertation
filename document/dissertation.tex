@@ -18,6 +18,9 @@
 
 %%% You'll want ``oneside'' for the deposit version, but probably not for any versions that don't need to meet the UW requirements
 \documentclass[12pt,oneside,letterpaper]{memoir}
+\setulmarginsandblock{3cm}{3cm}{*}
+\setlrmarginsandblock{3cm}{3cm}{*}
+\checkandfixthelayout
 
 % See if this fixes error
 \usepackage[usenames]{color}
@@ -63,7 +66,7 @@
 
 %% Now include the tex files for each chapter, like so (I put these in separate dirs): 
 \include{chapters/intro/intro}
-%\include{chapters/litrev/litrev}
+\include{chapters/litrev/litrev}
 \include{chapters/method/method}
 
 %% Do you have appendices?  If so, add them here, just like chapters.
