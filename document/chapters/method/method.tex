@@ -1,63 +1,43 @@
-\chapter{Methodology and Demonstration}
+\chapter{Experimental Methodology}
 \label{ch:method}
 
-This chapter first covers the methodology of the proposed work by introducing
-each experimental component and following up with a demonstration of each
-component. This has been split into three sections, summarized below.
+This chapter covers the methodology by introducing each experimental component.
+This has been split into three sections, which cover the four steps summarized
+in Figure \ref{fig:method}.
 
-Section \ref{sec:training} discusses how the training data set is obtained.
-This is a set of observations with known inputs, i.e., labels that are to be
-predicted. After the initial training data is simulated in Section
-\ref{sec:snfsim}, with a possible information reduction step in Section
-\ref{sec:inforeduc}, the data set will be input to a statistical learner for
-the next step: training a model.
-
-Section \ref{sec:statmodel} is about which algorithms use the training set.
-They use the features and labels in the training data to formulate a model.
-Algorithm choice and parameters are discussed in Section \ref{sec:choice}.
-Next, the main goal for these \gls{ML} models is to supply reactor
-parameters associated with some unknown \gls{SNF}. Section \ref{sec:rxtrparam}
-shows the results of testing this goal: the prediction of a new instance that
-has only features and no burnup label.  
-
-Finally, the algorithms are evaluated for accuracy and validated, as shown in
-Section \ref{sec:valid}. In practice, validation implies more than just
-ensuring the models are properly fit to the data.  Perhaps the training set was
-not representative of the actual data space, whereas non-statistical methods do
-not rely on the data space for results. To both understand the performance of
-the models, the results are then evaluated for over- or under-fitting. 
-
-\begin{figure}[!htb]
+\begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{./chapters/method/methodology.png}
-  \caption{Methodology of Proposed Experiment}
+  \includegraphics[width=0.7\linewidth]{./chapters/method/methodology.png}
+  \caption{Flowchart of the experimental methodology and the way each step is being implemented.}
   \label{fig:method}
 \end{figure}
 
-The demonstrations of the above are based on previous work on the subject
-\cite{dayman_feasibility_2013} regarding \gls{ML} model performance
-with respect to information reduction.  Replicating the methodology helps to
-establish some baseline expectations of reactor parameter prediction and how
-the different algorithms perform. 
+Section \ref{sec:training} discusses how the training data set is obtained
+through simulations and computational means. The initial training data
+simulated via \gls{ORIGEN} is detailed in Section \ref{sec:snfsim} This
+provides a set ofi \gls{SNF} observations with known reactor operation
+parameters, i.e., labels that are to be predicted.  Next, the information
+reduction step is covered in Section \ref{sec:inforeduc}, where random error is
+injected or computational gamma spectra are created via the \gls{GADRAS} tool.
+After this, the less-precise data set will be input to a statistical learner
+for the next step: training a model.
 
-Next, this work will expand upon the previous work.  The first future step is a
-different information reduction technique using gamma energies from \gls{SNF}
-nuclide recipes.  Following this, one could apply a \gls{DRF} that calculates
-various spectra based on the types of gamma detectors available to the
-forensics community (The gamma energy-based information reduction step is not
-demonstrated here).  Secondly, a more advanced \gls{ML} algorithm, support
-vector regression, is included to compare a complex model against the two
-simpler models.  A schematic of the workflow involving the experimental
-components is shown in Figure \ref{fig:method}.
+Section \ref{sec:statmodel} covers the implementation of the algorithms
+introduced in \ref{sec:algs}. They use the features and labels in the training
+data to formulate a model. \todo[inline]{update needed} 
 
-\section{Training Data}
+Lastly, the algorithms must be evaluated for their prediction performance when
+given test samples (i.e., a new \gls{SNF} measurement that has no labels
+according the to algorithm).  The approach is shown in Section \ref{sec:eval}. 
+
+\section{Training Data Simulation}
 \label{sec:training}
 \input{chapters/method/training}
 
-\section{Statistical Learning for Models}
+\section{Statistical Learning Implementation}
 \label{sec:statmodel}
 \input{chapters/method/statmodels}
 
-\section{Validation}
-\label{sec:valid}
-\input{chapters/method/validation}
+\section{Performance Evaluation}
+\label{sec:eval}
+\input{chapters/method/evaluation}

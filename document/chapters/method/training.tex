@@ -1,82 +1,125 @@
 \subsection{Spent Nuclear Fuel Simulations}
 \label{sec:snfsim}
 
-Because creating databases from real measurements to represent reactor
-technologies from around the world is impossible, the database in this study is
-created from high-fidelity simulations via \gls{ORIGEN} \cite{origen}.  A set
-of simulations of \gls{SNF} at different burnups and cooling times comprises
-the database.  Of interest to an entity trying to create a weapon is partially
-irradiated fuel if they have plutonium separations capabilities or any
-radioactive substance in the case of a dirty bomb.  Addressing the former, a
-smaller burnup than is typical for \gls{SNF} from a commercial reactor is used
-in the previous work. This will be repeated here for demonstrative purposes,
-but expanded upon in future work.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{./chapters/method/methodology1.png}
+  \caption{First portion of the flowchart from Figure \ref{fig:method} being 
+           described in this section.}
+\end{figure}
 
-\begin{table}[!hp]
+Of interest to an entity trying to create a weapon is partially irradiated fuel
+if they have plutonium separations capabilities or any radioactive substance in
+the case of a dirty bomb. Thus, this work focuses on \gls{SNF} from commercial
+power reactors. Ideally, a large enough database of \gls{SNF} nuclide assays
+would be able to be used for this work. Since that does not exist, the 
+database will be simulated via \gls{ORIGEN-ARP} \cite{origen, origenarp}.  
+
+\subsubsection{Training Set Labels}
+\label{sec:snflbls}
+
+The design of the training set is dependent on a number of factors.  First, it
+must have a sufficient number of burnup sets and time since irradiation steps
+to provide robust prediction. This is decided upon by maximizing the steps for
+both parameters, while balancing the computational limitations of a large
+training set. Through previous experience, an approximate upper limit would be
+somewhere around $1e6$ database entries for the specific calculations being
+done in this work.
+
+Secondly, the training set must represent what exists in the real world. This
+was accomplished by studying the spread of parameters in the \gls{SFCOMPO}
+database.  To ensure this, a variety of reactor types and assembly designs were
+included, listed in Table \ref{tbl:rxtrtype}. Table \ref{tbl:rxtrparam} lists
+the rest of the simulation inputs. These include not only the labels of
+prediction interest, \gls{U235} enrichment, burnup, and time since irradiation,
+but also other important simulation input parameters such as the reactor power
+density and the moderator density.  (Water is both the moderator and coolant in
+all simulated reactor types.)
+
+\begin{table}[!h]
   \centering
   \begin{subtable}{\linewidth}
     \centering
-    \includegraphics[height=0.7\textheight]{./chapters/method/TrainData.png}
-    \caption{Reactor types and uranium-235 enrichment [weight\%]}
+    \includegraphics[width=0.55\linewidth]{./chapters/method/trainset4_Orxtrs.png}
+    \caption{\gls{ORIGEN} designations for reactor technologies and fuel assembly design.}
     \label{tbl:rxtrtype}
     \vspace*{5mm}
   \end{subtable}
   \begin{subtable}{\linewidth}
     \centering
-    \includegraphics[width=0.7\linewidth]{./chapters/method/TrainData2.png}
-    \caption{Simulation space defining reactor parameters and cooling time}
+    \includegraphics[width=0.8\linewidth]{./chapters/method/trainset4_inputs.png}
+    \caption{Simulation parameters for \gls{ORIGEN} input files.}
     \label{tbl:rxtrparam}
   \end{subtable}%
-  \caption{Design of the Training Set Space}
+  \caption{Training set database design using the \gls{SFCOMPO} database as guidance.}
   \label{tbl:train}
 \end{table}
 
-As mentioned in Section \ref{sec:optvalid}, many algorithms are developed on
-the assumption that the training set will be \acrfull{i.i.d.}. This is
-important so that the model does not overvalue or overfit a certain area in the
-training space. As this is not easily proven, it requires extensive knowledge
-of worldwide commercial reactors. Most obviously, a truly \gls{i.i.d.} training
-set would go beyond the lower burnups, but this is purely for demonstration
-with a single use case in mind.  
+\todo[inline]{fix the figure, this is a placeholder}
+\begin{figure}[!htb]
+  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/method/histogram_scatter_trainset_viz.png}}
+  \caption{A combination of histograms and scatter plots to visualize the 
+           distribution of prediction labels in the training set.}
+  \label{fig:trainhist}
+\end{figure}
 
-The training database is thus constructed by simulating the same training set
-space as described in Ref.  \cite{dayman_feasibility_2013}, shown in Table
-\ref{tbl:train}. For each entry shown here the simulations included the span of
-cooling times and burnups in Table \ref{tbl:rxtrparam}. The power densities,
-listed enrichments, and moderator densities were kept constant. The burnup for
-the \glspl{PWR} was increased in steps of $950\ MWd/MTU$, resulting in 19
-measured time points. The \glspl{BWR} and \glspl{PHWR} had 18 measurements with
-burnup steps of $690\ MWd/MTU$.  This resulted in 2313 observations in the
-training set.
+\todo[inline]{add section reference} The third factor influencing database
+design is ensuring ideal \gls{ML} algorithm performance.  As mentioned in
+Section X, many algorithms are developed with the assumption that the training
+set will be \acrfull{i.i.d.}.  This is important so that the model does not
+overvalue or overfit a certain area in the training space. With the training
+set design, there are predetermined values for enrichment, burnup, and time
+since irradiation.  While there are $21-28$ burnup steps (depending on the
+reactor type) and 120 cooling time steps, there are only 6 values for
+enrichment. This creates the risk that the algorithm will end up being unable
+to generalize outside of those discrete values. Therefore, the burnup steps and
+time steps are perturbed randomly in a range that is $\pm10\%$ and $\pm30\%$
+from the originally defined values.  The enrichment also gets perturbed by
+$\pm10\%$, and not more because the cross-section libraries in \gls{ORIGEN-ARP}
+are pre-calculated for those enrichment values, so deviating too far from them
+would result in inaccurate \gls{SNF} simulations. The power densities and
+moderator densities were kept constant.  The resulting training set is $5e5$.
+Figure \ref{fig:trainhist} visualizes the somewhat even distrubition of the
+burnup and cooling time parameters, and shows the lack of even distribution of
+the enrichment parameter through a combination of scatter plots and
+histograms.\todo[inline]{enter new trainset size} 
 
-Feature reduction on the training set is manual in nature: the top 200 nuclides
-by concentration in each observation were retained. This resulted in 303
-features in total in the training set. All nuclides below the top 200
-concentrations in each observation were set to zero. Other reduction techniques
-using domain knowledge (e.g., filtering for actinides) and statistical
-dimensionality reduction (e.g., \gls{PCA}) are not addressed in this
-demonstration.
+\subsubsection{Training Set Features}
+\label{sec:snffeats}
 
-\begin{table}[!hbt]
+Hi hello.
+
+\begin{table}[!h]
   \centering
-  \includegraphics[width=0.95\linewidth]{./chapters/method/TestData.png}
-  \caption{Design of the Testing Set Space}
-  \label{tbl:test}
+  \begin{subtable}{\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{./chapters/method/nucmass_feats.png}
+    \caption{Set of features saved for the first experiment. The bold nuclide
+             masses overlap with the nuclides in \ref{tbl:nucacts}.}
+    \label{tbl:nucmass}
+    \vspace*{5mm}
+  \end{subtable}
+  \begin{subtable}{\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{./chapters/method/nucacts_feats.png}
+    \caption{Set of features saved for the second experiment. The bold nuclide
+             activities overlap with the nuclides in \ref{tbl:nucmass}.}
+    \label{tbl:nucacts}
+  \end{subtable}%
+  \caption{Two sets of features saved from the same simulation inputs for the 
+           two main experiments in this work.}
+  \label{tbl:nucfeats}
 \end{table}
-
-While typical \gls{ML} studies choose the testing set randomly from the
-training set, the previous work used an external one, shown in Table
-\ref{tbl:test}.  The simulations retained the default values from the training
-set; only the values shown here were changed. This provided 92 observations for
-testing.  The test set was designed to have values in between the trained
-values of burnup and cooling times for the same set of reactors.  However, a
-systematically chosen test set can be problematic since it may not cover parts
-of the training space.  It is implemented in this study for comparison, but
-\gls{CV} will be used moving forward. More specifically, using \textit{k}-fold
-\gls{CV} is expected to better indicate the model performance. 
 
 \subsection{Information Reduction}
 \label{sec:inforeduc}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{./chapters/method/methodology2.png}
+  \caption{Second portion of the flowchart from Figure \ref{fig:method} being 
+           described in this section.}
+\end{figure}
 
 Since the overall goal of this project is to determine how much information to
 what quality is needed to train an \gls{ML} model, there will be an
@@ -95,4 +138,10 @@ introduce error by limiting the nuclides to only those that can be measured
 with a gamma spectrometer. Although this is initially done using the
 availability of gamma energies in \gls{ORIGEN}, \gls{GADRAS} can provide more
 \gls{DRF}s to further reduce information given to the algorithm.
+
+Next, this work will expand upon the previous work.  The first future step is a
+different information reduction technique using gamma energies from \gls{SNF}
+nuclide recipes.  Following this, one could apply a \gls{DRF} that calculates
+various spectra based on the types of gamma detectors available to the
+forensics community 
 

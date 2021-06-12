@@ -1,8 +1,22 @@
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{./chapters/method/methodology4.png}
+  \caption{Fourth portion of the flowchart from Figure \ref{fig:method} being 
+           described in this section.}
+\end{figure}
+
 To obtain reliable models, one must both choose or create a training set
 carefully and study the impact of various algorithm parameters on the error.
 Although the title of this section suggests final steps of confirming a model's
 usefulness for predictions, what follows is more of a diagnostic exercise. 
 In practice, these analyses can be used for both purposes.
+In practice, validation implies more than just
+ensuring the models are properly fit to the data.  Perhaps the training set was
+not representative of the actual data space, whereas non-statistical methods do
+not rely on the data space for results. To both understand the performance of
+the models, the results are then evaluated for over- or under-fitting. 
+
 
 \gls{ML} algorithms are heavily dependent on the training inputs and algorithm
 parameters given to them, such as training set sizes, regularization, number of

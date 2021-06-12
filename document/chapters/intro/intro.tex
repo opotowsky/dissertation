@@ -31,17 +31,17 @@ particular that can potentially provide material attribution: reactor type,
 burnup, initial \gls{U235} enrichment, and time since fuel irradiation. 
 \todo[inline]{need to introduce this early but not sure I like it here}
 \begin{enumerate}
-  \item The reactor type is classified as one of the three most common types of
-  commercial power reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}. 
-  \item The burnup describes how much energy was produced by the fuel, taking
-  on the units megawatt-days (or gigawatt-days) per metric ton of heavy metal
-  (or initial uranium); it is referred to in this work as $MWd/MTU$, and
+  \item The \textbf{reactor type} is classified as one of the three most common
+  types of commercial power reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}. 
+  \item The \textbf{burnup} describes how much energy was produced by the fuel,
+  taking on the units megawatt-days (or gigawatt-days) per metric ton of heavy
+  metal (or initial uranium); it is referred to in this work as $MWd/MTU$, and
   sometimes $GWd/MTU$.  
-  \item The enrichment is the percentage of \gls{U235} with respect to the
-  entire amount of uranium in the fuel, and is reported as $\%U235$. 
-  \item Lastly, the time since irradiation is defined as how long the fuel has
-  been out of the reactor core, and is discussed usually in $days$, but
-  sometimes $years$. 
+  \item The \textbf{enrichment} is the percentage of \gls{U235} with respect to
+  the entire amount of uranium in the fuel, and is reported as $\%U235$. 
+  \item Lastly, the \textbf{time since irradiation} is defined as how long the
+  fuel has been out of the reactor core, and is discussed usually in $days$,
+  but sometimes $years$. It may also be referred to as cooling time. 
 \end{enumerate}
 
 \section{Motivation}
@@ -157,10 +157,10 @@ much information to what quality is needed to train an \gls{ML} model. Because
 creating databases from real measurements to represent \gls{SNF} from reactor
 technologies from around the world is not within the scope of this project, the
 database in this study will be created from simulations via the \gls{SCALE}
-\cite{scale} system using \gls{ORIGEN} \cite{origen}. This is the first process
-shown in Figure \ref{fig:intromethod}, referred to as training data because
-this is what input information is called in \gls{ML}. It is covered in Section
-\ref{sec:snfsim}.
+\cite{scale} system using \gls{ORIGEN} \cite{origen, origenarp}. This is the
+first process shown in Figure \ref{fig:intromethod}, referred to as training
+data because this is what input information is called in \gls{ML}. It is
+covered in Section \ref{sec:snfsim}.
 
 \begin{figure}[!hbt]
   \makebox[\textwidth][c]{\includegraphics[width=0.3\linewidth]{./chapters/intro/methodology_intro.png}}
