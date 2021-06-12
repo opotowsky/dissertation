@@ -6,6 +6,10 @@
            described in this section.}
 \end{figure}
 
+Define types of error, and or link back to section
+
+Define metrics choices, and or link back to section
+
 To obtain reliable models, one must both choose or create a training set
 carefully and study the impact of various algorithm parameters on the error.
 Although the title of this section suggests final steps of confirming a model's
@@ -16,7 +20,6 @@ ensuring the models are properly fit to the data.  Perhaps the training set was
 not representative of the actual data space, whereas non-statistical methods do
 not rely on the data space for results. To both understand the performance of
 the models, the results are then evaluated for over- or under-fitting. 
-
 
 \gls{ML} algorithms are heavily dependent on the training inputs and algorithm
 parameters given to them, such as training set sizes, regularization, number of
@@ -45,14 +48,6 @@ model performance because the entirety of the training set has also been
 tested.  The testing error scenario performs fitting and prediction $n=10$
 times and averages the errors of those results.
 
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\linewidth]{./chapters/method/lc1.png}
-    \caption{\acrshort{SVR} Learning Curve for Burnup Prediction, $TrainSet\ Size = 2313$}
-    \label{fig:lc1}
-\end{figure}
-
-The learning curves are obtained as follows, shown in Figure \ref{fig:lc1}.
 For a given (randomly chosen) training set size between $15$ and $100\%$ of the
 total data set, training and prediction rounds were performed for each. 
 
@@ -67,35 +62,5 @@ the data points of the training set, somehow fit the model too well. This is
 the danger with systematically choosing a testing set, and why the \gls{CV}
 error is used. 
 
-The \gls{CV} error performs as expected in that it both approaches and remains
-below the training error curve, but the parallel nature of the plot is not
-typical. There is no example behavior of this shape of Figure \ref{fig:lc1}'s
-learning curve in Figure \ref{fig:learning}. This could indicate overfitting
-(high variance) because of the somewhat consistent gap.  More robust
-diagnostics are needed to confirm the model is overfit.  It is presumed this is
-not caused by the algorithms, but the training set itself.  It is likely
-covering too small of a range of the simulation space.
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\linewidth]{./chapters/method/vc1.png}
-    \caption{\acrshort{SVR} Validation Curve for Burnup Prediction, $\gamma = 10^{-3}$}
-    \label{fig:vc1}
-\end{figure}
-
-The validation curves are obtained as follows, shown in Figure \ref{fig:vc1}.
-The $\gamma$ parameter in \gls{SVR} was varied from $10^{-4}-10^{-2}$.  Note
-that in Figure \ref{fig:vc1} the domain has been decreased to show the features
-close to the \textit{y}-axis.  It has also been reversed since small values of
-$\gamma$ correspond to a \textit{more} complex model.  Training and prediction
-rounds were carried out for each value of $\gamma$ with described above using
-$5$ \gls{CV} folds with $10$ prediction trials.  As with Figure \ref{fig:lc1},
-the testing curve does reach above the training curve, but only for small
-values of $\gamma$.  There is a possible \gls{CV} maximum at $\gamma=10^{-3}$,
-but this is not very clear.  A validation curve was also done for the $C$
-parameter, which was varied from $10^{-2}-10^{5}$ (not pictured). The ideal $C$
-in this case was $10^{3}$.  If the model is under- or overfit, not much
-variation will be seen with respect to the algorithm parameters. The resolution
-to the under- or overfitting is discussed in Section \ref{sec:prep}.
 
 

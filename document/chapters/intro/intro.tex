@@ -32,11 +32,11 @@ burnup, initial \gls{U235} enrichment, and time since fuel irradiation.
 \todo[inline]{need to introduce this early but not sure I like it here}
 \begin{enumerate}
   \item The \textbf{reactor type} is classified as one of the three most common
-  types of commercial power reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}. 
+  types of commercial power reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}.
   \item The \textbf{burnup} describes how much energy was produced by the fuel,
-  taking on the units megawatt-days (or gigawatt-days) per metric ton of heavy
-  metal (or initial uranium); it is referred to in this work as $MWd/MTU$, and
-  sometimes $GWd/MTU$.  
+  taking on the units \textit{megawatt-days (or gigawatt-days) per metric ton
+  of heavy metal (or initial uranium)}; it is referred to in this work as
+  $MWd/MTU$, and sometimes $GWd/MTU$.  
   \item The \textbf{enrichment} is the percentage of \gls{U235} with respect to
   the entire amount of uranium in the fuel, and is reported as $\%U235$. 
   \item Lastly, the \textbf{time since irradiation} is defined as how long the
@@ -188,8 +188,8 @@ optimization. Outlined in Section \ref{sec:algs} are three methods:
 \textit{k}-Nearest Neighbors, Decision Trees, and \gls{MLL} calculations. The
 first two are implemented via a python \gls{ML} library, scikit-learn
 \cite{scikit}. The \gls{MLL} method was originally developed for similar
-attribution work in the following studies: \cite{mll_method, mll_sensitivity,
-mll_validate}.
+attribution work \cite{mll_method, mll_sensitivity, mll_validate} and was
+implemented in python.
 
 After the training is complete, the results of each models' predictions must be
 evaluated according to their prediction performance, denoted as the fourth
