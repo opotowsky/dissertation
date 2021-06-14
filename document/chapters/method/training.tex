@@ -82,9 +82,9 @@ the multiple moderator densities simulated (see Table \ref{tbl:rxtrparam})
 \begin{figure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/method/histogram_scatter_trainset_viz.png}}
   \caption{A combination of histograms and scatter plots to visualize the 
-           distribution of prediction labels in the training set.
-           \textbf{\Large fix the histogram figure, this is a placeholder}}
+           distribution of prediction labels in the training set.}
   \label{fig:trainhist}
+  \todo[inline]{fix the histogram figure, this is a placeholder}
 \end{figure}
 
 \subsubsection{Training Set Features}
@@ -225,7 +225,8 @@ deviations calculated from the four uncertainty levels listed above.
 Moving beyond injecting uniform error to a nuclide mass measurement, the next
 step in information reduction takes place for the second experiment, which uses 
 processed gamma spectra for the training database. This adds more than one layer of 
-reduced information quality:
+reduced information quality, which are listed here as an outline of the steps
+taken to process the gamma spectra:
 \begin{enumerate}
   \item \label{itm:1} The list of nuclides is limited to radionuclides.
   \item \label{itm:2} Instead of "perfect" radionuclide activity knowledge, 
@@ -262,22 +263,39 @@ of $20\:minutes$ provides the expected peaks.
   \caption{Select details of 6 detector setups used to obtain gamma 
            spectra-based training databases.}
   \label{tbl:detsetups}
-\end{table}
 \todo[inline]{update this table if live times for nai and labr3 change}
+\end{table}
 
 Training databases were created for the six detectors outlined in Table
 \ref{tbl:detsetups}. They were chosen to compare the highest energy resolution
 detector, a lab-based \gls{HPGe}, against the rest, in order of decreasing
 energy resolution: portable \gls{HPGe}, \gls{CZT}, \gls{SrI2}, \gls{LaBr3}, and
 \gls{NaI} detectors. This is displayed in the table by including the \gls{FWHM}
-of the $661\:keV$ peak for Cs137.
+of the $661\:keV$ peak for Cs137. At this point, there are six versions of the
+original database for each detector setup, but there is a full gamma spectrum
+for each \gls{SNF} entry. It is not computationally prudent to use full gamma
+spectra for training and testing, and so these spectra are processed; this is
+step \ref{itm:3} from above, and is outlined as follows.
 
-At this point, there are six versions of the original database for each
-detector, but there is a full gamma spectrum for each \gls{SNF} entry. It is
-not computationally prudent to use full gamma spectra for training and testing,
-and so these spectra are processed; this is step \ref{itm:3} from above, and is
-outlined as follows.
-\todo[inline]{make some figures showing this process, and then write me}
+\begin{figure}[!h]
+  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/method/energy_window_example.png}}
+  \caption{Slice of an example gamma spectrum in one of the training databases
+           showing the windows over the gamma energy peaks.}
+  \todo[inline]{update}
+  \label{fig:enwindows}
+\end{figure}
+
+
+
+\begin{table}[!h]
+  \centering
+  \includegraphics[width=0.4\linewidth]{./chapters/method/enlist_nucs.png}
+  \caption{Nuclides that are represented by the gamma energy lines in the two . The entire 
+           set of 11 nuclides belongs to the long list, and the 6 bold nuclides
+           belong to the short list.}
+  \label{tbl:enlistnucs}
+\todo[inline]{this is for edited energy window lists, and includes problematic (simulation-wise) nuclides.}
+\end{table}
 
 Lastly, step \ref{itm:4} involves the inclusion of the counting error for the
 summed energy windows. This is quite simple, as statistical counting error of
@@ -285,4 +303,6 @@ $n$ counts is $\sqrt{n}$.  As in Section \ref{sec:masserr}, this error gets
 applied in the same way for the machine learning algorithms, where the uniform
 error is applied randomly within the range $[r-\sqrt{r},r+\sqrt{r}]$ for each
 summed energy window $r$. For the \gls{MLL} calculations, Equation
-\ref{eq:mllunc} is used, where $\sigma_{j} = \sqrt{r}$.
+\ref{eq:mllunc} is used, where $\sigma_{j} = \sqrt{r}$.  \todo[inline]{make
+sure variables are explained clearly, choosing r to match variables above, the
+original variable choice comes from TAMU papers}
