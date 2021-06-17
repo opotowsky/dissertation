@@ -1,9 +1,9 @@
 \chapter{Experimental Methodology}
 \label{ch:method}
 
-This chapter covers the methodology by introducing each experimental component.
-This has been split into three sections, which cover the four steps summarized
-in Figure \ref{fig:method}.
+This chapter covers the methodology by introducing each experimental component
+and its implementation details.  This has been split into four sections, which
+correspond to the four steps summarized in Figure \ref{fig:method}.
 
 \begin{figure}[!ht]
   \centering
@@ -14,17 +14,18 @@ in Figure \ref{fig:method}.
 
 Section \ref{sec:training} discusses how the training data set is obtained
 through simulations and computational means. The initial training data
-simulated via \gls{ORIGEN} is detailed in Section \ref{sec:snfsim} This
+simulated via \gls{ORIGEN} is detailed in Section \ref{sec:training} This
 provides a set of \gls{SNF} observations with known reactor operation
-parameters, i.e., labels that are to be predicted.  Next, the information
-reduction step is covered in Section \ref{sec:inforeduc}, where random error is
-injected or computational gamma spectra are created via the \gls{GADRAS} tool.
-After this, the less-precise data set will be input to a statistical learner
-for the next step: training a model.
+parameters, i.e., labels that are to be predicted.  
+
+Next, the information reduction step is covered in Section \ref{sec:inforeduc},
+where random error is injected or computational gamma spectra are created via
+the \gls{GADRAS} tool.  After this, the less-precise training data sets will be
+input to a statistical learner for the next step: training models.
 
 Section \ref{sec:statmodel} covers the implementation of the algorithms
 introduced in \ref{sec:algs}. They use the features and labels in the training
-data to formulate a model. \todo[inline]{update needed} 
+data sets to formulate a model. 
 
 Lastly, the algorithms must be evaluated for their prediction performance when
 given test samples (i.e., a new \gls{SNF} measurement that has no labels
@@ -33,6 +34,10 @@ according the to algorithm).  The approach is shown in Section \ref{sec:eval}.
 \section{Training Data Simulation}
 \label{sec:training}
 \input{chapters/method/training}
+
+\section{Information Reduction}
+\label{sec:inforeduc}
+\input{chapters/method/inforeduc}
 
 \section{Statistical Learning Implementation}
 \label{sec:statmodel}

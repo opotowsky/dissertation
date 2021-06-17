@@ -6,61 +6,12 @@
            described in this section.}
 \end{figure}
 
-Define types of error, and or link back to section
+As previously introduced in Section \ref{sec:testerr}, the prediction errors
+are compared to the training error to understand the generalization strength. 
 
-Define metrics choices, and or link back to section
+\subsection{Error Metrics}
+Error metrics being used, implementation details
 
-To obtain reliable models, one must both choose or create a training set
-carefully and study the impact of various algorithm parameters on the error.
-Although the title of this section suggests final steps of confirming a model's
-usefulness for predictions, what follows is more of a diagnostic exercise. 
-In practice, these analyses can be used for both purposes.
-In practice, validation implies more than just
-ensuring the models are properly fit to the data.  Perhaps the training set was
-not representative of the actual data space, whereas non-statistical methods do
-not rely on the data space for results. To both understand the performance of
-the models, the results are then evaluated for over- or under-fitting. 
-
-\gls{ML} algorithms are heavily dependent on the training inputs and algorithm
-parameters given to them, such as training set sizes, regularization, number of
-features in the training set, optimization parameters, etc.  From the results
-shown in Section \ref{sec:statmodel}, it is clear there is room for
-improvement.  To evaluate these input and parameter variations, diagnostic
-plots show the errors between the predicted burnup values and the actual burnup
-values with respect to some variable on the \textit{x}-axis.  As previously
-introduced in Section \ref{sec:optvalid}, the prediction errors are compared to
-the training error to understand the generalization strength. These two errors
-are plotted with respect to training set size (learning curves) and the
-algorithm parameters governing model complexity (validation curves) to provide
-insight into the model fitness. 
-
-In addition to \gls{ML} best practices, another layer of comparison is added
-here.  Because it is difficult to ensure consistently representative testing
-data, the accuracy of a learned model should not depend on only one testing
-set.  The learned model's accuracy is better estimated by using a validation
-set. Here, this is implemented as \textit{k}-fold \gls{CV}, introduced
-in Section \ref{sec:selectass}. This work includes both the testing error
-(using the testing set described in Section \ref{sec:training}) and $5$-fold
-\gls{CV} error. The predetermined testing set will allow for comparison
-against the previous work it was obtained from \cite{dayman_feasibility_2013},
-but it is assumed that \gls{CV} will provide a better indication of
-model performance because the entirety of the training set has also been
-tested.  The testing error scenario performs fitting and prediction $n=10$
-times and averages the errors of those results.
-
-For a given (randomly chosen) training set size between $15$ and $100\%$ of the
-total data set, training and prediction rounds were performed for each. 
-
-What one seeks from a learning curve is for the training and \gls{CV}/testing
-curves to approach each other, but also for the magnitude of the error to be
-acceptable. As the training set size reaches $100\%$, both the training and
-\gls{CV} errors do approach the training error curve.  However, the testing
-error here is \textbf{lower} than the training error, and this does not happen
-unless there is an issue with the training and/or testing sets. One possible
-explanation is that the testing set, while the values were chosen to be between
-the data points of the training set, somehow fit the model too well. This is
-the danger with systematically choosing a testing set, and why the \gls{CV}
-error is used. 
-
-
+\subsection{SFCOMPO}
+SFCOMPO performance implementation details
 
