@@ -10,7 +10,7 @@ consider the technical portion of the nuclear forensics workflow.
 
 First discussed are the types of forensic investigations in Section
 \ref{sec:types}, followed by an introduction to inverse problem theory in
-Section \ref{sec:inverse} as a way to evaluate the results of forensic methods. 
+Section \ref{sec:inverse} as a way to frame the forensics problem.
 
 \subsection{Types of Nuclear Forensics Investigations}
 \label{sec:types}
@@ -90,6 +90,10 @@ signatures with modeling, simulation, or statistical methods.
 \subsection{Nuclear Forensics as an Inverse Problem}
 \label{sec:inverse}
 
+\todo[inline]{probably not relevant anymore, and definitely would need better 
+              explanation if kept in. Its possibly useful way to frame the problem. 
+              Also haven't double checked that Bayes explanation is correct yet.}
+
 Nuclear forensics is a traditional inverse problem, which has been well
 documented mathematically and applied to a range of scientific disciplines.
 Understanding inverse problem theory can help systematically define the
@@ -143,34 +147,33 @@ which is commonly expressed as follows:
   P(A|B) = \frac{P(B|A)P(A)}{P(B)}
 \end{equation}
 
-Here, $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that
-events $A$ and $B$ will occur, representing the model and data spaces,
-respectively. $P(A)$ is known as the likelihood and $P(B)$ is known as the
-marginal likelihood. The marginal likelihood is a concept of the data space
-capturing all the possible measurement values. It is ignored here because as a
-homogenous probability, it is only useful for determining absolute
-probabilities and this will only be applied in a relative context.  $P(B|A)$ is
-the prior probability that event $B$ will occur given a known result for $A$,
-which are the measurements given the model parameters (i.e. the forward
-problem).  $P(A|B)$ is the posterior probability that event $A$ will occur
-given a known result for $B$, which are the predicted model parameters given
-the measurements (i.e., the inverse problem) \cite{inverse_theory,
-gentle_bayes}. A discussion of how these values are obtained takes place in
-Section \ref{sec:invcompare}.
+%Here, $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that
+%events $A$ and $B$ will occur, representing the model and data spaces,
+%respectively. $P(A)$ is known as the likelihood and $P(B)$ is known as the
+%marginal likelihood. The marginal likelihood is a concept of the data space
+%capturing all the possible measurement values. It is ignored here because as a
+%homogenous probability, it is only useful for determining absolute
+%probabilities and this will only be applied in a relative context.  $P(B|A)$ is
+%the prior probability that event $B$ will occur given a known result for $A$,
+%which are the measurements given the model parameters (i.e. the forward
+%problem).  $P(A|B)$ is the posterior probability that event $A$ will occur
+%given a known result for $B$, which are the predicted model parameters given
+%the measurements (i.e., the inverse problem) \cite{inverse_theory,
+%gentle_bayes}. 
 
-%This is can be mapped easily to the inverse physical system problem scenario.
-%$A$ would represent an occurence of a parameter in the model space, and $B$
-%would represent the measurement of some value. Thus, $P(A)$ is the probability
-%of a parameter existing without any knowledge of $B$. This is known as the prior
-%probability, usually given by some theory about the system. $P(B)$ is the
-%probability of some measurement existing without any knowledge of $A$. This is
-%known as the marginal likelihood, which is some homogeneous concept for the
-%potential measurements that could be made (this only serves to scale to absolute
-%probabilities and does not affect the relative probabilities). The likelihood,
-%$P(B|A)$, is the chance that a measurement is observed from a given parameter,
-%representing the forward problem.  Lastly, the posterior probability is the
-%chance of some parameter existing given some measurement, representing the
-%inverse problem solution \cite{inverse_theory, gentle_bayes}.  
+This is can be mapped easily to the inverse physical system problem scenario.
+$A$ would represent an occurence of a parameter in the model space, and $B$
+would represent the measurement of some value. Thus, $P(A)$ is the probability
+of a parameter existing without any knowledge of $B$. This is known as the
+prior probability, usually given by some theory about the system. $P(B)$ is the
+probability of some measurement existing without any knowledge of $A$. This is
+known as the marginal likelihood, which is some homogeneous concept for the
+potential measurements that could be made (this only serves to scale to
+absolute probabilities and does not affect the relative probabilities). The
+likelihood, $P(B|A)$, is the chance that a measurement is observed from a given
+parameter, representing the forward problem.  Lastly, the posterior probability
+is the chance of some parameter existing given some measurement, representing
+the inverse problem solution \cite{inverse_theory, gentle_bayes}.  
 
 Given the above, it is more intuitive to consider the conceptual version of
 Bayes' theorem in Equation \ref{eq:bayes_words}.

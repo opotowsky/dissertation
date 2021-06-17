@@ -160,7 +160,7 @@ database in this study will be created from simulations via the \gls{SCALE}
 \cite{scale} system using \gls{ORIGEN} \cite{origen, origenarp}. This is the
 first process shown in Figure \ref{fig:intromethod}, referred to as training
 data because this is what input information is called in \gls{ML}. It is
-covered in Section \ref{sec:snfsim}.
+covered in Section \ref{sec:training}.
 
 \begin{figure}[!hbt]
   \makebox[\textwidth][c]{\includegraphics[width=0.3\linewidth]{./chapters/intro/methodology_intro.png}}
@@ -184,19 +184,19 @@ this would warrant further studies and perhaps be field-applicable.
 The third step is to choose a method that performs model creation via
 statistical learning.  Statistical learners have varied strengths and
 weaknesses based on what is being predicted and how they implement
-optimization. Outlined in Section \ref{sec:algs} are three methods:
-\textit{k}-Nearest Neighbors, Decision Trees, and \gls{MLL} calculations. The
-first two are implemented via a python \gls{ML} library, scikit-learn
-\cite{scikit}. The \gls{MLL} method was originally developed for similar
-attribution work \cite{mll_method, mll_sensitivity, mll_validate} and was
-implemented in python.
+optimization. Introduced in Section \ref{sec:algs} and implemented in Section
+\ref{sec:statmodel} are three methods: \textit{k}-Nearest Neighbors, Decision
+Trees, and \gls{MLL} calculations. The first two are implemented via a python
+\gls{ML} library, scikit-learn \cite{scikit}. The \gls{MLL} method was
+originally developed for similar attribution work \cite{mll_method,
+mll_sensitivity, mll_validate} and was implemented in python.
 
 After the training is complete, the results of each models' predictions must be
 evaluated according to their prediction performance, denoted as the fourth
 process in Figure \ref{fig:intromethod}.  The machine-learned model predicts
 the parameters of a previously unseen test set.  The difference between the
 model predictions and the actual simulated parameters is known as the testing
-error or prediction error. \todo[inline]{link section} 
+error or prediction error. This is outlined in Section \ref{sec:eval}. 
 
 Thus, ultimately, this research protocol is designed to answer the question
 \textit{How does the ability to determine forensic-relevant spent nuclear fuel
@@ -218,22 +218,19 @@ prediction errors ($y_{true}$ versus $y_{pred}$) will be studied to draw
 conclusions about the capability of statistical methods to inform nuclear
 material attribution with less precise detection techniques.
 
-\todo[inline]{update everything below} 
-
 The necessary background is covered in Chapter \ref{ch:litrev}.  First, an
 introduction to the broader field of nuclear forensics is in Section
 \ref{sec:nfoverview} to place this work in the context of the technical mission
 areas. After that, a short discussion of the field of \gls{ML}, the algorithms
-used, and validation methods are in Section \ref{sec:mlback}.  Section
-\ref{sec:fcsim} includes information about the software used to generate the
-training data and perform the predictions.  Lastly, a review of statistical
-methods being used in studies of forensics analysis is covered in Section
-\ref{sec:stats4nf}. 
+used, and model perfomance are in Section \ref{sec:mlback}.  Lastly, a review
+of statistical methods being used in studies of forensics analysis is covered
+in Section \ref{sec:stats4nf}. 
 
-After the existing work is discussed, the methodology and a demonstration of
-the experimental components is introduced next in Chapter \ref{ch:method}.
-This will cover the simulated training data in Section \ref{sec:training}, the
-the details for training models in Section \ref{sec:statmodel}, and the process
-of model evaluation in Section \ref{sec:valid}.  
+After the existing work is discussed, the methodology and implementation of the
+experimental components is introduced next in Chapter \ref{ch:method}.  This
+will cover the simulated training data in Sections \ref{sec:training} and
+\ref{sec:inforeduc}, the the details for training models in Section
+\ref{sec:statmodel}, and the process of model evaluation in Section
+\ref{sec:eval}.
 
-Finally, 
+\todo[inline]{update with results sections} 

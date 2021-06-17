@@ -1,3 +1,6 @@
+
+\todo[inline]{many updates needed here}
+
 Although the body of literature on the area of proposed research is not
 expansive, there have been a number of relevant studies on the prediction of
 forensically relevant categories or quantities of nuclear materials using
@@ -53,29 +56,23 @@ extends that study to real measured samples from the \gls{SFCOMPO} database
 reliable discrimination between \gls{SNF} from \glspl{PWR} and \glsreset{BWR}
 \glspl{BWR}. 
 
-The most closely related work to this study involves not only statistical
-methods but an investigation of those methods when faced with information
-reduction via random nuclide measurement errors in the training data set
-\cite{dayman_feasibility_2013}.  Additionally, feature reduction was
-investigated by using various nuclide compositions: the top 200 nuclides by
-concentration in each vector, fission products only, and a \gls{PCA}-derived
-shortened nuclide list.  Three methods were compared. First and second, the
-nearest neighbor algorithm using both $L_1$ (sum of absolute differences of
-Cartesian coordinates) and $L_2$ norms for measuring distance between test data
-points classified reactor type and predicted burnup.  Third, ridge regression
-with an $L_2$ norm for regularization was only applied to burnup prediction. In
-both classification and regression cases, using the fission products nuclide
-list with both nearest neighbor methods performed the best. All other nuclide
-lists quickly devolved to random guesses with an increase in nuclide error in
-the case of reactor prediction, and more than 100\% error in the case of burnup
-prediction.
+An important paper that greatly influenced the development of this study
+involves not only statistical methods but an investigation of those methods
+when faced with information reduction via random nuclide measurement errors in
+the training data set \cite{dayman_feasibility_2013}.  Additionally, feature
+reduction was investigated by using various nuclide compositions: the top 200
+nuclides by concentration in each vector, fission products only, and a
+\gls{PCA}-derived shortened nuclide list.  Three methods were compared. First
+and second, the nearest neighbor algorithm using both $L_1$ (sum of absolute
+differences of Cartesian coordinates) and $L_2$ norms for measuring distance
+between test data points classified reactor type and predicted burnup.  Third,
+ridge regression with an $L_2$ norm for regularization was only applied to
+burnup prediction. In both classification and regression cases, using the
+fission products nuclide list with both nearest neighbor methods performed the
+best. All other nuclide lists quickly devolved to random guesses with an
+increase in nuclide error in the case of reactor prediction, and more than
+100\% error in the case of burnup prediction.
 
 For reliable prediction, it seems to be promising to use actinides
 \cite{nicolaou_2006, nicolaou_2014} and/or fission products
 \cite{dayman_feasibility_2013} for domain knowledge-based feature reduction.
-However, this work intends to still investigate statistical methods for
-dimensionality reduction, e.g., \gls{PCA}. This could be beneficial in
-prediction of burnup or other reactor parameters, or could be useful in other
-ways, such as visualization or discovering new correlations among \gls{SNF}
-properties as new reactor technologies are deployed.
-

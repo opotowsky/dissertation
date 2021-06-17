@@ -1,0 +1,116 @@
+After a model is trained, its performance must be evaluated. The following
+discusses the considerations taken for the evaluation of the prediction
+performance for the algorithms used in this work. 
+
+\gls{ML} algorithms are heavily dependent on the training inputs and algorithm
+parameters given to them, such as training set sizes, regularization (defined
+below in Section \ref{sec:complexity}), number of features in the training set,
+algorithm hyperparameters, etc.  To obtain reliable models, one must both
+choose or create a training set carefully and study the impact of various
+algorithm parameters on the error. Various error metrics are first covered in
+Section \ref{sec:testerr} before the causes of error are discussed in Section
+\ref{sec:complexity}.
+
+\subsubsection{Testing Error}
+\label{sec:testerr}
+
+The creation of an \gls{ML} model is a hidden process. Although the model
+emerges from a black box, there are ways to evaluate the generalization (i.e.,
+prediction) capability of it.  This is done by removing a small portion of the
+database for use as a testing set.  The rest of the data set is known as the
+training set and is used to train a model. After training, the test set is used
+to calculate the model's generalization error.  The generalization error is
+typically referred to as the \textit{testing error}, as it is measuring the
+ability of the model to predict future cases that were not introduced in the
+training phase.  
+
+In addition to evaluating a single learned model, it is beneficial to compare
+models. Moreover, there are potential degeneracies in the solution space. This
+is because most inverse problems are \textit{ill-posed}, because the solution
+is not guaranteed to be unique \cite{skutnik_2016}.  Evaluating not only the
+solution, but the confidence in the solution, is therefore prudent. While the
+two scikit-implemented aglorithms do not provide this information, the
+\gls{MLL} calculation method provides a likelihood with an uncertainty. This
+provides a measure of distinguishability that many machine learning approaches
+do not provide. \todo[inline]{finish this thought after you write the MLL
+section}
+
+\todo[inline]{write error metric section}
+\noindent \textbf{Reactor Type Classification}
+
+The following will be covered in order to evaluate the reactor type
+classification task:
+\begin{itemize}
+  \item Accuracy metrics
+  \item Confusion matrices 
+  \item Reciever operating characteristic curves
+\end{itemize}
+
+\begin{equation}
+  \textit{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)
+\end{equation}
+
+\begin{equation}
+  \textit{balanced-accuracy}(y, \hat{y}, w) = \frac{1}{\sum{\hat{w}_i}} \sum_i 1(\hat{y}_i = y_i) \hat{w}_i
+\end{equation}
+\[ \textit{where: } \hat{w}_i = \frac{w_i}{\sum_j{1(y_j = y_i) w_j}} \]
+
+\noindent \textbf{Regression Mean Error Calculations}
+
+Mean Absolute Error:
+\begin{equation}
+  \textit{MAE}(y, \hat{y}) = \frac{1}{n_{\text{samples}}} \sum_{i=0}^{n_{\text{samples}}-1} \left| y_i - \hat{y}_i \right|
+\end{equation}
+
+Median Absolute Error:
+\begin{equation}
+  \textit{MedAE}(y, \hat{y}) = \text{median}(\mid y_1 - \hat{y}_1 \mid, \ldots, \mid y_n - \hat{y}_n \mid)
+\end{equation}
+
+\subsubsection{Model Complexity}
+\label{sec:complexity}
+
+In statistical learning, there are two sources of error that need to be
+simultaneously minimized: bias and variance. Bias is caused by simplifications
+in the model, so the error is caused by missed relationships in the data; high
+bias is an indication of an underfit model.  Variance is caused by including
+random noise in the model, so the error is caused by oversensitivity to that
+noise; high variance is an indication of an overfit model. 
+
+\begin{figure}[!htb]
+  \makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{./chapters/litrev/BVtradeoff.png}}
+  \caption{Schematic showing the sources of error, bias and variance, and how 
+           they behave with respect to model complexity.}
+  \label{fig:bvtradeoff}
+\end{figure}
+
+Figure \ref{fig:bvtradeoff} shows the tradeoff between the bias and variance.
+The shape of the total error curve has a minimum that we seek to achieve with
+our model. Some bias is desired in order to generalize to future unknown data.
+But some variance is also positive for the model because it captures the
+relationships in the data that the bias counteracts. 
+
+Regularization:
+\todo[inline]{Move the text here from wherever you have it stashed}
+
+To evaluate these input and parameter variations, diagnostic plots show the
+errors between the predicted burnup values and the actual burnup values with
+respect to some variable on the \textit{x}-axis.  
+
+These two errors are plotted with respect to training set size (learning
+curves) and the algorithm parameters governing model complexity (validation
+curves) to provide insight into the model fitness. 
+Perhaps the training set was
+not representative of the actual data space, whereas non-statistical methods do
+not rely on the data space for results. 
+To both understand the performance of
+the models, the results are then evaluated for over- or under-fitting. 
+
+\todo[inline]{make sure i.i.d. is discussed}
+The training set size must be large and diverse enough to be considered
+\gls{i.i.d.} because most \gls{ML} algorithms are developed upon this
+assumption. Sometimes this is not possible, and the training data are skewed,
+i.e., a portion of the data is over-represented. This must be handled
+explicitly, but since each algorithm handles skewed data differently, it is
+currently beyond the scope of this work. 
+
