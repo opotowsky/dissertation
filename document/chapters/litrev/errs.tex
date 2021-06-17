@@ -14,13 +14,13 @@ Section \ref{sec:testerr} before the causes of error are discussed in Section
 \subsubsection{Testing Error}
 \label{sec:testerr}
 
-The creation of an \gls{ML} model is a hidden process. Although the model
-emerges from a black box, there are ways to evaluate the generalization (i.e.,
-prediction) capability of it.  This is done by removing a small portion of the
-database for use as a testing set.  The rest of the data set is known as the
-training set and is used to train a model. After training, the test set is used
-to calculate the model's generalization error.  The generalization error is
-typically referred to as the \textit{testing error}, as it is measuring the
+The creation of an \gls{ML} model is (usually) a hidden process. Although the
+model emerges from a black box, there are ways to evaluate the generalization
+(i.e., prediction) capability of it.  This is done by removing a small portion
+of the database for use as a testing set.  The rest of the data set is known as
+the training set and is used to train a model. After training, the test set is
+used to calculate the model's generalization error.  The generalization error
+is typically referred to as the \textit{testing error}, as it is measuring the
 ability of the model to predict future cases that were not introduced in the
 training phase.  
 
@@ -35,7 +35,7 @@ provides a measure of distinguishability that many machine learning approaches
 do not provide. \todo[inline]{finish this thought after you write the MLL
 section}
 
-\todo[inline]{write error metric section}
+\todo[inline]{metrics discussion here, copied in some math}
 \noindent \textbf{Reactor Type Classification}
 
 The following will be covered in order to evaluate the reactor type
@@ -67,6 +67,8 @@ Median Absolute Error:
   \textit{MedAE}(y, \hat{y}) = \text{median}(\mid y_1 - \hat{y}_1 \mid, \ldots, \mid y_n - \hat{y}_n \mid)
 \end{equation}
 
+\todo[inline]{as multiple ppl pointed out, MAPE will also be useful}
+
 \subsubsection{Model Complexity}
 \label{sec:complexity}
 
@@ -75,10 +77,13 @@ simultaneously minimized: bias and variance. Bias is caused by simplifications
 in the model, so the error is caused by missed relationships in the data; high
 bias is an indication of an underfit model.  Variance is caused by including
 random noise in the model, so the error is caused by oversensitivity to that
-noise; high variance is an indication of an overfit model. 
+noise; high variance is an indication of an overfit model. What follows is a
+discussion on error considerations that all reduce to one concept: how
+\textit{complex should a model be} to best predict a previously unseen test
+sample?
 
 \begin{figure}[!htb]
-  \makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{./chapters/litrev/BVtradeoff.png}}
+  \makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{./chapters/litrev/BVtradeoff.png}}
   \caption{Schematic showing the sources of error, bias and variance, and how 
            they behave with respect to model complexity.}
   \label{fig:bvtradeoff}
@@ -90,27 +95,43 @@ our model. Some bias is desired in order to generalize to future unknown data.
 But some variance is also positive for the model because it captures the
 relationships in the data that the bias counteracts. 
 
-Regularization:
-\todo[inline]{Move the text here from wherever you have it stashed}
-
-To evaluate these input and parameter variations, diagnostic plots show the
-errors between the predicted burnup values and the actual burnup values with
-respect to some variable on the \textit{x}-axis.  
-
-These two errors are plotted with respect to training set size (learning
-curves) and the algorithm parameters governing model complexity (validation
-curves) to provide insight into the model fitness. 
-Perhaps the training set was
-not representative of the actual data space, whereas non-statistical methods do
-not rely on the data space for results. 
-To both understand the performance of
-the models, the results are then evaluated for over- or under-fitting. 
-
-\todo[inline]{make sure i.i.d. is discussed}
+\todo[inline]{transition}
 The training set size must be large and diverse enough to be considered
 \gls{i.i.d.} because most \gls{ML} algorithms are developed upon this
 assumption. Sometimes this is not possible, and the training data are skewed,
 i.e., a portion of the data is over-represented. This must be handled
 explicitly, but since each algorithm handles skewed data differently, it is
-currently beyond the scope of this work. 
+currently beyond the scope of this work. Instead, attempts were made to best
+create an \gls{i.i.d.} training set, which is covered in Section
+\ref{sec:snflbls}.
+
+\noindent \textbf{Regularization:}
+\todo[inline]{Move the text here from wherever you have it stashed}
+
+\noindent \textbf{Diagnostic Plots:} 
+\todo[inline]{May or may not include in results, so may or may not include
+this. Figures excluded for now.}
+
+Diagnostic plots show the testing errors with respect to some variable on the
+\textit{x}-axis.  Typically this variable is related in some way to the model
+complexity. This provides insight into the model's fitness, and whether small 
+tweaks can be made to increase bias or variance to improve testing performance.
+Put another way, these approaches can evaluate under- or over-fitting.
+
+\textit{Learning curves} evaluate the number of training set observations to
+include in the training phase. This is relevant in a scenario like this work
+where the training set is large (large being a relative term).  The
+\textit{x}-axis for learning curves is thus the percentage of the training set
+used, or the absolute number of observations included for training. 
+
+\textit{Validation curves} evaluate algorithm hyperparameters that govern model
+complexity. This is a good best-practice to implement whether or not the model 
+is performing poorly, as a check against overfitting. 
+
+Another area worthy of investigation is the other dimension of the training
+set: the number of features included for model training. This is not usually a
+value that would be plotted on the \textit{x}-axis of a diagnostic plot (unless
+one's data is predisposed to this kind of study), but is considered in this
+work. The feature set selection is discussed in Sections \ref{sec:snffeats} and
+\ref{sec:inforeduc}.
 
