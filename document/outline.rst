@@ -52,6 +52,7 @@ Chapter 3
       - Regression: metrics choices informed by results (distribution of absolute error), but chronologically makes sense here. 
    - SFCOMPO (details of the testing set, missing values, etc)
    - Maybe: Diagnostic Curves
+   - another option: look at regression performance wrt reactor type
    - Discussion of features distributions here? or above? or below in alg performance discussion? 
 
 ---------
