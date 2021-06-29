@@ -34,50 +34,66 @@ Chapter 2
 ---------
 Chapter 3
 ---------
-**Methodology and Implementation**
+**Experiment 1 : on direct isotopics**
 
 - Training Data Simulations
    - FC Sim / Simulation Fidelity
    - Labels
    - Features
-- Information Reduction 
-   - Nuclide Masses : randomly applied uniform error
-   - Gamma Spectra (GADRAS) : covers all info reduc steps + counting error implementation
+- Information Reduction: Nuclide Masses
+   - Randomly applied uniform error
+   - Diff btw implementation for scikit and mll
 - ML Implementation (?CHTC?, ?testing?)
-   - Scikit Learn
+   - Scikit Learn (incl hyperparam optimization)
    - Max Likelihood Calcs
 - Performance Evaluation 
    - Error metrics choices (move discussion of Ch 2 metrics choices to here)
-      - Rxtr type discussion
-      - Regression: metrics choices informed by results (distribution of absolute error), but chronologically makes sense here. 
-   - SFCOMPO (details of the testing set, missing values, etc)
+      - Rxtr type discussion. Acc, BalAcc, Conf Matrix. ROC TBD.
+      - Regression: metrics choices informed by results (distribution of absolute error), 
+        but chronologically makes sense here. Include mean/median absolute and relative errors
+   - SFCOMPO 
+      - details (spread of params) of the testing set
+      - 2 treatments of missing values
    - Maybe: Diagnostic Curves
-   - another option: look at regression performance wrt reactor type
    - Discussion of features distributions here? or above? or below in alg performance discussion? 
-
----------
-Chapter 4
----------
-**Experimental Results**
-
-- Experiment 1 : Scikit + MLL on isotopics; SFCOMPO comparison
-   - Quick overview (essentially outline relevant processes from Ch 3)
+- Results
    - Prediction Error WRT Random Injected Error
-      - dicuss alg performance. Include mean and median absolute errors (forthcoming in next batch of results)
-      - might want to show learning curves to discuss generalizability of traditional ML methods versus MLL
-      - would a full likelihood calc w predictions be a good addition to the story or a distraction?
+      - Discuss alg performance, and different conclusions from different error metrics 
+      - Look at regression performance wrt rxtr type, and compare with results where rxtr type is already known
+      - MAPE wrt true Y
+      - Maybe: show learning curves to discuss generalizability of traditional ML methods versus MLL
+      - Would a full likelihood calc w predictions be a good addition to the story or a distraction? (I think the latter)
    - SFCOMPO Results
       - MLL does better with null (0) values, Scikit does better with imputed null values.
       - Rxtr type prediction is quite poor: investigate? 
       - Is there any utility in discussing a few cases in detail?
-- Experiment 2 : Scikit + MLL on processed spectra
-   - Quick overview (essentially outline relevant processes from Ch 3)
+
+---------
+Chapter 4
+---------
+**Experiment 2 : on processed gamma spectra**
+
+- Training Data Simulations
+   - Reference back to labels
+   - Features
+- Information Reduction: Gamma Spectra (GADRAS) 
+   - Info reduc steps: acts -> gammas -> drf/spectra -> choose energy windows -> processed spectra
+   - Counting error implementation (same diff as above between mll and scikit)
+- ML Implementation (Reference back, no differences here?) 
+- Performance Evaluation 
+   - Reference back
+   - Hyperparam optimization (slight diff)
    - Explanation of plots 
       - esp the x-axis
       - "baselines" and "goal lines"
+- Results
    - Prediction Error WRT Detector
-      - 
-      - check on variation in decision tree performance among pred types. this is likely from the alg hyperparameters. 
+      - Discuss alg performance, and different conclusions from different error metrics 
+      - MAPE wrt true Y
+      - Options that depend on choices from above, and can't be carried out for every data point: 
+         - Could look at a few cases of performance wrt rxtr type, and maybe could run regression cases on known rxtr type 
+         - Could run a few learning curves
+      - (note to self) check on variation in decision tree performance among pred types after updating alg hyperparams
 
 ---------
 Chapter 5
