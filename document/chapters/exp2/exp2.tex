@@ -1,0 +1,52 @@
+\chapter{Reactor Parameter Prediction Using Processed Gamma Spectra}
+\label{ch:exp2}
+
+This chapter covers the parameter prediction workflow using processed spectra
+as the input features. First, the methodology is updated from that in Chapter
+\ref{ch:exp1} in four sections that correspond to the four steps summarized in
+Figure \ref{fig:method}.  The fifth section presents and discusses the results.
+
+Section \ref{sec:training2} updates the features used in the training set. The
+full description of the simulations and training labels can be found in Section
+\ref{sec:training1}.  This provides a set of \gls{SNF} observations with the
+same known reactor operation parameters, i.e., labels that are to be predicted,
+but new nuclide features.
+
+Next, the information reduction step is covered in Section
+\ref{sec:inforeduc2}.  Here, computational gamma spectra are created via the
+\gls{GADRAS} tool; six detectors with decreasing energy resolution were chosen.
+The approach for processing the spectra from these detectors is outlined here
+as well. 
+
+The increasingly less-precise training data sets are input to a statistical
+learner for the next step: training models.  These use the features (from
+processed spectra) and labels (reactor parameters/simulation inputs) in the
+training data sets to formulate a model.  This is introduced in Section
+\ref{sec:statmodel1}, and the updates for this experiment are in Section
+\ref{sec:statmodel2}. 
+
+Lastly, the algorithms must be evaluated for their prediction performance when
+given test samples (i.e., a new \gls{SNF} measurement that has no labels
+according the to algorithm).  This follows much of what was introduced in
+Section \ref{sec:eval1}, and the updates to the approach is shown in Section
+\ref{sec:eval2}. 
+
+\section{Training Data Simulation}
+\label{sec:training2}
+\input{chapters/exp2/training}
+
+\section{Information Reduction}
+\label{sec:inforeduc2}
+\input{chapters/exp2/inforeduc}
+
+\section{Statistical Learning Implementation}
+\label{sec:statmodel2}
+\input{chapters/exp2/statmodels}
+
+\section{Performance Evaluation}
+\label{sec:eval2}
+\input{chapters/exp2/evaluation}
+
+\section{Results}
+\label{sec:results2}
+\input{chapters/exp2/results}

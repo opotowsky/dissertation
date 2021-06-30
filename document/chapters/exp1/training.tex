@@ -1,6 +1,6 @@
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\linewidth]{./chapters/method/methodology1.png}
+  \includegraphics[width=0.7\linewidth]{./chapters/exp1/methodology1.png}
   \caption{First portion of the flowchart from Figure \ref{fig:method} being 
            described in this section.}
 \end{figure}
@@ -65,10 +65,16 @@ fuel has been benchmarked for the relevant reactors \cite{mox_valid}.  Through
 parameters, and a reactor type, one can quickly perform many different nuclear
 reactor simulations and obtain \gls{SNF} recipes.
 
-\todo[inline]{This section needs more information about ORIGEN-ARP
-validation and maybe some nuclides that are known to perform poorly from ARP
-sims. Can show a generic example from one of my sources, and or an example of
-trying to match an ORIGEN-ARP simulation to an SFCOMPO entry.}
+\todo[inline]{This section needs more information about ORIGEN-ARP validation
+and maybe some nuclides that are known to perform poorly from ARP sims. Can
+show a generic example from one of my sources, and or an example of trying to
+match an ORIGEN-ARP simulation to an SFCOMPO entry. It is important to inform
+that this training set as ground truth is not perfect truth, for some nuclides
+more than others. The goal is not to explain the ARP validation without getting
+too deep.  This tool was necessary for the 500k training set. The prediction
+performance will be impacted by the poorly simulated nucs, so it may be
+worthwhile to note which ones have consistently large sim errors (unless this
+involves getting too deep. P.S. did you mention homogenized core above?}
 
 \subsection{Training Set Labels}
 \label{sec:snflbls}
@@ -77,14 +83,14 @@ trying to match an ORIGEN-ARP simulation to an SFCOMPO entry.}
   \centering
   \begin{subtable}{\linewidth}
     \centering
-    \includegraphics[width=0.5\linewidth]{./chapters/method/trainset4_Orxtrs.png}
+    \includegraphics[width=0.5\linewidth]{./chapters/exp1/trainset4_Orxtrs.png}
     \caption{\gls{ORIGEN} designations for reactor technologies and fuel assembly design.}
     \label{tbl:rxtrtype}
     \vspace*{5mm}
   \end{subtable}
   \begin{subtable}{\linewidth}
     \centering
-    \includegraphics[width=0.75\linewidth]{./chapters/method/trainset4_inputs.png}
+    \includegraphics[width=0.75\linewidth]{./chapters/exp1/trainset4_inputs.png}
     \caption{Simulation parameters for \gls{ORIGEN} input files.}
     \label{tbl:rxtrparam}
   \end{subtable}%
@@ -111,7 +117,7 @@ the reactor power density and the moderator density.  (Water is both the
 moderator and coolant in all simulated reactor types.)
 
 \begin{figure}[!hbt]
-  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/method/histogram_scatter_trainset_viz.png}}
+  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp1/histogram_scatter_trainset_viz.png}}
   \caption{A combination of histograms and scatter plots to visualize the 
            distribution of prediction labels in the training set.}
   \label{fig:trainhist}
@@ -125,7 +131,7 @@ are developed with the assumption that the training set will be
 overfit a certain area in the training space. With the training set design,
 there are predetermined values for enrichment, burnup, and time since
 irradiation.  While there are $21-28$ burnup steps (depending on the reactor
-type) and 120 cooling time steps, there are only 6 values for enrichment. This
+type) and 61 cooling time steps, there are only 6 values for enrichment. This
 creates the risk that the algorithm will end up being unable to generalize
 outside of those discrete values. Therefore, the burnup steps and time steps
 are perturbed randomly in a range that is $\pm10\%$ and $\pm30\%$ from the
@@ -134,25 +140,23 @@ $\pm10\%$, and not more because the cross-section libraries in \gls{ORIGEN-ARP}
 are pre-calculated for those enrichment values, so deviating too far from them
 would result in inaccurate \gls{SNF} simulations. The power densities and
 moderator densities were kept at the values defined in Table
-\ref{tbl:rxtrparam}.  The resulting training set is $1e6$.  Figure
-\ref{fig:trainhist} visualizes the somewhat even distribution of the burnup and
-cooling time parameters, and shows the lack of even distribution of the
-enrichment parameter through a combination of scatter plots and histograms.
-Note that there are many more \gls{BWR}s present in the histograms because of
-the multiple moderator densities simulated (see Table \ref{tbl:rxtrparam})
-\todo[inline]{update trainset size}
+\ref{tbl:rxtrparam}.  The resulting training set is $450240$ (or $4.5e5$)
+entries.  Figure \ref{fig:trainhist} visualizes the somewhat even distribution
+of the burnup and cooling time parameters, and shows the lack of even
+distribution of the enrichment parameter through a combination of scatter plots
+and histograms.  Note that there are many more \gls{BWR}s present in the
+histograms because of the multiple moderator densities simulated (see Table
+\ref{tbl:rxtrparam})
 
 \subsection{Training Set Features}
 \label{sec:snffeats}
 
-\todo[inline]{need to outline two exmpts before this. Writing this with that
-assumption.} The other design decision regarding the training set is related to
-which nuclides to track, i.e., the features.  For the first experiment, nuclide
+The other design decision regarding the training set is related to
+which nuclides to track, i.e., the features.  For this experiment, nuclide
 masses are necessary, and the most common measurements in \gls{SFCOMPO} guide
-the list of nuclides tracked.  In the second experiment, activities of
-radionuclides are necessary to calculate gamma spectra from these values.
+the list of nuclides tracked.  
 
-The first experiment with the 29 nuclide masses listed in Table
+The set of training features of 29 nuclide masses listed in Table
 \ref{tbl:nucmass} was designed with the following reasons in mind.  First, the
 units in mass is to represent the scenario of "perfect knowledge", where a full
 assay is done via mass spectrometry techniques.  Second, this is to have the
@@ -162,48 +166,15 @@ nuclide masses in $grams$, and they are converted to the units of
 \textit{milligrams per gram of initial uranium}, $mg/gU_i$, when the models are
 externally tested against \gls{SFCOMPO}. Lastly, the 29 nuclides chosen were
 based on the presence of measurements in \gls{SFCOMPO}, where these were
-present in at least 100 of the samples in the database.  The test set is
-described in more detail in Section \ref{sec:eval}.
+present in at least 100 of the samples in the database.  The external test set
+is described in more detail in Section \ref{sec:eval}.
 
 \begin{table}[!htb]
   \centering
-  \begin{subtable}{\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{./chapters/method/nucmass_feats.png}
-    \caption{Set of features saved for the first experiment, nuclide masses 
-             measured in $grams$. The bold nuclide masses overlap with the 
-             nuclides in \ref{tbl:nucacts}.}
-    \label{tbl:nucmass}
-    \vspace*{5mm}
-  \end{subtable}
-  \begin{subtable}{\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{./chapters/method/nucacts_feats.png}
-    \caption{Set of features saved for the second experiment, nuclide activities
-             measured in $Curies$. The bold nuclide activities overlap with the 
-             nuclides in \ref{tbl:nucmass}.}
-    \label{tbl:nucacts}
-  \end{subtable}%
-  \caption{Two sets of features saved from the same simulation inputs for the 
-           two main experiments in this work.}
-  \label{tbl:nucfeats}
+  \includegraphics[width=\linewidth]{./chapters/exp1/nucmass_feats.png}
+  \caption{Set of features saved for the first experiment, nuclide masses 
+           measured in $grams$. The bold nuclide masses overlap with the 
+           nuclides in \ref{tbl:nucacts}.}
+  \label{tbl:nucmass}
 \end{table}
-
-The second feature set with the 32 nuclide activities listed in Table
-\ref{tbl:nucacts} was designed with the following reasons in mind. First,
-nuclide activities are the most straightforward units to use for application to
-the \gls{DRF} in the \gls{GADRAS} tool for the second experiment. This process
-is used to obtain gamma spectra for each \gls{SNF} entry in the database, which
-is detailed in \ref{sec:inforeduc}.  Second, these specific nuclides were
-chosen because they fulfill four steps of filtering:
-\begin{enumerate}
-  \item They exist in the 196-long radionuclide list in \gls{GADRAS}.
-  \item They have an activity above $1e-7\:Ci$ (cutoff chosen to filter out
-  nuclides that are unlikely to produce gamma energy peaks).
-  \item They have a half-life longer than $1\:year$ (cutoff chosen based on
-  maximum cooling time of $16\:years$).
-  \item They have at least one gamma energy line above $200\:keV$ (cutoff
-  chosen based on low-energy gamma energy peaks being difficult to discern in
-  some detectors).
-\end{enumerate}
 

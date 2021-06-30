@@ -160,7 +160,7 @@ database in this study will be created from simulations via the \gls{SCALE}
 \cite{scale} system using \gls{ORIGEN} \cite{origen, origenarp}. This is the
 first process shown in Figure \ref{fig:intromethod}, referred to as training
 data because this is what input information is called in \gls{ML}. It is
-covered in Section \ref{sec:training}.
+covered in Section \ref{sec:training1}.
 
 \begin{figure}[!hbt]
   \makebox[\textwidth][c]{\includegraphics[width=0.3\linewidth]{./chapters/intro/methodology_intro.png}}
@@ -169,23 +169,24 @@ covered in Section \ref{sec:training}.
 \end{figure}
 
 The second process shown in Figure \ref{fig:intromethod} is information
-reduction, and is detailed in Section \ref{sec:inforeduc}.  This refers to
-measurement error and/or the measurement type that provides the nuclide
-information, and allows the extension of this workflow to better mimic
-constraints seen in a real-world setting.  For example, the primary example
-here is the reduction of information quality via gamma ray detector, which
-provide less exact nuclide information than, e.g., mass spectrometry.  The
-radionuclide concentrations from the simulations can be converted into gamma
-energies, which then undergo a detector response calculation to represent real
-as-measured gamma spectra as closely as possible.  If an algorithm could
-overcome the limitations of gamma detection and still provide useful results,
-this would warrant further studies and perhaps be field-applicable.
+reduction, and is detailed in Sections \ref{sec:inforeduc1} and
+\ref{sec:inforeduc2}.  This refers to measurement error and/or the measurement
+type that provides the nuclide information, and allows the extension of this
+workflow to better mimic constraints seen in a real-world setting.  For
+example, the primary example here is the reduction of information quality via
+gamma ray detector, which provide less exact nuclide information than, e.g.,
+mass spectrometry.  The radionuclide concentrations from the simulations can be
+converted into gamma energies, which then undergo a detector response
+calculation to represent real as-measured gamma spectra as closely as possible.
+If an algorithm could overcome the limitations of gamma detection and still
+provide useful results, this would warrant further studies and perhaps be
+field-applicable.
 
 The third step is to choose a method that performs model creation via
 statistical learning.  Statistical learners have varied strengths and
 weaknesses based on what is being predicted and how they implement
 optimization. Introduced in Section \ref{sec:algs} and implemented in Section
-\ref{sec:statmodel} are three methods: \textit{k}-Nearest Neighbors, Decision
+\ref{sec:statmodel1} are three methods: \textit{k}-Nearest Neighbors, Decision
 Trees, and \gls{MLL} calculations. The first two are implemented via a python
 \gls{ML} library, scikit-learn \cite{scikit}. The \gls{MLL} method was
 originally developed for similar attribution work \cite{mll_method,
@@ -196,7 +197,7 @@ evaluated according to their prediction performance, denoted as the fourth
 process in Figure \ref{fig:intromethod}.  The machine-learned model predicts
 the parameters of a previously unseen test set.  The difference between the
 model predictions and the actual simulated parameters is known as the testing
-error or prediction error. This is outlined in Section \ref{sec:eval}. 
+error or prediction error. This is outlined in Section \ref{sec:eval1}. 
 
 Thus, ultimately, this research protocol is designed to answer the question
 \textit{How does the ability to determine forensic-relevant spent nuclear fuel
@@ -207,30 +208,57 @@ available?}.
 
 The main purpose of this work is to evaluate the utility of statistical methods
 as an approach to determine nuclear forensics-relevant quantities as less
-information is available. \Gls{ML} algorithms are used to train models to
-provide these categories (reactor type) and values (burnup, enrichment, and
-time since irradiation) from the available information.  The training data is
-simulated using \gls{ORIGEN}, which provides an array of nuclide measurements
-as the features ($X$) and the parameters of interest ($y$) are provided from
-the simulation inputs. Information reduction is carried out using artificially
-injected random error or computationally generated gamma spectra. The
-prediction errors ($y_{true}$ versus $y_{pred}$) will be studied to draw
-conclusions about the capability of statistical methods to inform nuclear
-material attribution with less precise detection techniques.
+information is available. \Gls{ML} algorithms (\textit{k}-Nearest Neighbors,
+Decision Trees, and \gls{MLL} calculations) are used to train models to provide
+these categories (reactor type) and values (burnup, enrichment, and time since
+irradiation) from the available information.  The training data is simulated,
+which provides an array of nuclide measurements as the features ($X$). The
+prediction parameters of interest ($y$) are provided from the simulation
+inputs. Information reduction on $X$ is carried out using artificially injected
+random error or computationally generated gamma spectra. The prediction errors
+($y_{true}$ versus $y_{pred}$) will be studied to draw conclusions about the
+capability of statistical methods to inform nuclear material attribution with
+less precise detection techniques.
 
 The necessary background is covered in Chapter \ref{ch:litrev}.  First, an
 introduction to the broader field of nuclear forensics is in Section
 \ref{sec:nfoverview} to place this work in the context of the technical mission
 areas. After that, a short discussion of the field of \gls{ML}, the algorithms
-used, and model perfomance are in Section \ref{sec:mlback}.  Lastly, a review
-of statistical methods being used in studies of forensics analysis is covered
-in Section \ref{sec:stats4nf}. 
+used, and model perfomance considerations are in Section \ref{sec:mlback}.
+Lastly, a review of statistical methods being used in studies of forensics
+analysis is covered in Section \ref{sec:stats4nf}. 
 
-After the existing work is discussed, the methodology and implementation of the
-experimental components is introduced next in Chapter \ref{ch:method}.  This
-will cover the simulated training data in Sections \ref{sec:training} and
-\ref{sec:inforeduc}, the the details for training models in Section
-\ref{sec:statmodel}, and the process of model evaluation in Section
-\ref{sec:eval}.
+After the existing work is discussed, the first experimental procedure is
+outlined in Chapter \ref{ch:exp1}: Reactor Parameter Prediction Using Nuclide
+Masses.  This experiment is done as a demonstration of the methodology with the
+"perfect knowledge" of nuclide masses. These measurements also undergo
+information reduction by way of randomly applied uniform error. The performance
+of test cases drawn from the training data is presented and discussed, as well
+as the performance of real external test cases of nuclide concentration
+measurements.  The methodology and implementation of the experimental
+components are introduced in the first four subsections: the simulated training
+data is in Section \ref{sec:training1}, the information reduction is in Section
+\ref{sec:inforeduc1}, the the details for training models are in Section
+\ref{sec:statmodel1}, and the process of model evaluation is in Section
+\ref{sec:eval1}. The results of the first experiment are presented in Section
+\ref{sec:results1}, with the random error injection results in Section
+\ref{sec:randerr} and the performance using a real world set of test cases in
+Section \ref{sec:sfcompo}.
 
-\todo[inline]{update with results sections} 
+Next, the second experimental procedure is explored in Chapter \ref{ch:exp2}:
+Reactor Parameter Prediction Using Processed Gamma Spectra.  This experiment's
+purpose is to probe the usefulness of field-deployable detectors for giving
+rapid information about presumed \gls{SNF}. The information reduction is
+achieved by using computational gamma spectra of various detectors with
+decreasing detector energy resolution.  The performance of the prediction of
+reactor parameters is measured by using test cases drawn from the training set,
+where there is a training set for each detector in this study.  The methodology
+follows the same workflow as the first experiment, but updates to the
+components will be covered: the new training set features are in Section
+\ref{sec:training2}, the information reduction from full nuclide knowledge to
+processed gamma spectra is in Section \ref{sec:inforeduc2}, the changes to the
+training models are in Section \ref{sec:statmodel2}, and the additions to the
+process of model evaluation are in Section \ref{sec:eval2}.  The results of the
+second experiment are presented in Section \ref{sec:results2}.
+
+\todo[inline]{update w last chapter} 

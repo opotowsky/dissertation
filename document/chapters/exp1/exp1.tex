@@ -1,0 +1,75 @@
+\chapter{Reactor Parameter Prediction Using Nuclide Masses}
+\label{ch:exp1}
+
+This chapter covers the parameter prediction workflow using nuclide masses as
+the input features. First, the methodology is introduced by detailing each
+experimental component and its implementation.  This is split into four
+sections, which correspond to the four steps summarized in Figure
+\ref{fig:method}. The fifth section presents and discusses the results.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.7\linewidth]{./chapters/exp1/methodology.png}
+  \caption{Flowchart of the experimental methodology and the way each step is being implemented.}
+  \label{fig:method}
+\end{figure}
+
+Section \ref{sec:training1} discusses how the training data set is obtained
+through simulations and computational means. The initial training data
+simulated via \gls{ORIGEN} is detailed in Section \ref{sec:training1} This
+provides a set of \gls{SNF} observations with known reactor operation
+parameters, i.e., labels that are to be predicted. The four labels being
+predicted are as follows:
+\begin{enumerate}
+  \item The classification of the \textbf{reactor type} is one of the three
+  most common commercial power reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}.
+  \item The \textbf{burnup} describes how much energy was produced by the fuel
+  and has the units : $MWd/MTU$ or $GWd/MTU$, \textit{mega (or giga) watt-days
+  per metric ton of initial uranium}.
+  \item The \textbf{enrichment} is the percentage of \gls{U235} with respect to
+  the entire amount of uranium in the fuel: $\%U235$. 
+  \item Lastly, the \textbf{time since irradiation}, or cooling time, is
+  defined as how long the fuel has been out of the reactor core: $days$ or
+  $years$.
+\end{enumerate}
+
+Next, the information reduction step is covered in Section
+\ref{sec:inforeduc1}, where uniform error is randomly applied. After this, the
+less-precise training data sets will be input to a statistical learner for the
+next step: training models.
+
+Section \ref{sec:statmodel1} covers the implementation of the algorithms
+introduced in \ref{sec:algs}. They use the features and labels in the training
+data sets to formulate a model. 
+
+Next, the algorithms must be evaluated for their prediction performance when
+given test samples (i.e., a new \gls{SNF} measurement that has no labels
+according the to algorithm).  The approach is shown in Section \ref{sec:eval1}.
+
+Lastly, the results are shown in Section \ref{sec:results1} First presented is
+the prediction performance of samples that are taken out of the training data
+set to be used as test cases, which is shown in Section \ref{sec:results1}.
+Second, an external test set with nuclide concentraions is used to show how
+this approach performs with real world measurements. This is discussed in
+Section \ref{sec:results1}.  
+\todo[inline]{update last two section refs with subsection labels} 
+
+\section{Training Data Simulation}
+\label{sec:training1}
+\input{chapters/exp1/training}
+
+\section{Information Reduction}
+\label{sec:inforeduc1}
+\input{chapters/exp1/inforeduc}
+
+\section{Statistical Learning Implementation}
+\label{sec:statmodel1}
+\input{chapters/exp1/statmodels}
+
+\section{Performance Evaluation}
+\label{sec:eval1}
+\input{chapters/exp1/evaluation}
+
+\section{Results}
+\label{sec:results1}
+\input{chapters/exp1/results}

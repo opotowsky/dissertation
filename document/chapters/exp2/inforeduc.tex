@@ -1,6 +1,6 @@
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\linewidth]{./chapters/method/methodology2.png}
+  \includegraphics[width=0.7\linewidth]{./chapters/exp1/methodology2.png}
   \caption{Second portion of the flowchart from Figure \ref{fig:method} being 
            described in this section.}
 \end{figure}
@@ -8,61 +8,20 @@
 The overall goal of this project is to determine how much information to what
 quality is needed to train an \gls{ML} model that can provide \gls{SNF}
 attribution by correctly predicting the reactor type, burnup, \gls{U235}
-enrichment, and time since irradiation.  In this section, the process of
-information reduction of the training database is outlined for each experiment. 
+enrichment, and time since irradiation.  In this section, the information
+quality is treated as the information reduction (i.e. decreasing energy
+resolution) of processed gamma spectra in the training database.  This
+detector-based treatment was not applied to the mass measurements from the
+first experiment in Chapter \ref{ch:exp1} because studying measurement
+techniques that can only be done in a lab is not the goal of this work.
+Instead, field-deployable detectors are of interest.
 
-The first experiment introduces the nuclide masses to a uniform uncertainty via
-random error, and the second experiment computes a gamma spectrum for each
-sample in the database from the nuclide activities in Section
-\ref{sec:snffeats}.  This detector-based treatment is not being applied to the
-mass measurements because studying measurement techniques that can only be done
-in a lab is not the goal of this work.  Instead, field-deployable detectors are
-of interest. \todo[inline]{make sure this is mentioned in the intro}
-
-\subsection{1$^{\mathbf{st}}$ Experiment: Nuclide Masses}
-\label{sec:masserr}
-
-The training database for the first experiment is meant to be a proof of
-principle with the developed methodology, and mimic a scenario where there is
-"perfect knowledge" of a set of nuclides of interest. It is still interesting,
-however, to probe how the statistical models perform under increasing error in
-the nuclide measurements. Therefore error and uncertainty were injected into
-the nuclide mass measurements in the training database for the machine learning
-algorithms and \gls{MLL} calculations, respectively. 
-
-\noindent \textbf{Machine Learning Algorithms} : For the \textit{k}-nearest
-neighbor and decision tree algorithms, a uniform error is applied randomly to
-each nuclide mass as follows.  For a maximum error $E_{max}$ between the values
-of $0.0 < E_{max} < 0.2$, each nuclide mass is peturbed by a random fraction in
-the range: $[1-E_{max},1+E_{max}]$.  Therefore the $0\%$ error case represents
-full knowledge of nuclide masses, and that knowledge slowly decreases up to
-$20\%$. 
-
-\noindent \textbf{Maximum Likelihood Calculations} : For the \gls{MLL}
-calculations, a uniform uncertainty was introduced to each nuclide mass.  Thus,
-each nuclide is given an uncertainty of $5\%$, $10\%$, $15\%$, and $20\%$
-via:
-\begin{equation}
-  \label{eq:mllunc}
-  \sigma_{Log L}^2 = \sum_j \left( 
-                            \frac{r_{j,test} - r_{j,sim}}{\sigma_{j,sim}^2}
-                            \right)^2 
-                            (\sigma_{j,sim}^2 + \sigma_{j,test}^2)
-\end{equation}
-where $r_{j,sim}$ and $r_{j,test}$ are the nuclide measurements for the
-simulated/training set samples and the test samples, respectively, and
-$\sigma_{j,sim}$ and $\sigma_{j,test}$ are their respective standard
-deviations calculated from the four uncertainty levels listed above.
-
-\subsection{2$^{\mathbf{nd}}$ Experiment: Gamma Spectra}
-\label{sec:gamerr}
-
-Moving beyond injecting uniform error to a nuclide mass measurement, the next
-step in information reduction takes place for the second experiment, which uses
-processed gamma spectra for the training database.  The code \gls{GADRAS}
-\cite{gadras} developed at Sandia National Laboratories will provide
-computational gamma spectra.  This adds more than one layer of reduced
-information quality, which are listed here as an outline of the steps taken to
+This process is outlined here for the second experiment, in which a gamma
+spectrum is computed for each sample in the database from the nuclide
+activities in Section \ref{sec:training2}.  
+The code \gls{GADRAS} \cite{gadras} developed at Sandia National Laboratories will provide
+computational gamma spectra.  
+This adds more than one layer of reduced information quality, which are listed here as an outline of the steps taken to
 process the gamma spectra:
 
 \begin{enumerate}
@@ -74,7 +33,7 @@ process the gamma spectra:
 \end{enumerate}
 
 Step \ref{itm:1} covers which radionuclides to include, which was previously
-covered in Section \ref{sec:snffeats}. Step \ref{itm:2} is to obtain a gamma
+covered in Section \ref{sec:training2}. Step \ref{itm:2} is to obtain a gamma
 spectrum for every \gls{SNF} entry in the database. This is done using the
 \gls{GADRAS} tool, which applies a \gls{DRF} to the gamma lines from these
 radionuclides. The input is a nuclide activity vector, and the output is an
@@ -97,11 +56,10 @@ of $20\:minutes$ provides the expected peaks.
 
 \begin{table}[!htb]
   \centering
-  \includegraphics[width=\linewidth]{./chapters/method/gadras_detectors.png}
+  \includegraphics[width=\linewidth]{./chapters/exp2/gadras_detectors.png}
   \caption{Select details of 6 detector setups used to obtain gamma 
            spectra-based training databases.}
   \label{tbl:detsetups}
-\todo[inline]{update this table if live times for nai and labr3 change}
 \end{table}
 
 Training databases were created for the six detectors outlined in Table
@@ -116,7 +74,7 @@ spectra for training and testing, and so these spectra are processed; this is
 step \ref{itm:3} from above, and is outlined as follows.
 
 \begin{figure}[!htb]
-  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/method/energy_window_example.png}}
+  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp2/energy_window_example.png}}
   \caption{Slice of an example gamma spectrum in one of the training databases
            showing the windows over the gamma energy peaks.}
   \todo[inline]{update?}
@@ -127,9 +85,9 @@ Explanation of Step \ref{itm:3} here.
 
 \begin{table}[!htb]
   \centering
-  \includegraphics[width=0.4\linewidth]{./chapters/method/enlist_nucs.png}
+  \includegraphics[width=0.4\linewidth]{./chapters/exp2/enlist_nucs.png}
   \caption{Nuclides that are represented by the gamma energy lines in the two . The entire 
-           set of 11 nuclides belongs to the long list, and the 6 bold nuclides
+           set of 12 nuclides belongs to the long list, and the 7 bold nuclides
            belong to the short list.}
   \label{tbl:enlistnucs}
 \todo[inline]{placeholder list, update me.}
@@ -137,7 +95,7 @@ Explanation of Step \ref{itm:3} here.
 
 Lastly, step \ref{itm:4} involves the inclusion of the counting error for the
 summed energy windows. This is quite simple, as statistical counting error of
-$n$ counts is $\sqrt{n}$.  As in Section \ref{sec:masserr}, this error gets
+$n$ counts is $\sqrt{n}$.  As in Section \ref{sec:inforeduc1}, this error gets
 applied in the same way for the machine learning algorithms, where the uniform
 error is applied randomly within the range $[r-\sqrt{r},r+\sqrt{r}]$ for each
 summed energy window $r$. For the \gls{MLL} calculations, Equation
