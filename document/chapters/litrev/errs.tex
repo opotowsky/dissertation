@@ -67,7 +67,42 @@ Median Absolute Error:
   \textit{MedAE}(y, \hat{y}) = \text{median}(\mid y_1 - \hat{y}_1 \mid, \ldots, \mid y_n - \hat{y}_n \mid)
 \end{equation}
 
-\todo[inline]{as multiple ppl pointed out, MAPE will also be useful}
+Mean Absolute Percentage Error:
+\begin{equation}
+  \textit{MAPE} = 
+\end{equation}
+
+\noindent \textbf{Cross Validation}
+
+\todo[inline]{old text copied in. update, and discuss LOOV for MLL vs k=5 fold CV for scikit} 
+A testing set that would be used during training to give feedback, a
+\textit{\gls{CV} set}, can provide a faster convergence to a satisfactory
+model. As shown in Figure \ref{fig:cverror}, this can be done by splitting the
+data set into three groups: a large training set, a small \gls{CV} set, and a
+small testing set.  However, in practice, multiple rounds of \gls{CV} steps are
+used provide the fastest convergence.  This is referred to as \textit{k-fold
+cross-validation} and allows a user to have all training data entries be a
+testing entry once, bettering model evaluation. 
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.85\linewidth]{./chapters/litrev/cverror.png}
+  \caption{Illustration of Cross-Validation}
+  \label{fig:cverror}
+\end{figure}
+
+Using \gls{CV} provides a \textit{\gls{CV} error} that replaces the testing
+error during analysis.  As illustrated in Figure \ref{fig:cverror}, this splits
+the dataset into $k=3$ subsets. One set is designated as the testing set, and a
+model is trained with the rest. Following the first training phase, another
+begins, this time with a different subset as the testing set.  In total, this
+process in Figure \ref{fig:cverror} is performed $3$ times, giving $3$ models.
+The metrics of model performance are averaged by taking the mean of the
+accuracy/error of predictions.  This provides an additional level of model
+validation than can be achieved with a single testing set. This mean is
+reported as the \gls{CV} error. If the \gls{CV} error is acceptable, then
+training is performed on the entire training data set and can be tested on new
+observations.
 
 \subsubsection{Model Complexity}
 \label{sec:complexity}
@@ -132,6 +167,6 @@ Another area worthy of investigation is the other dimension of the training
 set: the number of features included for model training. This is not usually a
 value that would be plotted on the \textit{x}-axis of a diagnostic plot (unless
 one's data is predisposed to this kind of study), but is considered in this
-work. The feature set selection is discussed in Sections \ref{sec:snffeats} and
-\ref{sec:inforeduc}.
+work. The feature set selection is discussed in Sections \ref{sec:snffeats},
+\ref{training2}, and \ref{sec:inforeduc2}.
 
