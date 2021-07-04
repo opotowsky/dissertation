@@ -70,11 +70,11 @@ and maybe some nuclides that are known to perform poorly from ARP sims. Can
 show a generic example from one of my sources, and or an example of trying to
 match an ORIGEN-ARP simulation to an SFCOMPO entry. It is important to inform
 that this training set as ground truth is not perfect truth, for some nuclides
-more than others. The goal is not to explain the ARP validation without getting
+more than others. The goal is to explain the ARP validation without getting
 too deep.  This tool was necessary for the 500k training set. The prediction
 performance will be impacted by the poorly simulated nucs, so it may be
 worthwhile to note which ones have consistently large sim errors (unless this
-involves getting too deep. P.S. did you mention homogenized core above?}
+involves getting too deep). P.S. did you mention homogenized core above?}
 
 \subsection{Training Set Labels}
 \label{sec:snflbls}
@@ -167,7 +167,7 @@ nuclide masses in $grams$, and they are converted to the units of
 externally tested against \gls{SFCOMPO}. Lastly, the 29 nuclides chosen were
 based on the presence of measurements in \gls{SFCOMPO}, where these were
 present in at least 100 of the samples in the database.  The external test set
-is described in more detail in Section \ref{sec:eval}.
+is described in more detail in Section \ref{sec:sfcompo}.
 
 \begin{table}[!htb]
   \centering

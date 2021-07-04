@@ -5,10 +5,10 @@
 \label{ch:exp1}
 
 This chapter covers the parameter prediction workflow using nuclide masses as
-the input features. First, the methodology is introduced by detailing each
-experimental component and its implementation.  This is split into four
+the input features. The methodology is introduced by detailing each
+experimental component and its implementation. This is split into four
 sections, which correspond to the four steps summarized in Figure
-\ref{fig:method}. The fifth section presents and discusses the results.
+\ref{fig:method}.
 
 \begin{figure}[!ht]
   \centering
@@ -48,14 +48,11 @@ data sets to formulate a model.
 Next, the algorithms must be evaluated for their prediction performance when
 given test samples (i.e., a new \gls{SNF} measurement that has no labels
 according the to algorithm).  The approach is shown in Section \ref{sec:eval1}.
-
-Lastly, the results are shown in Section \ref{sec:results1} First presented is
-the prediction performance of samples that are taken out of the training data
-set to be used as test cases, which is shown in Section \ref{sec:results1}.
-Second, an external test set with nuclide concentraions is used to show how
-this approach performs with real world measurements. This is discussed in
-Section \ref{sec:results1}.  
-\todo[inline]{update last two section refs with subsection labels} 
+First presented is the prediction performance of samples that are taken out of
+the training data set to be used as test cases, which is shown in Section
+\ref{sec:randerr}.  Second, an external test set with nuclide concentraions is
+used to show how this approach performs with real world measurements. This is
+discussed in Section \ref{sec:sfcompo}.  
 
 \section{Training Data Simulation}
 \label{sec:training1}
@@ -69,10 +66,7 @@ Section \ref{sec:results1}.
 \label{sec:statmodel1}
 \input{chapters/exp1/statmodels}
 
-\section{Performance Evaluation}
+\section{Prediction Performance Evaluation}
 \label{sec:eval1}
 \input{chapters/exp1/evaluation}
 
-\section{Results}
-\label{sec:results1}
-\input{chapters/exp1/results}

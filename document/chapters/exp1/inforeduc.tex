@@ -5,33 +5,36 @@
            described in this section.}
 \end{figure}
 
-The overall goal of this project is to determine how much information to what
-quality is needed to train an \gls{ML} model that can provide \gls{SNF}
-attribution by correctly predicting the reactor type, burnup, \gls{U235}
-enrichment, and time since irradiation.  In this section, the information
-quality is treated as the information reduction (i.e., increasing error) of
-nuclide masses in the training database. 
+In this section, the information quality reduction is implemented as increasing
+the error of the nuclide mass measurements in the training database. After
+this, the statistical models will be evaluated as to how they perform under
+increasing error in the nuclide measurements. 
 
 The training database for the first experiment is meant to be a proof of
 principle with the developed methodology, and mimic a scenario where there is
-"perfect knowledge" of a set of nuclides of interest. It is still interesting,
-however, to probe how the statistical models perform under increasing error in
-the nuclide measurements. Therefore error and uncertainty were injected into
-the nuclide mass measurements in the training database for the machine learning
-algorithms and \gls{MLL} calculations, respectively. 
+"perfect knowledge" of a set of nuclides of interest.  But the overall goal of
+this project is to determine how much information to what quality is needed to
+train an \gls{ML} model that can provide \gls{SNF} attribution by correctly
+predicting the reactor type, burnup, \gls{U235} enrichment, and time since
+irradiation.  Therefore error and uncertainty were injected into the nuclide
+mass measurements in the training database for the machine learning algorithms
+and \gls{MLL} calculations, respectively. 
 
-\noindent \textbf{Machine Learning Algorithms} : For the \textit{k}-nearest
-neighbor and decision tree algorithms, a uniform error is applied randomly to
-each nuclide mass as follows.  For a maximum error $E_{max}$ between the values
-of $0.0 < E_{max} < 0.2$, each nuclide mass is peturbed by a random fraction in
-the range: $[1-E_{max},1+E_{max}]$.  Therefore the $0\%$ error case represents
-full knowledge of nuclide masses, and that knowledge slowly decreases up to
-$20\%$. 
+\subsection{Scikit Algorithms}
 
-\noindent \textbf{Maximum Likelihood Calculations} : For the \gls{MLL}
-calculations, a uniform uncertainty was introduced to each nuclide mass.  Thus,
-each nuclide is given an uncertainty of $5\%$, $10\%$, $15\%$, and $20\%$
-via:
+For the \textit{k}-nearest neighbor and decision tree algorithms, a uniform
+error is applied randomly to each nuclide mass as follows.  For a maximum error
+percentage of $E_{max}$, each nuclide mass is peturbed by a random value in the
+range: $[100-E_{max},100+E_{max}]$.  This occurs for 12 error levels between
+$0\% < E_{max} < 20\%$: 0, 0.3, 0.7, 1, 2, 4, 6, 8, 10, 13, 17, 20.  Therefore
+the $0\%$ error case represents full knowledge of nuclide masses, and that
+knowledge slowly decreases up to $20\%$. 
+
+\subsection{Maximum Log-Likelihood Calculations}
+
+For the \gls{MLL} calculations, a uniform uncertainty was introduced to each
+nuclide mass.  Thus, each nuclide is given an uncertainty of 1, 5, 10, 15, and
+20\% via:
 \begin{equation}
   \label{eq:mllunc}
   \sigma_{Log L}^2 = \sum_j \left( 
@@ -41,6 +44,6 @@ via:
 \end{equation}
 where $r_{j,sim}$ and $r_{j,test}$ are the nuclide measurements for the
 simulated/training set samples and the test samples, respectively, and
-$\sigma_{j,sim}$ and $\sigma_{j,test}$ are their respective standard
-deviations calculated from the four uncertainty levels listed above.
-
+$\sigma_{j,sim}$ and $\sigma_{j,test}$ are their respective standard deviations
+calculated from the four uncertainty levels listed above.  \todo[inline]{review
+chosen variables and that they match with what ends up in MLL intro}
