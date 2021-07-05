@@ -39,7 +39,7 @@ Chapter 3
 - Training Data Simulations
    - FC Sim / Simulation Fidelity
    - Labels
-   - Features
+   - Features (Discussion of features distributions here? or below in results discussion?)
 - Information Reduction: Nuclide Masses
    - Randomly applied uniform error
    - Diff btw implementation for scikit and mll
@@ -47,23 +47,15 @@ Chapter 3
    - Scikit Learn (incl hyperparam optimization)
    - Max Likelihood Calcs
 - Performance Evaluation 
-   - Error metrics choices (move discussion of Ch 2 metrics choices to here)
-      - Rxtr type discussion. Acc, BalAcc, Conf Matrix. ROC TBD.
-      - Regression: metrics choices informed by results (distribution of absolute error), 
-        but chronologically makes sense here. Include mean/median absolute and relative errors
+   - Prediction Error WRT Random Injected Error
+      - Rxtr type discussion. BalAcc, Conf Matrices
+      - Regression cases
+      - Show learning curves to discuss generalization of traditional ML methods versus MLL
+      - Preds wrt reactor type, versus preds from already known rxtr type
+      - Would a full likelihood calc w predictions be a good addition to the story or a distraction? (I think the latter)
    - SFCOMPO 
       - details (spread of params) of the testing set
       - 2 treatments of missing values
-   - Maybe: Diagnostic Curves
-   - Discussion of features distributions here? or above? or below in alg performance discussion? 
-- Results
-   - Prediction Error WRT Random Injected Error
-      - Discuss alg performance, and different conclusions from different error metrics 
-      - Look at regression performance wrt rxtr type, and compare with results where rxtr type is already known
-      - MAPE wrt true Y
-      - Maybe: show learning curves to discuss generalizability of traditional ML methods versus MLL
-      - Would a full likelihood calc w predictions be a good addition to the story or a distraction? (I think the latter)
-   - SFCOMPO Results
       - MLL does better with null (0) values, Scikit does better with imputed null values.
       - Rxtr type prediction is quite poor: investigate? 
       - Is there any utility in discussing a few cases in detail?
@@ -79,14 +71,13 @@ Chapter 4
 - Information Reduction: Gamma Spectra (GADRAS) 
    - Info reduc steps: acts -> gammas -> drf/spectra -> choose energy windows -> processed spectra
    - Counting error implementation (same diff as above between mll and scikit)
-- ML Implementation (Reference back, no differences here?) 
+- ML Implementation (Reference back, only differences are hyperparam optimization) 
 - Performance Evaluation 
    - Reference back
    - Hyperparam optimization (slight diff)
    - Explanation of plots 
       - esp the x-axis
       - "baselines" and "goal lines"
-- Results
    - Prediction Error WRT Detector
       - Discuss alg performance, and different conclusions from different error metrics 
       - MAPE wrt true Y
