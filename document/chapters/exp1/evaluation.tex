@@ -9,44 +9,109 @@
 \subsection{Random Error Impacts on Prediction}
 \label{sec:randerr}
 
-As previously introduced in Section \ref{sec:testerr}, the prediction errors
-are compared among the three approaches to understand the performance.
-
-Error metrics being used, implementation details (not really any, just python scripts)
-
-Conf matrix, ROC Curve, Learning curve (Maybe for 1\% and 10\% error cases?)
-
 \begin{figure}[!ht]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_BalAcc_rxtr.png}
-        \caption[]{Caption.}
-        %\label{fig:}
+        \caption{Balanced accuracy of reactor type classification.}
+        \label{fig:randerrA}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_burn.png}
-        \caption[]{Caption.}
-        %\label{fig:}
+        \caption{Negative \gls{MAPE} of burnup regression.}
+        \label{fig:randerrB}
     \end{subfigure}
     \vskip\baselineskip
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_enri.png}
-        \caption[]{Caption.}
-        %\label{fig:}
+        \caption{Negative \gls{MAPE} of \gls{U235} regression.}
+        \label{fig:randerrC}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_cool.png}
-        \caption[]{Caption.}
+        \caption{Negative \gls{MAPE} of time since irradiation regression.} 
+        \label{fig:randerrD}
+    \end{subfigure}
+    \caption{Prediction performance with respect to decreasing information
+             quality in the form of uniform/random error applied to the nuclide 
+             mass measurements in the training set.}
+    \label{fig:randerr}
+\end{figure}
+
+As previously introduced in Section \ref{sec:testerr}, the prediction
+performance is measured by evaluating the accuracy of the reactor type
+classification or the error of the regression cases (burnup, \gls{U235}
+enrichment, cooling time).  These performance metrics for all four prediction
+types are compared across the three algorithms used: \textit{k}-nearest
+neighbors (denoted in plots as \textit{kNN}), decision trees (denoted in plots
+as \textit{Dec Tree} or \textit{DTree}), and \gls{MLL} calculations.  To judge
+the degradation of predictions of the algorithms with increasing nuclide mass
+measurement error (i.e., reduced information quality, detailed in section
+\ref{sec:inforeduc1}), four plots are made with the introduced error on the
+\textit{x}-axis and a prediction performance metric on the \textit{y}-axis.
+Shown in Figure \ref{fig:randerr}, the \textit{y}-axis is always oriented so
+that lower is poorer performance and higher is better performance. This is why
+Figures \ref{fig:randerrB}--\ref{fig:randerrD} present a negative error on the
+\textit{y}-axis.
+\todo[inline]{In order to have consistency in plot presentation w future plots,
+the plots in this section have a small delta-x to show error bars that are
+otherwise hard to see.  Since the x-axis is continuous, this may force a return
+to using the fill-between to visualize error bands instead.}
+
+Figure \ref{fig:randerrA} shows the balanced accuracy of reactor type
+classification, where a score of $1$ is perfect prediction and a score of $0$
+is random classification. The error bars reflect a 99\% confidence interval.
+While the two scikit-learn algorithms follow a very similar path of decreased
+accuracy as the error increases, the \gls{MLL} calculation approach appears to
+be more robust to the nuclide mass measurement error. This behavior is seen in
+all four plots in Figure \ref{fig:randerr}. Another interesting result is that
+the \gls{MLL} calculation performs slightly worse for low errors. If the
+expected measurement errors of nuclide masses in a training database or in a
+test sample can be guaranteed to be better than ~2\%, the \gls{MLL} calculation
+is no longer the obvious preferred choice for reactor type prediction.
+
+Figure \ref{fig:randerrB} demonstrates the first regression performance plot.
+As mentioned, the \textit{x}-axis is negative \gls{MAPE} so that higher is
+always better.  The error bars reflect one standard deviation of the average
+percentage errors.  Again, the \gls{MLL} method is robust to training set error
+but performs slightly worse at low error values.  All three methods calculate
+burnup with a maximum error of 5\% at 20\% error in the training set.  While it
+is difficult to draw an acceptable baseline, this minimum performance level can
+serve as a benchmark for the work presented in Chapter \ref{ch:exp2}. 
+
+Figure \ref{fig:randerrC}
+
+is about 6\%. The error bars reflect one standard deviation of the 
+average percentage errors.
+
+the maximum error of \textit{k}-nearest neighbors reaches nearly 
+30\%, but the other two are under 10\% error. The error bars 
+reflect one standard deviation of the average percentage errors.
+
+
+\begin{figure}[!ht]
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_err01.png}
+        \caption[]{1\% error}
         %\label{fig:}
     \end{subfigure}
-    \caption[]{Caption Caption.}
-    %\label{fig:}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_err10.png}
+        \caption[]{10\% error}
+        %\label{fig:}
+    \end{subfigure}
+    \caption[]{Confusion matrices for reactor type prediction, two different error injection levels.}
+    \label{fig:cm_nuc29}
 \end{figure}
 
 \begin{figure}[!ht]
@@ -78,8 +143,8 @@ Conf matrix, ROC Curve, Learning curve (Maybe for 1\% and 10\% error cases?)
         \caption[]{Caption.}
         %\label{fig:}
     \end{subfigure}
-    \caption[]{Caption Caption.}
-    %\label{fig:}
+    \caption[]{Learning curves.}
+    \label{fig:learns}
 \end{figure}
 
 \begin{figure}[!ht]

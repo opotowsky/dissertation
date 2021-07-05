@@ -83,18 +83,34 @@ involves getting too deep). P.S. did you mention homogenized core above?}
   \centering
   \begin{subtable}{\linewidth}
     \centering
-    \includegraphics[width=0.5\linewidth]{./chapters/exp1/trainset4_Orxtrs.png}
+    \begin{tabular}{@{}lll@{}}
+    \toprule
+      \textbf{PWR} & \textbf{BWR}  & \textbf{PHWR} \\ \toprule
+      CE14x14      & GE7x7-0       & CANDU19       \\
+      W17x17       & Abb8x8-1      & CANDU28       \\
+      S18x18       & Atrium10x10-9 & CANDU37       \\
+      BW15x15      & SVEA64-1      &               \\
+      VVER440      &               &               \\ \bottomrule
+    \end{tabular}
     \caption{\gls{ORIGEN} designations for reactor technologies and fuel assembly design.}
     \label{tbl:rxtrtype}
     \vspace*{5mm}
   \end{subtable}
   \begin{subtable}{\linewidth}
     \centering
-    \includegraphics[width=0.75\linewidth]{./chapters/exp1/trainset4_inputs.png}
+    \begin{tabular}{@{}llll@{}}
+      \toprule
+                              & \textbf{PWR}                     & \textbf{BWR}                     & \textbf{PHWR} \\ \toprule
+      Power Density [MW/MTU]  & 25, 35, 41                       & 10, 22                           & 2.2, 18, 22   \\
+      Burnup [GWd/MTU]        & 2--68                            & 1--68                            & 0.45--12.6    \\
+      Moderator Density [g/cc]& 0.71                             & \{0.1, 0.3, 0.5, 0.7\}           & 0.84          \\
+      Enrichment [\% U235]    & \{0.5, 1.5, 2, 3, 4, 5\}         & \{0.5, 1.5, 2, 3, 4, 5\}         & 0.711         \\
+      Cooling Time [days]     & \multicolumn{3}{c}{\{0--6000\} in 100-day steps}                                    \\ \bottomrule
+    \end{tabular}
     \caption{Simulation parameters for \gls{ORIGEN} input files.}
     \label{tbl:rxtrparam}
   \end{subtable}%
-  \caption{Training set database design using the \gls{SFCOMPO} database as guidance. \cite{sfcompo}}
+  \caption{Training set database design and parameters for \gls{ORIGEN} input files.}
   \label{tbl:train}
 \end{table}
 
