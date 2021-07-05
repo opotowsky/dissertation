@@ -8,42 +8,6 @@
 
 \subsection{Random Error Impacts on Prediction}
 \label{sec:randerr}
-
-\begin{figure}[!ht]
-    \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_BalAcc_rxtr.png}
-        \caption{Balanced accuracy of reactor type classification.}
-        \label{fig:randerrA}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_burn.png}
-        \caption{Negative \gls{MAPE} of burnup regression.}
-        \label{fig:randerrB}
-    \end{subfigure}
-    \vskip\baselineskip
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_enri.png}
-        \caption{Negative \gls{MAPE} of \gls{U235} regression.}
-        \label{fig:randerrC}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_cool.png}
-        \caption{Negative \gls{MAPE} of time since irradiation regression.} 
-        \label{fig:randerrD}
-    \end{subfigure}
-    \caption{Prediction performance with respect to decreasing information
-             quality in the form of uniform/random error applied to the nuclide 
-             mass measurements in the training set.}
-    \label{fig:randerr}
-\end{figure}
-
 As previously introduced in Section \ref{sec:testerr}, the prediction
 performance is measured by evaluating the accuracy of the reactor type
 classification or the error of the regression cases (burnup, \gls{U235}
@@ -76,76 +40,212 @@ expected measurement errors of nuclide masses in a training database or in a
 test sample can be guaranteed to be better than ~2\%, the \gls{MLL} calculation
 is no longer the obvious preferred choice for reactor type prediction.
 
-Figure \ref{fig:randerrB} demonstrates the first regression performance plot.
-As mentioned, the \textit{x}-axis is negative \gls{MAPE} so that higher is
-always better.  The error bars reflect one standard deviation of the average
+Although the balanced accuracy score provides slightly better information about
+classification performance for an imbalanced data set (the training set is
+26.8\% \gls{PWR}, 71.6\% \gls{BWR}, and 1.5\% \gls{PHWR}), it still does not
+provide much detail about what is being misclassified. To probe this further,
+Figure \ref{fig:cm_nuc29} shows two sets of confusion matrices.  The diagonal
+squares are the fraction of true positives for each reactor type, where the
+predicted label (\textit{x}-axis) is equal to the true label (\textit{y}-axis).
+The off diagonal squares are the fraction of false positives for each reactor
+type, where the predicted label is something other than the true label. In
+addition to the numbers being included in the matrices, a colorbar provides
+perceptially uniform shading for these true positive and false positive
+fractions. 
+
+In Figure \ref{fig:cm_nuc29_01}, the three algorithms are presented for the 1\%
+random error case. In Figure \ref{fig:randerrA}, one can see these three data
+points on the plot clustered near the top showing almost-perfect performance.
+(A reminder that the true positive fractions in the confusion matrices do not
+map directly to the balanced accuracy score, which puts more weight on the
+underrepresented classes.) The confusion matrices give more dimension to this
+near-perfect reactor type classification performance. The majority of the
+misclassification is in \gls{PWR}s being classified as \gls{BWR}s: 0.4\% for
+\textit{k}-nearest neighbors and decision trees, and 1.6\% for \gls{MLL}
+calculations. Although, there are also some \gls{BWR}s that are misclassified
+as \gls{PWR}s: 0.1\% for \textit{k}-nearest neighbors and decision trees, and
+0.5\% for \gls{MLL} calculations. The \gls{PWR}/\gls{BWR} distinction is known
+to be a difficult problem\todo{find citation}, so the correct \gls{PHWR}
+classifications are not particularly notable for this discussion.
+
+Figure \ref{fig:cm_nuc29_10} shows confusion matrices for the three algorithms
+for the 10\% random error case. In Figure \ref{fig:randerrA}, one can see these
+three data points on the plot, where the \gls{MLL} point is near a balanced
+accuracy score of 1, and the scikit-learn algorithms both have score of around
+0.93. As with the 1\% error case, the majority of the misclassification is in
+\gls{PWR}s being classified as \gls{BWR}s: 11.0\% for \textit{k}-nearest
+neighbors, 10.3\% for decision trees, and 1.7\% for \gls{MLL} calculations.
+The \gls{BWR}s are being misclassified as \gls{PWR}s at the following
+percentages: 3.4\% for \textit{k}-nearest neighbors, 3.7\% for decision trees,
+and 0.5\% for \gls{MLL} calculations. Note how the performance of the \gls{MLL}
+calculations are nearly the same for both error levels, which is shown by the 
+\gls{MLL} line in Figure \ref{fig:randerrA}.
+
+Figure \ref{fig:randerrB} demonstrates the burnup prediction performance.  As
+mentioned, the \textit{x}-axis is negative \gls{MAPE} so that higher is always
+better.  The error bars reflect one standard deviation of the average
 percentage errors.  Again, the \gls{MLL} method is robust to training set error
 but performs slightly worse at low error values.  All three methods calculate
 burnup with a maximum error of 5\% at 20\% error in the training set.  While it
-is difficult to draw an acceptable baseline, this minimum performance level can
-serve as a benchmark for the work presented in Chapter \ref{ch:exp2}. 
+is difficult to draw a baseline, this minimum performance level can serve as a
+benchmark for the work presented in Chapter \ref{ch:exp2}. 
 
-Figure \ref{fig:randerrC}
+\begin{figure}[!hbt]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_BalAcc_rxtr.png}
+        \caption{Balanced accuracy of reactor type classification with respect 
+                 to random error.}
+        \label{fig:randerrA}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_burn.png}
+        \caption{Negative \gls{MAPE} of burnup regression with respect to 
+                 random error.}
+        \label{fig:randerrB}
+    \end{subfigure}
+    \vskip\baselineskip
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_enri.png}
+        \caption{Negative \gls{MAPE} of \gls{U235} enrichment regression with 
+                 respect to random error.}
+        \label{fig:randerrC}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_cool.png}
+        \caption{Negative \gls{MAPE} of time since irradiation regression with 
+                 respect to random error.} 
+        \label{fig:randerrD}
+    \end{subfigure}
+    \caption{Prediction performance of reactor type, burnup, enrichment, and 
+             time since irradiation with respect to decreasing information
+             quality in the form of uniform/random error applied to the nuclide 
+             mass measurements in the training set.}
+    \label{fig:randerr}
+\end{figure}
 
-is about 6\%. The error bars reflect one standard deviation of the 
-average percentage errors.
-
-the maximum error of \textit{k}-nearest neighbors reaches nearly 
-30\%, but the other two are under 10\% error. The error bars 
-reflect one standard deviation of the average percentage errors.
-
-
-\begin{figure}[!ht]
+\begin{figure}[!htb]
     \centering
     \begin{subfigure}[b]{\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_err01.png}
-        \caption[]{1\% error}
-        %\label{fig:}
+        \caption{Confusion matrices for 1\% error for each algorithm.}
+        \label{fig:cm_nuc29_01}
     \end{subfigure}
     \vskip\baselineskip
     \begin{subfigure}[b]{\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_err10.png}
-        \caption[]{10\% error}
-        %\label{fig:}
+        \caption{Confusion matrices for 10\% error for each algorithm.}
+        \label{fig:cm_nuc29_10}
     \end{subfigure}
-    \caption[]{Confusion matrices for reactor type prediction, two different error injection levels.}
+    \caption{Confusion matrices for reactor type prediction for each algorithm 
+             at two training set error levels: 1\% and 10\%.}
     \label{fig:cm_nuc29}
 \end{figure}
 
-\begin{figure}[!ht]
+Figure \ref{fig:randerrC} shows the trend of \gls{U235} enrichment prediction
+with increasing error in the nuclide mass training set.  The error bars reflect
+one standard deviation of the average percentage errors, and the behavior of
+the \gls{MLL} method in Figure \ref{fig:randerrB} versus the scikit-learn
+algorithms is the same here.  The maximum \gls{MAPE} is about 6\% at 20\%
+training set error. 
+
+Last, the time since irradiation prediction performance for the three
+algorithms with respect to increasing nuclide mass error is pictured in Figure
+\ref{fig:randerrD}.  The error bars reflect one standard deviation of the
+average percentage errors.  The behavior of \textit{k}-nearest neighbors is
+unique here versus the previous two regression categories; whereas the maximum
+prediction \gls{MAPE}s remain well under 10\% for both the decision tree and
+\gls{MLL} methods, the maximum error of \textit{k}-nearest neighbors reaches
+nearly 30\% at 20\% nuclide mass error. \todo[inline]{I'm not sure why this is
+the case, and have not found a way to figure this out yet. In previous
+iterations of the experiment, all methods performed worse on the cooling time.
+But now that is not the case and it's only kNN performing significantly worse} 
+
+\begin{figure}[!htb]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_BalAcc_rxtr.png}
-        \caption[]{Caption.}
-        %\label{fig:}
+        \caption{Balanced accuracy of reactor type classification with respect 
+                 to training set size.}
+        \label{fig:learnsA}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_MAPE_burn.png}
-        \caption[]{Caption.}
-        %\label{fig:}
+        \caption{Negative \gls{MAPE} of burnup regression with respect to 
+                 to training set size.}
+        \label{fig:learnsB}
     \end{subfigure}
     \vskip\baselineskip
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_MAPE_enri.png}
-        \caption[]{Caption.}
-        %\label{fig:}
+        \caption{Negative \gls{MAPE} of \gls{U235} enrichment regression with 
+                 respect to training set size.}
+        \label{fig:learnsC}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_MAPE_cool.png}
-        \caption[]{Caption.}
-        %\label{fig:}
+        \caption{Negative \gls{MAPE} of time since irradiation regression with 
+                 respect to training set size.}
+        \label{fig:learnsD}
     \end{subfigure}
-    \caption[]{Learning curves.}
+    \caption{Learning curves for reactor type, burnup, enrichment, and time 
+             since irradiation with respect to increasing fraction of the 
+             training set.}
     \label{fig:learns}
 \end{figure}
+
+Although a key takeaway from Figure \ref{fig:randerr} is that the \gls{MLL}
+calculations are the most robust to introduced error in the training set
+features for all four prediction categories, there is another aspect of the
+algorithm performance not shown in those plots: generalization. \Gls{MLL}
+outperforms the scikit-learn methods in part because the training set is so
+large. This is because it does not generalize to unseen data; it provides
+predictions based on finding the closest training set entry to the test sample.
+This is also true for the \textit{k}-nearest neighbor implementations where
+$k=1$ (burnup and cooling time, as seen in Table \ref{tbl:exp1hypparam}).
+
+One way to show that an algorithm is generalizing well in comparison to others
+is to view the shape of its learning curve (introduced in Section
+\ref{sec:complexity}): the prediction performance with respect to training set
+size.  Learning curves were constructed for all four prediction categories,
+demonstrated in Figure \ref{fig:learns}. As in Figure \ref{fig:randerr}, the
+\textit{y}-axis is always oriented so that lower is poorer performance and
+higher is better performance; also, the error bars reflect a 99\% confidence
+interval for Figure \ref{fig:learnsA}, and one standard deviation of the
+average percentage errors for Figures \ref{fig:learnsB}--\ref{fig:learnsD}.
+These learning curves represent the 1\% random error case in Figure
+\ref{fig:randerr}, so the \gls{MLL} learning curve will be below the
+scikit-learn algorithms for the reactor type, burnup, and enrichment
+predictions, and the \textit{k}-nearest neighbor learning curve will be below
+the \gls{MLL} and decision tree curves for time since irradiation. Thus, the
+scores/errors in Figure \ref{fig:randerr} are the data points at the 100\%
+training set level in Figure \ref{fig:learns}.
+
+\todo[inline]{would it be better to flip the x-axis so that performance
+degradation travels right as in the random error plots? Also, probably need to
+cut out some of the error bars for kNN in fourth plot to better see what is
+happening}
+
+Figure \ref{fig:learnsA} shows that the balanced accuracy of reactor type
+classification for the \gls{MLL} calculations decreases much more at lower
+training set size than for the scikit-learn algorithms.  This pattern holds
+true for the burnup \gls{MAPE} in Figure \ref{fig:learnsB} and the enrichment
+\gls{MAPE} in Figure \ref{fig:learnsC}, although the standard deviation is
+large enough for the \gls{MLL} values that one cannot declare this with .
 
 \begin{figure}[!ht]
   \centering

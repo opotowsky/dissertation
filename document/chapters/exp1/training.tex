@@ -162,7 +162,9 @@ of the burnup and cooling time parameters, and shows the lack of even
 distribution of the enrichment parameter through a combination of scatter plots
 and histograms.  Note that there are many more \gls{BWR}s present in the
 histograms because of the multiple moderator densities simulated (see Table
-\ref{tbl:rxtrparam})
+\ref{tbl:rxtrparam}). The number of \gls{PWR}, \gls{BWR}, and \gls{PHWR}
+entries in the training set is 120960 (26.8\%), 322560 (71.6\%), and 6720
+(1.5\%), respectively.
 
 \subsection{Training Set Features}
 \label{sec:snffeats}
@@ -187,10 +189,16 @@ is described in more detail in Section \ref{sec:sfcompo}.
 
 \begin{table}[!htb]
   \centering
-  \includegraphics[width=\linewidth]{./chapters/exp1/nucmass_feats.png}
+  \begin{tabular}{@{}|l|l|l|l|l|l|l|l|@{}}
+    \toprule
+    \textbf{Am241}&Am242m        &\textbf{Am243}&Cm242&\textbf{Cm244}&\textbf{Cs134}&\textbf{Cs137}&\textbf{Eu154} \\ \midrule
+    Nd143         &Nd144         &Nd145         &Nd146&Nd148         &Nd150         &\textbf{Np237}&\textbf{Pu238} \\ \midrule
+    \textbf{Pu239}&\textbf{Pu240}&Pu241         &Pu242&Sm147         &Sm149         &Sm150         &Sm151          \\ \midrule
+    Sm152         &\textbf{U234} &\textbf{U235} &U236 &U238          &              &              &               \\ \bottomrule
+  \end{tabular}
   \caption{Set of features saved for the first experiment, nuclide masses 
            measured in $grams$. The bold nuclide masses overlap with the 
-           nuclides in \ref{tbl:nucacts}.}
+           nuclides in Table \ref{tbl:nucacts}.}
   \label{tbl:nucmass}
 \end{table}
 

@@ -19,10 +19,10 @@ model emerges from a black box, there are ways to evaluate the generalization
 (i.e., prediction) capability of it.  This is done by removing a small portion
 of the database for use as a testing set.  The rest of the data set is known as
 the training set and is used to train a model. After training, the test set is
-used to calculate the model's generalization error.  The generalization error
+used to calculate the model's error to unseen test samples.  This error
 is typically referred to as the \textit{testing error}, as it is measuring the
 ability of the model to predict future cases that were not introduced in the
-training phase.  
+training phase. 
 
 In addition to evaluating a single learned model, it is beneficial to compare
 models. Moreover, there are potential degeneracies in the solution space. This
@@ -43,7 +43,7 @@ classification task:
 \begin{itemize}
   \item Accuracy metrics
   \item Confusion matrices 
-  \item Reciever operating characteristic curves
+  \item \Gls{ROC} curves
 \end{itemize}
 
 \begin{equation}
