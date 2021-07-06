@@ -9,6 +9,7 @@ quick: $(manuscript).tex
 
 all-via-pdf: $(manuscript).tex
 	pdflatex $(latexopt) $(manuscript)
+	makeglossaries $(manuscript)
 	bibtex $(references)
 	pdflatex $(latexopt) $(manuscript)
 	pdflatex $(latexopt) $(manuscript)

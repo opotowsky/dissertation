@@ -11,6 +11,10 @@
 *.out
 *.toc
 *.tdo
+*.acr
+*.alg
+*.glg
+*.gls
 *.swp
 *.synctex.gz
 presentation/pres.pdf
