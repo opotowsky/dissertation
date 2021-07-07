@@ -81,6 +81,8 @@ and 0.5\% for \gls{MLL} calculations. Note how the performance of the \gls{MLL}
 calculations are nearly the same for both error levels, which is shown by the 
 \gls{MLL} line in Figure \ref{fig:randerrA}.
 
+\todo[inline]{update with single confusion matrix grid and add 20\% conf matrix discussion}
+
 Figure \ref{fig:randerrB} demonstrates the burnup prediction performance.  As
 mentioned, the \textit{x}-axis is negative \gls{MAPE} so that higher is always
 better.  The error bars reflect one standard deviation of the average
@@ -91,63 +93,70 @@ is difficult to draw a baseline, this minimum performance level can serve as a
 benchmark for the work presented in Chapter \ref{ch:exp2}. 
 
 \begin{figure}[!hbt]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_BalAcc_rxtr.png}
-        \caption{Balanced accuracy of reactor type classification with respect 
-                 to random error.}
-        \label{fig:randerrA}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_burn.png}
-        \caption{Negative \gls{MAPE} of burnup regression with respect to 
-                 random error.}
-        \label{fig:randerrB}
-    \end{subfigure}
-    \vskip\baselineskip
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_enri.png}
-        \caption{Negative \gls{MAPE} of \gls{U235} enrichment regression with 
-                 respect to random error.}
-        \label{fig:randerrC}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_cool.png}
-        \caption{Negative \gls{MAPE} of time since irradiation regression with 
-                 respect to random error.} 
-        \label{fig:randerrD}
-    \end{subfigure}
-    \caption{Prediction performance of reactor type, burnup, enrichment, and 
-             time since irradiation with respect to decreasing information
-             quality in the form of uniform/random error applied to the nuclide 
-             mass measurements in the training set.}
-    \label{fig:randerr}
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_BalAcc_rxtr.png}
+    \caption{Balanced accuracy of reactor type classification with respect 
+             to random error.}
+    \label{fig:randerrA}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_burn.png}
+    \caption{Negative \gls{MAPE} of burnup regression with respect to 
+             random error.}
+    \label{fig:randerrB}
+  \end{subfigure}
+  \vskip\baselineskip
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_enri.png}
+    \caption{Negative \gls{MAPE} of \gls{U235} enrichment regression with 
+             respect to random error.}
+    \label{fig:randerrC}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_cool.png}
+    \caption{Negative \gls{MAPE} of time since irradiation regression with 
+             respect to random error.} 
+    \label{fig:randerrD}
+  \end{subfigure}
+  \caption{Prediction performance of reactor type, burnup, enrichment, and 
+           time since irradiation with respect to decreasing information
+           quality in the form of uniform/random error applied to the nuclide 
+           mass measurements in the training set.}
+  \label{fig:randerr}
 \end{figure}
 
 \begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[b]{\textwidth}
     \centering
-    \begin{subfigure}[b]{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_err01.png}
-        \caption{Confusion matrices for 1\% error for each algorithm.}
-        \label{fig:cm_nuc29_01}
-    \end{subfigure}
-    \vskip\baselineskip
-    \begin{subfigure}[b]{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_err10.png}
-        \caption{Confusion matrices for 10\% error for each algorithm.}
-        \label{fig:cm_nuc29_10}
-    \end{subfigure}
-    \caption{Confusion matrices for reactor type prediction for each algorithm 
-             at two training set error levels: 1\% and 10\%.}
-    \label{fig:cm_nuc29}
+    \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_err01.png}
+    \caption{Confusion matrices for 1\% error for each algorithm.}
+    \label{fig:cm_nuc29_01}
+  \end{subfigure}
+  \vskip\baselineskip
+  \begin{subfigure}[b]{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_err10.png}
+    \caption{Confusion matrices for 10\% error for each algorithm.}
+    \label{fig:cm_nuc29_10}
+  \end{subfigure}
+  \vskip\baselineskip
+  \begin{subfigure}[b]{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_err20.png}
+    \caption{Confusion matrices for 20\% error for each algorithm.}
+    \label{fig:cm_nuc29_20}
+  \end{subfigure}
+  \caption{Confusion matrices for reactor type prediction for each algorithm 
+           at three training set error levels: 1\%, 10\%, and 20\%.}
+  \label{fig:cm_nuc29}
 \end{figure}
 
 Figure \ref{fig:randerrC} shows the trend of \gls{U235} enrichment prediction

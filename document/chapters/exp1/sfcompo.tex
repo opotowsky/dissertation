@@ -8,13 +8,13 @@ work. \cite{sfcompo}. The only parameter not part of the \gls{SFCOMPO} database
 is the time since irradiation, so that is not predicted here. 
 
 \begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.7\textwidth]{./chapters/exp1/sfcompo_scatter_viz.png}
-    \caption{Scatter plot showing the range of reactor operation parameters in 
-             the \gls{SFCOMPO} testing set that are being predicted.}
-    \label{fig:sfcoscatter}
-    \todo[inline]{increase tick size, maybe show comparison against training 
-                  E v B scatter plot}
+  \centering
+  \includegraphics[width=0.7\textwidth]{./chapters/exp1/sfcompo_scatter_viz.png}
+  \caption{Scatter plot showing the range of reactor operation parameters in 
+           the \gls{SFCOMPO} testing set that are being predicted.}
+  \label{fig:sfcoscatter}
+  \todo[inline]{increase tick size, maybe show comparison against training 
+                E v B scatter plot}
 \end{figure}
 
 There are 505 test cases that are able to be compared against the training
@@ -55,80 +55,78 @@ chosen based on the frequency of these measurements being present in
 filtering, so there are some nuclide measurements present at under 100 counts.
 Each nuclide's frequency in \gls{SFCOMPO} is listed in Table \ref{tbl:missing}.
 
-
-
 \begin{table}[!ht]
   \centering
   \begin{tabular}{@{}l|lll|lll@{}}
-  \toprule
-                   & \multicolumn{3}{l|}{Accuracy Scores} & \multicolumn{3}{l}{Balanced Accuracy Scores} \\ \toprule
-  Null Handling    & kNN        & DTree      & MLL       & kNN           & DTree         & MLL           \\ \midrule
-  Imputed Nulls    & 0.52       & 0.60       & 0.39      & 0.09          & 0.12          & 0.00          \\
-  Zero-value Nulls & 0.45       & 0.42       & 0.72      & 0.21          & 0.30          & 0.63          \\ \bottomrule
-  \end{tabular}
+    \toprule
+                     & \multicolumn{3}{l|}{Accuracy Scores} & \multicolumn{3}{l}{Balanced Accuracy Scores} \\ \toprule
+    Null Handling    & kNN        & DTree      & MLL       & kNN           & DTree         & MLL           \\ \midrule
+    Imputed Nulls    & 0.52       & 0.60       & 0.39      & 0.09          & 0.12          & 0.00          \\
+    Zero-value Nulls & 0.45       & 0.42       & 0.72      & 0.21          & 0.30          & 0.63          \\ \bottomrule
+    \end{tabular}
   \caption{sfcompo reactor accuracies.}
   \label{tbl:sfcorxtr}
 \end{table}
 
 \begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_impnull_burn.png}
-        \caption[]{Caption.}
-        %\label{fig:}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_0null_burn.png}
-        \caption[]{Caption.}
-        %\label{fig:}
-    \end{subfigure}
-    \caption{sfcompo burnup boxplots.}
-    \label{fig:sfcoburn}
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_impnull_burn.png}
+    \caption{imputed nulls.}
+    \label{fig:burnimp}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_0null_burn.png}
+    \caption{0 nulls.}
+    \label{fig:burn0}
+  \end{subfigure}
+  \caption{sfcompo burnup boxplots.}
+  \label{fig:sfcoburn}
 \end{figure}
 
 \begin{table}[!ht]
   \centering
   \begin{tabular}{@{}l|lll|lll@{}}
-  \toprule
-                   & \multicolumn{3}{l|}{Mean Errors [GWd/MTU]} & \multicolumn{3}{l}{Median Errors [GWd/MTU]} \\ \toprule
-  Null Handling    & kNN           & DTree         & MLL           & kNN            & DTree          & MLL    \\ \midrule
-  Imputed Nulls    & 9.43          & 10.89         & 13.17         & 7.26           & 8.28           & 10.84  \\
-  Zero-value Nulls & 14.88         & 15.18         & 3.53          & 11.47          & 8.79           & 1.70   \\ \bottomrule
+    \toprule
+                     & \multicolumn{3}{l|}{Mean Errors [GWd/MTU]} & \multicolumn{3}{l}{Median Errors [GWd/MTU]} \\ \toprule
+    Null Handling    & kNN           & DTree         & MLL           & kNN            & DTree          & MLL    \\ \midrule
+    Imputed Nulls    & 9.43          & 10.89         & 13.17         & 7.26           & 8.28           & 10.84  \\
+    Zero-value Nulls & 14.88         & 15.18         & 3.53          & 11.47          & 8.79           & 1.70   \\ \bottomrule
   \end{tabular}
   \caption{sfcompo burnup errors.}
   \label{tbl:sfcoburn}
 \end{table}
 
 \begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_0null_enri.png}
-        \caption[]{Caption.}
-        %\label{fig:}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_impnull_enri.png}
-        \caption[]{Caption.}
-        %\label{fig:}
-    \end{subfigure}
-    \caption{sfcompo enrichment boxplots.}
-    \label{fig:sfcoenri}
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_impnull_enri.png}
+    \caption{imputed nulls.}
+    \label{fig:enriimp}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_0null_enri.png}
+    \caption{0 nulls.}
+    \label{fig:enri0}
+  \end{subfigure}
+  \caption{sfcompo enrichment boxplots.}
+  \label{fig:sfcoenri}
 \end{figure}
 
 \begin{table}[!ht]
   \centering
   \begin{tabular}{@{}l|lll|lll@{}}
-  \toprule
-                   & \multicolumn{3}{l|}{Mean Errors [\% U235]} & \multicolumn{3}{l}{Median Errors [\% U235]} \\ \toprule
-  Null Handling    & kNN           & DTree          & MLL          & kNN            & DTree          & MLL    \\ \midrule
-  Imputed Nulls    & 0.72          & 0.31           & 1.25         & 0.50           & 0.22           & 1.13   \\
-  Zero-value Nulls & 1.67          & 0.36           & 0.49         & 2.02           & 0.22           & 0.35   \\ \bottomrule
+    \toprule
+                     & \multicolumn{3}{l|}{Mean Errors [\% U235]} & \multicolumn{3}{l}{Median Errors [\% U235]} \\ \toprule
+    Null Handling    & kNN           & DTree          & MLL          & kNN            & DTree          & MLL    \\ \midrule
+    Imputed Nulls    & 0.72          & 0.31           & 1.25         & 0.50           & 0.22           & 1.13   \\
+    Zero-value Nulls & 1.67          & 0.36           & 0.49         & 2.02           & 0.22           & 0.35   \\ \bottomrule
   \end{tabular}
   \caption{sfcompo enrichment errors.}
   \label{tbl:sfcoenri}
