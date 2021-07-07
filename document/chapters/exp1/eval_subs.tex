@@ -5,79 +5,40 @@
   \centering
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err01_BalAcc_rxtr.png}
+    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err05_BalAcc_rxtr.png}
     \caption{Balanced accuracy of reactor type classification with respect 
              to training set size.}
-    \label{fig:learnsA01}
+    \label{fig:learnsA}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err01_MAPE_burn.png}
+    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err05_MAPE_burn.png}
     \caption{Negative \gls{MAPE} of burnup regression with respect to 
              to training set size.}
-    \label{fig:learnsB01}
+    \label{fig:learnsB}
   \end{subfigure}
   \vskip\baselineskip
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err01_MAPE_enri.png}
+    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err05_MAPE_enri.png}
     \caption{Negative \gls{MAPE} of \gls{U235} enrichment regression with 
              respect to training set size.}
-    \label{fig:learnsC01}
+    \label{fig:learnsC}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err01_MAPE_cool.png}
+    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err05_MAPE_cool.png}
     \caption{Negative \gls{MAPE} of time since irradiation regression with 
              respect to training set size.}
-    \label{fig:learnsD01}
+    \label{fig:learnsD}
   \end{subfigure}
   \caption{Learning curves for reactor type, burnup, enrichment, and time 
            since irradiation with respect to increasing fraction of the 
-           training set, for 1\% training set random error.}
-  \label{fig:learns01}
+           training set, for 5\% training set random error.}
+  \label{fig:learns}
 \end{figure}
-
-%\begin{figure}[!htb]
-%  \centering
-%  \begin{subfigure}[b]{0.49\textwidth}
-%    \centering
-%    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err10_BalAcc_rxtr.png}
-%    \caption{Balanced accuracy of reactor type classification with respect 
-%             to training set size.}
-%    \label{fig:learnsA10}
-%  \end{subfigure}
-%  \hfill
-%  \begin{subfigure}[b]{0.49\textwidth}
-%    \centering
-%    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err10_MAPE_burn.png}
-%    \caption{Negative \gls{MAPE} of burnup regression with respect to 
-%             to training set size.}
-%    \label{fig:learnsB10}
-%  \end{subfigure}
-%  \vskip\baselineskip
-%  \begin{subfigure}[b]{0.49\textwidth}
-%    \centering
-%    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err10_MAPE_enri.png}
-%    \caption{Negative \gls{MAPE} of \gls{U235} enrichment regression with 
-%             respect to training set size.}
-%    \label{fig:learnsC10}
-%  \end{subfigure}
-%  \hfill
-%  \begin{subfigure}[b]{0.49\textwidth}
-%    \centering
-%    \includegraphics[width=\textwidth]{./chapters/exp1/learncurve_nuc29_err10_MAPE_cool.png}
-%    \caption{Negative \gls{MAPE} of time since irradiation regression with 
-%             respect to training set size.}
-%    \label{fig:learnsD10}
-%  \end{subfigure}
-%  \caption{Learning curves for reactor type, burnup, enrichment, and time 
-%           since irradiation with respect to increasing fraction of the 
-%           training set, for 10\% training set random error.}
-%  \label{fig:learns10}
-%\end{figure}
 
 Although a key takeaway from Figure \ref{fig:randerr} is that the \gls{MLL}
 calculations are the most robust to introduced error in the training set
@@ -93,28 +54,26 @@ One way to show that an algorithm is generalizing well in comparison to others
 is to view the shape of its learning curve (introduced in Section
 \ref{sec:complexity}): the prediction performance with respect to training set
 size.  Learning curves were constructed for all four prediction categories,
-demonstrated in Figure \ref{fig:learns01}. As in Figure \ref{fig:randerr}, the
+demonstrated in Figure \ref{fig:learns}. As in Figure \ref{fig:randerr}, the
 \textit{y}-axis is always oriented so that lower is poorer performance and
 higher is better performance; also, the error bars reflect a 99\% confidence
-interval for Figure \ref{fig:learnsA01}, and one standard deviation of the
-average percentage errors for Figures \ref{fig:learnsB01}--\ref{fig:learnsD01}.
+interval for Figure \ref{fig:learnsA}, and one standard deviation of the
+average percentage errors for Figures \ref{fig:learnsB}--\ref{fig:learnsD}.
 These learning curves represent the 1\% random error case in Figure
 \ref{fig:randerr}, so the \gls{MLL} learning curve will be below the
 scikit-learn algorithms for the reactor type, burnup, and enrichment
 predictions, and the \textit{k}-nearest neighbor learning curve will be below
 the \gls{MLL} and decision tree curves for time since irradiation.  Thus, the
 scores/errors in Figure \ref{fig:randerr} are the data points at the 100\%
-training set level in Figure \ref{fig:learns01}.  \todo[inline]{would it be
-better to flip the x-axis so that performance degradation travels right as in
-the random error plots?}
+training set level in Figure \ref{fig:learns}.  
 
-Figure \ref{fig:learnsA01} shows that the balanced accuracy score of reactor type
+Figure \ref{fig:learnsA} shows that the balanced accuracy score of reactor type
 classification for the \gls{MLL} calculations decreases more at lower training
 set size than for the scikit-learn algorithms.  This pattern holds true for the
-burnup \gls{MAPE} in Figure \ref{fig:learnsB01} and the enrichment \gls{MAPE} in
-Figure \ref{fig:learnsC01}, although the standard deviation is large enough for
+burnup \gls{MAPE} in Figure \ref{fig:learnsB} and the enrichment \gls{MAPE} in
+Figure \ref{fig:learnsC}, although the standard deviation is large enough for
 the \gls{MLL} values that the two sets of scikit-learn values are encompassed
-by that range. Lastly, Figure \ref{fig:learnsD01} has the error bars cropped out
+by that range. Lastly, Figure \ref{fig:learnsD} has the error bars cropped out
 for the \textit{k}-nearest neighbors curve in order to better see the \gls{MLL}
 and decision tree curves. The latter two follow a nearly equivalent path, and
 the decrease in performance for \textit{k}-nearest neighbors happens mostly in
