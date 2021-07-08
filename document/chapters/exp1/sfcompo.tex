@@ -194,20 +194,21 @@ plots inlcuded for these predictions in Figures \ref{fig:sfcoburn} and
 \ref{fig:sfcoenri}, respectively.  Box plots were chosed since they can provide
 a larger amount of information than just a mean or median value.  The white
 triangles represent the mean error, and the white line in notched box is the
-median error. The box itself is the 25\% (Q1) and 75\% (Q3) quartiles. The
-error bars or whiskers are meant to represent the spread of all errors minus
-the outliers.  The bottom whisker reaches to $Q1 - 1.5*(Q3-Q1)$ and the top
-whisker reaches to $Q3 + 1.5*(Q3-Q1)$. Any values outside of this range are
-considered outliers. \cite{matplotlib}
+median error. The box itself is the 25\% (Q1) and 75\% (Q3) quartiles at the
+bottom and top, respectively. The error bars or whiskers are meant to represent
+the spread of all errors minus the outliers.  The bottom whisker reaches to $Q1
+- 1.5*(Q3-Q1)$ and the top whisker reaches to $Q3 + 1.5*(Q3-Q1)$. Any values
+outside of this range are considered outliers. \cite{matplotlib}
 
 The expected results that \gls{MLL} will perform better with the zero-nulls
-test set also holds true for the regression cases, as shown in Table \ref{tbl:sfcoburn}. 
-While the scikit-learn
-algorithms have a moderate increase in both the mean and median burnup errors
-from the imputed nulls to the zero-nulls, the \gls{MLL} calculations have an
-order of magnitude decrease in error when moving in that same direction.
-Seeing this trend in Figure \ref{fig:sfcoburn} is a little difficult due to 
-the non-shared \textit{y}-axes.
+test set also holds true for the regression cases, as shown in Table
+\ref{tbl:sfcoburn}.  While the scikit-learn algorithms have a moderate increase
+in both the mean and median burnup errors from the imputed nulls to the
+zero-nulls, the \gls{MLL} calculations have an order of magnitude decrease in
+error when moving in that same direction.  Seeing this trend in Figure
+\ref{fig:sfcoburn} is a little difficult due to the non-shared \textit{y}-axes, but 
+
+39 outliers for mll calc for 0 null
 
 \begin{table}[!htb]
   \centering
@@ -222,6 +223,8 @@ the non-shared \textit{y}-axes.
            test cases.}
   \label{tbl:sfcoburn}
 \end{table}
+
+Enrichment outliers: 30/16 for dtree/mll for imputed. 45/16 for dtree/mll for 0 val.
 
 \begin{figure}[!htb]
   \centering
