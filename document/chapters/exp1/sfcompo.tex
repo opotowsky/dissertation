@@ -71,24 +71,6 @@ predict the \gls{SFCOMPO} test cases where the nulls are both converted to zero
 and imputed using the mean.  \todo[inline]{is converting to zero technically
 imputation as well?}
 
-Table \ref{tbl:sfcorxtr} presents two metrics for the two missing value
-techniques: the accuracy and balanced accuracy scores. The accuracy scores for
-both the imputed nulls and zero-nulls test sets are mostly under 0.62, which is
-the fraction of \gls{PWR} entries.  Therefore, a classifier could predict
-\gls{PWR} every time and do better than these accuracy scores.  For the
-zero-nulls test set predictions using \gls{MLL}, however, the accuracy of 0.72
-does exceed the "majority guess" accuracy of 0.62.  Since \gls{MLL}
-calculations filter out null values, it is expected that the scores will be
-higher for all prediction categories where \gls{MLL} is being used with the
-zero-nulls test set. This expected \gls{MLL} performance also holds true when
-looking at the balanced accuracy score.  A value of 0 balanced accuracy denotes
-random guessing, but it can also be negative if the classifications are worse
-than random guessing. The balanced accuracy of 0.63 for the zero-nulls case is
-a promising result. The balanced accuracies of \textit{k}-nearest neighbors and
-decision trees are all quite low. Also, the higher accuracies correspond to lower
-balanced accuracies, and vice versa. Therefore, further investigation is
-necessary.
-
 \begin{table}[!htb]
   \centering
   \begin{tabular}{@{}m{1.5in}llllll@{}}
@@ -104,36 +86,6 @@ necessary.
            of the \gls{SFCOMPO} test cases.}
   \label{tbl:sfcorxtr}
 \end{table}
-
-Figure \ref{fig:cm} allows for a deeper look into what is happening with the
-reactor type predictions for both of the \gls{SFCOMPO} test sets.  The
-scikit-learn aglorithms have a higher accuracy for their mean-imputed null
-values test set than their zero-nulls counterparts, but the balanced accuracies
-follow the opposite direction. For \textit{k}-nearest neighbors, imputed nulls
-cause more than half of the \gls{PWR}s and all of the \gls{PHWR}s to be
-misclassified as \gls{BWR}s. Additionally, 28.5\% \gls{BWR}s are misclassified
-as \gls{PWR}s.  For the zero-nulls test set, there is a much larger correct
-\gls{BWR} classification fraction, but also a much larger \gls{PWR}
-misclassification fraction. The \gls{PHWR} true positive fraction increases
-from 0 to 25\%. \Gls{BWR} (32\% of test cases) and \gls{PHWR} (5.5\% of test
-cases) are the two minority classes in the database.  Because they both have
-higher true positive fractions but there were overall fewer correct predictions
-(from a much higher \gls{PWR} misclassification) from the imputed nulls to the
-zero-nulls, the accuracy went down but the balanced accuracy went up.
-
-Decision trees follows a similar pattern the the \textit{k}-nearest neighbors
-example.  The \gls{PWR} misclassification increases from the imputed nulls to
-the zero-nulls test set in a similar manner, although the original \gls{PWR}
-true positive fraction is higher (leading to a higher accuracy for the imputed
-nulls case).  As before, the \gls{BWR} correct classification increases
-drastically from the imputed nulls to zero-nulls case.  Additionally, the
-\gls{PHWR} classifiction improvement from imputed nulls to zero-nulls is better
-for decision trees than for \textit{k}-nearest neighbors.  Therefore, again,
-the accuracy decreased and the balanced accuracy increased. The larger
-improvement for the minority classes has led to the larger balanced accuracy
-improvement for decision trees.
-
-The trend in Figure \ref{fig:cm} is the opposite 
 
 \begin{figure}[!htb]
   \centering
@@ -156,30 +108,109 @@ The trend in Figure \ref{fig:cm} is the opposite
   \label{fig:cm}
 \end{figure}
 
-The expected results that \gls{MLL} will perform better with the zero-nulls test set also holds true fo
+Table \ref{tbl:sfcorxtr} presents two metrics for the two missing value
+techniques: the accuracy and balanced accuracy scores. The accuracy scores for
+both the imputed nulls and zero-nulls test sets are mostly under 0.62, which is
+the fraction of \gls{PWR} entries.  Therefore, a classifier could predict
+\gls{PWR} every time and do better than these accuracy scores.  For the
+zero-nulls test set predictions using \gls{MLL}, however, the accuracy of 0.72
+does exceed the "majority guess" accuracy of 0.62.  Since \gls{MLL}
+calculations filter out null values, it is expected that the scores will be
+higher for all prediction categories where \gls{MLL} is being used with the
+zero-nulls test set. This expected \gls{MLL} performance also holds true when
+looking at the balanced accuracy score.  A value of 0 balanced accuracy denotes
+random guessing, but it can also be negative if the classifications are worse
+than random guessing. The balanced accuracy of 0.63 for the zero-nulls case is
+a promising result. The balanced accuracies of \textit{k}-nearest neighbors and
+decision trees are all quite low. Also, the higher accuracies correspond to lower
+balanced accuracies, and vice versa. Therefore, further investigation is
+necessary.
 
-\begin{figure}[!ht]
-  \centering
-  \begin{subfigure}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_impnull_burn.png}
-    \caption{imputed nulls.}
-    \label{fig:burnimp}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_0null_burn.png}
-    \caption{0 nulls.}
-    \label{fig:burn0}
-  \end{subfigure}
-  \caption{sfcompo burnup boxplots.}
-  \label{fig:sfcoburn}
-\end{figure}
+Figure \ref{fig:cm} allows for a deeper look into what is happening with the
+reactor type predictions for both of the \gls{SFCOMPO} test sets.  The
+scikit-learn aglorithms have a higher accuracy for their mean-imputed null
+values test set than their zero-nulls counterparts, but the balanced accuracies
+follow the opposite direction. For \textit{k}-nearest neighbors, imputed nulls
+cause more than half of the \gls{PWR}s and all of the \gls{PHWR}s to be
+misclassified as \gls{BWR}s. Additionally, 28.5\% \gls{BWR}s are misclassified
+as \gls{PWR}s.  For the zero-nulls test set, there is a much larger correct
+\gls{BWR} classification percentage, but also a much larger \gls{PWR}
+misclassification percentage. The \gls{PHWR} true positive percentage increases
+from 0 to 25\%. \Gls{BWR} (32\% of test cases) and \gls{PHWR} (5.5\% of test
+cases) are the two minority classes in the database.  Because they both have
+higher true positive fractions but there were overall fewer correct predictions
+(from a much higher \gls{PWR} misclassification) from the imputed nulls to the
+zero-nulls, the accuracy went down but the balanced accuracy went up.
 
-\begin{table}[!ht]
+Decision trees follows a similar pattern the the \textit{k}-nearest neighbors
+example.  The \gls{PWR} misclassification increases from the imputed nulls to
+the zero-nulls test set in a similar manner, although the original \gls{PWR}
+true positive fraction is higher (leading to a higher accuracy for the imputed
+nulls case).  As before, the \gls{BWR} correct classification increases
+drastically from the imputed nulls to zero-nulls case.  Additionally, the
+\gls{PHWR} classifiction improvement from imputed nulls to zero-nulls is better
+for decision trees than for \textit{k}-nearest neighbors.  Therefore, again,
+the accuracy decreased and the balanced accuracy increased. The larger
+improvement for the minority classes has led to the larger balanced accuracy
+improvement for decision trees.
+
+In Figure \ref{fig:cm}, the confusion matrices for the \gls{MLL} calculations
+tell a very different story than those for the scikit-learn algorithms.  The
+only similarity is that using imputed nulls causes all \gls{PHWR}s to be
+classified as \gls{BWR}s. \gls{PWR}s are misclassified as \gls{BWR}s at 78.2\%,
+and \gls{BWR}s are misclassified as \gls{PWR}s at 22.4\%. For the zero-nulls
+test set, \gls{PHWR}s and \gls{PWR}s true positive percentages sharply improve
+to 92.9\% and 79.5\%, respectively.  The true positive rate for \gls{BWR}s,
+however, decreases from 77.0\% to 53.9\%. This is the opposite trend from both
+of the scikit-learn algorithms.  Despite the misclassification increase for
+\gls{BWR}s, both the accuracy score and balanced accuracy score increase for
+\gls{MLL} calculations when moving from using imputed null values to zero-null
+values in the test set. The improvement in \gls{MLL} classification is likely
+because the imputed nulls test set hides information rather than removing it
+from consideration. 
+
+All three algorithms using both test sets tend towards misclassifying
+\gls{PHWR}s as \gls{BWR}s (except for \gls{MLL} calculations using zero-null
+missing values).  This is likely because \gls{BWR}s comprise the majority of
+the training set (72\%), and no matter how the missing measurements are handled
+there may be too little information to predict these well with most algorithms.
+For the two scikit-learn algorithms, the zero-nulls test set predicts
+\gls{BWR}s the majority of the time (despite there being 50\% correct
+\gls{PHWR} prediction for decision trees). This also is likely from \gls{BWR}
+being the training set majority class, so with many nuclides measuring at zero,
+there are likely to be few good matches, and the majority class becomes the
+most likely prediction. This explanation is possibly applicable to the imputed
+nulls test set as well, but the behavior pattern is less clear because the
+imputed nulls give more information for these algorithms than zero-value nulls
+(since the zero-values cannot be removed from consideration), so a larger
+proportion of \gls{PWR}s are being predicted properly.
+
+Next, the prediction of \gls{SFCOMPO} test samples for the regression cases
+will be discussed. There is no time since irradiation value in the database, so
+only burnup and \gls{U235} enrichment are discussed here.  While both the mean
+and median errors for burnup and enrichment prediction are listed in Tables
+\ref{tbl:sfcoburn} and \ref{tbl:sfcoenri}, respectively, there are also box
+plots inlcuded for these predictions in Figures \ref{fig:sfcoburn} and
+\ref{fig:sfcoenri}, respectively.  Box plots were chosed since they can provide
+a larger amount of information than just a mean or median value.  The white
+triangles represent the mean error, and the white line in notched box is the
+median error. The box itself is the 25\% (Q1) and 75\% (Q3) quartiles. The
+error bars or whiskers are meant to represent the spread of all errors minus
+the outliers.  The bottom whisker reaches to $Q1 - 1.5*(Q3-Q1)$ and the top
+whisker reaches to $Q3 + 1.5*(Q3-Q1)$. Any values outside of this range are
+considered outliers. \cite{matplotlib}
+
+The expected results that \gls{MLL} will perform better with the zero-nulls
+test set also holds true for the regression cases, as shown in Table \ref{tbl:sfcoburn}. 
+While the scikit-learn
+algorithms have a moderate increase in both the mean and median burnup errors
+from the imputed nulls to the zero-nulls, the \gls{MLL} calculations have an
+order of magnitude decrease in error when moving in that same direction.
+Seeing this trend in Figure \ref{fig:sfcoburn} is a little difficult due to 
+the non-shared \textit{y}-axes.
+
+\begin{table}[!htb]
   \centering
-  %\begin{tabular}{@{}lllllll@{}}
   \begin{tabular}{@{}m{1.5in}llllll@{}}
     \toprule
                      & \multicolumn{3}{m{2in}}{Mean Errors [GWd/MTU]} & \multicolumn{3}{c}{Median Errors [GWd/MTU]} \\ \toprule
@@ -187,30 +218,33 @@ The expected results that \gls{MLL} will perform better with the zero-nulls test
     Imputed Nulls    & 9.43          & 10.89         & 13.17         & 7.26           & 8.28           & 10.84  \\
     Zero-value Nulls & 14.88         & 15.18         & 3.53          & 11.47          & 8.79           & 1.70   \\ \bottomrule
   \end{tabular}
-  \caption{sfcompo burnup errors.}
+  \caption{Mean and median errors for burnup prediction of the \gls{SFCOMPO} 
+           test cases.}
   \label{tbl:sfcoburn}
 \end{table}
 
-\begin{figure}[!ht]
+\begin{figure}[!htb]
   \centering
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_impnull_enri.png}
-    \caption{imputed nulls.}
-    \label{fig:enriimp}
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_impnull_burn.png}
+    \caption{Box plots for mean-imputed null values.}
+    \label{fig:burnimp}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_0null_enri.png}
-    \caption{0 nulls.}
-    \label{fig:enri0}
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_0null_burn.png}
+    \caption{Box plots for zero-replaced null values.}
+    \label{fig:burn0}
   \end{subfigure}
-  \caption{sfcompo enrichment boxplots.}
-  \label{fig:sfcoenri}
+  \caption{Box plots of burnup prediction error for each algorithm 
+           using two missing entry techniques: imputation with mean values 
+           and replacement with zero.}
+  \label{fig:sfcoburn}
 \end{figure}
 
-\begin{table}[!ht]
+\begin{table}[!htb]
   \centering
   \begin{tabular}{@{}m{1.5in}llllll@{}}
     \toprule
@@ -219,7 +253,29 @@ The expected results that \gls{MLL} will perform better with the zero-nulls test
     Imputed Nulls    & 0.72          & 0.31           & 1.25         & 0.50           & 0.22           & 1.13   \\
     Zero-value Nulls & 1.67          & 0.36           & 0.49         & 2.02           & 0.22           & 0.35   \\ \bottomrule
   \end{tabular}
-  \caption{sfcompo enrichment errors.}
+  \caption{Mean and median errors for enrichment prediction of the \gls{SFCOMPO} 
+           test cases.}
   \label{tbl:sfcoenri}
 \end{table}
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_impnull_enri.png}
+    \caption{Box plots for mean-imputed null values.}
+    \label{fig:enriimp}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_boxplots_0null_enri.png}
+    \caption{Box plots for zero-replaced null values.}
+    \label{fig:enri0}
+  \end{subfigure}
+  \caption{Box plots of enrichment prediction error for each algorithm 
+           using two missing entry techniques: imputation with mean values 
+           and replacement with zero.}
+  \label{fig:sfcoenri}
+\end{figure}
 

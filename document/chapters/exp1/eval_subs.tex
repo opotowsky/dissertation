@@ -85,15 +85,86 @@ diverging faster, the error bars are too large to state anything definitive.
 
 There is similar work being done \todo{get tamu citation} to this that focuses
 on these prediction categories but in a serial manner, i.e., first determining
-the reactor type before moving forward with other predictions.
-\todo[inline]{Finish intro here}
+the reactor type before moving forward with other predictions. 
+\todo[inline]{Finish intro here.}
+
+%\begin{table}[!htb]
+%  \centering
+%  \begin{tabular}{@{}llllllll@{}}
+%    \toprule
+%    &  &  \multicolumn{2}{c}{\textit{k}NN} 
+%    &     \multicolumn{2}{c}{Dec Trees} 
+%    &     \multicolumn{2}{c}{MLL Calcs} \\ 
+%    \toprule
+%    \begin{tabular}[c]{@{}l@{}}Prediction\\ Parameter\end{tabular} &
+%    \begin{tabular}[c]{@{}l@{}}Reactor \\ Type\end{tabular} &
+%    K & U &  K & U & K & U \\ \midrule
+%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Burnup \\ \% {[MWd/MTU]} \end{tabular}}
+%     & PWR  & 0.08  & 0.08  & 0.03 & 0.04 & 0.24 & 0.25 \\ 
+%     & BWR  & 0.11  & 0.10  & 0.03 & 0.03 & 0.40 & 0.40 \\ 
+%     & PHWR & 0.13  & 0.19  & 0.01 & 0.03 & 0.29 & 0.29 \\ \hline
+%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Enrichment \\ \% {[\% U235]} \end{tabular}}
+%     & PWR  & 0.10  & 0.11  & 0.02 & 0.02 & 0.26 & 0.29 \\ 
+%     & BWR  & 0.12  & 0.12  & 0.02 & 0.02 & 0.46 & 0.46 \\ 
+%     & PHWR & 0.00  & 0.00  & 0.00 & 0.00 & 0.00 & 0.00 \\ \hline
+%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Time Since \\ Irradiation \\ \% {[days]} \end{tabular}}
+%     & PWR  & 6.47  & 6.13  & 1.50 & 1.43 & 1.55 & 1.46 \\ 
+%     & BWR  & 9.18  & 9.15  & 1.56 & 1.53 & 2.07 & 2.05 \\ 
+%     & PHWR & 13.78 & 18.62 & 4.51 & 3.71 & 2.30 & 2.30 \\ \bottomrule
+%  \end{tabular}
+%  \caption{\gls{MAPE}s for the three prediction cases for each algorithm at 1\% 
+%           training set error. \textit{K} refers to \textit{known} reactor 
+%           type and \textit{U} refers to \textit{unknown} reactor type prior 
+%           to regression.}
+%  \label{tbl:knownrxtr}
+%\end{table}
+
+%\begin{figure}[!htb]
+%  \centering
+%  \includegraphics[width=\textwidth]{./chapters/exp1/rxtr-type_known-unknown_diff_err01.png}
+%  \caption{Heatmaps for the three regression cases showing the percent 
+%           difference in prediction error between a known reactor type 
+%           and unknown reactor type.}
+%  \label{fig:knownrxtr}
+%\end{figure}
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{@{}llllllll@{}}
+    \toprule
+    &  &  \multicolumn{2}{c}{\textit{k}NN} 
+    &     \multicolumn{2}{c}{Dec Trees} 
+    &     \multicolumn{2}{c}{MLL Calcs} \\ 
+    \toprule
+    \begin{tabular}[c]{@{}l@{}}Prediction\\ Parameter\end{tabular} &
+    \begin{tabular}[c]{@{}l@{}}Reactor \\ Type\end{tabular} &
+    K & U &  K & U & K & U \\ \midrule
+    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Burnup \\ \% {[MWd/MTU]} \end{tabular}}
+     & PWR  & 0.60  & 0.66  & 0.54 & 0.75 & 0.24 & 0.25 \\
+     & BWR  & 0.88  & 0.90  & 0.60 & 0.66 & 0.40 & 0.40 \\
+     & PHWR & 0.66  & 1.27  & 0.14 & 0.54 & 0.28 & 0.28 \\ \hline
+    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Enrichment \\ \% {[\% U235]} \end{tabular}}
+     & PWR  & 0.85  & 0.99  & 0.36 & 0.48 & 0.26 & 0.29 \\
+     & BWR  & 1.14  & 1.16  & 0.51 & 0.54 & 0.45 & 0.46 \\
+     & PHWR & 0.00  & 0.00  & 0.00 & 0.02 & 0.00 & 0.00 \\ \hline
+    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Time Since \\ Irradiation \\ \% {[days]} \end{tabular}}
+     & PWR  & 11.44 & 10.48 & 2.35 & 2.19 & 1.55 & 1.46 \\
+     & BWR  & 15.39 & 15.48 & 2.27 & 2.28 & 2.06 & 2.05 \\
+     & PHWR & 19.32 & 34.41 & 4.96 & 4.52 & 2.30 & 2.30 \\ \bottomrule
+  \end{tabular}
+  \caption{\gls{MAPE}s for the three prediction cases for each algorithm at 5\% 
+           training set error. \textit{K} refers to \textit{known} reactor 
+           type and \textit{U} refers to \textit{unknown} reactor type prior 
+           to regression.}
+  \label{tbl:knownrxtr}
+\end{table}
 
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width=\textwidth]{./chapters/exp1/rxtr-type_known-unknown_diff.png}
+  \includegraphics[width=\textwidth]{./chapters/exp1/rxtr-type_known-unknown_diff_err05.png}
   \caption{Heatmaps for the three regression cases showing the percent 
            difference in prediction error between a known reactor type 
-           and unknown reactor type.}
+           and unknown reactor type using a 5\% training set error.}
   \label{fig:knownrxtr}
 \end{figure}
 
@@ -109,37 +180,6 @@ from the unknown reactor type case to the known reactor type case.  The
 negative percentages indicate the error increased/worsened from the unknown to
 the known case. 
 
-\begin{table}[!htb]
-  \centering
-  \begin{tabular}{@{}llllllll@{}}
-    \toprule
-    &  &  \multicolumn{2}{c}{\textit{k}NN} 
-    &     \multicolumn{2}{c}{Dec Trees} 
-    &     \multicolumn{2}{c}{MLL Calcs} \\ 
-    \toprule
-    \begin{tabular}[c]{@{}l@{}}Prediction\\ Parameter\end{tabular} &
-    \begin{tabular}[c]{@{}l@{}}Reactor \\ Type\end{tabular} &
-    K & U &  K & U & K & U \\ \midrule
-    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Burnup \\ \% {[MWd/MTU]} \end{tabular}}
-     & PWR  & 0.08  & 0.08  & 0.03 & 0.04 & 0.24 & 0.25 \\ 
-     & BWR  & 0.11  & 0.10  & 0.03 & 0.03 & 0.40 & 0.40 \\ 
-     & PHWR & 0.13  & 0.19  & 0.01 & 0.03 & 0.29 & 0.29 \\ \hline
-    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Enrichment \\ \% {[\% U235]} \end{tabular}}
-     & PWR  & 0.10  & 0.11  & 0.02 & 0.02 & 0.26 & 0.29 \\ 
-     & BWR  & 0.12  & 0.12  & 0.02 & 0.02 & 0.46 & 0.46 \\ 
-     & PHWR & 0.00  & 0.00  & 0.00 & 0.00 & 0.00 & 0.00 \\ \hline
-    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Time Since \\ Irradiation \\ \% {[days]} \end{tabular}}
-     & PWR  & 6.47  & 6.13  & 1.50 & 1.43 & 1.55 & 1.46 \\ 
-     & BWR  & 9.18  & 9.15  & 1.56 & 1.53 & 2.07 & 2.05 \\ 
-     & PHWR & 13.78 & 18.62 & 4.51 & 3.71 & 2.30 & 2.30 \\ \bottomrule
-  \end{tabular}
-  \caption{\gls{MAPE}s for the three prediction cases for each algorithm. 
-           \textit{K} refers to \textit{known} reactor type and \textit{U}
-           refers to \textit{unknown} reactor type prior to regression.}
-  \label{tbl:knownrxtr}
-\end{table}
-
-\todo[inline]{waiting on 5\% results before adding to this discussion}
 
 For burnup prediction, most differences are within $\pm10\%$ except for three
 scenarios.  The decision tree algorithm has improved burnup prediction for
