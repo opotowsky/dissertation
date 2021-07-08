@@ -95,6 +95,7 @@ Chapter 5
 - Future Work
    - Filtering out problematic nuclides
    - Increase simulation fidelity
+   - SFCOMPO: better null imputation  
    - Algorithm optimization 
    - Feature set study; iso ratios
    - Serial Prediction (rxtr type first, then burnup, etc)

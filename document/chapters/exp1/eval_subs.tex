@@ -1,6 +1,33 @@
 
 \subsubsection{Model Generalization}
 
+Although a key takeaway from Figure \ref{fig:randerr} is that the \gls{MLL}
+calculations are the most robust to introduced error in the training set
+features for all four prediction categories, there is another aspect of the
+algorithm performance not shown in those plots: generalization. \Gls{MLL}
+outperforms the scikit-learn methods in part because the training set is so
+large. This is because it does not generalize to unseen data; it provides
+predictions based on finding the closest training set entry to the test sample.
+This is also true for the \textit{k}-nearest neighbor implementations where
+$k=1$ (burnup and cooling time, as seen in Table \ref{tbl:exp1hypparam}).
+
+One way to show that an algorithm is generalizing well in comparison to others
+is to view the shape of its learning curve (introduced in Section
+\ref{sec:complexity}): the prediction performance with respect to training set
+size.  Learning curves were constructed for all four prediction categories,
+demonstrated in Figure \ref{fig:learns}. As in Figure \ref{fig:randerr}, the
+\textit{y}-axis is always oriented so that lower is poorer performance and
+higher is better performance; also, the error bars reflect a 99\% confidence
+interval for Figure \ref{fig:learnsA}, and one standard deviation of the
+average percentage errors for Figures \ref{fig:learnsB}--\ref{fig:learnsD}.
+These learning curves represent the 1\% random error case in Figure
+\ref{fig:randerr}, so the \gls{MLL} learning curve will be below the
+scikit-learn algorithms for the reactor type, burnup, and enrichment
+predictions, and the \textit{k}-nearest neighbor learning curve will be below
+the \gls{MLL} and decision tree curves for time since irradiation.  Thus, the
+scores/errors in Figure \ref{fig:randerr} are the data points at the 100\%
+training set level in Figure \ref{fig:learns}.  
+
 \begin{figure}[!htb]
   \centering
   \begin{subfigure}[b]{0.49\textwidth}
@@ -40,33 +67,6 @@
   \label{fig:learns}
 \end{figure}
 
-Although a key takeaway from Figure \ref{fig:randerr} is that the \gls{MLL}
-calculations are the most robust to introduced error in the training set
-features for all four prediction categories, there is another aspect of the
-algorithm performance not shown in those plots: generalization. \Gls{MLL}
-outperforms the scikit-learn methods in part because the training set is so
-large. This is because it does not generalize to unseen data; it provides
-predictions based on finding the closest training set entry to the test sample.
-This is also true for the \textit{k}-nearest neighbor implementations where
-$k=1$ (burnup and cooling time, as seen in Table \ref{tbl:exp1hypparam}).
-
-One way to show that an algorithm is generalizing well in comparison to others
-is to view the shape of its learning curve (introduced in Section
-\ref{sec:complexity}): the prediction performance with respect to training set
-size.  Learning curves were constructed for all four prediction categories,
-demonstrated in Figure \ref{fig:learns}. As in Figure \ref{fig:randerr}, the
-\textit{y}-axis is always oriented so that lower is poorer performance and
-higher is better performance; also, the error bars reflect a 99\% confidence
-interval for Figure \ref{fig:learnsA}, and one standard deviation of the
-average percentage errors for Figures \ref{fig:learnsB}--\ref{fig:learnsD}.
-These learning curves represent the 1\% random error case in Figure
-\ref{fig:randerr}, so the \gls{MLL} learning curve will be below the
-scikit-learn algorithms for the reactor type, burnup, and enrichment
-predictions, and the \textit{k}-nearest neighbor learning curve will be below
-the \gls{MLL} and decision tree curves for time since irradiation.  Thus, the
-scores/errors in Figure \ref{fig:randerr} are the data points at the 100\%
-training set level in Figure \ref{fig:learns}.  
-
 Figure \ref{fig:learnsA} shows that the balanced accuracy score of reactor type
 classification for the \gls{MLL} calculations decreases more at lower training
 set size than for the scikit-learn algorithms.  This pattern holds true for the
@@ -86,8 +86,7 @@ diverging faster, the error bars are too large to state anything definitive.
 There is similar work being done \todo{get tamu citation} to this that focuses
 on these prediction categories but in a serial manner, i.e., first determining
 the reactor type before moving forward with other predictions.
-\todo[inline]{Finish intro here. Can't get the table to compile yet, so leaving
-out for now}
+\todo[inline]{Finish intro here}
 
 \begin{figure}[!htb]
   \centering
@@ -97,28 +96,6 @@ out for now}
            and unknown reactor type.}
   \label{fig:knownrxtr}
 \end{figure}
-
-%\begin{table}[!htb]
-%  \centering
-%  \begin{tabular}{@{}llllllll@{}} \toprule
-%    \begin{tabular}[c]{@{}l@{}}Prediction\\ Parameter\end{tabular} 
-%     & Reactor Type & kNN Known & kNN Unknown & DTree Known & DTree Unknown & MLL Known & MLL Unknown \\ \toprule
-%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Burnup\\ [MWd/MTU],\\ MAPE\end{tabular}}
-%     & PWR & 0.08 & 0.08 & 0.03 & 0.04 & 0.24 & 0.25 \\
-%     & BWR  & 0.11  & 0.10  & 0.03 & 0.03 & 0.40 & 0.40 \\
-%     & PHWR & 0.13  & 0.19  & 0.01 & 0.03 & 0.29 & 0.29 \\ \midrule
-%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Enrichment\\ [\% U235], \\ MAPE\end{tabular}}
-%     & PWR & 0.10 & 0.11 & 0.02 & 0.02 & 0.26 & 0.29 \\
-%     & BWR  & 0.12  & 0.12  & 0.02 & 0.02 & 0.46 & 0.46 \\
-%     & PHWR & 0.00  & 0.00  & 0.00 & 0.00 & 0.00 & 0.00 \\ \midrule
-%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Time Since \\ Irradiation\\ [days], \\ MAPE\end{tabular}}
-%     & PWR & 6.47 & 6.13 & 1.50 & 1.43 & 1.55 & 1.46 \\
-%     & BWR  & 9.18  & 9.15  & 1.56 & 1.53 & 2.07 & 2.05 \\
-%     & PHWR & 13.78 & 18.62 & 4.51 & 3.71 & 2.30 & 2.30 \\ \bottomrule
-%  \end{tabular}
-%  \caption{Caption.}
-%  \label{tbl:knownrxtr}
-%\end{table}
 
 The workflow was repeated for the three regression cases where they were
 trained on reactor type-filtered training sets. A 1\% random error was applied
@@ -131,6 +108,38 @@ in each square.  The positive percentages indicate the error decreased/improved
 from the unknown reactor type case to the known reactor type case.  The
 negative percentages indicate the error increased/worsened from the unknown to
 the known case. 
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{@{}llllllll@{}}
+    \toprule
+    &  &  \multicolumn{2}{c}{\textit{k}NN} 
+    &     \multicolumn{2}{c}{Dec Trees} 
+    &     \multicolumn{2}{c}{MLL Calcs} \\ 
+    \toprule
+    \begin{tabular}[c]{@{}l@{}}Prediction\\ Parameter\end{tabular} &
+    \begin{tabular}[c]{@{}l@{}}Reactor \\ Type\end{tabular} &
+    K & U &  K & U & K & U \\ \midrule
+    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Burnup \\ \% {[MWd/MTU]} \end{tabular}}
+     & PWR  & 0.08  & 0.08  & 0.03 & 0.04 & 0.24 & 0.25 \\ 
+     & BWR  & 0.11  & 0.10  & 0.03 & 0.03 & 0.40 & 0.40 \\ 
+     & PHWR & 0.13  & 0.19  & 0.01 & 0.03 & 0.29 & 0.29 \\ \hline
+    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Enrichment \\ \% {[\% U235]} \end{tabular}}
+     & PWR  & 0.10  & 0.11  & 0.02 & 0.02 & 0.26 & 0.29 \\ 
+     & BWR  & 0.12  & 0.12  & 0.02 & 0.02 & 0.46 & 0.46 \\ 
+     & PHWR & 0.00  & 0.00  & 0.00 & 0.00 & 0.00 & 0.00 \\ \hline
+    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Time Since \\ Irradiation \\ \% {[days]} \end{tabular}}
+     & PWR  & 6.47  & 6.13  & 1.50 & 1.43 & 1.55 & 1.46 \\ 
+     & BWR  & 9.18  & 9.15  & 1.56 & 1.53 & 2.07 & 2.05 \\ 
+     & PHWR & 13.78 & 18.62 & 4.51 & 3.71 & 2.30 & 2.30 \\ \bottomrule
+  \end{tabular}
+  \caption{\gls{MAPE}s for the three prediction cases for each algorithm. 
+           \textit{K} refers to \textit{known} reactor type and \textit{U}
+           refers to \textit{unknown} reactor type prior to regression.}
+  \label{tbl:knownrxtr}
+\end{table}
+
+\todo[inline]{waiting on 5\% results before adding to this discussion}
 
 For burnup prediction, most differences are within $\pm10\%$ except for three
 scenarios.  The decision tree algorithm has improved burnup prediction for

@@ -8,6 +8,7 @@
 
 \subsection{Random Error Impacts on Prediction}
 \label{sec:randerr}
+
 As previously introduced in Section \ref{sec:testerr}, the prediction
 performance is measured by evaluating the accuracy of the reactor type
 classification or the error of the regression cases (burnup, \gls{U235}
@@ -21,12 +22,9 @@ measurement error (i.e., reduced information quality, detailed in section
 \textit{x}-axis and a prediction performance metric on the \textit{y}-axis.
 Shown in Figure \ref{fig:randerr}, the \textit{y}-axis is always oriented so
 that lower is poorer performance and higher is better performance. This is why
-Figures \ref{fig:randerrB}--\ref{fig:randerrD} present a negative error on the
-\textit{y}-axis.
-\todo[inline]{In order to have consistency in plot presentation w future plots,
-the plots in this section have a small delta-x to show error bars that are
-otherwise hard to see.  Since the x-axis is continuous, this may force a return
-to using the fill-between to visualize error bands instead.}
+Figures \ref{fig:randerrB}--\ref{fig:randerrD} present a negative \gls{MAPE} on
+the \textit{y}-axis. Additionally, the data points on all the plots have a
+small $\Delta x$ to show error bars that are otherwise impossible to see.
 
 Figure \ref{fig:randerrA} shows the balanced accuracy of reactor type
 classification, where a score of $1$ is perfect prediction and a score of $0$
@@ -44,55 +42,19 @@ Although the balanced accuracy score provides slightly better information about
 classification performance for an imbalanced data set (the training set is
 26.8\% \gls{PWR}, 71.6\% \gls{BWR}, and 1.5\% \gls{PHWR}), it still does not
 provide much detail about what is being misclassified. To probe this further,
-Figure \ref{fig:cm_nuc29} shows two sets of confusion matrices.  The diagonal
+Figure \ref{fig:cm_nuc29} shows three sets of confusion matrices.  The diagonal
 squares are the fraction of true positives for each reactor type, where the
 predicted label (\textit{x}-axis) is equal to the true label (\textit{y}-axis).
 The off diagonal squares are the fraction of false positives for each reactor
-type, where the predicted label is something other than the true label. In
-addition to the numbers being included in the matrices, a colorbar provides
+type, where the predicted label is something other than the true label.  These
+fractions inside the pixels show the raw numbers of each position normalized to
+the number of true labels.  It is ideal to have the diagonal be as close to 1
+as possible and the off-diagonal pixels be as close to 0 as possible.  In
+addition to the fractions being included in the matrices, a colorbar provides
 perceptially uniform shading for these true positive and false positive
 fractions. 
 
-In Figure \ref{fig:cm_nuc29_01}, the three algorithms are presented for the 1\%
-random error case. In Figure \ref{fig:randerrA}, one can see these three data
-points on the plot clustered near the top showing almost-perfect performance.
-(A reminder that the true positive fractions in the confusion matrices do not
-map directly to the balanced accuracy score, which puts more weight on the
-underrepresented classes.) The confusion matrices give more dimension to this
-near-perfect reactor type classification performance. The majority of the
-misclassification is in \gls{PWR}s being classified as \gls{BWR}s: 0.4\% for
-\textit{k}-nearest neighbors and decision trees, and 1.6\% for \gls{MLL}
-calculations. Although, there are also some \gls{BWR}s that are misclassified
-as \gls{PWR}s: 0.1\% for \textit{k}-nearest neighbors and decision trees, and
-0.5\% for \gls{MLL} calculations. The \gls{PWR}/\gls{BWR} distinction is known
-to be a difficult problem\todo{find citation}, so the correct \gls{PHWR}
-classifications are not particularly notable for this discussion.
-
-Figure \ref{fig:cm_nuc29_10} shows confusion matrices for the three algorithms
-for the 10\% random error case. In Figure \ref{fig:randerrA}, one can see these
-three data points on the plot, where the \gls{MLL} point is near a balanced
-accuracy score of 1, and the scikit-learn algorithms both have score of around
-0.93. As with the 1\% error case, the majority of the misclassification is in
-\gls{PWR}s being classified as \gls{BWR}s: 11.0\% for \textit{k}-nearest
-neighbors, 10.3\% for decision trees, and 1.7\% for \gls{MLL} calculations.
-The \gls{BWR}s are being misclassified as \gls{PWR}s at the following
-percentages: 3.4\% for \textit{k}-nearest neighbors, 3.7\% for decision trees,
-and 0.5\% for \gls{MLL} calculations. Note how the performance of the \gls{MLL}
-calculations are nearly the same for both error levels, which is shown by the 
-\gls{MLL} line in Figure \ref{fig:randerrA}.
-
-\todo[inline]{update with single confusion matrix grid and add 20\% conf matrix discussion}
-
-Figure \ref{fig:randerrB} demonstrates the burnup prediction performance.  As
-mentioned, the \textit{x}-axis is negative \gls{MAPE} so that higher is always
-better.  The error bars reflect one standard deviation of the average
-percentage errors.  Again, the \gls{MLL} method is robust to training set error
-but performs slightly worse at low error values.  All three methods calculate
-burnup with a maximum error of 5\% at 20\% error in the training set.  While it
-is difficult to draw a baseline, this minimum performance level can serve as a
-benchmark for the work presented in Chapter \ref{ch:exp2}. 
-
-\begin{figure}[!hbt]
+\begin{figure}[!htb]
   \centering
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
@@ -154,17 +116,78 @@ benchmark for the work presented in Chapter \ref{ch:exp2}.
     \caption{Confusion matrices for 20\% error for each algorithm.}
     \label{fig:cm_nuc29_20}
   \end{subfigure}
-  \caption{Confusion matrices for reactor type prediction for each algorithm 
+  \caption{Confusion matrices of reactor type prediction for each algorithm 
            at three training set error levels: 1\%, 10\%, and 20\%.}
   \label{fig:cm_nuc29}
 \end{figure}
+
+In Figure \ref{fig:cm_nuc29_01}, the three algorithms are presented for the 1\%
+random error case. In Figure \ref{fig:randerrA}, one can see these three data
+points on the plot clustered near the top showing almost-perfect performance.
+(A reminder that the true positive fractions in the confusion matrices do not
+map directly to the balanced accuracy score, which puts more weight on the
+underrepresented classes.) The confusion matrices give more dimension to this
+near-perfect reactor type classification performance. The majority of the
+misclassification is in \gls{PWR}s being classified as \gls{BWR}s: 0.4\% for
+\textit{k}-nearest neighbors and decision trees, and 1.6\% for \gls{MLL}
+calculations. Although, there are also some \gls{BWR}s that are misclassified
+as \gls{PWR}s: 0.1\% for \textit{k}-nearest neighbors and decision trees, and
+0.5\% for \gls{MLL} calculations.  There are zero misclassified \gls{PHWR}
+cases and zero \gls{LWR} cases misclassified as \gls{PHWR}; the value of 0.000
+to three decimals fraction here represents a real zero-count, but this is not
+necessarily the case for the other sets of confusion matrices.  The
+\gls{PWR}/\gls{BWR} distinction is known to be a difficult problem\todo{find
+citation}, so the correct \gls{PHWR} classifications are not particularly
+notable for this discussion. 
+
+Figure \ref{fig:cm_nuc29_10} shows confusion matrices for the three algorithms
+for the 10\% random error case. In Figure \ref{fig:randerrA}, one can see these
+three data points on the plot, where the \gls{MLL} point is near a balanced
+accuracy score of 1, and the scikit-learn algorithms both have score of around
+0.93. As with the 1\% error case, the majority of the misclassification is in
+\gls{PWR}s being classified as \gls{BWR}s: 11.3\% for \textit{k}-nearest
+neighbors, 10.3\% for decision trees, and 1.7\% for \gls{MLL} calculations.
+The \gls{BWR}s are being misclassified as \gls{PWR}s at the following
+percentages: 3.4\% for \textit{k}-nearest neighbors, 3.6\% for decision trees,
+and 0.5\% for \gls{MLL} calculations. Note how the performance of the \gls{MLL}
+calculations are nearly the same for both error levels, which is shown by the
+\gls{MLL} line in Figure \ref{fig:randerrA}. Because of the normalization, the
+\gls{LWR}s that are misclassified as \gls{PHWR}s appear to be zero. However,
+this does happen, just rarely: 15 \gls{BWR}s are classified as \gls{PHWR} using
+decision trees. Also, \textit{k}-nearest neighbors and decision trees
+misclassified \gls{PHWR} as an \gls{LWR} 2 times using the former and 20 times
+using the latter (no \gls{PHWR} misclassifications happened using \gls{MLL}).
+
+Figure \ref{fig:cm_nuc29_20} shows confusion matrices for the three algorithms
+for the 20\% random error case. In Figure \ref{fig:randerrA}, one can see these
+three data points on the plot, where the \gls{MLL} point is near a balanced
+accuracy score of 0.97, \textit{k}-nearest neighbors is around 0.83, and
+decision trees is around 0.86. As with the previous two error cases, the
+majority of the misclassification is in \gls{PWR}s being classified as
+\gls{BWR}s: 24.6\% for \textit{k}-nearest neighbors, 20.3\% for decision trees,
+and 5.6\% for \gls{MLL} calculations.  The \gls{BWR}s are being misclassified
+as \gls{PWR}s at the following percentages: 7.9\% for \textit{k}-nearest
+neighbors, 7.3\% for decision trees, and 0.5\% for \gls{MLL} calculations.
+\Gls{PHWR}s are misclassified as an \gls{LWR} 100 times for \textit{k}-nearest
+neighbors, 82 times for decision trees, and 0 times for \gls{MLL} calculations.
+\Gls{LWR}s were misclassified as \gls{PHWR} 42 times for \textit{k}-nearest
+neighbors, 66 times for decision trees, and 0 times for \gls{MLL} calculations.
+
+\todo[inline]{update discussion when you update to a single confusion matrix grid}
+
+Figure \ref{fig:randerrB} demonstrates the burnup prediction performance.  As
+mentioned, the \textit{x}-axis is negative \gls{MAPE} so that higher is always
+better.  The error bars reflect one standard deviation of the average
+percentage errors.  Again, the \gls{MLL} method is robust to training set error
+but performs slightly worse at low error values.  All three methods calculate
+burnup with a maximum error of 5\% at 20\% error in the training set.  
 
 Figure \ref{fig:randerrC} shows the trend of \gls{U235} enrichment prediction
 with increasing error in the nuclide mass training set.  The error bars reflect
 one standard deviation of the average percentage errors, and the behavior of
 the \gls{MLL} method in Figure \ref{fig:randerrB} versus the scikit-learn
-algorithms is the same here.  The maximum \gls{MAPE} is about 6\% at 20\%
-training set error. 
+algorithms is the same here.  The maximum \gls{MAPE} among all algorithms is
+about 6\% at 20\% training set error. 
 
 Last, the time since irradiation prediction performance for the three
 algorithms with respect to increasing nuclide mass error is pictured in Figure
@@ -173,11 +196,16 @@ average percentage errors.  The behavior of \textit{k}-nearest neighbors is
 unique here versus the previous two regression categories; whereas the maximum
 prediction \gls{MAPE}s remain under about 6\% for both the decision tree and
 \gls{MLL} methods, the maximum error of \textit{k}-nearest neighbors reaches
-nearly 30\% at 20\% nuclide mass error. \todo[inline]{1. do I need more ticks
-on these y-axes?  2. I'm not sure why this is the case, and have not found a
-way to figure this out yet. In previous iterations of the experiment, all
-methods performed worse on the cooling time.  But now that is not the case and
-it's only kNN performing significantly worse} 
+nearly 30\% at 20\% nuclide mass error.  There is an inset to show more detail
+about the behavior of the decision trees and \gls{MLL} calculations curves:
+decision trees is a maximum of 6\% prediction error at 20\% training set error,
+and \gls{MLL} calculations remain nearly horizontal at approximately 2\%
+prediction error for all training set error levels.  \todo[inline]{I'm not sure
+why this is the case, and have not found a way to figure this out yet.} 
+
+While it is difficult to draw a baseline for minimum acceptable behavior on
+these plots, these performances can serve as a benchmark for the work presented
+in Chapter \ref{ch:exp2}. 
 
 \input{chapters/exp1/eval_subs}
 
