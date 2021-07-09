@@ -18,12 +18,10 @@ Instead, field-deployable detectors are of interest.
 
 This process is outlined here for the second experiment, in which a gamma
 spectrum is computed for each sample in the database from the nuclide
-activities in Section \ref{sec:training2}.  
-The code \gls{GADRAS} \cite{gadras} developed at Sandia National Laboratories will provide
-computational gamma spectra.  
-This adds more than one layer of reduced information quality, which are listed here as an outline of the steps taken to
-process the gamma spectra:
-
+activities in Section \ref{sec:training2}.  The code \gls{GADRAS} \cite{gadras}
+developed at Sandia National Laboratories will provide computational gamma
+spectra.  This adds more than one layer of reduced information quality, which
+are listed here as an outline of the steps taken to process the gamma spectra:
 \begin{enumerate}
   \item \label{itm:1} The list of nuclides is limited to radionuclides.
   \item \label{itm:2} Instead of "perfect" radionuclide activity knowledge, 
@@ -43,9 +41,10 @@ The nuclide activity data did require some processing to be used in this way.
 The activities that come from the \gls{ORIGEN} simulations are based on there
 being $1\:MT$ of initial uranium-based fuel. Not only is this quantity an
 unlikely amount to be smuggled, it would overwhelm a detector at the
-\todo[inline]{fix this to be better technical explanation of dead time and pile
-up} source-detector distances in \gls{GADRAS}. Therefore, the material (and
-resulting nuclide activities) are scaled to be $1\:g$ of \gls{SNF}.
+source-detector distances in \gls{GADRAS}.  Therefore, the material (and
+resulting nuclide activities) are scaled to be $1\:g$ of \gls{SNF}.  
+\todo[inline]{fix this to be better technical explanation of dead
+time and pile up} 
 
 Regarding the input information for the \gls{GADRAS} calculations, the sources
 are provided without any background; this is because any spectrum would undergo
@@ -56,7 +55,21 @@ of $20\:minutes$ provides the expected peaks.
 
 \begin{table}[!htb]
   \centering
-  \includegraphics[width=\linewidth]{./chapters/exp2/gadras_detectors.png}
+  \begin{tabular}{@{}lcllll@{}}
+  \toprule
+    \textbf{Detector} &
+    \textbf{\begin{tabular}[c]{@{}c@{}}\% FWHM \\ @ 661 keV\end{tabular}} &
+    \textbf{\begin{tabular}[c]{@{}l@{}}Distance \\ (cm)\end{tabular}} &
+    \textbf{\begin{tabular}[c]{@{}l@{}}Height \\ (cm)\end{tabular}} &
+    \textbf{\begin{tabular}[c]{@{}l@{}}Live Time\\ (s)\end{tabular}} &
+    \textbf{\begin{tabular}[c]{@{}l@{}}Num \\ Channels\end{tabular}} \\ \midrule
+    In-Lab HPGe   & 0.21 & 100.0 & 84.0  & 600  & 8192 \\
+    Portable HPGe & 0.29 & 100.0 & 100.0 & 600  & 8192 \\
+    CZT           & 1.20 & 100.0 & 100.0 & 600  & 1024 \\
+    SrI2          & 2.94 & 100.0 & 100.0 & 600  & 1024 \\
+    LaBr3         & 3.63 & 213.0 & 84.5  & 2400 & 1024 \\
+    NaI           & 7.74 & 213.0 & 85.4  & 2400 & 1024 \\ \bottomrule
+  \end{tabular}
   \caption{Select details of 6 detector setups used to obtain gamma 
            spectra-based training databases.}
   \label{tbl:detsetups}
@@ -81,16 +94,21 @@ step \ref{itm:3} from above, and is outlined as follows.
   \label{fig:enwindows}
 \end{figure}
 
-Explanation of Step \ref{itm:3} here. 
+Explanation of Step \ref{itm:3} here. Length of auto lists: 206 120 30 9 19 17 d1/d2/d3/d4/d5/d6
 
 \begin{table}[!htb]
   \centering
-  \includegraphics[width=0.4\linewidth]{./chapters/exp2/enlist_nucs.png}
-  \caption{Nuclides that are represented by the gamma energy lines in the two . The entire 
-           set of 12 nuclides belongs to the long list, and the 7 bold nuclides
-           belong to the short list.}
+  \begin{tabular}{@{}|l|l|l|@{}}
+    \hline
+    \textbf{Am241} & \textbf{Am243} & Cm243          \\ \hline
+    Cm244          & Cm245          & \textbf{Cs134} \\ \hline
+    \textbf{Cs137} & Eu152          & \textbf{Eu154} \\ \hline
+    \textbf{Kr85}  & Pu248          & \textbf{Sb125} \\ \hline
+  \end{tabular}
+  \caption{Nuclides that are represented by the gamma energy lines in the 
+           energy lists. The entire set of 12 nuclides belongs to the long 
+           list, and the 7 bold nuclides belong to the short list.}
   \label{tbl:enlistnucs}
-\todo[inline]{placeholder list, update me.}
 \end{table}
 
 Lastly, step \ref{itm:4} involves the inclusion of the counting error for the

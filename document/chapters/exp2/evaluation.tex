@@ -7,3 +7,51 @@
 \end{figure}
 
 Updates from Section \ref{sec:eval1}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_BalAcc_rxtr.png}
+  \caption{Prediction performance of reactor type as measured by balanced accuracy
+           with respect to decreasing information quality in the form of decreasing
+           detector energy resolution.}
+  \label{fig:rxtr}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{./chapters/exp2/confusion_matrix_nucs_acts.png}
+  \caption{Confusion matrices of reactor type prediction for each algorithm 
+           for different training sets (all at a 1\% error level): 29 nuclide 
+           masses, 32 nuclide activities, 12 nuclide activities, and 7 nuclide 
+           activities.}
+  \label{fig:cm_nucs_acts}
+\end{figure}
+
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_MAPE_burn.png}
+  \caption{Prediction performance of burnup as measured by \gls{MAPE} with 
+           respect to decreasing information quality in the form of decreasing 
+           detector energy resolution for three types of processed gamma spectra.}
+  \label{fig:burn}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_MAPE_enri.png}
+  \caption{Prediction performance of enrichment as measured by \gls{MAPE} with 
+           respect to decreasing information quality in the form of decreasing 
+           detector energy resolution for three types of processed gamma spectra.}
+  \label{fig:enri}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_MAPE_cool.png}
+  \caption{Prediction performance of time since irradiation as measured by \gls{MAPE} 
+           with respect to decreasing information quality in the form of decreasing 
+           detector energy resolution for three types of processed gamma spectra.}
+  \label{fig:cool}
+\end{figure}
+
