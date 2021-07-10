@@ -7,12 +7,24 @@
 \end{figure}
 
 The chosen algorithms (\textit{k}-nearest neighbors, decision trees, and
-\gls{MLL} calculations) are introduced in Section \ref{sec:algs} and
-implementation details are in Section \ref{sec:statmodel1}. The only
-difference for this experiment are the hyperparameters chosen for the
-scikit-learn algorithms.
+\gls{MLL} calculations) are introduced in Section \ref{sec:algs} and their
+implementation details are in Section \ref{sec:statmodel1}.  This section will
+therefore only cover the implementation differences from the previous work.
+The \gls{MLL} calculations are implemented identically to Chapter
+\ref{ch:exp1}.  However, the scikit-learn algorithms in this experiment did
+undergo a new round of hyperparameter optimization.
 
-\todo[inline]{finish me}
+The full list of training sets that undergo training and prediction are as
+follows: 29 nuclide masses (from Chapter \ref{ch:exp1}), 32 nuclide activities
+(full knowledge), 7 \& 12 nuclide activities (full knowledge for short and long
+energy window lists, respectively), and auto, short, and long energy window
+lists applied to the six detectors (lab-based \gls{HPGe}, portable \gls{HPGe},
+\gls{CZT}, \gls{SrI2}, \gls{LaBr3}, \gls{NaI}). Each of these 22 training sets
+\todo{left off here} 
+
+Table \ref{tbl:exp2hypparam} lists the updates to the hyperparameter
+optimization results. Because the 29 nuclide mass training set is included for
+comparison 
 
 \begin{table}[!htb]
   \centering

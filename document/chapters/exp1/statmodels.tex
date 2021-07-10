@@ -96,7 +96,7 @@ based on the \textit{k}-fold \gls{CV} approach, not to be confused with the
 folds and they all performed the same because the training set is large.  Given
 the equal performance among several options, the number of \gls{CV} folds was
 chosen to be 5 based on computational expediency. The \texttt{KFold}
-cross-validator with observation shuffling (i.e., the data set was shiffled
+cross-validator with observation shuffling (i.e., the data set was shuffled
 prior to splitting) in the scikit package carried out this task for the
 regression prediction cases.  For reactor type classification, the
 \texttt{StratifiedKFold} cross-validator was used since there is an imbalance
@@ -126,7 +126,7 @@ the predictions returned equal the number of entries in the training set.
 A key difference in how the \gls{MLL} method provides predictions is that it
 returns all the labels together, so it is not doing any generalizing on the
 continuous variable labels (burnup, enrichment, and cooling time). It is
-analgous to \textit{k}-nearest neighbors where $k = 1$, because there is no
+analogous to \textit{k}-nearest neighbors where $k = 1$, because there is no
 model being created, it just matches upon the call for prediction. Because of
 this, the \gls{MLL} method performing well is highly dependent on the training
 set being sufficiently large. 

@@ -5,15 +5,17 @@
 \label{ch:exp2}
 
 This chapter covers the parameter prediction workflow using processed spectra
-as the input features. First, the methodology is updated from that in Chapter
-\ref{ch:exp1} in four sections that correspond to the four steps summarized in
-Figure \ref{fig:method}.  The fifth section presents and discusses the results.
+as the input features. The methodology from Chapter \ref{ch:exp1} is reapplied
+with new implementations surrounding the training set moving beyond full
+knowledge of nuclide masses to degraded knowledge of processed gamma spectra.
+This is described in four sections that correspond to the four steps summarized
+in Figure \ref{fig:method}. 
 
-Section \ref{sec:training2} updates the features used in the training set. The
-full description of the simulations and training labels can be found in Section
-\ref{sec:training1}.  This provides a set of \gls{SNF} observations with the
-same known reactor operation parameters, i.e., labels that are to be predicted,
-but new nuclide features.
+The full description of the simulations and training labels can be found in
+Section \ref{sec:training1}.  Section \ref{sec:training2} provides the updates
+on the features used in the training set.  This results in a set of \gls{SNF}
+observations with the same known reactor operation parameters, i.e., labels
+that are to be predicted, but new nuclide features. 
 
 Next, the information reduction step is covered in Section
 \ref{sec:inforeduc2}.  Here, computational gamma spectra are created via the
