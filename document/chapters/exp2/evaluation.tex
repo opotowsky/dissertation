@@ -6,52 +6,56 @@
            described in this section.}
 \end{figure}
 
-Updates from Section \ref{sec:eval1}
+The prediction performance is measured by the balanced accuracy of the reactor
+type classification or the absolute and/or relative error of the regression
+cases (burnup, \gls{U235} enrichment, cooling time), which were introduced in
+Section \ref{sec:testerr}.  These performance metrics for all four prediction
+types and all six detectors are compared across the three algorithms used:
+\textit{k}-nearest neighbors (denoted in plots as \textit{kNN}), decision trees
+(denoted in plots as \textit{Dec Tree} or \textit{DTree}), and \gls{MLL}
+calculations.  \todo[inline]{how much gets repeated from ch 3, e.g.,
+reexplaining balanced accuracy, confusion matrices, etc?}
 
 \begin{figure}[!htb]
   \centering
-  \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_BalAcc_rxtr.png}
-  \caption{Prediction performance of reactor type as measured by balanced accuracy
-           with respect to decreasing information quality in the form of decreasing
-           detector energy resolution.}
-  \label{fig:rxtr}
+  \includegraphics[width=0.5\linewidth]{./chapters/exp2/exp2_plot_description.png}
+  \caption{Demonstration of plots being used to evaluate the results.}
+  \label{fig:detdemo}
 \end{figure}
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\textwidth]{./chapters/exp2/confusion_matrix_nucs_acts.png}
-  \caption{Confusion matrices of reactor type prediction for each algorithm 
-           for different training sets (all at a 1\% error level): 29 nuclide 
-           masses, 32 nuclide activities, 12 nuclide activities, and 7 nuclide 
-           activities.}
-  \label{fig:cm_nucs_acts}
-\end{figure}
+In order to evaluate the prediction performace degradation with decreasing
+information quality via detector energy resolution, a basic plot format is
+presented, pictured in Figure \ref{fig:detdemo}. The \textit{y}-axis is always
+oriented so that higher levels indicate better performance, so is plotted as
+accuracy score or negative error.  The \textit{x}-axis is oriented so that
+degradation travels rightward. There are three plots for each prediction
+parameter, corresponding to the three energy window lists: auto, short, and
+long.  First, the 29 nuclide mass training set is included for comparison,
+followed by the 32 nuclide activity training set, which is intended to
+represent a full knowledge scenario of nuclide activities before gamma
+detection. These are both the same for all three energy window lists.  The 7 \&
+12 nuclide activities are next, and they represent the full knowledge scenario
+for the post-gamma detection short and long energy window lists, respectively.
+The 12 nuclide activity training set is chosen to be used for the auto energy
+window list plots.  All of the nuclide mass/nuclide activity training sets are
+predicted with a 1\% training set error applied.  Last, the six detectors are
+in order of decreasing detector energy resolution. Thus, for each prediction
+parameter, there are three plots for each energy window list with these nine
+\textit{x}-axis categories.
 
+Another component of Figure \ref{fig:detdemo} are the two horizontal lines. The
+bottom/red line represents some measure of minimum acceptable "base level"
+performance.  Depending on the metric being presented, this is derived from the
+training set composition or the performance of the 29 nuclide mass training set
+in Section \ref{sec:eval1}. The top/blue line represents the ideal performance,
+and is also determined either from the training set design or previous
+performance with the 29 nuclide mass training set.
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_MAPE_burn.png}
-  \caption{Prediction performance of burnup as measured by \gls{MAPE} with 
-           respect to decreasing information quality in the form of decreasing 
-           detector energy resolution for three types of processed gamma spectra.}
-  \label{fig:burn}
-\end{figure}
+\todo[inline]{if box plots are added, make mention here first}
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_MAPE_enri.png}
-  \caption{Prediction performance of enrichment as measured by \gls{MAPE} with 
-           respect to decreasing information quality in the form of decreasing 
-           detector energy resolution for three types of processed gamma spectra.}
-  \label{fig:enri}
-\end{figure}
+\subsection{Reactor Type Classification}
+\input{chapters/exp2/eval_rxtr}
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_MAPE_cool.png}
-  \caption{Prediction performance of time since irradiation as measured by \gls{MAPE} 
-           with respect to decreasing information quality in the form of decreasing 
-           detector energy resolution for three types of processed gamma spectra.}
-  \label{fig:cool}
-\end{figure}
+\subsection{Regression Results}
+\input{chapters/exp2/eval_reg}
 

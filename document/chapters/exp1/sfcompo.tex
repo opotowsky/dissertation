@@ -6,7 +6,8 @@ generalization or rxtr type prior knowledge sections that could be useful here
 for more in depth discussion. 3. this ended up really motivating the use of
 relative error versus absolute (really, both) so it could maybe go first, then
 the random error results section could go second using the relative error
-plots?}
+plots? 4. go back and check on reactor tech in sfcompo versus the origen 
+reactors in the training DB}
 
 The testing described in Section \ref{sec:randerr} describes the process of
 evaluating the methodology with test cases drawn from the training database.
@@ -201,7 +202,7 @@ will be discussed. There is no time since irradiation value in the database, so
 only burnup and \gls{U235} enrichment are discussed here.  While the mean and
 median errors for burnup and enrichment prediction are listed in Tables
 \ref{tbl:sfcoburn} and \ref{tbl:sfcoenri}, respectively, there are also box
-plots inlcuded for both absolute and relative errors in Figures
+plots included for both absolute and relative errors in Figures
 \ref{fig:sfcoburn} and \ref{fig:sfcoenri}, respectively.  Box plots were chosen
 since they can provide a larger amount of information than just a mean or
 median value.  The white triangles represent the mean error, and the white line
@@ -324,7 +325,7 @@ test set predicted by \gls{MLL} calculations far outperform all other
 algorithm/test set scenarios. However, the enrichment regression results break
 this trend.  Table \ref{fig:sfcoenri} shows that decision trees outperform the
 other methods, and furthermore, there isn't a large difference in performance
-between the two test sets, expecially seeing that the median absolute error is
+between the two test sets, especially seeing that the median absolute error is
 the same for both test sets.  The other two algorithms follow their previous
 behavior: moving from imputed nulls to zero-nulls, \textit{k}-nearest neighbors
 has worse performance and \gls{MLL} calculations has better performance.

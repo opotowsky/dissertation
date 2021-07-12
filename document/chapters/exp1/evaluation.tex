@@ -6,8 +6,8 @@
            described in this section.}
 \end{figure}
 
-\subsection{Random Error Impacts on Prediction}
-\label{sec:randerr}
+\todo[inline]{ch 4 uses more than relative error, and so might want to add mean
+abs error and or median abs error to this discussion.}
 
 As previously introduced in Section \ref{sec:testerr}, the prediction
 performance is measured by evaluating the accuracy of the reactor type
@@ -15,11 +15,15 @@ classification or the error of the regression cases (burnup, \gls{U235}
 enrichment, cooling time).  These performance metrics for all four prediction
 types are compared across the three algorithms used: \textit{k}-nearest
 neighbors (denoted in plots as \textit{kNN}), decision trees (denoted in plots
-as \textit{Dec Tree} or \textit{DTree}), and \gls{MLL} calculations.  To judge
-the degradation of predictions of the algorithms with increasing nuclide mass
-measurement error (i.e., reduced information quality, detailed in section
-\ref{sec:inforeduc1}), four plots are made with the introduced error on the
-\textit{x}-axis and a prediction performance metric on the \textit{y}-axis.
+as \textit{Dec Tree} or \textit{DTree}), and \gls{MLL} calculations.  
+
+\subsection{Random Error Impacts on Prediction}
+\label{sec:randerr}
+
+To judge the degradation of predictions of the algorithms with increasing
+nuclide mass measurement error (i.e., reduced information quality, detailed in
+Section \ref{sec:inforeduc1}), four plots are made with the introduced error on
+the \textit{x}-axis and a prediction performance metric on the \textit{y}-axis.
 Shown in Figure \ref{fig:randerr}, the \textit{y}-axis is always oriented so
 that lower is poorer performance and higher is better performance. This is why
 Figures \ref{fig:randerrB}--\ref{fig:randerrD} present a negative \gls{MAPE} on

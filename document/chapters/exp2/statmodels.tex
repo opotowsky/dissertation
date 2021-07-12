@@ -14,17 +14,13 @@ The \gls{MLL} calculations are implemented identically to Chapter
 \ref{ch:exp1}.  However, the scikit-learn algorithms in this experiment did
 undergo a new round of hyperparameter optimization.
 
-The full list of training sets that undergo training and prediction are as
+The full list of 22 training sets that undergo training and prediction are as
 follows: 29 nuclide masses (from Chapter \ref{ch:exp1}), 32 nuclide activities
-(full knowledge), 7 \& 12 nuclide activities (full knowledge for short and long
-energy window lists, respectively), and auto, short, and long energy window
-lists applied to the six detectors (lab-based \gls{HPGe}, portable \gls{HPGe},
-\gls{CZT}, \gls{SrI2}, \gls{LaBr3}, \gls{NaI}). Each of these 22 training sets
-\todo{left off here} 
-
-Table \ref{tbl:exp2hypparam} lists the updates to the hyperparameter
-optimization results. Because the 29 nuclide mass training set is included for
-comparison 
+(full knowledge scenario for all nuclides, whether or not they are present in a
+quantity able to be detected), 7 \& 12 nuclide activities (full knowledge for
+short and long energy window lists, respectively), and auto, short, and long
+energy window lists applied to the six detectors (lab-based \gls{HPGe},
+portable \gls{HPGe}, \gls{CZT}, \gls{SrI2}, \gls{LaBr3}, \gls{NaI}). 
 
 \begin{table}[!htb]
   \centering
@@ -67,6 +63,31 @@ comparison
                                                                                              & Cooling Time & 2 & 58 & None or 150 \\ 
     \bottomrule 
   \end{tabular}
-  \caption{Algorithm hyperparameters that underwent optimization (note the energy lists took all detectors into account).}
+  \caption{Optimized algorithm hyperparameters; the energy lists took all 
+           detectors into account.}
   \label{tbl:exp2hypparam}
 \end{table}
+
+Table \ref{tbl:exp2hypparam} lists the hyperparameter optimization results for
+the 22 training sets. Because the 29 nuclide mass training set is included in
+this chapter for comparison, its optimization results are also listed here.
+The number of features for decision trees are not limited because the test runs
+for optimization provided highly variable results. The only case where this is
+not true is with the auto energy windows list for the lab-based \gls{HPGe} with
+a length of 206; the maximum features for this one case are limited to 150.
+Instead, optimization was carried out only on the maximum depth for decision
+trees with keeping the full length of features.  This is an area that could
+undergo deeper exploration than what occurs in this work, since the training
+sets with large feature sets can become overfit.
+
+The optimization took place in two rounds, where the first round had a coarser
+grid of \textit{k} for \textit{k}-nearest neighbors and maximum depth for
+decision trees and the second round had a finer grid of parameters. The 7 \& 12
+nuclide activity training sets were optimized separately but contain averages
+of the two results for the maximum depth, and the higher value of \textit{k}
+when the two did not match. The \textit{k} and maximum depths were averaged
+across all six detectors for each energy window list length (short, long, and
+auto).  There were fairly consistent results from the short and long lists, but
+the variable length of the auto-generated energy windows lists (in Table
+\ref{tbl:enwindows}) gave a wider range of ideal hyperparameters.
+
