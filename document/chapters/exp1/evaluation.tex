@@ -6,9 +6,6 @@
            described in this section.}
 \end{figure}
 
-\todo[inline]{ch 4 uses more than relative error, and so might want to add mean
-abs error and or median abs error to this discussion.}
-
 As previously introduced in Section \ref{sec:testerr}, the prediction
 performance is measured by evaluating the accuracy of the reactor type
 classification or the error of the regression cases (burnup, \gls{U235}
@@ -93,11 +90,45 @@ positive fractions.
     \label{fig:randerrD}
   \end{subfigure}
   \caption{Prediction performance of reactor type, burnup, enrichment, and 
-           time since irradiation with respect to decreasing information
-           quality in the form of uniform/random error applied to the nuclide 
-           mass measurements in the training set.}
+           time since irradiation as measured by relative error with respect 
+           to uniform/random error applied to the nuclide mass measurements 
+           in the training set.}
   \todo[inline]{inset background needs to be opaque, since the knn error bars are seen in it}
   \label{fig:randerr}
+\end{figure}
+
+\begin{figure}[!htb]
+\todo[inline]{ch 4 uses more than relative error, and so added MAE this
+section. need to add discussion.}
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAE_burn.png}
+    \caption{Negative \gls{MAE} of burnup regression with respect to 
+             random error.}
+    \label{fig:randmaeA}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAE_enri.png}
+    \caption{Negative \gls{MAE} of \gls{U235} enrichment regression with 
+             respect to random error.}
+    \label{fig:randmaeB}
+  \end{subfigure}
+  \vskip\baselineskip
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAE_cool.png}
+    \caption{Negative \gls{MAE} of time since irradiation regression with 
+             respect to random error.} 
+    \label{fig:randmaeC}
+  \end{subfigure}
+  \caption{Prediction performance of burnup, enrichment, and time since 
+           irradiation as measured by \gls{MAE} with respect to decreasing 
+           information quality in the form of uniform/random error applied 
+           to the nuclide mass measurements in the training set.}
+  \label{fig:randmae}
 \end{figure}
 
 \begin{figure}[!htb]

@@ -1,4 +1,5 @@
 
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\linewidth]{./chapters/exp1/methodology4.png}
@@ -25,22 +26,24 @@ reexplaining balanced accuracy, confusion matrices, etc?}
 
 In order to evaluate the prediction performace degradation with decreasing
 information quality via detector energy resolution, a basic plot format is
-presented, pictured in Figure \ref{fig:detdemo}. The \textit{y}-axis is always
-oriented so that higher levels indicate better performance, so is plotted as
-accuracy score or negative error.  The \textit{x}-axis is oriented so that
-degradation travels rightward. There are three plots for each prediction
-parameter, corresponding to the three energy window lists: auto, short, and
-long.  First, the 29 nuclide mass training set is included for comparison,
-followed by the 32 nuclide activity training set, which is intended to
-represent a full knowledge scenario of nuclide activities before gamma
-detection. These are both the same for all three energy window lists.  The 7 \&
-12 nuclide activities are next, and they represent the full knowledge scenario
-for the post-gamma detection short and long energy window lists, respectively.
-The 12 nuclide activity training set is chosen to be used for the auto energy
-window list plots.  All of the nuclide mass/nuclide activity training sets are
-predicted with a 1\% training set error applied.  Last, the six detectors are
-in order of decreasing detector energy resolution. Thus, for each prediction
-parameter, there are three plots for each energy window list with these nine
+presented, pictured in Figure \ref{fig:detdemo}.  There are three plots for
+each prediction parameter, corresponding to the three energy window lists:
+auto, short, and long.  The \textit{y}-axis is always oriented so that higher
+levels indicate better performance, so is plotted as accuracy score or negative
+error.  
+
+The \textit{x}-axis is oriented so that degradation travels rightward.
+First, the 29 nuclide mass training set is included for comparison, followed by
+the 32 nuclide activity training set, which is intended to represent a full
+knowledge scenario of nuclide activities before gamma detection. These are both
+the same for all three energy window lists.  The 7 \& 12 nuclide activities are
+next, and they represent the full knowledge scenario for the post-gamma
+detection short and long energy window lists, respectively.  The 12 nuclide
+activity training set is chosen to be used for the auto energy window list
+plots.  All of the nuclide mass/nuclide activity training sets are predicted
+with a 1\% training set error applied.  Last, the six detectors are in order of
+decreasing detector energy resolution. Thus, for each prediction parameter,
+there are three plots for each energy window list with these nine
 \textit{x}-axis categories.
 
 Another component of Figure \ref{fig:detdemo} are the two horizontal lines. The
@@ -50,8 +53,6 @@ training set composition or the performance of the 29 nuclide mass training set
 in Section \ref{sec:eval1}. The top/blue line represents the ideal performance,
 and is also determined either from the training set design or previous
 performance with the 29 nuclide mass training set.
-
-\todo[inline]{if box plots are added, make mention here first}
 
 \subsection{Reactor Type Classification}
 \input{chapters/exp2/eval_rxtr}

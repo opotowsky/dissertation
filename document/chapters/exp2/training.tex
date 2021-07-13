@@ -9,9 +9,8 @@ In the second experiment, activities of radionuclides are necessary to
 calculate gamma spectra from these values. The \gls{ORIGEN} simulations and
 their inputs are the same as Section \ref{sec:training1}, but the outputs
 tracked are a different set of nuclides, measured in $Ci$, or $Curies$.  In
-this experiment, the full knowledge scenario is this set of 32 nuclide
-activities, although the results from the 29 nuclide masses from Chapter
-\ref{ch:exp1} are included for comparison. The simulation parameters that
+this experiment, the full knowledge scenario is the set of 32 nuclide
+activities found in Table \ref{tbl:nucacts}.  The simulation parameters that
 are being predicted are the same:
 \begin{enumerate}
   \item The classification of the \textbf{reactor type}: \gls{PWR}, \gls{BWR}, 
@@ -55,7 +54,9 @@ chosen because they remained after four steps of filtering:
   some detectors).
 \end{enumerate}
 
-\todo[inline]{if shape of feature histograms is relevant, keep the figure and discuss}
+\todo[inline]{if shape of feature histograms is relevant, keep the figure and
+discuss. update: it isn't relevant for the scikit algorithms, because neither
+makes assumptions about the distrubitions of features.}
 
 \begin{figure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp2/histograms_trainset_features_acts.png}}
@@ -63,6 +64,7 @@ chosen because they remained after four steps of filtering:
   \label{fig:actshist}
 \end{figure}
 
-This one initial training set will undergo several transformations to become 
-six training sets (one for each detector) for each spectra-processing approach.
-This is described next in Section \ref{sec:inforeduc2}.
+This one initial training set will undergo several transformations to become
+six training sets (one for each detector) for each spectra-processing approach
+(three for each set of detectors).  This is described next in Section
+\ref{sec:inforeduc2}.
