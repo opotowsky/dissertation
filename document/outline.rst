@@ -93,13 +93,14 @@ Chapter 5
 
 - Conclusion
 - Future Work
-   - Filtering out problematic nuclides
    - Increase simulation fidelity
+   - Feature set study
+      - Filtering out problematic nuclides
+      - Iso ratios
    - SFCOMPO: 
       - rxtr type first, then regression
       - better null imputation  
    - Algorithm optimization 
-   - Feature set study; iso ratios
+   - Do ROC studies to vary the decision threshold for PHWR/PWRs to avoid misclassifications as BWR
    - Serial Prediction (rxtr type first, then burnup, etc)
-
 

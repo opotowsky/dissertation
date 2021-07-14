@@ -1,13 +1,4 @@
 
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_BalAcc_rxtr.png}
-  \caption{Prediction performance of reactor type as measured by balanced 
-           accuracy with respect to decreasing detector energy resolution 
-           for three types of processed gamma spectra.}
-  \label{fig:rxtr}
-\end{figure}
-
 To judge the degradation of predictions of the algorithms with decreasing
 information quality (detailed in Section \ref{sec:inforeduc2}), a plot for each
 energy window list (auto, short, and long) is presented.  Figure \ref{fig:rxtr}
@@ -21,6 +12,15 @@ training set error for the 29 nuclide mass training set in Figure
 \ref{fig:randerrA}.  The red line that indicates a baseline/minimum acceptable
 performance is at a balanced accuracy score of 0.75, which is an arbitrary
 choice. 
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_BalAcc_rxtr.png}
+  \caption{Prediction performance of reactor type as measured by balanced 
+           accuracy with respect to decreasing detector energy resolution 
+           for three types of processed gamma spectra.}
+  \label{fig:rxtr}
+\end{figure}
 
 For the auto and short energy windows lists, the \textit{k}-nearest neighbors
 performance is usually below \gls{MLL} calculations and above decision trees,
@@ -40,37 +40,6 @@ have a decision trees performance below the baseline; there is no detector for
 which decision trees performs above the baseline on the auto list plot.
 Decision trees almost consistently performs the worse for the last four
 detectors.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\textwidth]{./chapters/exp2/confusion_matrix_nucs_acts.png}
-  \caption{Confusion matrices of reactor type prediction for each algorithm 
-           for different training sets (all at a 1\% error level): 29 nuclide 
-           masses, 32 nuclide activities, 12 nuclide activities, and 7 nuclide 
-           activities.}
-  \label{fig:cm_nucs_acts}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.83\textwidth]{./chapters/exp2/confusion_matrix_6dets_auto.png}
-  \caption{Confusion matrices for auto energy window list training sets.}
-  \label{fig:cm_auto}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.83\textwidth]{./chapters/exp2/confusion_matrix_6dets_short.png}
-  \caption{Confusion matrices for short energy window list training sets.}
-  \label{fig:cm_short}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.83\textwidth]{./chapters/exp2/confusion_matrix_6dets_long.png}
-  \caption{Confusion matrices for long energy window list training sets.}
-  \label{fig:cm_long}
-\end{figure}
 
 For the short and long energy windows lists, \gls{MLL} is above the baseline
 except for the \gls{NaI} detector.  For the auto list, only the last two
@@ -102,6 +71,37 @@ approximately the same, but interestingly, they improve slightly for
 \textit{k}-nearest neighbors and \gls{MLL} calculations.  A visible increase in
 misclassification is clear with the 12 and 7 nuclide activity training sets,
 especially for decision trees. \todo[inline]{discuss numbers or no?}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=\textwidth]{./chapters/exp2/confusion_matrix_nucs_acts.png}
+  \caption{Confusion matrices of reactor type prediction for each algorithm 
+           for different training sets (all at a 1\% error level): 29 nuclide 
+           masses, 32 nuclide activities, 12 nuclide activities, and 7 nuclide 
+           activities.}
+  \label{fig:cm_nucs_acts}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.83\textwidth]{./chapters/exp2/confusion_matrix_6dets_auto.png}
+  \caption{Confusion matrices for auto energy window list training sets.}
+  \label{fig:cm_auto}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.83\textwidth]{./chapters/exp2/confusion_matrix_6dets_short.png}
+  \caption{Confusion matrices for short energy window list training sets.}
+  \label{fig:cm_short}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.83\textwidth]{./chapters/exp2/confusion_matrix_6dets_long.png}
+  \caption{Confusion matrices for long energy window list training sets.}
+  \label{fig:cm_long}
+\end{figure}
 
 Figure \ref{fig:cm_auto} shows the confusion matrices for all six detectors (in
 the same order top-to-bottom as the \textit{x}-axis in Figure \ref{fig:rxtr})

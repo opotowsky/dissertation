@@ -49,5 +49,11 @@ metrics for distance can be the Manhattan distance, Euclidian distance,
 To write: a section on decision trees
 
 \subsubsection{Maximum Log-Likelihood Calculations}
-To write: a section on \gls{MLL} calcs.
 
+Likelihood calculated is as follows:
+\[L(M|r_{test}) = \prod_i \frac{1}{\sigma_{i,sim} \sqrt{2\pi}} \exp{\frac{-(r_{i,test} - r_{i,sim})^2}{2 \sigma_{i,sim}^2}}\]
+
+Whereas the log-likelihood is used in practice:
+\[ln(L(M|r_{test})) = \sum_i ln(\frac{1}{\sigma_{i,sim} \sqrt{2\pi}}) - \frac{(r_{i,test} - r_{i,sim})^2}{2 \sigma_{i,sim}^2}\]
+
+Approach based on previous work: \cite{mll_method, mll_validate, mll_sensitivity}
