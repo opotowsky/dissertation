@@ -30,8 +30,8 @@
 \newcounter {listofheading}
 
 \newcommand\@thesistitlesmallskip{0.1in}
-\newcommand\@thesistitlemedskip{0.2in} %was 3
-\newcommand\@thesistitlebigskip{0.4in} %was 5
+\newcommand\@thesistitlemedskip{0.3in} 
+\newcommand\@thesistitlebigskip{0.5in} 
 \newcommand{\degree}[1]{\gdef\@degree{#1}}
 \newcommand{\project}{\gdef\@doctype{A masters project report}}
 \newcommand{\prelim}{\gdef\@doctype{A preliminary report}}
@@ -49,7 +49,7 @@
 \gdef\@doctype{A dissertation }        %Default is dissertation
 
 \gdef\@department{Nuclear Engineering \& Engineering Physics} 
-\gdef\@defensedate{Day Month 2021}
+\gdef\@defensedate{Day August 2021}
 \gdef\@committee{
   %\setstretch{1.0}
   \footnotesize
@@ -71,7 +71,7 @@
     \def\thanks##1{\typeout{Warning: `thanks' deleted from thesis titlepage.}}
     \let\footnotesize\small \let\footnoterule\relax \setcounter{page}{1}
     \begin{center}
-      {\textbf{\expandafter\expandafter{\LARGE \@title}}} \\[\@thesistitlesmallskip]
+      {\textbf{\expandafter\expandafter{\Large \@title}}} \\[\@thesistitlesmallskip]
        by \\[\@thesistitlesmallskip]
       {\Large \@author} \\[\@thesistitlemedskip]
       \@doctype submitted in partial fulfillment of \\ the requirements for the degree of \\[\@thesistitlemedskip]

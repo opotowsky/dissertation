@@ -9,15 +9,16 @@ algorithm would be used.
 
 \subsubsection{Nearest Neighbor Methods}
 
-Nearest neighbor regression is a unique algorithm in that it is instance-based;
-it does not actually generalize, but tracks the observations in the training
-set.  The main metric for this algorithm is distance (or dissimilarity) between
-the test sample and the closest training sample(s) in the vicinity.  During
-prediction, the algorithm will calculate a value based on the instance that is
-closest to the current test sample. Thus, there is not any learning, but
-instead a direct comparison between an unknown sample and the space that the
-training set populates. The predictions from nearest neighbors can be quite
-accurate, but are highly unstable to peturbations \cite{elements_stats}.
+Nearest neighbors classification and regression are unique algorithms in
+that thay are instance-based; they do not actually generalize, but instead
+track the observations in the training set.  The main metric for this algorithm
+is distance (or dissimilarity) between the test sample and the closest training
+sample(s) in the vicinity.  During prediction, the algorithm will calculate a
+value based on the instance that is closest to the current test sample. Thus,
+there is not any learning, but instead a direct comparison between an unknown
+sample and the space that the training set populates. The predictions from
+nearest neighbors can be quite accurate, but are highly unstable to
+peturbations \cite{elements_stats}.
 
 \begin{figure}[!htb]
   \centering
@@ -34,6 +35,7 @@ pictoral explanation of how this is done for a prediction of a single feature.
 For \textit{k}-neighbors, this algorithm predicts a value, $Y$, from the input
 features, $\boldsymbol{X}$, in the neighborhood, $N_k (\boldsymbol{X})$
 \cite{elements_stats}. 
+
 \begin{equation}
   Y(\boldsymbol{X}) = \frac{1}{k} \sum_{x_i \in N_k(\boldsymbol{X})} y_i
   \label{eq:knn}
@@ -46,14 +48,45 @@ metrics for distance can be the Manhattan distance, Euclidian distance,
 \todo[inline]{finish me}
 
 \subsubsection{Decision Trees}
-To write: a section on decision trees
+
+
 
 \subsubsection{Maximum Log-Likelihood Calculations}
 
-Likelihood calculated is as follows:
-\[L(M|r_{test}) = \prod_i \frac{1}{\sigma_{i,sim} \sqrt{2\pi}} \exp{\frac{-(r_{i,test} - r_{i,sim})^2}{2 \sigma_{i,sim}^2}}\]
+The \gls{MLL} calulations approach applied here is based on a method developed
+to do similar work \cite{mll_method, mll_validate, mll_sensitivity}.  That work
+involved matching nuclear material samples based on some select measurements to
+entries in a database of containing those measurements.\todo{keep vague or no?}
+Each database entry also has a similar list of labels to the labels being
+predicted in this work: reactor type, burnup, and time since irradiation.
 
-Whereas the log-likelihood is used in practice:
-\[ln(L(M|r_{test})) = \sum_i ln(\frac{1}{\sigma_{i,sim} \sqrt{2\pi}}) - \frac{(r_{i,test} - r_{i,sim})^2}{2 \sigma_{i,sim}^2}\]
+Here, the same approach is taken. An "unknown" test sample is compared against
+the training set using the likelihood calculation between that sample and the
+training set entries.  The higher the likelihood, the higher the probability
+that the database entry represents the sample. The likelihood is in Equation
+\ref{eq:like}, whereas the log-likelihood is used more often in practice, shown
+in Equation \ref{eq:loglike}.
+\begin{equation}
+  L(M|x_{test}) = \prod_i \frac{1}{\sigma_{i,sim} \sqrt{2\pi}} \exp{\frac{-(x_{i,test} - x_{i,sim})^2}{2 \sigma_{i,sim}^2}}
+  \label{eq:like}
+\end{equation}
+\begin{equation}
+  ln(L(M|x_{test})) = \sum_i ln(\frac{1}{\sigma_{i,sim} \sqrt{2\pi}}) - \frac{(x_{i,test} - x_{i,sim})^2}{2 \sigma_{i,sim}^2}
+  \label{eq:loglike}
+\end{equation}
+The likelihood is a measure of the probability that a model $M$ produced the
+measurements seen in the test sample, given by $L(M|x_{test})$.  In both
+Equations \ref{eq:like} and \ref{eq:loglike}, $x$ refers to the set of
+features, and $x_{i, test}$ and $x_{i,sim}$ are the individual features for the
+test sample and the training set entries, respectively. The uncertainty of the
+measurement associated with each feature is represented by $\sigma_{i,sim}$
 
-Approach based on previous work: \cite{mll_method, mll_validate, mll_sensitivity}
+\todo[inline]{Discuss how using a normal probability density function to match
+the variables assume that the variables themselves are normal?}
+
+Interestingly, the \gls{MLL} calculations method works like \textit{k}-nearest
+neighbors, where there is no model but a prediction according to the closest
+match database entry.  There is one detail that differs, however. Whereas
+\textit{k}-nearest neighbors minimizes distance/dissimilarity, this approach
+instead maximizes similarity via a likelihood function. 
+

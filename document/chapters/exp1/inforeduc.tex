@@ -36,14 +36,13 @@ For the \gls{MLL} calculations, a uniform uncertainty was introduced to each
 nuclide mass.  Thus, each nuclide is given an uncertainty of 1, 5, 10, 15, and
 20\% via:
 \begin{equation}
-  \label{eq:mllunc}
   \sigma_{Log L}^2 = \sum_j \left( 
-                            \frac{r_{j,test} - r_{j,sim}}{\sigma_{j,sim}^2}
+                            \frac{x_{j,test} - x_{j,sim}}{\sigma_{j,sim}^2}
                             \right)^2 
                             (\sigma_{j,sim}^2 + \sigma_{j,test}^2)
+  \label{eq:mllunc}
 \end{equation}
-where $r_{j,sim}$ and $r_{j,test}$ are the nuclide measurements for the
+where $x_{j,sim}$ and $x_{j,test}$ are the nuclide measurements for the
 simulated/training set samples and the test samples, respectively, and
 $\sigma_{j,sim}$ and $\sigma_{j,test}$ are their respective standard deviations
-calculated from the four uncertainty levels listed above.  \todo[inline]{review
-chosen variables and that they match with what ends up in MLL intro}
+calculated from the four uncertainty levels listed above.  
