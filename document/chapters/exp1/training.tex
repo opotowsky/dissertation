@@ -137,7 +137,6 @@ moderator and coolant in all simulated reactor types.)
   \caption{A combination of histograms and scatter plots to visualize the 
            distribution of prediction labels in the training set.}
   \label{fig:trainhist}
-  \todo[inline]{fix the histogram figure, this is a placeholder}
 \end{figure}
 
 The third factor influencing database design is ensuring ideal \gls{ML}
@@ -202,7 +201,16 @@ is described in more detail in Section \ref{sec:sfcompo}.
   \label{tbl:nucmass}
 \end{table}
 
-\todo[inline]{if shape of feature histograms is relevant, keep the figure and discuss}
+Many \gls{ML} algorithms are dependent on a presumed feature distribution.
+Figure \ref{fig:nucshist} is a set of histograms for each feature, showing the
+spread of each nuclide mass measurement across the entire training set.  While
+a few nuclides have a normal distribution (the most common presumption), many
+do not. Fortunately, both \textit{k}-nearest neighbors and decision trees are
+non-parametric methods that do not make any underlying assumptions about
+feature probability distributions. The \gls{MLL} method, however, does make the
+assumption of a normal distribution. Any poor performance could therefore be
+explained by this underlying assumption being an inaccurate representation of
+the features in the training set.
 
 \begin{figure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp1/histograms_trainset_features_nucs.png}}

@@ -7,6 +7,18 @@ This would require a classification algorithm. Or perhaps the input fuel
 composition is relevant to an investigation on weapons intent, so a regression
 algorithm would be used. 
 
+There are three algorithms presented in this section: \textit{k}-nearest
+neighbors, decision trees, and \gls{MLL} calculations. They were chosen based
+on their simplicity; this work has yet to be benchmarked using simple
+algorithms so a more complex treatment of the training sets in this work would
+be premature. Additionally, in part because of their simplicity, they are all
+"white box" methods.  This is unique in the \gls{ML} universe, since most
+algorithms create a black box model that is unable to be analyzed by a human.
+The  decision trees method provides an output model that can be used to discern
+behavior and understand predictions, and \textit{k}-nearest neighbors and
+\gls{MLL} calculations do not create a model at all. Individual predictions can
+still be analyzed, however, since the procedures are so simple. 
+
 \subsubsection{Nearest Neighbor Methods}
 
 Nearest neighbors classification and regression are unique algorithms in
@@ -20,6 +32,27 @@ sample and the space that the training set populates. The predictions from
 nearest neighbors can be quite accurate, but are highly unstable to
 peturbations \cite{elements_stats}.
 
+Prediction with this method will be explained using \textit{k}-nearest
+neighbors regression.  First, the distances between the test sample and each of
+the training set instances are calculated.  Most commonly the Euclidian
+distance is used, but this walkthrough uses the Manhattan distance:
+\begin{equation}
+  d_{i} = \sum_{j=1}^{N_{feats}} |x_{j,train} - x_{j,test}|
+  \label{eq:l1}
+\end{equation}
+where $i$ is each training set instance, and $j$ refers to each feature in the
+training set.  The lowest \textit{k} $d_{i}$ are chosen, and the value, $Y$ is
+predicted using:
+\begin{equation}
+  Y(\boldsymbol{x}) = \frac{1}{k} \sum_{i=1}^{k} w_i \cdot y_i
+  \label{eq:knn}
+\end{equation}
+where $w_{i}$ is either uniform and takes on a value of $1$ or is
+distance-based and takes on a value of $1/d_{i}$ and $\boldsymbol{x}$ is the
+full set of features.  This averages the closest \textit{k} neighbors for an
+estimate of the unknown sample, as shown in Equation \ref{eq:knn}.  For
+classification, the mode of the \textit{k} nearest neighbors is taken.  
+
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.8\linewidth]{./chapters/litrev/nn-fig.png}
@@ -28,28 +61,22 @@ peturbations \cite{elements_stats}.
   \label{fig:nn}
 \end{figure}
 
-An extension of nearest neighbor is \textit{k}-nearest neighbor regression.
-The closest \textit{k} neighbors are averaged for an estimate of the unknown
-sample, as shown in Equation \ref{eq:knn}.  Figure \ref{fig:nn} provides a
-pictoral explanation of how this is done for a prediction of a single feature.
-For \textit{k}-neighbors, this algorithm predicts a value, $Y$, from the input
-features, $\boldsymbol{X}$, in the neighborhood, $N_k (\boldsymbol{X})$
-\cite{elements_stats}. 
-
-\begin{equation}
-  Y(\boldsymbol{X}) = \frac{1}{k} \sum_{x_i \in N_k(\boldsymbol{X})} y_i
-  \label{eq:knn}
-\end{equation}
-
-There are two tuneable parameters in this algorithm: the distance metric and
-the value of \textit{k}.  The population of the neighborhood, \textit{k},
-affects the number of points being averaged together for a prediction.  The
-metrics for distance can be the Manhattan distance, Euclidian distance, 
-\todo[inline]{finish me}
+Figure \ref{fig:nn} provides a pictoral explanation of Equation \ref{eq:knn}
+for a prediction where there is one feature. In this figure, there is a test
+sample with a feature, valued at $x_i$, indicated with the grey dotted line.
+The three circles represent the neighborhood given by the value of \textit{k},
+and the darker dots on the line represent the reported prediction $y$ for each
+choice of \textit{k}.  In this illustration, $k=1$ or $k=2$ provide a more
+accurate prediction according to a visual inspection of the trend, but higher
+values of $k$ can be useful, and will be discussed in Section
+\ref{sec:complexity}.
 
 \subsubsection{Decision Trees}
 
+The predictions from decision trees, similar to \textit{k}-nearest neighbors,
+are highly unstable to peturbations. 
 
+\cite{elements_stats}
 
 \subsubsection{Maximum Log-Likelihood Calculations}
 
@@ -60,33 +87,28 @@ entries in a database of containing those measurements.\todo{keep vague or no?}
 Each database entry also has a similar list of labels to the labels being
 predicted in this work: reactor type, burnup, and time since irradiation.
 
-Here, the same approach is taken. An "unknown" test sample is compared against
-the training set using the likelihood calculation between that sample and the
-training set entries.  The higher the likelihood, the higher the probability
-that the database entry represents the sample. The likelihood is in Equation
-\ref{eq:like}, whereas the log-likelihood is used more often in practice, shown
-in Equation \ref{eq:loglike}.
+Interestingly, the \gls{MLL} calculations method works like \textit{k}-nearest
+neighbors, where there is no model but a prediction according to the closest
+match database entry.  There is one detail that differs, however. Whereas
+\textit{k}-nearest neighbors minimizes distance/dissimilarity, this approach
+instead maximizes similarity via a likelihood function. An "unknown" test
+sample is compared against the training set using the likelihood calculation
+between that sample and the training set entries.  The higher the likelihood,
+the higher the probability that the database entry represents the sample. The
+likelihood is in Equation \ref{eq:like}, whereas the log-likelihood is used
+more often in practice, shown in Equation \ref{eq:loglike}.
 \begin{equation}
-  L(M|x_{test}) = \prod_i \frac{1}{\sigma_{i,sim} \sqrt{2\pi}} \exp{\frac{-(x_{i,test} - x_{i,sim})^2}{2 \sigma_{i,sim}^2}}
+  L(M|x_{test}) = \prod_i \frac{1}{\sigma_{i,train} \sqrt{2\pi}} \exp{\frac{-(x_{i,test} - x_{i,train})^2}{2 \sigma_{i,train}^2}}
   \label{eq:like}
 \end{equation}
 \begin{equation}
-  ln(L(M|x_{test})) = \sum_i ln(\frac{1}{\sigma_{i,sim} \sqrt{2\pi}}) - \frac{(x_{i,test} - x_{i,sim})^2}{2 \sigma_{i,sim}^2}
+  ln(L(M|x_{test})) = \sum_i ln(\frac{1}{\sigma_{i,train} \sqrt{2\pi}}) - \frac{(x_{i,test} - x_{i,train})^2}{2 \sigma_{i,train}^2}
   \label{eq:loglike}
 \end{equation}
 The likelihood is a measure of the probability that a model $M$ produced the
 measurements seen in the test sample, given by $L(M|x_{test})$.  In both
 Equations \ref{eq:like} and \ref{eq:loglike}, $x$ refers to the set of
-features, and $x_{i, test}$ and $x_{i,sim}$ are the individual features for the
+features, and $x_{i, test}$ and $x_{i,train}$ are the individual features for the
 test sample and the training set entries, respectively. The uncertainty of the
-measurement associated with each feature is represented by $\sigma_{i,sim}$
-
-\todo[inline]{Discuss how using a normal probability density function to match
-the variables assume that the variables themselves are normal?}
-
-Interestingly, the \gls{MLL} calculations method works like \textit{k}-nearest
-neighbors, where there is no model but a prediction according to the closest
-match database entry.  There is one detail that differs, however. Whereas
-\textit{k}-nearest neighbors minimizes distance/dissimilarity, this approach
-instead maximizes similarity via a likelihood function. 
+measurement associated with each feature is represented by $\sigma_{i,train}$.
 

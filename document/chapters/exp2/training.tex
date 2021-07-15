@@ -54,9 +54,15 @@ chosen because they remained after four steps of filtering:
   some detectors).
 \end{enumerate}
 
-\todo[inline]{if shape of feature histograms is relevant, keep the figure and
-discuss. update: it isn't relevant for the scikit algorithms, because neither
-makes assumptions about the distrubitions of features.}
+As dicussed in Section \ref{sec:snffeats}, the \gls{MLL} method presumes the
+features have a normal distribution. Figure \ref{fig:actshist} shows the
+distribution of each radionuclide in the training set. Compared to the features
+in Figure \ref{fig:nucshist}, there seem to be even fewer features with a
+normal distribution, with Pu239 being perhaps the only feature fitting this
+assumption. Again, this should not impact the scitkit-learn algorithms but may
+impact the performance of the \gls{MLL} calculations.  \todo[inline]{this might
+not be important bc most training sets rely on processed gamma spectra and
+those may or may not have normal distrubitions?}
 
 \begin{figure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp2/histograms_trainset_features_acts.png}}

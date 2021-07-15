@@ -37,12 +37,12 @@ nuclide mass.  Thus, each nuclide is given an uncertainty of 1, 5, 10, 15, and
 20\% via:
 \begin{equation}
   \sigma_{Log L}^2 = \sum_j \left( 
-                            \frac{x_{j,test} - x_{j,sim}}{\sigma_{j,sim}^2}
+                            \frac{x_{j,test} - x_{j,train}}{\sigma_{j,train}^2}
                             \right)^2 
-                            (\sigma_{j,sim}^2 + \sigma_{j,test}^2)
+                            (\sigma_{j,train}^2 + \sigma_{j,test}^2)
   \label{eq:mllunc}
 \end{equation}
-where $x_{j,sim}$ and $x_{j,test}$ are the nuclide measurements for the
+where $x_{j,train}$ and $x_{j,test}$ are the nuclide measurements for the
 simulated/training set samples and the test samples, respectively, and
-$\sigma_{j,sim}$ and $\sigma_{j,test}$ are their respective standard deviations
-calculated from the four uncertainty levels listed above.  
+$\sigma_{j,train}$ and $\sigma_{j,test}$ are their respective standard
+deviations calculated from the four uncertainty levels listed above.  
