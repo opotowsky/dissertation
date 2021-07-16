@@ -73,10 +73,39 @@ values of $k$ can be useful, and will be discussed in Section
 
 \subsubsection{Decision Trees}
 
-The predictions from decision trees, similar to \textit{k}-nearest neighbors,
-are highly unstable to peturbations. 
+Decision trees are a common choice because they are simple to implement and
+provide an interpretable model. However, the predictions from decision trees,
+similar to \textit{k}-nearest neighbors, are unstable to peturbations.  What
+follows is a highly simplified explanation of the Classification and Regression
+Trees algorithm for growing decision trees and a more full treatment can be
+found in Reference \cite{elements_stats} or in the User Guide in Reference
+\cite{scikit}.
 
-\cite{elements_stats}
+For decision trees regression, the algorithm splits the feature space into
+different regions.  Decision trees are constructed by iteratively finding
+places in the feature space at which to split the data to best predict a label,
+maximizing differentiation between average label values at each split.  This
+process continues until some externally set stopping requirement is met, or no
+information gain can be made by continuing to create splits. 
+
+
+
+The proportion of class $k$ observations in node $m$: 
+\[p_{mk} = 1/ N_m \sum_{y \in Q_m} I(y = k)\]
+
+In classification, the node impurity $H(Q_m)$ can be measured by the Gini index: 
+\begin{equation}
+  H(Q_m) = \sum_k p_{mk} (1 - p_{mk})
+\end{equation}
+And in regression, the node impurity $H(Q_m)$ can be measured by mean squared error:
+\begin{equation}
+%\begin{align}
+\begin{aligned}
+  \bar{y}_m &= \frac{1}{N_m} \sum_{y \in Q_m} y \\
+  H(Q_m) &= \frac{1}{N_m} \sum_{y \in Q_m} (y - \bar{y}_m)^2
+\end{aligned}
+%\end{align}
+\end{equation}
 
 \subsubsection{Maximum Log-Likelihood Calculations}
 

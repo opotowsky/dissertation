@@ -74,15 +74,11 @@ Mean Absolute Percentage Error:
 
 \noindent \textbf{Cross Validation}
 
-\todo[inline]{old text copied in. update} 
 A testing set that would be used during training to give feedback, a
 \textit{\gls{CV} set}, can provide a faster convergence to a satisfactory
 model. As shown in Figure \ref{fig:cverror}, this can be done by splitting the
 data set into three groups: a large training set, a small \gls{CV} set, and a
-small testing set.  However, in practice, multiple rounds of \gls{CV} steps are
-used provide the fastest convergence.  This is referred to as \textit{k-fold
-cross-validation} and allows a user to have all training data entries be a
-testing entry once, bettering model evaluation. 
+small testing set.  
 
 \begin{figure}[!htb]
   \centering
@@ -91,18 +87,21 @@ testing entry once, bettering model evaluation.
   \label{fig:cverror}
 \end{figure}
 
-Using \gls{CV} provides a \textit{\gls{CV} error} that replaces the testing
-error during analysis.  As illustrated in Figure \ref{fig:cverror}, this splits
-the dataset into $k=3$ subsets. One set is designated as the testing set, and a
-model is trained with the rest. Following the first training phase, another
-begins, this time with a different subset as the testing set.  In total, this
-process in Figure \ref{fig:cverror} is performed $3$ times, giving $3$ models.
-The metrics of model performance are averaged by taking the mean of the
-accuracy/error of predictions.  This provides an additional level of model
-validation than can be achieved with a single testing set. This mean is
-reported as the \gls{CV} error. If the \gls{CV} error is acceptable, then
-training is performed on the entire training data set and can be tested on new
-observations.
+However, in practice, multiple rounds of \gls{CV} steps are used provide the
+fastest convergence.  This is referred to as \textit{k-fold cross-validation}
+and allows a user to have all training data entries be a testing entry once,
+bettering model evaluation.  An example where $k=3$ is illustrated in Figure
+\ref{fig:cverror}.  One partition of the training set is designated as the
+testing set, and a model is trained with the rest. This returns the testing
+error for that first testing partition.  Following the first training phase,
+another begins, this time with a different subset as the testing set.  In
+total, this process is performed $3$ times, giving $3$ models.  
+
+Since each partition becomes a testing set at one point, all entries in the
+training set are tested.  While in most applications the metrics of model
+performance are averaged by taking the mean of the accuracy/error of
+predictions, this work instead focuses on the aggregate statistics of all the
+testing errors taken together, regardless of which partition they were in.
 
 \subsubsection{Model Complexity}
 \label{sec:complexity}
@@ -127,19 +126,46 @@ sample?
 Figure \ref{fig:bvtradeoff} shows the tradeoff between the bias and variance.
 The shape of the total error curve has a minimum that we seek to achieve with
 our model. Some bias is desired in order to generalize to future unknown data.
-But some variance is also positive for the model because it captures the
+But, some variance is positive for the model because it captures the
 relationships in the data that the bias counteracts. 
 
-\todo[inline]{transition}
-The training set size must be large and diverse enough to be considered
-\gls{i.i.d.} because most \gls{ML} algorithms are developed upon this
-assumption. Sometimes this is not possible, and the training data are skewed,
-i.e., a portion of the data is over-represented. This must be handled
-explicitly, but since each algorithm handles skewed data differently, it is
-currently beyond the scope of this work. Instead, attempts were made to best
-create an \gls{i.i.d.} training set, which is covered in Section
-\ref{sec:snflbls}.
 
+
+
+
+After ensuring the appropriate training set size is selected, the models must
+be further optimized using \textit{validation curves}.  These provide
+information on the bias-variance tradeoff with respect to model complexity. Two
+main tuneable factors affecting model complexity can cause the model to be
+under- or overfit to the data: number of features in the data set and algorithm
+parameters that control the regularization.
+
+\begin{figure}[!htb]
+  \centering
+  \makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{./chapters/litrev/ValidationCurve.png}}
+  \caption{Schematic showing effect of model complexity/regularization on model 
+           performance.}
+  \label{fig:validation}
+\end{figure}
+
+Figure \ref{fig:validation} adapted from Ref. \cite{elements_stats} shows the
+optimum as the minimum of the \gls{CV} error curve in the main (bottom)
+plot. There is some gap between it and the training error, much larger than the
+left side of the plot and much smaller than the right.  The top-middle plot is
+a simplified visualization of an approximately well-fit model.  The left region
+is marked by both errors being quite high, and above is an  illustration of how
+an underfit plot (high bias) could provide high errors. The right region shows
+the training error being quite low but the \gls{CV} error being high.
+The diagram differing options with how to adjust to skewed training sets
+\cite{scikit}.  above shows that it is obvious how the training error would be
+negligible, but generalizing beyond that probably will not yield accurate
+results. 
+
+In practice, plotting learning and validation curves can be iterative. But as
+previously mentioned, too many optimizations will result in a poorly performing
+model when exposed to data outside of the training set.
+
+\todo[inline]{transition}
 \noindent \textbf{Regularization:}
 
 \todo[inline]{Move the text here from wherever you have it stashed. The methods
@@ -149,14 +175,20 @@ note to cover this in the results sections}
 
 \noindent \textbf{Diagnostic Plots:} 
 
-\todo[inline]{May or may not include in results, so may or may not include
-this. Figures excluded for now.}
-
 Diagnostic plots show the testing errors with respect to some variable on the
 \textit{x}-axis.  Typically this variable is related in some way to the model
 complexity. This provides insight into the model's fitness, and whether small 
 tweaks can be made to increase bias or variance to improve testing performance.
 Put another way, these approaches can evaluate under- or over-fitting.
+
+The training set size must be large and diverse enough to be considered
+\gls{i.i.d.} because most \gls{ML} algorithms are developed upon this
+assumption. Sometimes this is not possible, and the training data are skewed,
+i.e., a portion of the data is over-represented. This must be handled
+explicitly, but since each algorithm handles skewed data differently, it is
+currently beyond the scope of this work. Instead, attempts were made to best
+create an \gls{i.i.d.} training set, which is covered in Section
+\ref{sec:snflbls}.
 
 \textit{Learning curves} evaluate the number of training set observations to
 include in the training phase. This is relevant in a scenario like this work
@@ -174,4 +206,11 @@ value that would be plotted on the \textit{x}-axis of a diagnostic plot (unless
 one's data is predisposed to this kind of study), but is considered in this
 work. The feature set selection is discussed in Sections \ref{sec:snffeats},
 \ref{sec:training2}, and \ref{sec:inforeduc2}.
+
+There is a risk associated with better prediction after using
+optimization tools.  The increase in performance from over-optimization could
+be linked to the training set performance and might not generalize outside of
+the specific type of input data used.  A workaround for this scenario is to
+obtain more data for the set or to obtain a completely different data set
+altogether. 
 
