@@ -32,44 +32,75 @@ solution, but the confidence in the solution, is therefore prudent. While the
 two scikit-implemented aglorithms do not provide this information, the
 \gls{MLL} calculation method provides a likelihood with an uncertainty. This
 provides a measure of distinguishability that many machine learning approaches
-do not provide. \todo[inline]{finish this thought after you write the MLL
-section}
+do not provide. \todo[inline]{check back on this and take it out if you don't 
+look at MLL confidence}
 
-\todo[inline]{metrics discussion here, copied in some math}
 \noindent \textbf{Reactor Type Classification}
 
-The following will be covered in order to evaluate the reactor type
-classification task:
-\begin{itemize}
-  \item Accuracy metrics
-  \item Confusion matrices 
-  \item \Gls{ROC} curves
-\end{itemize}
-
+For the classification of reactor type, it is typical to use an accuracy score
+for classification, where the total number of correct predictions is taken as a
+fraction of the entire sample set.
 \begin{equation}
-  \textit{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)
+  \textit{accuracy} = \frac{1}{n_\text{samples}} \sum_{i=1}^{n_\text{samples}} 
+                      1(y_{pred,i} = y_{true,i})
 \end{equation}
 
+But training sets can have an uneven number of classes represented.  A more
+fair scoring system for imbalanced datasets is instead balanced accuracy, which
+averages the accuracy of each class. This would provide a range from 0 to 1. In
+this work, however, the balanced accuracy is used with \texttt{adjusted=True}
+in scikit-learn. This rescales the range to $\frac{1}{1-n_\text{classes}}$ to
+1, where 0 is considered random scoring.  This is done by defining a sample
+weight as the following, based on its class frequency: \cite{scikit}
 \begin{equation}
-  \textit{balanced-accuracy}(y, \hat{y}, w) = \frac{1}{\sum{\hat{w}_i}} \sum_i 1(\hat{y}_i = y_i) \hat{w}_i
+  w_i = \frac{1}{\sum_j{1(y_j = y_i) w_j}}
 \end{equation}
-\[ \textit{where: } \hat{w}_i = \frac{w_i}{\sum_j{1(y_j = y_i) w_j}} \]
+for \textit{j} classes and \textit{i} samples. Thus, the balanced accuracy is 
+the following with the adjusted weights.
+\begin{equation}
+  \textit{balanced-accuracy} = \frac{1}{\sum{w_i}} \sum_{i=1}^{n_\text{samples}} 
+                               w_i \cdot 1(y_{pred, i} = y_{true_i})
+\end{equation}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.4\linewidth]{./chapters/litrev/cm_example.png}
+  \caption{Example of a confusion matrix for the three reactor types}
+  \label{fig:cm_ex}
+\end{figure}
+
+In addition to the metrics which combine the knowledge of true positive and
+true negative predictions, it is also important to study the
+misclassifications. Confusion matrices show the both the true positive
+predictions and the false positive predictions, which can be useful information
+in understanding an imperfect accuracy or balanced accuracy score. For example,
+Figure \ref{fig:cm_ex} pictures an example confusion matrix that could result
+from this dataset, where a fraction of 1 \gls{PHWR}s are correctly predicted,
+but a fraction of 0.1 \gls{PWR}s and \gls{BWR}s get misclassified as the other. 
 
 \noindent \textbf{Regression Mean Error Calculations}
 
-Mean Absolute Error:
+For the three regression cases, there are a few metrics that are being
+calculated to measure prediction performance: the \gls{MAE}, \gls{MedAE}, and
+\gls{MAPE}. The most common metrics to use for comparing regression errors are
+\gls{RMSE} or \gls{MAE}, but these mean errors do not provide the full picture.
+The \gls{MedAE} can provide interesting insight into a middle-ground or
+majority behavior. Also, the relative error via \gls{MAPE} can provide insight
+especially when there is a large span of values for a regression case; a large
+absolute error could be a small relative error. Therefore, they are all
+tracked.  The \gls{MAE}, \gls{MedAE}, and \gls{MAPE} are calculated as follows,
+respectively.
 \begin{equation}
-  \textit{MAE}(y, \hat{y}) = \frac{1}{n_{\text{samples}}} \sum_{i=0}^{n_{\text{samples}}-1} \left| y_i - \hat{y}_i \right|
+  \textit{MAE} = \frac{1}{n_{\text{samples}}} \sum_{i=1}^{n_{\text{samples}}} 
+                 \left| y_{true, i} - y_{pred, i} \right|
 \end{equation}
-
-Median Absolute Error:
 \begin{equation}
-  \textit{MedAE}(y, \hat{y}) = \text{median}(\mid y_1 - \hat{y}_1 \mid, \ldots, \mid y_n - \hat{y}_n \mid)
+  \textit{MedAE} = \text{median}(\mid y_{true, 1} - y_{pred, 1} \mid, \ldots, 
+                                 \mid y_{true, n} - y_{pred, n} \mid)
 \end{equation}
-
-Mean Absolute Percentage Error:
 \begin{equation}
-  \textit{MAPE} = 
+  \textit{MAPE} =  \frac{100}{n_{\text{samples}}} \sum_{i=1}^{n_{\text{samples}}} 
+                   \frac{\left| y_{true, i} - y_{pred, i} \right|}{y_{true, i}}
 \end{equation}
 
 \noindent \textbf{Cross Validation}
@@ -83,7 +114,7 @@ small testing set.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.85\linewidth]{./chapters/litrev/cverror.png}
-  \caption{Illustration of Cross-Validation}
+  \caption{Illustration of two ways of performing cross-validation.}
   \label{fig:cverror}
 \end{figure}
 
@@ -129,57 +160,48 @@ our model. Some bias is desired in order to generalize to future unknown data.
 But, some variance is positive for the model because it captures the
 relationships in the data that the bias counteracts. 
 
-
-
-
-
-After ensuring the appropriate training set size is selected, the models must
-be further optimized using \textit{validation curves}.  These provide
-information on the bias-variance tradeoff with respect to model complexity. Two
-main tuneable factors affecting model complexity can cause the model to be
-under- or overfit to the data: number of features in the data set and algorithm
-parameters that control the regularization.
+\textit{Regularization} refers to introducing a term into the \gls{ML} model to
+prevent overfitting; it is used in many \gls{ML} algorithms to reduce the model
+complexity and therefore the resulting variance.  This would be represented by
+increasing \textit{k} in \textit{k}-nearest neighbors, or reducing the maximum
+features a decision trees implementation could consider for splitting.  The top
+three windows in Figure \ref{fig:complex} show the effects of regularization on
+a simple linear regression model. With heavy regularization comes high bias,
+represented by the left-most window.  The right-most window shows a low
+regularization scenario, where most individual points are tracked by the model,
+but generalizing beyond that might be problematic. The middle plot represents an 
+approximately well-fit model.  
 
 \begin{figure}[!htb]
   \centering
   \makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{./chapters/litrev/ValidationCurve.png}}
   \caption{Schematic showing effect of model complexity/regularization on model 
            performance.}
-  \label{fig:validation}
+  \label{fig:complex}
 \end{figure}
-
-Figure \ref{fig:validation} adapted from Ref. \cite{elements_stats} shows the
-optimum as the minimum of the \gls{CV} error curve in the main (bottom)
-plot. There is some gap between it and the training error, much larger than the
-left side of the plot and much smaller than the right.  The top-middle plot is
-a simplified visualization of an approximately well-fit model.  The left region
-is marked by both errors being quite high, and above is an  illustration of how
-an underfit plot (high bias) could provide high errors. The right region shows
-the training error being quite low but the \gls{CV} error being high.
-The diagram differing options with how to adjust to skewed training sets
-\cite{scikit}.  above shows that it is obvious how the training error would be
-negligible, but generalizing beyond that probably will not yield accurate
-results. 
-
-In practice, plotting learning and validation curves can be iterative. But as
-previously mentioned, too many optimizations will result in a poorly performing
-model when exposed to data outside of the training set.
-
-\todo[inline]{transition}
-\noindent \textbf{Regularization:}
-
-\todo[inline]{Move the text here from wherever you have it stashed. The methods
-in this work have high variance, and so regularization is necessary, but
-hyperparameter optimization left me with high variance models, so maybe take
-note to cover this in the results sections}
-
-\noindent \textbf{Diagnostic Plots:} 
 
 Diagnostic plots show the testing errors with respect to some variable on the
 \textit{x}-axis.  Typically this variable is related in some way to the model
-complexity. This provides insight into the model's fitness, and whether small 
+complexity. This provides insight into the model's fitness, and whether small
 tweaks can be made to increase bias or variance to improve testing performance.
-Put another way, these approaches can evaluate under- or over-fitting.
+Put another way, these approaches can evaluate under- or over-fitting.  When
+the \textit{x}-axis is related to regularization parameters, often referred to
+as algorithm hyperparameters in this work, it is known as a \textit{validation
+curve}. A full treatment of validation curves is not considered here, but
+Figure \ref{fig:complex} shows the portion relevant to the discussion in the
+bottom plot.  The negative prediction error is plotted on the \textit{y}-axis
+so that the orientation of higher is better is maintained.  A parameter
+influencing model complexity is on the \textit{x}-axis.  The testing error is
+typically low for the high bias and high variance models, but there usually
+exists an optimum parameter for model complexity for most training datasets. 
+
+Another parameter indirectly influencing model complexity is the training set
+size.  When the training set size is plotted on the \textit{x}-axis as either
+the percentage of the training set used or the absolute number of observations,
+it is called a \textit{learning curve}.  These allow for the user to evaluate
+the optimum number of training set observations to include in the training
+phase.  This is relevant in a scenario like this work where the training set is
+large (large being a relative term).  
 
 The training set size must be large and diverse enough to be considered
 \gls{i.i.d.} because most \gls{ML} algorithms are developed upon this
@@ -190,16 +212,6 @@ currently beyond the scope of this work. Instead, attempts were made to best
 create an \gls{i.i.d.} training set, which is covered in Section
 \ref{sec:snflbls}.
 
-\textit{Learning curves} evaluate the number of training set observations to
-include in the training phase. This is relevant in a scenario like this work
-where the training set is large (large being a relative term).  The
-\textit{x}-axis for learning curves is thus the percentage of the training set
-used, or the absolute number of observations included for training. 
-
-\textit{Validation curves} evaluate algorithm hyperparameters that govern model
-complexity. This is a good best-practice to implement whether or not the model 
-is performing poorly, as a check against overfitting. 
-
 Another area worthy of investigation is the other dimension of the training
 set: the number of features included for model training. This is not usually a
 value that would be plotted on the \textit{x}-axis of a diagnostic plot (unless
@@ -207,10 +219,12 @@ one's data is predisposed to this kind of study), but is considered in this
 work. The feature set selection is discussed in Sections \ref{sec:snffeats},
 \ref{sec:training2}, and \ref{sec:inforeduc2}.
 
-There is a risk associated with better prediction after using
-optimization tools.  The increase in performance from over-optimization could
-be linked to the training set performance and might not generalize outside of
-the specific type of input data used.  A workaround for this scenario is to
-obtain more data for the set or to obtain a completely different data set
-altogether. 
+In practice, plotting learning and validation curves can be iterative. But too
+many optimizations will result in a poorly performing model when exposed to
+data outside of the training set, so there is a risk associated with better
+prediction after using optimization tools.  This increase in performance from
+over-optimization could be linked to the training set performance and might not
+generalize outside of the specific type of input data used.  A workaround for
+this scenario is to obtain more data for the set or to obtain a completely
+different data set altogether. 
 
