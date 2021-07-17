@@ -32,26 +32,27 @@ sample and the space that the training set populates. The predictions from
 nearest neighbors can be quite accurate, but are highly unstable to
 peturbations \cite{elements_stats}.
 
-Prediction with this method will be explained using \textit{k}-nearest
-neighbors regression.  First, the distances between the test sample and each of
-the training set instances are calculated.  Most commonly the Euclidian
-distance is used, but this walkthrough uses the Manhattan distance:
+The process of prediction with \textit{k}-nearest neighbors is as follows.
+First, the distances between the test sample and each of the training set
+instances are calculated.  Most commonly the Euclidian distance is used, but
+this walkthrough uses the Manhattan distance:
 \begin{equation}
   d_{i} = \sum_{j=1}^{N_{feats}} |x_{j,train} - x_{j,test}|
   \label{eq:l1}
 \end{equation}
 where $i$ is each training set instance, and $j$ refers to each feature in the
-training set.  The lowest \textit{k} $d_{i}$ are chosen, and the value, $Y$ is
-predicted using:
+training set.  The lowest \textit{k} $d_{i}$ are chosen. For \textit{k}-nearest
+neighbors regression, the value, $y$ is predicted using the following equation.
 \begin{equation}
-  Y(\boldsymbol{x}) = \frac{1}{k} \sum_{i=1}^{k} w_i \cdot y_i
-  \label{eq:knn}
+  y(\boldsymbol{x}) = \frac{1}{k} \sum_{i=1}^{k} w_i \cdot y_i
 \end{equation}
 where $w_{i}$ is either uniform and takes on a value of $1$ or is
 distance-based and takes on a value of $1/d_{i}$ and $\boldsymbol{x}$ is the
-full set of features.  This averages the closest \textit{k} neighbors for an
-estimate of the unknown sample, as shown in Equation \ref{eq:knn}.  For
-classification, the mode of the \textit{k} nearest neighbors is taken.  
+full set of features. The regression equation averages the closest \textit{k}
+neighbors for an estimate of the unknown sample.  In \textit{k}-nearest
+neighbors classification, the class label $y$ is predicted using the mode of
+the nearest neighbors selected using the \textit{k} smallest $d_i$, or when
+$w_i$ is $1/d{i}$ the weighted mode is used to choose the predicted label.
 
 \begin{figure}[!htb]
   \centering
@@ -77,17 +78,54 @@ Decision trees are a common choice because they are simple to implement and
 provide an interpretable model. However, the predictions from decision trees,
 similar to \textit{k}-nearest neighbors, are unstable to peturbations.  What
 follows is a highly simplified explanation of the Classification and Regression
-Trees algorithm for growing decision trees and a more complete treatment can be
-found in Reference \cite{elements_stats} or in the User Guide in Reference
-\cite{scikit}.
+Trees algorithm for growing decision trees, showing only the equations for
+splitting criteria.  A more complete treatment can be found in Reference
+\cite{elements_stats} or in the User Guide in Reference \cite{scikit}.
 
-The decision trees algorithm splits the feature space into different regions.
-Decision trees are constructed by iteratively finding places in the feature
-space at which to split the data to best predict a label, maximizing
-differentiation between average label values at each split, or grouping similar
-label values or classes together.  This process continues until some externally
-set stopping requirement is met, or no information gain can be made by
-continuing to create splits. 
+At their core, decision trees algorithms split the feature space into different
+regions.  Decision trees are constructed by iteratively finding places in the
+feature space at which to split the data to best predict a label. Some measure
+of information gain (more accurately the opposite, impurity, denoted here as
+$H$) is used to select a splitting criterion at each split, which maximizes
+differentiation between average label values in regression or groups similar
+labels together in classification.  This process continues until some
+externally set stopping requirement is met, or no information gain can be made
+by continuing to create splits. 
+
+Each split creates two new nodes on the tree, where the node has to find a new
+splitting criterion. In the math that follows, there are nodes given by $m$,
+and a number of samples in each node given by $N_{\text{samples}, m}$. The
+individual node samples are given by $i$. The impurity at the node is denoted
+as $H(m)$. In classification, the node impurity can be measured by the Gini
+index, where $p_{m, k}$ is the proportion of class $k$ observations at the
+node:
+\begin{equation}
+  \begin{aligned}
+    p_{m, k} &= \frac{1}{N_{\text{samples}, m}} \sum_{i=1}^{N_{\text{samples}, m}}
+              I(y = k)
+    \\
+    H(m) &= \sum_k p_{m, k} (1 - p_{m, k})
+  \end{aligned}
+\end{equation}
+And in regression, the node impurity $H(m)$ can be measured by the mean squared
+error, where $\bar{y}_m$ is the average value of the samples in the node.
+\begin{equation}
+  \begin{aligned}
+    \bar{y}_m &= \frac{1}{N_{\text{samples}, m}} \sum_{i=1}^{N_{\text{samples}, m}} 
+                 y_{i, m}
+    \\
+    H(m) &= \frac{1}{N_{\text{samples}, m}} \sum_{i=1}^{N_{\text{samples}, m}}
+              (y_i - \bar{y}_{i, m})^2
+  \end{aligned}
+\end{equation}
+The splitting criterion with the lowest impurity is the one that is chosen to
+make the split.  This will partition the feature space and the splitting
+process will continue until a pre-defined tree size or number of samples per
+node. Without a pre-defined stopping point the tree will grow until there is
+one sample per node. This process can be understood more intuitively by
+stuyding Figure \ref{fig:dtr}. Note that this tree was created using a maximum
+tree depth of $2$ for visualization purposes in order to explain the process,
+so is not indicative of a real decision tree.
 
 \begin{figure}[!htb]
   \centering
@@ -97,23 +135,20 @@ continuing to create splits.
   \label{fig:dtr}
 \end{figure}
 
-Each split creates two new nodes on the tree, where the node has to find a new splitting criterion.
-This is \todo{left off here}
-
-The proportion of class $k$ observations in node $m$: 
-\[p_{mk} = 1/ N_m \sum_{y \in Q_m} I(y = k)\]
-
-In classification, the node impurity $H(Q_m)$ can be measured by the Gini index: 
-\begin{equation}
-  H(Q_m) = \sum_k p_{mk} (1 - p_{mk})
-\end{equation}
-And in regression, the node impurity $H(Q_m)$ can be measured by mean squared error:
-\begin{equation}
-  \begin{aligned}
-    \bar{y}_m &= \frac{1}{N_m} \sum_{y \in Q_m} y \\
-    H(Q_m) &= \frac{1}{N_m} \sum_{y \in Q_m} (y - \bar{y}_m)^2
-  \end{aligned}
-\end{equation}
+In Figure \ref{fig:dtr}, the first split is determined to occur at the feature
+Sm149 on whether the nuclide measurement is above a value of $-1.33$. Note that
+this value is negative because of the scaling process the training set is put
+through, described in Section \ref{sec:statmodels1}.\todo{check this later} The
+majority class at this node is \gls{BWR} which is expected since the training
+set is 72\% \gls{BWR}.  The values list indicates the fraction of each class in
+the node, which is alphabetically ordered \texttt{[BWR, PHWR, PWR]}. It is even
+among the three because the class weights were told to be balanced.  This
+splitting criterion provides a Gini impurity score of 0.67, which represents
+the minimum Gini impurity of all the candidate splits, but also indicates there
+are multiple classes represented in this node (again, expected).  It would be 0
+if there were only one class in the node.  In the visualization, the shading of
+the colors in the tree are bolder for there being a higher fraction of a single
+class.
 
 \subsubsection{Maximum Log-Likelihood Calculations}
 

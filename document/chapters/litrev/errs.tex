@@ -41,15 +41,15 @@ For the classification of reactor type, it is typical to use an accuracy score
 for classification, where the total number of correct predictions is taken as a
 fraction of the entire sample set.
 \begin{equation}
-  \textit{accuracy} = \frac{1}{n_\text{samples}} \sum_{i=1}^{n_\text{samples}} 
-                      1(y_{pred,i} = y_{true,i})
+  \textit{accuracy} = \frac{1}{N_\text{samples}} \sum_{i=1}^{N_\text{samples}} 
+                      I(y_{pred,i} = y_{true,i})
 \end{equation}
 
 But training sets can have an uneven number of classes represented.  A more
 fair scoring system for imbalanced datasets is instead balanced accuracy, which
 averages the accuracy of each class. This would provide a range from 0 to 1. In
 this work, however, the balanced accuracy is used with \texttt{adjusted=True}
-in scikit-learn. This rescales the range to $\frac{1}{1-n_\text{classes}}$ to
+in scikit-learn. This rescales the range to $\frac{1}{1-N_\text{classes}}$ to
 1, where 0 is considered random scoring.  This is done by defining a sample
 weight as the following, based on its class frequency: \cite{scikit}
 \begin{equation}
@@ -58,16 +58,9 @@ weight as the following, based on its class frequency: \cite{scikit}
 for \textit{j} classes and \textit{i} samples. Thus, the balanced accuracy is 
 the following with the adjusted weights.
 \begin{equation}
-  \textit{balanced-accuracy} = \frac{1}{\sum{w_i}} \sum_{i=1}^{n_\text{samples}} 
-                               w_i \cdot 1(y_{pred, i} = y_{true_i})
+  \textit{balanced-accuracy} = \frac{1}{\sum_{i}{w_i}} \sum_{i=1}^{N_\text{samples}}
+                               w_i \cdot I(y_{pred, i} = y_{true_i})
 \end{equation}
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=0.4\linewidth]{./chapters/litrev/cm_example.png}
-  \caption{Example of a confusion matrix for the three reactor types}
-  \label{fig:cm_ex}
-\end{figure}
 
 In addition to the metrics which combine the knowledge of true positive and
 true negative predictions, it is also important to study the
@@ -76,7 +69,15 @@ predictions and the false positive predictions, which can be useful information
 in understanding an imperfect accuracy or balanced accuracy score. For example,
 Figure \ref{fig:cm_ex} pictures an example confusion matrix that could result
 from this dataset, where a fraction of 1 \gls{PHWR}s are correctly predicted,
-but a fraction of 0.1 \gls{PWR}s and \gls{BWR}s get misclassified as the other. 
+but a fraction of 0.1 \gls{PWR}s and \gls{BWR}s get misclassified as the other.
+\todo[inline]{fix plural acro situation here}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.4\linewidth]{./chapters/litrev/cm_example.png}
+  \caption{Example of a confusion matrix for the three reactor types}
+  \label{fig:cm_ex}
+\end{figure}
 
 \noindent \textbf{Regression Mean Error Calculations}
 
@@ -91,7 +92,7 @@ absolute error could be a small relative error. Therefore, they are all
 tracked.  The \gls{MAE}, \gls{MedAE}, and \gls{MAPE} are calculated as follows,
 respectively.
 \begin{equation}
-  \textit{MAE} = \frac{1}{n_{\text{samples}}} \sum_{i=1}^{n_{\text{samples}}} 
+  \textit{MAE} = \frac{1}{N_{\text{samples}}} \sum_{i=1}^{N_{\text{samples}}} 
                  \left| y_{true, i} - y_{pred, i} \right|
 \end{equation}
 \begin{equation}
@@ -99,7 +100,7 @@ respectively.
                                  \mid y_{true, n} - y_{pred, n} \mid)
 \end{equation}
 \begin{equation}
-  \textit{MAPE} =  \frac{100}{n_{\text{samples}}} \sum_{i=1}^{n_{\text{samples}}} 
+  \textit{MAPE} =  \frac{100}{N_{\text{samples}}} \sum_{i=1}^{N_{\text{samples}}} 
                    \frac{\left| y_{true, i} - y_{pred, i} \right|}{y_{true, i}}
 \end{equation}
 
