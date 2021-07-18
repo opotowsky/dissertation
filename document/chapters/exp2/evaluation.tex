@@ -37,7 +37,7 @@ auto, short, and long.  The \textit{y}-axis is always oriented so that higher
 levels indicate better performance, so is plotted as accuracy score or negative
 error.  
 
-The \textit{x}-axis is oriented so that degradation travels rightward.
+The \textit{x}-axis is oriented so that reduced information travels rightward.
 First, the 29 nuclide mass training set is included for comparison, followed by
 the 32 nuclide activity training set, which is intended to represent a full
 knowledge scenario of nuclide activities before gamma detection. These are both
@@ -49,15 +49,16 @@ plots.  All of the nuclide mass/nuclide activity training sets are predicted
 with a 1\% training set error applied.  Last, the six detectors are in order of
 decreasing detector energy resolution. Thus, for each prediction parameter,
 there are three plots for each energy window list with these nine
-\textit{x}-axis categories.
+\textit{x}-axis categories. 
 
-Another component of Figure \ref{fig:detdemo} are the two horizontal lines. The
-bottom/red line represents some measure of minimum acceptable "base level"
-performance.  Depending on the metric being presented, this is derived from the
-training set composition or the performance of the 29 nuclide mass training set
-in Section \ref{sec:eval1}. The top/blue line represents the ideal performance,
-and is also determined either from the training set design or previous
-performance with the 29 nuclide mass training set.
+The last component of Figure \ref{fig:detdemo} is the red horizontal line.  It
+represents a minimum acceptable performance, interpreted from the results in
+Section \ref{sec:eval1}. It is drawn at the level of the worst performing
+aglorithm at 20\% training set error.  This is therefore somewhat arbitrary,
+but if the detectors cannot predict above this level, it means that a
+detector-based training set with only counting error cannot reach the level of
+performance of 20\% error in a training set based on an assay of 29 nuclide
+masses.
 
 \subsection{Reactor Type Classification}
 \input{chapters/exp2/eval_rxtr}

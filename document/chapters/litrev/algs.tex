@@ -45,6 +45,7 @@ training set.  The lowest \textit{k} $d_{i}$ are chosen. For \textit{k}-nearest
 neighbors regression, the value, $y$ is predicted using the following equation.
 \begin{equation}
   y(\boldsymbol{x}) = \frac{1}{k} \sum_{i=1}^{k} w_i \cdot y_i
+  \label{eq:knn}
 \end{equation}
 where $w_{i}$ is either uniform and takes on a value of $1$ or is
 distance-based and takes on a value of $1/d_{i}$ and $\boldsymbol{x}$ is the
@@ -138,7 +139,7 @@ so is not indicative of a real decision tree.
 In Figure \ref{fig:dtr}, the first split is determined to occur at the feature
 Sm149 on whether the nuclide measurement is above a value of $-1.33$. Note that
 this value is negative because of the scaling process the training set is put
-through, described in Section \ref{sec:statmodels1}.\todo{check this later} The
+through, described in Section \ref{sec:statmodel1}.\todo{check this later} The
 majority class at this node is \gls{BWR} which is expected since the training
 set is 72\% \gls{BWR}.  The values list indicates the fraction of each class in
 the node, which is alphabetically ordered \texttt{[BWR, PHWR, PWR]}. It is even

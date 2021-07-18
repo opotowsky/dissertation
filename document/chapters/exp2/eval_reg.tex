@@ -2,19 +2,20 @@
 In this section, the results of the regression cases (burnup, enrichment, and
 time since irradiation) are presented. For each prediction parameter, the plot
 format described in Figure \ref{fig:detdemo} is used to show both the
-\gls{MAPE} and \gls{MAE} for each of the three energy window lists.  However,
-while seeing the performance decrease with all three algorithms on the same
-plot is helpful for getting a bigger picture of the results, a more detailed
-visual is also helpful. Box plots provide this increased statistical detail and
-a direct comparison of mean and median error for each data point. There are the
-same "goal" lines (blue lines) and baselines (red lines), but they are flipped
-since the axis is no longer negative.  There is one plot for each algorithm for
-a given energy window list-based set of detector training sets.  Because these
-are box plots, they are not oriented to the "higher is better" standard of the
-\textit{y}-axis of the original prediction performance plots. Additionally, the
-full knowledge cases (the 29 nuclide masses, and the 32, 12, and 7 nuclide
-activities sets) are not able to be represented on the same scale as the
-detector training set results, so they are excluded from the box plot figures. 
+\gls{MAPE} for each of the three energy window lists.  However, while seeing
+the performance decrease with all three algorithms on the same plot is helpful
+for getting a bigger picture of the results, a more detailed visual is also
+helpful. Box plots provide increased statistical detail and a direct comparison
+of mean and median error for each data point, which each taken alone can paint
+a drastically different picture of the results.  There is one set of boxes for
+each algorithm for a given energy window list-based set of detector training
+sets.  Because these are box plots, they are not oriented to the "higher is
+better" standard of the \textit{y}-axis of the original prediction performance
+plots.  There are the same red baselines, but they are now at a positive value
+since the \textit{y}-axis is no longer negative.  Lastly, the full knowledge
+cases (the 29 nuclide masses, and the 32, 12, and 7 nuclide activities sets)
+are not able to be represented on the same scale as the detector training set
+results, so they are excluded from the box plot figures. 
 
 \subsubsection{Burnup Regression}
 
