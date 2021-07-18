@@ -90,11 +90,11 @@ slightly for \textit{k}-nearest neighbors and \gls{MLL} calculations.  A
 visible increase in misclassification is clear with the 12 and 7 nuclide
 activity training sets, especially for decision trees. The starkest increase in
 misclassification is with \gls{PWR}s being classified as \gls{BWR}s. This
-increases from about 5\% to about 10\% from the 12-nuclide set to the 7-nuclide
-set. For the 7-nuclide set decision trees classification, the misclassification
-of \gls{PHWR}s as \gls{BWR}s reaches about 5\%. By contrast, the same
-misclassification is 3\% for \textit{k}-nearest neighbors and 1\% for \gls{MLL}
-calculations. 
+increases from about 5\% to about 10\% from the 12 nuclides set to the 7
+nuclides set. For the 7 nuclides set decision trees classification, the
+misclassification of \gls{PHWR}s as \gls{BWR}s reaches about 5\%. By contrast,
+the same misclassification is 3\% for \textit{k}-nearest neighbors and 1\% for
+\gls{MLL} calculations. 
 
 \begin{figure}[!htbp]
   \centering
@@ -177,3 +177,9 @@ Overall, the sets of confusion matrices presented in Figures
 misclassification pattern. With less information, more \gls{PWR}s and
 \gls{PHWR}s get classified as \gls{BWR}s. Since about 72\% of the training set
 is an entry on \gls{BWR}, this pattern is expected. 
+
+\todo[inline]{anomalous auto list knn cases for d1 and d2 exist for all four
+prediction parameters. the same discussion is therefore relevant for all four
+(that the auto method is likely picking up peaks for the HPGes that are adding
+noise and not information to the windows lists). where to put this? Here, then
+reference back to it?}

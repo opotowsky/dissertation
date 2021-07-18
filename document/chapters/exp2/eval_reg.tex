@@ -5,19 +5,46 @@ format described in Figure \ref{fig:detdemo} is used to show both the
 \gls{MAPE} for each of the three energy window lists.  However, while seeing
 the performance decrease with all three algorithms on the same plot is helpful
 for getting a bigger picture of the results, a more detailed visual is also
-helpful. Box plots provide increased statistical detail and a direct comparison
-of mean and median error for each data point, which each taken alone can paint
-a drastically different picture of the results.  There is one set of boxes for
-each algorithm for a given energy window list-based set of detector training
-sets.  Because these are box plots, they are not oriented to the "higher is
-better" standard of the \textit{y}-axis of the original prediction performance
-plots.  There are the same red baselines, but they are now at a positive value
-since the \textit{y}-axis is no longer negative.  Lastly, the full knowledge
-cases (the 29 nuclide masses, and the 32, 12, and 7 nuclide activities sets)
-are not able to be represented on the same scale as the detector training set
-results, so they are excluded from the box plot figures. 
+helpful. 
+
+Introduced in Section \ref{sec:sfcoreg}, box plots provide increased
+statistical detail and a direct comparison of mean and median error for each
+data point, which each taken alone can paint a drastically different picture of
+the results.  There is one set of boxes for each algorithm for a given energy
+window list-based set of detector training sets.  Because these are box plots,
+they are not oriented to the "higher is better" standard of the \textit{y}-axis
+of the original prediction performance plots.  There are the same red
+baselines, but they are now at a positive value since the \textit{y}-axis is no
+longer negative.  Lastly, the full knowledge cases (the 29 nuclide masses, and
+the 32, 12, and 7 nuclide activities sets) are not able to be represented on
+the same scale as the detector training set results, so they are excluded from
+the box plot figures. 
+
+Lastly, in order to see the spread of the data and compare the mean and median
+errors, the outliers were supressed from the box plots. There are many outliers
+in these results, and the values can be quite large. Each set of box plots is
+therefore repeated with a set of box plots with the outliers included.
 
 \subsubsection{Burnup Regression}
+
+The baseline performance in Figure \ref{fig:burn} is at -4\% \gls{MAPE} for
+burnup, chosen by the lowest performance of the three algorithms at the
+reference point of 20\% training set error for the 29 nuclide mass training set
+in in Figure \ref{fig:randerrB}. In Figures \ref{fig:burnbox} and
+\ref{fig:burnboxfly}, the red baseline is at $1000\:MWd/MTU$, from the
+reference point in Figure \ref{fig:randmaeA}.  In these two sets of plots, the
+baseline is at a positive value because the box plots do not have a negative
+\textit{y}-axis. 
+
+Figure \ref{fig:burn} shows encouraging results about the burnup prediction,
+for all three algorithms and all three energy windows lists used to process the
+gamma spectra. There is overall a gradual decrease from perfect knowledge
+starting at close to 0\% error to the lowest energy resolution detector at
+about -1.5\%.  There are two anomalous cases, as with the reactor type results
+in Figure \ref{fig:rxtr}: the predictions using \textit{k}-nearest neighbors
+for the two \gls{HPGe} detectors processed with the auto energy windows list.
+The reason for this behavior is discussed at the end of Section
+\ref{sec:exp2_rxtr}. 
 
 \begin{figure}[!htb]
   \centering
@@ -27,22 +54,6 @@ results, so they are excluded from the box plot figures.
            of processed gamma spectra.}
   \label{fig:burn}
 \end{figure}
-
-The goal lines and baselines for the burnup plots in Figure \ref{fig:burn} were
-all chosen by the performance of algorithms at a reference point of 20\%
-training set error for the 29 nuclide mass training set in in Figures
-\ref{fig:randerrB} and \ref{fig:randmaeA}.  For Figure \ref{fig:burn}, the
-blue line is at -1\% , which corresponds to the \gls{MLL} performance at the
-reference point.  The red baseline is at -4\%, which is the lowest performance
-of all three algorithms at the reference point.  
-%For Figure \ref{fig:burnB},
-the blue line is at $-300\:MWd/MTU$, and the red baseline is at
-$-1000\:MWd/MTU$.  These also correspond to \gls{MLL} and \textit{k}-nearest
-neighbors, respectively, at the reference point in Figure \ref{fig:randmaeA}.
-The same lines are present in Figure \ref{fig:burnbox}, but instead are
-positive values so the red line is on top.  \todo[inline]{the other two cases
-below have arbitrary baselines for a more discriminatory discussion, maybe that
-would be useful to do here too. leaving discussion for later}
 
 \begin{figure}[!hp]
   \centering
@@ -98,23 +109,23 @@ would be useful to do here too. leaving discussion for later}
   \label{fig:burnboxfly}
 \end{figure}
 
+Next, the \textit{y}-axis orientation flips to positive absolute error, so that
+higher values are worse and the goal is to have the mean and median errors be
+below the red line.  Most of the burnup errors in Figures \ref{fig:burnboxA},
+\ref{fig:burnboxB}, and \ref{fig:burnboxC} are below the red line, except for
+the mean error from the portable \gls{HPGe}
+
+
 \subsubsection{U235 Enrichment Regression}
 
-The goal lines for the enrichment plots in Figure \ref{fig:enri} were both
-chosen by the performance of algorithms at a reference point of 20\% training
-set error for the 29 nuclide mass training set in in Figures \ref{fig:randerrC}
-and \ref{fig:randmaeB}.  Since the results in these two figures were much
-better than the detector results, the baselines were chosen somewhat
-arbitrarily.  This is partially in order to draw a line through the clustering
-of the detector results.  For Figure \ref{fig:enri}, the blue line is at -6\%
-, which corresponds to the \textit{k}-nearest neighbors performance at the
-reference point.  The red baseline is at -30\%, which is the previously
-mentioned arbitrary choice.  For Figure \ref{fig:enri}, the blue line is at
-$-0.15\:\% U235$, and the red baseline is at $-0.6\:\% U235$.  The former
-corresponds to \textit{k}-nearest neighbors at the reference point in Figure
-\ref{fig:randmaeB}, and the latter is another arbitrary choice based on where
-the detector results are clustering.  The same lines are present in Figure
-\ref{fig:enribox}, but instead are positive values so the red line is on top.
+The baseline performance for the enrichment predictions in Figure
+\ref{fig:enri} is at -6\% \gls{MAPE}, chosen by the lowest performance of the
+three algorithms at the reference point of 20\% training set error for the 29
+nuclide mass training set in in Figure \ref{fig:randerrC}. In Figures
+\ref{fig:enribox} and \ref{fig:enriboxfly}, the red baseline is at $0.17\:[\%
+U235]$, from the reference point in Figure \ref{fig:randmaeB}.  In these two
+sets of plots, the baseline is at a positive value because the box plots do not
+have a negative \textit{y}-axis. 
 
 \begin{figure}[!htb]
   \centering
@@ -132,6 +143,11 @@ for all three energy windows lists are nearly flat. For both Figures
 \ref{fig:enri}, the blue line is therefore not making any
 meaningful discrimination. The almost even performance across detector types 
 and algorithms (with exceptions) \todo{left off here}
+
+As with the other previously discussed prediction types, there are two
+anomalous cases: the prediction using \textit{k}-nearest neighbors for the two
+\gls{HPGe} detectors processed with the auto energy windows list. The reason
+for this behavior is discussed at the end of Section \ref{sec:exp2_rxtr}. 
 
 \begin{figure}[!hp]
   \centering
@@ -189,6 +205,23 @@ and algorithms (with exceptions) \todo{left off here}
 
 \subsubsection{Time Since Irradiation Regression}
 
+The original baseline performance for the time since irradition predictions in
+Figure \ref{fig:cool} were at -30\% \gls{MAPE}, chosen by the lowest
+performance of the three algorithms at the reference point of 20\% training set
+error for the 29 nuclide mass training set in in Figure \ref{fig:randerrD}.
+However, the \textit{k}-nearest neighbors algorithm in that plot had
+exceptionally poor performance compared to the other two algorithms, so all of
+the results from the detector-based training sets (including those predicted
+using \textit{k}-nearest neighbors, oddly enough) far outperform this baseline.
+Therefore, a new one was chosen based on the decision trees performance at the
+reference point in Figure \ref{fig:randerrD}, at a \gls{MAPE} of -6\%.
+Similarly, in Figures \ref{fig:coolbox} and \ref{fig:coolboxfly}, the original
+baseline is at $550\:[days]$ and the updated red baseline is at $120\:[days]$,
+from the \textit{k}-nearest neighbors and decision trees performances,
+respectively, at the reference point in Figure \ref{fig:randmaeC}.  In these
+two sets of plots, the baseline is at a positive value because the box plots do
+not have a negative \textit{y}-axis. 
+
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_MAPE_cool.png}
@@ -198,24 +231,10 @@ and algorithms (with exceptions) \todo{left off here}
   \label{fig:cool}
 \end{figure}
 
-The goal lines and baselines for the time since irradiation plots in Figure
-\ref{fig:cool} were all chosen by the performance of algorithms at a reference
-point of 20\% training set error for the 29 nuclide mass training set in in
-Figures \ref{fig:randerrD} and \ref{fig:randmaeC}, with one exception where an
-arbitrary choice needed to be made.  The \textit{k}-nearest neighbors results
-had to be excluded from consideration since the behavior of this algorithm
-degraded drastically at 20\% training set error.  For Figure \ref{fig:cool},
-the blue line is at -6\%, which corresponds to the decision trees performance
-at the reference point.  The red baseline is at -10\%, which is the previously
-mentioned arbitrary choice, since using the \textit{k}-nearest neighbors value
-of -30\% would not yeild an interesting discussion.  For Figure
-, the blue line is at $-60\:days$, and the red baseline is at
-$-120\:days$.  The latter corresponds to decision trees at the reference point
-in Figure \ref{fig:randmaeC}. The former was informed by the value of \gls{MLL}
-at the reference point ($-40\:days$), but made to be a little lower to better
-evaluate the detector results, none of which reach a negative error of that
-level.  The same lines are present in Figure \ref{fig:coolbox}, but instead are
-positive values so the red line is on top.
+As with the other previously discussed prediction types, there are two
+anomalous cases: the prediction using \textit{k}-nearest neighbors for the two
+\gls{HPGe} detectors processed with the auto energy windows list. The reason
+for this behavior is discussed at the end of Section \ref{sec:exp2_rxtr}. 
 
 \begin{figure}[!hp]
   \centering
