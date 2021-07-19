@@ -64,7 +64,6 @@ is below the \gls{MLL} and decision trees points for time since irradiation.
   \caption{Learning curves for reactor type, burnup, enrichment, and time 
            since irradiation with respect to increasing fraction of the 
            training set, for 5\% training set random error.}
-  \todo[inline]{inset background needs to be opaque, since the knn error bars are seen in it}
   \label{fig:learns}
 \end{figure}
 
@@ -84,9 +83,7 @@ error bars are so large, there is an inset showing a closeup of the other two
 curves above -6\%.  The decision trees and \gls{MLL} calculations curves now
 appear to follow the trend in the burnup and enrichment cases, and the
 \gls{MLL} curve crosses under the decision trees curve between 20\% and 40\%
-training set size.  \todo[inline]{Shoudl it be noted that the standard
-deviation of the relative errors is large enough for all three curves that the
-trend cannot be taken as proof?}
+training set size.  
 
 There is a dependence on training set size for all three algorithms in Figure
 \ref{fig:learns}. For the most part, the \textit{k}-nearest neighbors and

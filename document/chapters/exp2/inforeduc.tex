@@ -198,8 +198,7 @@ Lastly, step \ref{itm:4} involves the inclusion of the counting error for the
 summed energy windows. This is quite simple, as statistical counting error of
 $n$ counts is $\sqrt{n}$.  As in Section \ref{sec:inforeduc1}, this error gets
 applied in the same way for the scikit-learn algorithms, where the uniform
-error is applied randomly within the range $[r-\sqrt{r},r+\sqrt{r}]$ for each
-summed energy window $r$. For the \gls{MLL} calculations, Equation
-\ref{eq:mllunc} is used, where $\sigma_{j} = \sqrt{r}$.  \todo[inline]{make
-sure variables are explained clearly, chose r to match previous variables/the
-original variable choice comes from TAMU papers}
+error is applied randomly within the range $[x_i - \sqrt{x_i}, x_i +
+\sqrt{x_i}]$ for each summed energy window $x_i$. For the \gls{MLL}
+calculations, Equation \ref{eq:mllunc} is used, where $\sigma_{i} =
+\sqrt{x_i}$.  

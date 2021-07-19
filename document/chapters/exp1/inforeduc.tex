@@ -33,16 +33,17 @@ slowly decreases up to $20\%$.
 \subsection{Maximum Log-Likelihood Calculations}
 
 For the \gls{MLL} calculations, a uniform uncertainty was introduced to each
-nuclide mass.  Thus, each nuclide is given an uncertainty of 1, 5, 10, 15, and
-20\% via:
+nuclide mass.  The uncertainty is calculation from error propogation of
+Equation \ref{eq:loglike}.  Thus, each nuclide is given an uncertainty of 1, 5,
+10, 15, and 20\% via:
 \begin{equation}
-  \sigma_{Log L}^2 = \sum_j \left( 
-                            \frac{x_{j,test} - x_{j,train}}{\sigma_{j,train}^2}
+  \sigma_{Log L}^2 = \sum_i \left( 
+                            \frac{x_{i,test} - x_{i,train}}{\sigma_{i,train}^2}
                             \right)^2 
-                            (\sigma_{j,train}^2 + \sigma_{j,test}^2)
+                            (\sigma_{i,train}^2 + \sigma_{i,test}^2)
   \label{eq:mllunc}
 \end{equation}
-where $x_{j,train}$ and $x_{j,test}$ are the nuclide measurements for the
+where $x_{i,train}$ and $x_{i,test}$ are the nuclide measurements for the
 simulated/training set samples and the test samples, respectively, and
-$\sigma_{j,train}$ and $\sigma_{j,test}$ are their respective standard
+$\sigma_{i,train}$ and $\sigma_{i,test}$ are their respective standard
 deviations calculated from the four uncertainty levels listed above.  
