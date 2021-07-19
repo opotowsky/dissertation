@@ -172,14 +172,20 @@ however. This may or may not be related to the reason the two training sets
 from these detectors perform significantly worse for the auto energy windows
 list. 
 
+The two extreme \textit{k}-nearest neighbors cases for the two \gls{HPGe}s is a
+behavior that will repeat for not-yet-discussed prediction parameters.  The
+most likely explanation is that the automatic peak search step (as opposed to
+predefining the selection of peaks based on expected gamma energy photopeaks)
+finds peaks that are adding noise and not information to the energy windows
+lists.  Since these algorithms all suffer from high variance, it is possible
+that this peak search approach is causing these two detectors (which have a
+high energy resolution) to succumb to the additional noise. This should be
+contrasted with the case of the \gls{SrI2} detector, where it is one of the
+only detector-based training sets to exceed the baseline defined level.
+
 Overall, the sets of confusion matrices presented in Figures
 \ref{fig:cm_nucs_acts}-\ref{fig:cm_long} show various degrees of the same
 misclassification pattern. With less information, more \gls{PWR}s and
 \gls{PHWR}s get classified as \gls{BWR}s. Since about 72\% of the training set
-is an entry on \gls{BWR}, this pattern is expected. 
+is an entry on \gls{BWR}, this pattern is expected.
 
-\todo[inline]{anomalous auto list knn cases for d1 and d2 exist for all four
-prediction parameters. the same discussion is therefore relevant for all four
-(that the auto method is likely picking up peaks for the HPGes that are adding
-noise and not information to the windows lists). where to put this? Here, then
-reference back to it?}
