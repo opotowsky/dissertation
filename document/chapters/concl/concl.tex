@@ -1,4 +1,4 @@
-\chapter{Conclusion}
+\chapter{Conclusions and Future Work}
 \label{ch:concl}
 
 This chapter focuses on concluding remarks and future work.  First in Section
@@ -7,7 +7,7 @@ together to discuss the bigger picture of this work.  Additionally, there are
 areas of the methodology that are simplified and several avenues this work
 could pursue, so this is discussed in Section \ref{sec:future}.
 
-\section{Summary}
+\section{Conclusions}
 \label{sec:concl}
 
 The main research question that this work addresses is as follows: \textit{How
@@ -61,32 +61,109 @@ increasingly less precise material detection techniques.  These steps are
 covered in Sections \ref{sec:eval1} and \ref{sec:eval2}.  The results from each
 of the two chapters are summarized as follows.
 
-The first experimental procedure is in Chapter \ref{ch:exp1} and is entitled
-Reactor Parameter Prediction Using Nuclide Masses.  This experiment is done as
-a demonstration of the methodology with the "perfect knowledge" of nuclide
-masses. It also demonstrates the effects of information reduction by injecting
-noise into the training set (randomly applied uniform error).  First, the
-entire training set is tested at some point. For the scikit-learn algorithms,
-this is accomplished via 5-fold \gls{CV}, and the \gls{MLL} calculations test
-one training set entry at a time. The results of the training set being tested are
-covered in Section \ref{sec:randerr}
+\noindent \textbf{Reactor Parameter Prediction Using Nuclide Masses}
 
+First, the results from the experimental procedure in Chapter \ref{ch:exp1} are
+discussed.  This experiment is a demonstration of the methodology with the
+"perfect knowledge" of nuclide masses. It first implements the effects of
+information reduction by injecting noise into the training set (randomly
+applied uniform error) in Sections \ref{sec:randerrA} and \ref{sec:randerrB}.
+Next, the impacts of training set size are evaluated to understand the effects
+of model generalization in Section \ref{sec:randerrC}. After this, the impacts
+of having prior knowledge of the reactor type on the quality of prediction of
+the regression cases are studied in Section \ref{sec:randerrD}. Last, the
+external testing set, the \gls{SFCOMPO} database, is used to test this
+methodology against sometimes complicated real world data sets in Section
+\ref{sec:sfcompo}. 
 
-The performance of test cases drawn from the training data is presented and discussed, as well
-as the performance of real external test cases of nuclide concentration
-measurements.  
-Within the performance evaluation, the random error injection
-results are in Section \ref{sec:randerr} and the performance using a real world
-set of test cases in Section \ref{sec:sfcompo}.
+For Sections \ref{sec:randerrA}--\ref{sec:randerrD}, the prediction performance
+is measured by using the training set to provide testing samples. The entire
+training set is tested at some point; when a test sample is used, it is first
+removed from the training set so that there is no exact replica of it in the
+training stage. For the scikit-learn algorithms, this is accomplished via
+5-fold \gls{CV}, and the \gls{MLL} calculations test one training set entry at
+a time.  Impacts of increasing training set error on the four prediction
+parameters are covered in Sections \ref{sec:randerrA} and \ref{sec:randerrB}
+The \gls{MLL} calculations method is the most resilient to introduced error,
+followed by decision trees then \textit{k}-nearest neighbors. The behaviors of
+each algorithm's performance degradation for reactor type, burnup, and
+enrichment all behave in a similar fashion. But the \textit{k}-nearest
+neighbors prediction of time since irradiation has a drastically fast drop that
+starts with even 1\% introduced training set error. The prediction performance
+at 20\% training set error is used as a baseline for future work. 
 
-The second experimental procedure, Reactor Parameter Prediction Using Processed
-Gamma Spectra, is explored in Chapter \ref{ch:exp2}.  This experiment's purpose
-is to probe the usefulness of field-deployable detectors for giving rapid
-information about presumed \gls{SNF}. The information reduction is achieved by
-using computational gamma spectra of various detectors with decreasing detector
-energy resolution.  The performance of the prediction of reactor parameters is
-measured by using test cases drawn from the training set, where there is a
-training set for each detector in this study.  
+In Section \ref{sec:randerrC}, the impacts of fewer training set entries are
+implemented to investigate how the algorithms each generalize. Using the
+training set that has 5\% error, it was reduced in four steps from its full
+size, the lowest size being 20\% of the full training set. Although the
+\gls{MLL} calculations perform above the scikit-learn algorithms at most sizes,
+the data points at 20\% training set size show \gls{MLL} below one or both of
+the scikit-learn algorithms. The takeaway is that while this training set is
+more than large enough to achieve good performance from a high variance
+approach, the performance may not hold with a different training set design. 
+
+Section \ref{sec:randerrD} shows whether the burnup, enrichment, and time since
+irradiation predictions benefit from having the prior knowledge of reactor
+type.  The largest improvement is for the \gls{PHWR} (only 1.5\% of training
+set) regression cases for the scikit-learn algorithms, whereas there is no
+improvement for \gls{MLL} calculations. Because the \gls{BWR} class dominates
+the training set, there is modest improvement in \gls{PWR} regression cases as
+well for the scikit-learn algorithms.
+
+Last in this chapter is Section \ref{sec:sfcompo}, where the performance of
+this methodology using real world test cases os nuclide concentration
+measurements via the \gls{SFCOMPO} database is demonstrated.  While the
+training set design spans the label space that exists in \gls{SFCOMPO}, there
+are many missing measurements from the features in the training set, which is
+comprised of 29 nuclide masses.  Because of an imbalanced training set and the
+method used to handle the null values, the reactor type classification results
+are poor, which translates to the regression cases as well.  The \gls{MLL}
+calculations perform the best, but many of the prediction errors are still
+large. The techniques for improving the performance are discussed next in the
+future work suggestions, Section \ref{sec:future}.
+
+\noindent \textbf{Reactor Parameter Prediction Using Processed Gamma Spectra}
+
+The second experimental procedure is explored in Chapter \ref{ch:exp2}.  This
+experiment's purpose is to probe the usefulness of field-deployable detectors
+for giving rapid information about presumed \gls{SNF}. The information
+reduction is achieved by using computational gamma spectra of various detectors
+with decreasing detector energy resolution.  Additionally, the gamma spectra of
+each \gls{SNF} entry are processed in three different manners, resulting in
+three energy windows lists, denoted by auto, short, and long.  The performance
+of the prediction of reactor parameters is measured by using test cases drawn
+from the training set, where there is a training set for each detector in this
+study.  Again, the testing of the algorithms is accomplished using 5-fold
+\gls{CV} for the scikit-learn algorithms, and by removing one test sample at a
+time from the training set for the \gls{MLL} calculations.
+
+The reactor type classifcation results are first covered in Section
+\ref{sec:exp2_rxtr}.  The \gls{MLL} calculations consistently perform the best
+across the algorithms, and the short energy windows list has the best
+performance across the energy windows lists.  Most of the misclassications are
+\gls{PWR} and \gls{PHWR} being labeled as \gls{BWR}.  The automatic peak
+searching results in erratic behavior for the scikit-learn algorithms because
+the high energy resolution detectors perform poorly but one of the lower energy
+resolution detectors performed very well. It is therefore a promising approach
+for the lower energy resolution detectors, and possibly even still the high
+energy resolution detectors since in theory one could filter the noise from the
+detector peak searches. 
+
+Next, the regression cases are shown in Section \ref{sec:exp2_reg}.  The burnup
+predictions for all the algorithms and energy windows lists outperform the
+baseline, except in one case of \textit{k}-nearest neighbors being used with
+the auto energy windows list.  The enrichment predictions for the set of six
+detectors all fell below the baseline, however, and the time since irradiation
+predictions all are very close to the baseline, with some points right above it
+and some right below it.  The spread of outliers encompassed $3-17\%$ of the
+training set depending on the case, and in most cases the magnitude of the
+outlier errors is of significant concern. For all three regression cases, there
+was little contrast among the three energy windows lists. The auto list had
+more erratic behavior, and the short list had a slight but not significant
+average performance over the long list. It is possible that even the short list
+with 42 features has too high of a dimension for these methods to perform well. 
+
+\noindent \textbf{Hi hello}
 
 Mll performs well bc of training set design. If there were to be a smaller db
 with higher simulation fidelity, other algs may do better because there would
@@ -98,10 +175,6 @@ but hyperparameter optimization left me with high variance models, so this
 needs to be discussed somewhere. some discussion of feature number might
 also be useful w results
 
-%Although an approximate three-month error seems Vlike an acceptable
-%window for a many-years-old piece of \gls{SNF}, a one-year error in time since
-%irradiation estimate seems too large to be an acceptable error
-
 \section{Future Work}
 \label{sec:future}
 
@@ -109,7 +182,7 @@ also be useful w results
 
 Increase simulation fidelity
 
-Feature set study: filtering out problematic nuclides, using iso ratios
+Feature set study: filtering out problematic nuclides, using iso ratios, filtering out noise for auto peak search approach
 
 \noindent \textbf{Statistical Method Optimization}
 
