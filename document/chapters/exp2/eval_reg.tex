@@ -99,9 +99,9 @@ figures.
 The baseline performance in Figure \ref{fig:burn} is at -4\% \gls{MAPE} for
 burnup, chosen by the lowest performance of the three algorithms at the
 reference point of 20\% training set error for the 29 nuclide mass training set
-in in Figure \ref{fig:randerrB}. In Figures \ref{fig:burnbox} and
+in Figure \ref{fig:burnmape}. In Figures \ref{fig:burnbox} and
 \ref{fig:burnboxfly}, the red baseline is at $1000\:MWd/MTU$, from the
-reference point in Figure \ref{fig:randmaeA}.  In these two sets of plots, the
+reference point in Figure \ref{fig:burnmae}.  In these two sets of plots, the
 baseline is at a positive value because the box plots do not have a negative
 \textit{y}-axis. 
 
@@ -215,9 +215,9 @@ large that it is difficult to conclusively define a trend.
 The baseline performance for the enrichment predictions in Figure
 \ref{fig:enri} is at -6\% \gls{MAPE}, chosen by the lowest performance of the
 three algorithms at the reference point of 20\% training set error for the 29
-nuclide mass training set in in Figure \ref{fig:randerrC}. In Figures
+nuclide mass training set in in Figure \ref{fig:enrimape}. In Figures
 \ref{fig:enribox} and \ref{fig:enriboxfly}, the red baseline is at $0.17\:\%
-U235$, from the reference point in Figure \ref{fig:randmaeB}.  In these two
+U235$, from the reference point in Figure \ref{fig:enrimae}.  In these two
 sets of plots, the baseline is at a positive value because the box plots do not
 have a negative \textit{y}-axis. 
 
@@ -335,17 +335,17 @@ difficult to conclusively define a trend.
 The original baseline performance for the time since irradition predictions in
 Figure \ref{fig:cool} were at -30\% \gls{MAPE}, chosen by the lowest
 performance of the three algorithms at the reference point of 20\% training set
-error for the 29 nuclide mass training set in in Figure \ref{fig:randerrD}.
+error for the 29 nuclide mass training set in in Figure \ref{fig:coolmape}.
 However, the \textit{k}-nearest neighbors algorithm in that plot had
 exceptionally poor performance compared to the other two algorithms, so all of
 the results from the detector-based training sets (including those predicted
 using \textit{k}-nearest neighbors, oddly enough) far outperform this baseline.
 Therefore, a new one was chosen based on the decision trees performance at the
-reference point in Figure \ref{fig:randerrD}, at a \gls{MAPE} of -6\%.
+reference point in Figure \ref{fig:coolmape}, at a \gls{MAPE} of -6\%.
 Similarly, in Figures \ref{fig:coolbox} and \ref{fig:coolboxfly}, the original
 baseline is at $550\:days$ and the updated red baseline is at $120\:days$, from
 the \textit{k}-nearest neighbors and decision trees performances, respectively,
-at the reference point in Figure \ref{fig:randmaeC}.  In these two sets of
+at the reference point in Figure \ref{fig:coolmae}.  In these two sets of
 plots, the baseline is at a positive value because the box plots do not have a
 negative \textit{y}-axis. 
 
@@ -383,10 +383,6 @@ the decision trees results for the \gls{NaI} detector.  Other than the portable
 absolute errors rarely exceeds $400\:days$, or a little over a year.  Taking an
 aggregate view of the three plots, many of the \gls{MAE}s are around
 $100\:days$.
-
-%Although an approximate three-month error seems like an acceptable
-%window for a many-years-old piece of \gls{SNF}, a one-year error in time since
-%irradiation estimate seems too large to be an acceptable error
 
 Although the range of absolute errors typically reaches to around $400\:days$,
 the outliers in Figure \ref{fig:coolboxfly} reach to about $10x$ that level to

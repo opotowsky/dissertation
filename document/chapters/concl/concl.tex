@@ -1,22 +1,134 @@
-\chapter{Conclusions and Future Work}
+\chapter{Conclusion}
 \label{ch:concl}
 
-Hi hello.
+This chapter focuses on concluding remarks and future work.  First in Section
+\ref{sec:concl}, the main experimental results from each section are brought
+together to discuss the bigger picture of this work.  Additionally, there are
+areas of the methodology that are simplified and several avenues this work
+could pursue, so this is discussed in Section \ref{sec:future}.
 
-\section{Conclusions}
+\section{Summary}
 \label{sec:concl}
 
-Thus, ultimately, this research protocol is designed to answer the question
-\textit{How does the ability to determine forensic-relevant spent nuclear fuel
-attributes using machine-learning techniques degrade as less information is
-available?}. 
+The main research question that this work addresses is as follows: \textit{How
+does the ability to determine forensic-relevant spent nuclear fuel attributes
+using machine-learning techniques degrade as less information is available?}. 
+The workflow to examine this question takes place in four steps.  
+
+First, the training data is simulated, which provides an array of nuclide
+measurements as the features. The prediction parameters are the simulation
+inputs: reactor type, burnup, \gls{U235} enrichment, and time since
+irradiation.  The reactor types are one of three common commercial reactors:
+\gls{PWR}, \gls{BWR}, or \gls{PHWR}.  The burnup is measured in $MWd/MTU$ and
+ranges from 0 to about $68,000$ in 21-28 timesteps depending on the reactor
+type.  The enrichment is $\%U235$ and is centered around the following
+percentages: 0.5, 1.5, 2.0, 3.0, 4.0, 5.0, and 0.711 (natural \gls{U235}
+enrichment for the \gls{PHWR}s).  The time since irradiation is measured in
+$days$ and ranges from 0 to 6000, or 16 years, in $100-day$ time steps with 61
+total steps. Given these simulation inputs, the makeup of 4.5e5 \gls{SNF}
+entries are simulated using \gls{ORIGEN} \cite{scale, origen, origenarp}.
+These steps are covered in Sections \ref{sec:training1} and
+\ref{sec:training2}.
+
+Second, information reduction on the training set is carried out using randomly
+injected uniform error or computationally generated gamma spectra. For the
+former, the training set is comprised of nuclide masses and the random error is
+used to study the robustness of the methodology to artificial noise in the
+feature set.  For the latter, the training set is initially comprised of
+nuclide activities, and \gls{GADRAS} is used to compute the gamma spectra via
+\gls{DRF}s for six detectors \cite{gadras}. Each detector-based training set
+undergoes three different methods of processing the gamma spectra. This is
+intended to answer the question of whether field-deployable detectors can give
+enough information about radionuclides to be able to successfully attribute
+\gls{SNF}.  These steps are covered in Sections \ref{sec:inforeduc1} and
+\ref{sec:inforeduc2}.
+
+Third, three algorithms, \textit{k}-nearest neighbors, decision trees, and
+\gls{MLL} calculations, are used to train models to predict the four reactor
+parameters of interest.  The first two are algorithms implemented using the
+scikit-learn python \gls{ML} toolkit, and \gls{MLL} is implemented in python
+leveraging SciPy and NumPy for fast likelihood calculations \cite{scikit,
+scipy, numpy}.  For the scikit algorithms, the hyperparameters governing model
+complexity were optimized to minimize the prediction errors.  The scripts
+written to run the scikit-learn predictions and the \gls{MLL} calculations were
+deployed using \gls{UW}--Madison's \gls{CHTC} resources, the \gls{UW} campus
+grid, and the \gls{OSG} \cite{osg07, osg09}.  These steps are covered in
+Sections \ref{sec:statmodel1} and \ref{sec:statmodel2}.
+
+Fourth, the prediction errors are evaluated to draw conclusions about the
+capability of statistical methods to inform nuclear material attribution with
+increasingly less precise material detection techniques.  These steps are
+covered in Sections \ref{sec:eval1} and \ref{sec:eval2}.  The results from each
+of the two chapters are summarized as follows.
+
+The first experimental procedure is in Chapter \ref{ch:exp1} and is entitled
+Reactor Parameter Prediction Using Nuclide Masses.  This experiment is done as
+a demonstration of the methodology with the "perfect knowledge" of nuclide
+masses. It also demonstrates the effects of information reduction by injecting
+noise into the training set (randomly applied uniform error).  First, the
+entire training set is tested at some point. For the scikit-learn algorithms,
+this is accomplished via 5-fold \gls{CV}, and the \gls{MLL} calculations test
+one training set entry at a time. The results of the training set being tested are
+covered in Section \ref{sec:randerr}
+
+
+The performance of test cases drawn from the training data is presented and discussed, as well
+as the performance of real external test cases of nuclide concentration
+measurements.  
+Within the performance evaluation, the random error injection
+results are in Section \ref{sec:randerr} and the performance using a real world
+set of test cases in Section \ref{sec:sfcompo}.
+
+The second experimental procedure, Reactor Parameter Prediction Using Processed
+Gamma Spectra, is explored in Chapter \ref{ch:exp2}.  This experiment's purpose
+is to probe the usefulness of field-deployable detectors for giving rapid
+information about presumed \gls{SNF}. The information reduction is achieved by
+using computational gamma spectra of various detectors with decreasing detector
+energy resolution.  The performance of the prediction of reactor parameters is
+measured by using test cases drawn from the training set, where there is a
+training set for each detector in this study.  
 
 Mll performs well bc of training set design. If there were to be a smaller db
 with higher simulation fidelity, other algs may do better because there would
 be fewer training set entries. Even a few times throughout this work, knn and
 dec trees gets close to MLL performance.
 
+The methods in this work have high variance, and so regularization is necessary,
+but hyperparameter optimization left me with high variance models, so this
+needs to be discussed somewhere. some discussion of feature number might
+also be useful w results
+
+%Although an approximate three-month error seems Vlike an acceptable
+%window for a many-years-old piece of \gls{SNF}, a one-year error in time since
+%irradiation estimate seems too large to be an acceptable error
+
 \section{Future Work}
 \label{sec:future}
 
-Hello
+\noindent \textbf{Training Set Features}
+
+Increase simulation fidelity
+
+Feature set study: filtering out problematic nuclides, using iso ratios
+
+\noindent \textbf{Statistical Method Optimization}
+
+High variance algorithms, not much optimization work done
+
+Could implement k-best loglike for MLL!
+
+\noindent \textbf{Serial Prediction}
+
+Rxtr type first, then regression cases. 
+
+Implement ROC studies to vary the decision threshold for PHWR/PWRs to avoid
+misclassifications as BWR. Goal here is perfector rxtr type classification if
+it comes first. 
+
+\noindent \textbf{\gls{SFCOMPO}}
+
+Serial prediction (rxtr type first, then regression cases)
+
+Nulls imputation can be accomplished via kNN separately, but 0s still would
+still likely work best for MLL
+

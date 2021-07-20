@@ -19,27 +19,47 @@ as \textit{Dec Tree} or \textit{DTree}), and \gls{MLL} calculations.
 
 To judge the degradation of predictions of the algorithms with increasing
 nuclide mass measurement error (i.e., reduced information quality, detailed in
-Section \ref{sec:inforeduc1}), four plots are made with the introduced error on
-the \textit{x}-axis and a prediction performance metric on the \textit{y}-axis.
-Shown in Figure \ref{fig:randerr}, the \textit{y}-axis is always oriented so
-that lower is poorer performance and higher is better performance. This is why
-Figures \ref{fig:randerrB}--\ref{fig:randerrD} present a negative \gls{MAPE} on
-the \textit{y}-axis. Additionally, the data points on all the plots have a
-small $\Delta x$ to show error bars that are otherwise impossible to see.
+Section \ref{sec:inforeduc1}), several plots are made with the introduced error
+on the \textit{x}-axis and a prediction performance metric on the
+\textit{y}-axis.  The \textit{y}-axis is always oriented so that lower is
+poorer performance and higher is better performance. This is why Figures
+\ref{fig:randburn}--\ref{fig:randcool} present a negative error on the
+\textit{y}-axis. Additionally, the data points on all the plots have a small
+$\Delta x$ to show error bars that are otherwise impossible to see.
 
-Figure \ref{fig:randerrA} shows the balanced accuracy of reactor type
+\subsubsection{Reactor Type Classification}
+
+Figure \ref{fig:randrxtr} shows the balanced accuracy of reactor type
 classification, where a score of $1$ is perfect prediction and a score of $0$
 is random classification. The error bars reflect a 99\% confidence interval.
 While the two scikit-learn algorithms follow a very similar path of decreased
 accuracy as the error increases, the \gls{MLL} calculation approach appears to
-be more robust to the nuclide mass measurement error. This behavior is seen in
-all four plots in Figure \ref{fig:randerr}. Another interesting result is that
-the \gls{MLL} calculation performs slightly worse for low errors. If the
-expected measurement errors of nuclide masses in a training database or in a
-test sample can be guaranteed to be better than ~2\%, the \gls{MLL} calculation
-is no longer the obvious preferred choice for reactor type prediction.
+be more robust to the nuclide mass measurement error.  Another interesting
+result is that the \gls{MLL} calculation performs slightly worse for low
+errors. If the expected measurement errors of nuclide masses in a training
+database or in a test sample can be guaranteed to be better than ~2\%, the
+\gls{MLL} calculation is no longer the obvious preferred choice for reactor
+type prediction.
 
-Although the balanced accuracy score provides slightly better information about
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.5\textwidth]{./chapters/exp1/randerr_compare_nuc29_BalAcc_rxtr.png}
+  \caption{Prediction performance of reactor type as measured by balanced 
+           accuracy with respect to uniform/random error applied to the nuclide 
+           mass measurements in the training set.}
+  \label{fig:randrxtr}
+\end{figure}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_3errs.png}
+  \caption{Confusion matrices of reactor type prediction for each algorithm 
+           at three training set error levels: 1\%, 10\%, and 20\%, in the 
+           top, middle, and bottom panels, respectively.}
+  \label{fig:cm_nuc29}
+\end{figure}
+
+Although the balanced accuracy score provides more information about
 classification performance for an imbalanced data set (the training set is
 26.8\% \gls{PWR}, 71.6\% \gls{BWR}, and 1.5\% \gls{PHWR}), it still does not
 provide much detail about what is being misclassified. To probe this further,
@@ -56,91 +76,8 @@ are also displayed. To allow the fractions to be rapidly perceived, a colorbar
 provides perceptially uniform shading for these true positive and false
 positive fractions. 
 
-\begin{figure}[!htb]
-  \centering
-  \begin{subfigure}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_BalAcc_rxtr.png}
-    \caption{Balanced accuracy of reactor type classification with respect 
-             to random error.}
-    \label{fig:randerrA}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_burn.png}
-    \caption{Negative \gls{MAPE} of burnup regression with respect to 
-             random error.}
-    \label{fig:randerrB}
-  \end{subfigure}
-  \vskip\baselineskip
-  \begin{subfigure}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_enri.png}
-    \caption{Negative \gls{MAPE} of \gls{U235} enrichment regression with 
-             respect to random error.}
-    \label{fig:randerrC}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_cool.png}
-    \caption{Negative \gls{MAPE} of time since irradiation regression with 
-             respect to random error.} 
-    \label{fig:randerrD}
-  \end{subfigure}
-  \caption{Prediction performance of reactor type, burnup, enrichment, and 
-           time since irradiation as measured by relative error with respect 
-           to uniform/random error applied to the nuclide mass measurements 
-           in the training set.}
-  \label{fig:randerr}
-\end{figure}
-
-\begin{figure}[!htb]
-\todo[inline]{ch 4 uses more than relative error, and so added MAE this
-section. need to add discussion.}
-  \centering
-  \begin{subfigure}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAE_burn.png}
-    \caption{Negative \gls{MAE} of burnup regression with respect to 
-             random error.}
-    \label{fig:randmaeA}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAE_enri.png}
-    \caption{Negative \gls{MAE} of \gls{U235} enrichment regression with 
-             respect to random error.}
-    \label{fig:randmaeB}
-  \end{subfigure}
-  \vskip\baselineskip
-  \begin{subfigure}[b]{0.49\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAE_cool.png}
-    \caption{Negative \gls{MAE} of time since irradiation regression with 
-             respect to random error.} 
-    \label{fig:randmaeC}
-  \end{subfigure}
-  \caption{Prediction performance of burnup, enrichment, and time since 
-           irradiation as measured by \gls{MAE} with respect to decreasing 
-           information quality in the form of uniform/random error applied 
-           to the nuclide mass measurements in the training set.}
-  \label{fig:randmae}
-\end{figure}
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_3errs.png}
-  \caption{Confusion matrices of reactor type prediction for each algorithm 
-           at three training set error levels: 1\%, 10\%, and 20\%, in the 
-           top, middle, and bottom panels, respectively.}
-  \label{fig:cm_nuc29}
-\end{figure}
-
 In the top panel of Figure \ref{fig:cm_nuc29}, the three algorithms are
-presented for the 1\% random error case. In Figure \ref{fig:randerrA}, one can
+presented for the 1\% random error case. In Figure \ref{fig:randrxtr}, one can
 see these three data points on the plot clustered near the top showing
 almost-perfect performance.  (A reminder that the true positive fractions in
 the confusion matrices do not map directly to the balanced accuracy score,
@@ -159,7 +96,7 @@ difficult problem\todo{find citation}, so the correct \gls{PHWR}
 classifications are not particularly notable for this discussion. 
 
 The middle panel of Figure \ref{fig:cm_nuc29} shows confusion matrices for the
-three algorithms for the 10\% random error case. In Figure \ref{fig:randerrA},
+three algorithms for the 10\% random error case. In Figure \ref{fig:randrxtr},
 one can see these three data points on the plot, where the \gls{MLL} point is
 near a balanced accuracy score of 1, and the scikit-learn algorithms both have
 score of around 0.93. As with the 1\% error case, the majority of the
@@ -169,7 +106,7 @@ misclassification is in \gls{PWR}s being classified as \gls{BWR}s: 11.3\% for
 at the following percentages: 3.4\% for \textit{k}-nearest neighbors, 3.6\% for
 decision trees, and 0.5\% for \gls{MLL} calculations. Note how the performance
 of the \gls{MLL} calculations are nearly the same for both error levels, which
-is shown by the \gls{MLL} line in Figure \ref{fig:randerrA}. Because of the
+is shown by the \gls{MLL} line in Figure \ref{fig:randrxtr}. Because of the
 normalization, the \gls{LWR}s that are misclassified as \gls{PHWR}s appear to
 be zero. However, this does happen, just rarely: 15 \gls{BWR}s are classified
 as \gls{PHWR} using decision trees. Also, \textit{k}-nearest neighbors and
@@ -178,7 +115,7 @@ former and 20 times using the latter (no \gls{PHWR} misclassifications happened
 using \gls{MLL}).
 
 The bottom panel of Figure \ref{fig:cm_nuc29} shows confusion matrices for the
-three algorithms for the 20\% random error case. In Figure \ref{fig:randerrA},
+three algorithms for the 20\% random error case. In Figure \ref{fig:randrxtr},
 one can see these three data points on the plot, where the \gls{MLL} point is
 near a balanced accuracy score of 0.97, \textit{k}-nearest neighbors is around
 0.83, and decision trees is around 0.86. As with the previous two error cases,
@@ -192,36 +129,138 @@ neighbors, 82 times for decision trees, and 0 times for \gls{MLL} calculations.
 \Gls{LWR}s were misclassified as \gls{PHWR} 42 times for \textit{k}-nearest
 neighbors, 66 times for decision trees, and 0 times for \gls{MLL} calculations.
 
-Figure \ref{fig:randerrB} demonstrates the burnup prediction performance.  As
-mentioned, the \textit{x}-axis is negative \gls{MAPE} so that higher is always
-better.  The error bars reflect one standard deviation of the average
-percentage errors.  Again, the \gls{MLL} method is robust to training set error
-but performs slightly worse at low error values.  All three methods calculate
-burnup with a maximum error of 5\% at 20\% error in the training set.  
+\subsubsection{Regression Results}
 
-Figure \ref{fig:randerrC} shows the trend of \gls{U235} enrichment prediction
-with increasing error in the nuclide mass training set.  The error bars reflect
-one standard deviation of the average percentage errors, and the behavior of
-the \gls{MLL} method in Figure \ref{fig:randerrB} versus the scikit-learn
-algorithms is the same here.  The maximum \gls{MAPE} among all algorithms is
-about 6\% at 20\% training set error. 
+Each set of plots for a given prediction parameter in this section shows both
+the relative error (\gls{MAPE}) and the absolute error (\gls{MAE}). In addition
+to the \gls{MAE} on the second plot for each regression case, the \gls{MedAE}
+is represented as a triangle on the plot as well. These three errors taken
+together provide more detailed information about the performance of each
+algorithm when faced with training set noise.  As previously mentioned, the
+\textit{x}-axis has negative errors, so that higher is always better.  
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_burn.png}
+    \caption{Negative \gls{MAPE} of burnup regression with respect to 
+             random error.}
+    \label{fig:burnmape}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAE_burn.png}
+    \caption{Negative \gls{MAE} of burnup regression with respect to 
+             random error.}
+    \label{fig:burnmae}
+  \end{subfigure}
+  \caption{Prediction performance of burnup as measured by relative and 
+           absolute errors with respect to uniform/random error applied to the 
+           nuclide mass measurements in the training set.}
+  \label{fig:randburn}
+\end{figure}
+
+Figure \ref{fig:randburn} demonstrates the burnup prediction performance, with
+the \gls{MAPE} in Figure \ref{fig:burnmape} and the \gls{MAE} and \gls{MedAE}
+in Figure \ref{fig:burnmae}. In these figures, the error bars reflect one
+standard deviation of the percentage errors or the absolute errors,
+respectively.  As with the reactor type prediction in Figure
+\ref{fig:randrxtr}, the \gls{MLL} method is robust to training set error but
+performs slightly worse at low error values.  All three methods calculate
+burnup with a maximum error of -5\% or $-1000\:MWd/MTU$ at 20\% error in the
+training set. The \gls{MedAE}s show a more encouraging picture of the
+performance as compared to the \gls{MAE}s. It is interesting that the
+scikit-learn algorithms and the \gls{MLL} calculations diverge at 5\% training
+set error for \gls{MAPE} and \gls{MAE}, but at 10\% training set error for the
+\gls{MedAE}.
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_enri.png}
+    \caption{Negative \gls{MAPE} of \gls{U235} enrichment regression with 
+             respect to random error.}
+    \label{fig:enrimape}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAE_enri.png}
+    \caption{Negative \gls{MAE} of \gls{U235} enrichment regression with 
+             respect to random error.}
+    \label{fig:enrimae}
+  \end{subfigure}
+  \caption{Prediction performance of enrichment as measured by relative and 
+           absolute errors with respect to uniform/random error applied to the 
+           nuclide mass measurements in the training set.}
+  \label{fig:randenri}
+\end{figure}  
+
+Figure \ref{fig:randenri} demonstrates the \gls{U235} enrichment prediction
+performance, with the \gls{MAPE} in Figure \ref{fig:enrimape} and the \gls{MAE}
+and \gls{MedAE} in Figure \ref{fig:enrimae}. In these figures, the error bars
+reflect one standard deviation of the percentage errors or the absolute errors,
+respectively.  Again, the \gls{MLL} method is robust to training set error but
+performs slightly worse at low error values.  All three methods calculate
+enrichment with a maximum error of -6\% or $-0.17\:\%U235$ at 20\% error in the
+training set. Again, the \gls{MedAE}s show a more encouraging picture of the
+performance as compared to the \gls{MAE}s. The scikit-learn algorithms and the
+\gls{MLL} calculations diverge at 10\% training set error for \gls{MAPE} and
+\gls{MAE}, but at 15\% training set error for the \gls{MedAE}.
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAPE_cool.png}
+    \caption{Negative \gls{MAPE} of time since irradiation regression with 
+             respect to random error.} 
+    \label{fig:coolmape}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/randerr_compare_nuc29_MAE_cool.png}
+    \caption{Negative \gls{MAE} of time since irradiation regression with 
+             respect to random error.} 
+    \label{fig:coolmae}
+  \end{subfigure}
+  \caption{Prediction performance of time since irradiation as measured by 
+           relative and absolute errors with respect to uniform/random error 
+           applied to the nuclide mass measurements in the training set.}
+  \label{fig:randcool}
+\end{figure}
 
 Last, the time since irradiation prediction performance for the three
 algorithms with respect to increasing nuclide mass error is pictured in Figure
-\ref{fig:randerrD}.  The error bars reflect one standard deviation of the
-average percentage errors.  The behavior of \textit{k}-nearest neighbors is
-unique here versus the previous two regression categories; whereas the maximum
-prediction \gls{MAPE}s remain under about 6\% for both the decision tree and
-\gls{MLL} methods, the maximum error of \textit{k}-nearest neighbors reaches
-nearly 30\% at 20\% nuclide mass error.  There is an inset to show more detail
-about the behavior of the decision trees and \gls{MLL} calculations curves:
-decision trees is a maximum of 6\% prediction error at 20\% training set error,
-and \gls{MLL} calculations remain nearly horizontal at approximately 2\%
-prediction error for all training set error levels.  
+\ref{fig:randcool}.  The \gls{MAPE} is shown in Figure \ref{fig:enrimape} and
+the \gls{MAE} and \gls{MedAE} are shown in Figure \ref{fig:enrimae}.  The error
+bars reflect one standard deviation of the percentage errors or the absolute
+errors, respectively.  The \gls{MLL} method is most robust to training set
+error, but for this prediction parameter, the behavior of \textit{k}-nearest
+neighbors is unique here versus the previous two regression categories.  Time
+since irradiation is predicted with a maximum error of -30\% or $-550\:days$ at
+20\% error in the training set using the \textit{k}-nearest neighbors
+algorithm.  In Figure \ref{fig:coolmape}, there is an inset to show more detail
+about the behavior of the decision trees and \gls{MLL} calculations curves, so
+if one ignores the clearly anomalous \textit{k}-nearest neighbors performance
+and focuses instead on decision trees, those values are -6\% and $-120\:days$.
+The \gls{MLL} calculations remain nearly horizontal at approximately 2\%
+prediction error for all training set error levels.  The \gls{MedAE}, as usual,
+shows a more encouraging picture of the performance as compared to the
+\gls{MAE}.
 
-While it is difficult to draw a baseline for minimum acceptable behavior on
-these plots, these performances can serve as a benchmark for the work presented
-in Chapter \ref{ch:exp2}. 
+Overall, the robustness to training set error that is present in the \gls{MLL}
+calculations applies to all of the prediction parameters. The decision trees
+performance is second best, and \textit{k}-nearest neighbors performs the
+worst.  In the case of time since irradiation, \textit{k}-nearest neighbors
+degrades incredibly fast with introduced training set error.  While it is
+difficult to draw a baseline for minimum acceptable behavior on these plots,
+these performances can serve as a benchmark for the work presented in Chapter
+\ref{ch:exp2}. 
 
 \input{chapters/exp1/eval_subs}
 

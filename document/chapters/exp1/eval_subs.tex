@@ -1,8 +1,8 @@
 
 \subsubsection{Model Generalization}
 
-Although a key takeaway from Figure \ref{fig:randerr} is that the \gls{MLL}
-calculations are the most robust to introduced error in the training set
+Although a key takeaway from Section \ref{sec:randerr} is that the \gls{MLL}
+calculations are the most resilient to introduced error in the training set
 features for all four prediction categories, there is another aspect of the
 algorithm performance not explicitly shown in those plots: generalization.
 \Gls{MLL} does not generalize to unseen data; it provides predictions based on
@@ -10,23 +10,6 @@ finding the closest training set entry to the test sample.  It (usually)
 outperforms the scikit-learn methods in part because the training set is so
 large. This is also true for the \textit{k}-nearest neighbor implementations
 where $k=1$ (burnup and cooling time, as seen in Table \ref{tbl:exp1hypparam}).
-
-One way to show that an algorithm is generalizing well in comparison to others
-is to view the shape of its learning curve (introduced in Section
-\ref{sec:complexity}): the prediction performance with respect to training set
-size.  Learning curves were constructed for all four prediction categories,
-demonstrated in Figure \ref{fig:learns}. As in Figure \ref{fig:randerr}, the
-\textit{y}-axis is always oriented so that lower is poorer performance and
-higher is better performance; also, the error bars reflect a 99\% confidence
-interval for Figure \ref{fig:learnsA}, and one standard deviation of the
-average percentage errors for Figures \ref{fig:learnsB}--\ref{fig:learnsD}.
-These learning curves represent the 5\% random error case in Figure
-\ref{fig:randerr}, so the scores/errors in Figure \ref{fig:randerr} are the
-data points at the 100\% training set level in Figure \ref{fig:learns}.
-Therefore, the leftmost data in Figure \ref{fig:learns} will show the \gls{MLL}
-point being slightly above the scikit-learn points for the reactor type,
-burnup, and enrichment predictions, and the \textit{k}-nearest neighbor point
-is below the \gls{MLL} and decision trees points for time since irradiation.  
 
 \begin{figure}[!htb]
   \centering
@@ -67,6 +50,24 @@ is below the \gls{MLL} and decision trees points for time since irradiation.
   \label{fig:learns}
 \end{figure}
 
+One way to show that an algorithm is generalizing well in comparison to others
+is to view the shape of its learning curve (introduced in Section
+\ref{sec:complexity}): the prediction performance with respect to training set
+size.  Learning curves were constructed for all four prediction categories,
+demonstrated in Figure \ref{fig:learns}. As in Figures
+\ref{fig:randrxtr}--\ref{fig:randcool} , the \textit{y}-axis is always oriented
+so that lower is poorer performance and higher is better performance; also, the
+error bars reflect a 99\% confidence interval for Figure \ref{fig:learnsA}, and
+one standard deviation of the average percentage errors for Figures
+\ref{fig:learnsB}--\ref{fig:learnsD}.  These learning curves represent the 5\%
+random error case in Figures \ref{fig:randrxtr}--\ref{fig:randcool}, so the
+scores/errors in these figures are the data points at the 100\% training set
+level in Figure \ref{fig:learns}.  Therefore, the leftmost data in Figure
+\ref{fig:learns} will show the \gls{MLL} point being slightly above the
+scikit-learn points for the reactor type, burnup, and enrichment predictions,
+and the \textit{k}-nearest neighbor point is below the \gls{MLL} and decision
+trees points for time since irradiation.  
+
 Figure \ref{fig:learnsA} shows that the balanced accuracy score of reactor type
 classification for the \gls{MLL} calculations decreases more at lower training
 set size than for the scikit-learn algorithms. Here, the curve crosses below
@@ -76,7 +77,7 @@ For the burnup \gls{MAPE} in Figure \ref{fig:learnsB} and the enrichment
 of the scikit-learn algorithm curves. This happens between 20\% and 40\%
 training set size for burnup, and between 40\% and 60\% training set size for
 enrichment.  Lastly, Figure \ref{fig:learnsD} shows a different arrangement,
-which is to be expected from the results shown in Figure \ref{fig:randerrD},
+which is to be expected from the results shown in Figure \ref{fig:randcool},
 where the \textit{k}-nearest neighbors performance is significantly worse than
 the other two algorithms. Because the \textit{k}-nearest neighbors curve and
 error bars are so large, there is an inset showing a closeup of the other two
@@ -98,9 +99,9 @@ than the simple scikit-learn algorithms.
 
 \subsubsection{Reactor Type Prior Knowledge}
 
-There is similar work being done \todo{get tamu citation} to this work that
-focuses on similar prediction categories but in a serial manner, i.e., first
-determining the reactor type before moving forward with other predictions.
+There is similar work being done to this work that focuses on similar
+prediction categories but in a serial manner, i.e., first determining the
+reactor type before moving forward with other predictions \cite{serial_ml}.
 This makes a lot of sense intuitively, that knowing the reactor type could
 allow a more accurate reporting of the other reactor operation parameters,
 rather than trying to predict them while blind to the reactor type, which is
@@ -125,9 +126,7 @@ type was known or unknown prior to prediction, denoted as \textit{K} and
 \textit{U}, respectively. Most of these relative errors are quite low, and
 around or under 2\%.  So, e.g., despite burnup from \gls{PHWR}s improving, it
 was by 0.61\%, a precision of which may not be of concern. Still, these
-performance differences can be looked at in more detail.  \todo[inline]{5\%
-error case is shown but it follows a similar trend to 1\% rand err case.
-Haven't done calcs for higher errors, but could.}
+performance differences can be looked at in more detail.  
 
 \begin{table}[!htb]
   \centering

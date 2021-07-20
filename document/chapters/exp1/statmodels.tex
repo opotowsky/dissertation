@@ -119,13 +119,14 @@ The scripts written to run the scikit-learn algorithms were deployed using
 \subsection{Maximum Log-Likelihood Calculations}
 
 The \gls{MLL} calculation method is implemented in python using the SciPy
-statistics toolkit \cite{scipy}. In this method, one test sample is removed
-from the training set at a time, and the log-likelihood calculation in Equation
-\ref{eq:loglike} is performed between the test sample and all the rows of the
-training set.  The observation with the largest log-likelihood is returned as
-the predicted labels. Just like with the scikit-learn algorithm-based
-predictions, the entire training set becomes a test sample at some point, so
-the predictions returned equal the number of entries in the training set.
+statistics toolkit and NumPy functionality \cite{scipy, numpy}. In this method,
+one test sample is removed from the training set at a time, and the
+log-likelihood calculation in Equation \ref{eq:loglike} is performed between
+the test sample and all the rows of the training set.  The observation with the
+largest log-likelihood is returned as the predicted labels. Just like with the
+scikit-learn algorithm-based predictions, the entire training set becomes a
+test sample at some point, so the predictions returned equal the number of
+entries in the training set.
 
 A key difference in how the \gls{MLL} method provides predictions is that it
 returns all the labels together, so it is not doing any generalizing on the

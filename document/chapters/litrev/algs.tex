@@ -139,16 +139,16 @@ so is not indicative of a real decision tree.
 In Figure \ref{fig:dtr}, the first split is determined to occur at the feature
 Sm149 on whether the nuclide measurement is above a value of $-1.33$. Note that
 this value is negative because of the scaling process the training set is put
-through, described in Section \ref{sec:statmodel1}.\todo{check this later} The
-majority class at this node is \gls{BWR} which is expected since the training
-set is 72\% \gls{BWR}.  The values list indicates the fraction of each class in
-the node, which is alphabetically ordered \texttt{[BWR, PHWR, PWR]}. It is even
-among the three because the class weights were told to be balanced.  This
-splitting criterion provides a Gini impurity score of 0.67, which represents
-the minimum Gini impurity of all the candidate splits, but also indicates there
-are multiple classes represented in this node (again, expected).  It would be 0
-if there were only one class in the node.  In the visualization, the shading of
-the colors in the tree are bolder for there being a higher fraction of a single
+through, described in Section \ref{sec:statmodel1}. The majority class at this
+node is \gls{BWR} which is expected since the training set is 72\% \gls{BWR}.
+The values list indicates the fraction of each class in the node, which is
+alphabetically ordered \texttt{[bwr, phwr, pwr]}. It is even among the three
+because the class weights were told to be balanced.  This splitting criterion
+provides a Gini impurity score of 0.67, which represents the minimum Gini
+impurity of all the candidate splits, but also indicates there are multiple
+classes represented in this node (again, expected).  It would be 0 if there
+were only one class in the node.  In the visualization, the shading of the
+colors in the tree are bolder for there being a higher fraction of a single
 class.
 
 \subsubsection{Maximum Log-Likelihood Calculations}

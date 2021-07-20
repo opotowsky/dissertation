@@ -59,10 +59,11 @@ features have a normal distribution. Figure \ref{fig:actshist} shows the
 distribution of each radionuclide in the training set. Compared to the features
 in Figure \ref{fig:nucshist}, there seem to be even fewer features with a
 normal distribution, with Pu239 being perhaps the only feature fitting this
-assumption. Again, this should not impact the scitkit-learn algorithms but may
-impact the performance of the \gls{MLL} calculations.  \todo[inline]{this might
-not be important bc most training sets rely on processed gamma spectra and
-those may or may not have normal distrubitions?}
+assumption. The information-reduced training sets covered next have a similar
+profile of distributions to Figure \ref{fig:actshist}, but with a higher
+percentage of exponential distributions.  Again, this should not impact the
+scitkit-learn algorithms but may impact the performance of the \gls{MLL}
+calculations. \todo[inline]{or if I say it do I have to show some?} 
 
 \begin{figure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp2/histograms_trainset_features_acts.png}}
