@@ -1,17 +1,12 @@
 
-\todo[inline]{many updates needed here}
-
-Although the body of literature on the area of proposed research is not
-expansive, there have been a number of relevant studies on the prediction of
-forensically relevant categories or quantities of nuclear materials using
-statistical methods. 
-
-\subsection{Special Nuclear Materials Studied}
-
-With regards to broader forensics capabilities, materials from different steps
-of the nuclear fuel cycle are being studied.  Even though each material has
-its own forensics signatures, the process of applying statistical methods to
-the analysis of material provenance is similar for each. 
+Although the body of literature in the area of proposed research is not
+expansive, there have been a number of relevant studies. These, in some way,
+are related to the the prediction of forensics-applicable categories or
+quantities of nuclear materials using statistical methods.  With regards to
+broader forensics capabilities, materials from different steps of the nuclear
+fuel cycle are being studied.  Even though each material has its own forensics
+signatures, the process of applying statistical methods to the analysis of
+material provenance is similar for each. 
 
 For example, on the front end of the fuel cycle, an entity may have obtained
 \gls{UOC} if they have enrichment capabilities.  One study performed
@@ -19,7 +14,10 @@ statistical analyses on \gls{UOC} from 21 sources (throughout seven countries)
 using 30 concentration measurements of various elements, isotopes, and
 compounds, e.g., sodium, magnesium, thorium, uranium-234, or halide compounds
 \cite{robel_2009}.  The goal of classifying the source and the country was
-reached 60\% and 85\% of the time, respectively.  
+reached 60\% and 85\% of the time, respectively, with the unique method
+developed in the paper (an iterative partial least squares discrimination
+analysis approach), which outperformed decision trees and \textit{k}-nearest
+neighbors.
 %Note: there was a ton of skew in their data and the correction for that was
 %weak sauce
 
@@ -33,45 +31,162 @@ materials are the same age, five plutonium isotopes ($A = 238-242$) correctly
 predicted a test sample. However, taking different times since irradiation and
 reprocessing into account requires more isotopic measurements. 
 
-\subsection{Statistical Methods Employed}
+\noindent \textbf{Factor Analysis Work}
 
-There are statistical methods studies that focus on the classification of the
-reactor type for unknown samples \cite{robel_2009, nicolaou_pu, jones_snf_2014,
-nicolaou_2009}.  However, this work is focused on burnup prediction.  Although
-the results for both regression and classification are based on a number of
-features that are usually isotopic in nature, it is not clear if the regression
-counterparts of these algorithms will perform similarly for this task. 
+In addition to the immediately aforementioned work, there is a suite of work on
+this topic doing classification using factor analysis or isoptic ratios with
+visual distinction.  Although factor analysis explicitly requires the input of
+domain knowledge, it is a valuable first step towards understanding how
+statistical methods can provide insightful models to classify materials.  This
+series of work seeks to accomplish classification of a reactor history (reactor
+type, enrichment, burnup) using the distinguishability between similar sets of
+samples, as pictured in Figure \ref{fig:nico}.
 
-Promising regression work using factor analysis has been published
-\cite{nicolaou_2006, nicolaou_2014}.  Although factor analysis explicitly
-requires the input of domain knowledge, it is a valuable first step towards
-understanding how statistical methods can provide insightful models that
-predict fuel enrichment and burnup. In the following two cases, the features
-included for the analysis are only the uranium and plutonium isotopes remaining
-in the \gls{SNF}.  Ref. \cite{nicolaou_2006} covers predicting enrichment and
-burnup from a range of simulated \gls{SNF} recipes and comparing an `unknown'
-sample to the results of the factor analysis. Ref.  \cite{nicolaou_2014}
-extends that study to real measured samples from the \gls{SFCOMPO} database
-\cite{sfcompo}. This work also highlights and addresses a known problem:
-reliable discrimination between \gls{SNF} from \glspl{PWR} and \glspl{BWR}. 
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.5\linewidth]{./chapters/litrev/nicolaou.png}
+  \caption{Example from Reference \cite{nicolaou_pu} on using factor analysis 
+           to show similaries between classes of \gls{SNF} for visual 
+           identification.}
+  \label{fig:nico}
+\end{figure}
 
-An important paper that greatly influenced the development of this study
-involves not only statistical methods but an investigation of those methods
-when faced with information reduction via random nuclide measurement errors in
-the training data set \cite{dayman_feasibility_2013}.  Additionally, feature
-reduction was investigated by using various nuclide compositions: the top 200
-nuclides by concentration in each vector, fission products only, and a
-\gls{PCA}-derived shortened nuclide list.  Three methods were compared. First
-and second, the nearest neighbor algorithm using both $L_1$ (sum of absolute
-differences of Cartesian coordinates) and $L_2$ norms for measuring distance
-between test data points classified reactor type and predicted burnup.  Third,
-ridge regression with an $L_2$ norm for regularization was only applied to
-burnup prediction. In both classification and regression cases, using the
-fission products nuclide list with both nearest neighbor methods performed the
-best. All other nuclide lists quickly devolved to random guesses with an
-increase in nuclide error in the case of reactor prediction, and more than
-100\% error in the case of burnup prediction.
+The chronologically earliest study in this grouping of publications
+\cite{nicolaou_2006} uses \gls{ORIGEN}-simulated uranium and plutonium (U234,
+U235, U236, U238, Pu238, Pu239, Pu240, Pu241 and Pu242) of various \gls{SNF}
+designations.  These simulated measurements are subject to factor analysis and
+the results usually plotted.  The unknown samples in this work are in visual
+alignment with the factor-analysis-determined groupings.  Reference
+\cite{nicolaou_2014} extends that study (same statistical method, same list of
+isotopes) to real measured samples from the \gls{SFCOMPO} database
+\cite{sfcompo, valid_sfco}.  The goal here was to determine whether the factor
+analysis approach could distinguish the chosen \gls{SFCOMPO} entries well, and
+the results confirm the goal was achieved.  Reference \cite{nicolaou_2015} uses
+three plutonium ratios (Pu242/Pu240, Pu238/Pu Total, and Pu239/Pu240) to
+accomplish the same goal with simulated \gls{SNF} without factor analysis, and
+the results are similar. 
 
-For reliable prediction, it seems to be promising to use actinides
-\cite{nicolaou_2006, nicolaou_2014} and/or fission products
-\cite{dayman_feasibility_2013} for domain knowledge-based feature reduction.
+This work mostly relies on actinides for identifying \gls{SNF}
+\cite{nicolaou_2006, nicolaou_pu, nicolaou_2014, nicolaou_2015}, but the use of
+fission products is also promising \cite{nicolaou_2009}.  This particular
+publication was interesting because the author chose to use one set of fission
+products to represent a typical mass spectrometry assay (Cs133, Ce140, Sm150,
+Sm152, Nd144, Nd145, Nd146, Nd148, Nd150), and another set to represent what
+could be determined from a gamma detector (Zr95, Nb95, Ru106, Cs134, Cs137,
+Ce144).  This approach is successful when the simulation uncertainty is below
+3\% \cite{nicolaou_2009}.
+
+\noindent \textbf{Other Classification Work}
+
+There are other papers on statistical methods that focus on the classification
+of the reactor type for unknown samples that helped frame this work.  One study
+simulated and tracked 34 nuclides of a set of typical commercial nuclear power
+reactors and their operation parameters, but first used statistical
+dimensionality reduction (via Laplacian eignmaps) before subjecting the
+training data to reactor type classification, comparing linear discriminant
+analysis, quadratic discriminant analysis, random forests, and Parzen window
+classifiers \cite{jones_snf_2014}.  Condensing the 34 features into three has
+not only computational and potentially discriminatory benefits, there are
+visualization benefits as shown in Figure \ref{fig:jones}.  This plot and this
+work also highlights and addresses a known problem: reliable discrimination
+between \gls{SNF} from \glspl{PWR} and \glspl{BWR}. 
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\linewidth]{./chapters/litrev/jones.png}
+  \caption{Results of leveraging a pre-processing step of dimansionality 
+           reduction for visualization purposes, from Reference 
+           \cite{jones_snf_2014}.}
+  \label{fig:jones}
+\end{figure}
+
+Another paper compared principal components analysis and partial least squares
+discriminant analysis to classify reactor type. As with the above, a set of
+\gls{SNF} from typical commerial power reactors from around the world were
+simulated and used as test samples for this attribution step, but unlike the
+above they chose to focus on uranium and plutonium isotopes to address the
+challenge of identifying chemically separated uranium or plutonium. This work
+uses a qualitiative visual distinguishability discussion to choose the better
+method of partial least squares discriminant analysis.
+
+\noindent \textbf{Regression Work}
+
+A paper that greatly influenced the development of this study involves not only
+statistical methods but an investigation of those methods when faced with
+information reduction via random nuclide measurement errors in the training
+data set \cite{dayman_feasibility_2013}.  Additionally, feature reduction was
+investigated by using various nuclide compositions: the top 200 nuclides by
+concentration in each vector, fission products only, and a principal components
+analysis-derived shortened nuclide list.  
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{./chapters/litrev/dayman.png}
+  \caption{Plot from Reference \cite{dayman_feasibility_2013} that shows the 
+           degradation of burnup prediction performance with respect to 
+           increasing training set error for three algorithm implementations 
+           and three feature sets.}
+  \label{fig:dayman}
+\end{figure}
+
+Using these various feature sets, three methods were also compared. First and
+second, the nearest neighbor algorithm with two differnt distance metrics was
+used: Manhattan distance ($L_1$ norm, or sum of absolute differences of
+Cartesian coordinates) and Euclidian distance ($L_2$ norm, or square root of
+the sum of squared differences of Cartesian coordinates).  The nearest neighbor
+approaches classified reactor type and predicted burnup.  Third, ridge
+regression with an $L_2$ norm for regularization was only applied to burnup
+prediction.  In both classification and regression cases, using the fission
+products nuclide list with both nearest neighbor methods performed the best.
+All other nuclide lists quickly devolved to random guesses with an increase in
+nuclide error in the case of reactor prediction, and more than 100\% error in
+the case of burnup prediction. Figure \ref{fig:dayman} shows the behavior of
+burnup prediction at low training set error (under 1\%) for the various methods
+with feature set combinations. 
+
+\noindent \textbf{MLL Calculations}
+
+Another set of publications focuses on a particular methodology that was chosen
+to be implemented in this work. Although many commonly used statistical methods
+have been previously discussed in this section, this approach is unique: a
+\gls{MLL} calculation approach for determining the similarity of a test sample
+to a database of simulated samples \cite{mll_method}.  The mathematical
+framework for \gls{MLL} calculations is in Section \ref{sec:algs}.  This was
+developed to attribute weapons-grade plutonium, and so the training database is
+only simulated with low burnup values.  Additionally, the time steps are much
+smaller than what exists in the training set in this work, and these
+publications focus on a set of 10 isotope ratios as the feature set.  Despite
+these differences, this approach is still applicable to this work, which
+focuses on \gls{SNF}. 
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.6\linewidth]{./chapters/litrev/tamu.png}
+  \caption{Plot from Reference \cite{mll_method} that shows a sample being 
+           assigned burnup and time since irradiation values based on a 
+           likelihood maximum.}
+  \label{fig:tamu}
+\end{figure}
+
+Figure \ref{fig:tamu} shows one of the results, where a simulated sample of
+$4.39\:GWd/MTU$ burnup and $3652\:days$ time since irradiation is tested
+against the training database via likelihood calculations of the feature set of
+10 isotope ratios; the maximum is visibly close to the grouth truths.  This
+method was later validated with experimental samples, in Reference
+\cite{mll_validate}. 
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\linewidth]{./chapters/litrev/tamu2.png}
+  \caption{Results from a sensitivity study on the \gls{MLL} method where 
+           uncertainty was increased. The levels shown here are 7\%, 14\%, 
+           21\%, and 28\% \cite{mll_sensitivity}.}
+  \label{fig:tamu2}
+\end{figure}
+
+After experimental validation, sensitivity studies were conducted in Reference
+\cite{mll_sensitivity}.  Figure \ref{fig:tamu2} shows a set of results from the
+increasing of uncertainty. It is interesting that the likelihood decrease
+happens faster on the time since irradiation axis than on the burnup axis,
+since this work has also determined burnup to be easier to predict with
+accuracy than time since irradiation (even with a different feature set).

@@ -71,3 +71,105 @@ discussed in Section \ref{sec:sfcompo}.
 \label{sec:eval1}
 \input{chapters/exp1/evaluation}
 
+\section{Summary}
+
+This chapter covers the details of the methodology in four main sections:
+training set simulations, information reduction, statistical methods
+implementation, and performance evaluation. This approach focuses on the
+situation where there is a full set of well-measured nuclides, some of which
+require destructive techniquess to measure, which will later be contrasted to a
+set of nuclides that are measured in a non-destructive manner. 
+
+First, in Section \ref{sec:training1}, the training data is simulated, which
+provides an array of nuclide measurements as the features. The prediction
+parameters are the simulation inputs: reactor type, burnup, \gls{U235}
+enrichment, and time since irradiation.  The reactor types are one of three
+common commercial reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}.  The burnup is
+measured in $MWd/MTU$ and ranges from 0 to about $68,000$ in 21-28 timesteps
+depending on the reactor type.  The enrichment is $\%U235$ and is centered
+around the following percentages: 0.5, 1.5, 2.0, 3.0, 4.0, 5.0, and 0.711
+(natural \gls{U235} enrichment for the \gls{PHWR}s).  The time since
+irradiation is measured in $days$ and ranges from 0 to 6000, or 16 years, in
+$100-day$ time steps with 61 total steps. Given these simulation inputs, the
+makeup of 4.5e5 \gls{SNF} entries are simulated using \gls{ORIGEN} \cite{scale,
+origen, origenarp}.
+
+Second, in Section \ref{sec:inforeduc1}, information reduction on the training
+set is carried out using randomly injected uniform error. The random error is
+used to study the robustness of the methodology to artificial noise in the
+feature set, which is comprised of 29 nuclide masses.  The introduced trainig
+set error is increased up to 20\%.
+
+Third, in Section \ref{sec:statmodel1}, three algorithms, \textit{k}-nearest
+neighbors, decision trees, and \gls{MLL} calculations, are used to train models
+to predict the four reactor parameters of interest.  The first two are
+algorithms implemented using the scikit-learn python \gls{ML} toolkit, and
+\gls{MLL} is implemented in python leveraging SciPy and NumPy for fast
+likelihood calculations \cite{scikit, scipy, numpy}.  For the scikit
+algorithms, the hyperparameters governing model complexity were optimized to
+minimize the prediction errors.  The scripts written to run the scikit-learn
+predictions and the \gls{MLL} calculations were deployed using
+\gls{UW}--Madison's \gls{CHTC} resources, the \gls{UW} campus grid, and the
+\gls{OSG} \cite{osg07, osg09}.  
+
+Fourth, in Section \ref{sec:eval1}, the prediction errors are evaluated to draw
+conclusions about the capability of the chosen statistical methods to inform
+\gls{SNF} attribution with increasingly less precise material measurements.
+Sections \ref{sec:randerrA} and \ref{sec:randerrB} show the results of
+information reduction by injecting noise into the training set (randomly
+applied uniform error).  Next, the impacts of training set size are evaluated
+to understand the effects of model generalization in Section
+\ref{sec:randerrC}. After this, the impacts of having prior knowledge of the
+reactor type on the quality of prediction of the regression cases are studied
+in Section \ref{sec:randerrD}. Last, the external testing set, the
+\gls{SFCOMPO} database, is used to test this methodology in Section
+\ref{sec:sfcompo}. 
+
+For Sections \ref{sec:randerrA}--\ref{sec:randerrD}, the prediction performance
+is measured by using the training set to provide testing samples. The entire
+training set is tested at some point; when a test sample is used, it is first
+removed from the training set so that there is no exact replica of it in the
+training stage. For the scikit-learn algorithms, this is accomplished via
+5-fold \gls{CV}, and the \gls{MLL} calculations test one training set entry at
+a time.  Impacts of increasing training set error on the four prediction
+parameters are covered in Sections \ref{sec:randerrA} and \ref{sec:randerrB}
+The \gls{MLL} calculations method is the most resilient to introduced error,
+followed by decision trees then \textit{k}-nearest neighbors. The behaviors of
+each algorithm's performance degradation for reactor type, burnup, and
+enrichment all behave in a similar fashion. But the \textit{k}-nearest
+neighbors prediction of time since irradiation has a drastic drop that
+starts with even 1\% introduced training set error. The prediction performance
+at 20\% training set error is used as a baseline for future work. 
+
+In Section \ref{sec:randerrC}, the impacts of fewer training set entries are
+implemented to investigate how the algorithms each generalize to unseen samples. Using the
+training set that has 5\% error, it was reduced in four steps from its full
+size, the lowest size being 20\% of the full training set. Although the
+\gls{MLL} calculations perform above the scikit-learn algorithms at most sizes,
+the data points at 20\% training set size show \gls{MLL} below one or both of
+the scikit-learn algorithms. The takeaway is that while this training set is
+more than large enough to achieve good performance from a high variance
+approach, the performance may not hold with a different training set design. 
+
+Section \ref{sec:randerrD} shows whether the burnup, enrichment, and time since
+irradiation predictions benefit from having the prior knowledge of reactor
+type.  The largest improvement is for the \gls{PHWR} (only 1.5\% of training
+set) regression cases for the scikit-learn algorithms, whereas there is no
+improvement for \gls{MLL} calculations. Because the \gls{BWR} class dominates
+the training set, there is modest improvement in \gls{PWR} regression cases as
+well for the scikit-learn algorithms.
+
+Last in this chapter is Section \ref{sec:sfcompo}, where the performance of
+this methodology using real world test cases os nuclide concentration
+measurements via the \gls{SFCOMPO} database is demonstrated.  While the
+training set design spans the label space that exists in \gls{SFCOMPO}, there
+are many missing measurements from the features in the training set, which is
+comprised of 29 nuclide masses.  Because of an imbalanced training set and the
+method used to handle the null values, the reactor type classification results
+are poor, which translates to the regression cases as well.  The \gls{MLL}
+calculations perform the best, but many of the prediction errors are still
+large. It is possible that because most of the 505 entries contain many of the
+of-interest uranium and plutonium isotopes, that this testing set should be
+used only in a study limited to those isotopes. They are known to provide good
+discrimination on their own \cite{pu_discrimination, nicolaou_2006,
+nicolaou_pu, nicolaou_2009, nicolaou_2014, nicolaou_2015}.

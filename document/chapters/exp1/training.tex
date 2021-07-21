@@ -10,7 +10,7 @@ if they have plutonium separations capabilities or any radioactive substance in
 the case of a dirty bomb. Thus, this work focuses on \gls{SNF} from commercial
 power reactors. Ideally, a large enough database of \gls{SNF} nuclide assays
 would be able to be used for this work. Since that does not exist, the 
-database will be simulated via \gls{ORIGEN-ARP} \cite{origen, origenarp}.  
+database will be simulated via \gls{ORIGEN} \cite{origen, origenarp}.  
 
 \subsection{Simulation Fidelity}
 \label{sec:fidelity}
@@ -56,28 +56,66 @@ neutrons, alpha particles, beta particles, and gamma rays. Other derived
 quantities like activity, decay heat, or radiological hazard factors are also
 an option.
 
+\begin{table}[!htbp]
+  \centering
+  \includegraphics[width=\linewidth]{./chapters/exp1/pwr_benchmark.png}
+  \caption{Example set of results from work that uses \gls{SFCOMPO} test cases 
+           for \gls{PWR} simulation benchmarking in Reference 
+           \cite{pwr_benchmark_2010}.}
+  \label{tbl:pwr_bench}
+\end{table}
+
 \gls{ORIGEN-ARP} allows users to access a wider range of simulations by
 interpolating between the pre-calculated libraries instead of creating new
-libraries.  It is known to be validated for \gls{LWR} \gls{SNF}
-\cite{lwr_valid}. Additionally, recycled \gls{SNF} in the form of mixed oxide
-fuel has been benchmarked for the relevant reactors \cite{mox_valid}.  Through
-\gls{ORIGEN}, given an initial material composition, some reactor operation
-parameters, and a reactor type, one can quickly perform many different nuclear
-reactor simulations and obtain \gls{SNF} recipes.
+libraries.  The libraries contained in \gls{ORIGEN-ARP} for various reactor
+technologies and fuel assemblies are optimized to sets of \gls{U235}
+enrichments for the relevant coolant and moderator densities.  They also
+contain optimized burnup steps, which informed the burnup steps used in this
+work \cite{origenarp}.  The \gls{SNF} simulated in this work comes from a
+homogenized reactor core, and so does not take axial variations of burnup into
+account.  Through \gls{ORIGEN}, given an initial material composition, some
+reactor operation parameters, and a reactor type, one can quickly perform many
+different nuclear reactor simulations and obtain \gls{SNF} recipes. Since there
+are nearly 500k simulations being used in this work, \gls{ORIGEN-ARP} is able
+to provide these simulations with relative computational ease. 
 
-\todo[inline]{This section needs more information about ORIGEN-ARP validation
-and maybe some nuclides that are known to perform poorly from ARP sims. Can
-show a generic example from one of my sources, and or an example of trying to
-match an ORIGEN-ARP simulation to an SFCOMPO entry. It is important to inform
-that this training set as ground truth is not perfect truth, for some nuclides
-more than others. The goal is to explain the ARP validation without getting
-too deep.  This tool was necessary for the 500k training set. The prediction
-performance will be impacted by the poorly simulated nucs, so it may be
-worthwhile to note which ones have consistently large sim errors (unless this
-involves getting too deep). P.S. did you mention homogenized core above?}
+Of course, there may be some losses in simulation fidelity by taking this
+route.  \gls{ORIGEN-ARP} is well-validated for \gls{LWR} \gls{SNF}
+\cite{lwr_valid}.  Additionally, recycled \gls{SNF} in the form of mixed oxide
+fuel has been benchmarked for the relevant reactors \cite{mox_valid}.  Still,
+there are some nuclides for which simulations are not well-matched to the
+experimental measurements. The systematic overprediction of Eu154 is documented
+in Reference \cite{skutnik_eu154}.  Some details of computed versus
+experimental nuclide compositions for \gls{PHWR}s are covered in Reference
+\cite{skutnik_2021}. Table \ref{tbl:pwr_bench} shows a small slice of the
+results in Reference \cite{pwr_benchmark_2010}.  This work uses several
+\gls{SCALE} modules to simulate nuclide measurements, and using a former
+release of \gls{SFCOMPO} \cite{sfcompo, valid_sfco}, compares these to the
+experimental measurements.  Although \gls{ORIGEN-ARP} was not used, some
+reactor core simplifications were made, where the target fuel rod had
+individual mixtures specified and the remainder of the core was homogenized.
+The $\frac{E}{C}$ in the table refers to the experimental to calculated ratio
+of each measurement, for which there are three sets of comparisons (labeled at
+the top by "Sample ID").  The highlighting is for nuclides that are in one or
+both of the experiments in this work, and tend to have larger errors.  The
+first sample is a lower burnup and has the largest errors.
+
+In summary, it is important to note that that the simulated training set as
+ground truth is not perfect truth, for some nuclides more than others.  The
+prediction performance will be impacted by the poorly simulated nuclides, but a
+detailed study on  which nuclide measurements to exclude is outside of the
+scope of this work.
 
 \subsection{Training Set Labels}
 \label{sec:snflbls}
+
+The design of the training set is dependent on a number of factors.  First, it
+must have a sufficient number of burnup sets and time since irradiation steps
+to provide robust prediction. This is decided upon by maximizing the steps for
+both parameters, while balancing the computational limitations of a large
+training set. Through previous experience, an approximate limit would be around
+$1e6$ database entries for the specific calculations in this work and employing
+reasonable computational limitations.
 
 \begin{table}[!htb]
   \centering
@@ -114,23 +152,15 @@ involves getting too deep). P.S. did you mention homogenized core above?}
   \label{tbl:train}
 \end{table}
 
-The design of the training set is dependent on a number of factors.  First, it
-must have a sufficient number of burnup sets and time since irradiation steps
-to provide robust prediction. This is decided upon by maximizing the steps for
-both parameters, while balancing the computational limitations of a large
-training set. Through previous experience, an approximate limit would be around
-$1e6$ database entries for the specific calculations in this work and employing
-reasonable computational limitations.
-
 Secondly, the training set must represent what exists in the real world. This
 was accomplished by studying the spread of parameters in the \gls{SFCOMPO}
-database \cite{sfcompo}.  To ensure this, a variety of reactor types and
-assembly designs were included, listed in Table \ref{tbl:rxtrtype}. Table
-\ref{tbl:rxtrparam} lists the rest of the simulation inputs. These include not
-only the labels of prediction interest, \gls{U235} enrichment, burnup, and time
-since irradiation, but also other important simulation input parameters such as
-the reactor power density and the moderator density.  (Water is both the
-moderator and coolant in all simulated reactor types.)
+database \cite{sfcompo, valid_sfco}.  To ensure this, a variety of reactor
+types and assembly designs were included, listed in Table \ref{tbl:rxtrtype}.
+Table \ref{tbl:rxtrparam} lists the rest of the simulation inputs. These
+include not only the labels of prediction interest, \gls{U235} enrichment,
+burnup, and time since irradiation, but also other important simulation input
+parameters such as the reactor power density and the moderator density.  (Water
+is both the moderator and coolant in all simulated reactor types.)
 
 \begin{figure}[!hbt]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp1/histogram_scatter_trainset_viz.png}}

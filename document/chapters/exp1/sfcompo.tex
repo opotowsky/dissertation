@@ -1,14 +1,12 @@
 
-\todo[inline]{go back and check on reactor tech in sfcompo versus the origen
-reactors in the training DB}
-
 The testing described in Section \ref{sec:randerr} describes the process of
 evaluating the methodology with test cases drawn from the training database.
 It is also helpful to test the methodology against real assays of \gls{SNF}.
 The \gls{SFCOMPO} database was created to allow access to these sorts of
 measurements linked to the reactor operation parameters being predicted in this
-work. \cite{sfcompo}. The only parameter not part of the \gls{SFCOMPO} database
-is the time since irradiation, so that is not predicted here. 
+work \cite{sfcompo, valid_sfco}. The only parameter not part of the
+\gls{SFCOMPO} database is the time since irradiation, so that is not predicted
+here. 
 
 \begin{figure}[!htb]
   \centering
@@ -16,7 +14,6 @@ is the time since irradiation, so that is not predicted here.
   \caption{Scatter plot showing the range of reactor operation parameters in 
            the \gls{SFCOMPO} testing set that are being predicted.}
   \label{fig:sfcoscatter}
-  \todo[inline]{maybe show comparison against training E v B scatter plot}
 \end{figure}
 
 There are 505 test cases that are able to be compared against the training
@@ -182,11 +179,7 @@ most likely prediction. This explanation is possibly applicable to the imputed
 nulls test set as well, but the behavior pattern is less clear because the
 imputed nulls give more information for these algorithms than zero-value nulls
 (since the zero-values cannot be removed from consideration), so a larger
-proportion of \gls{PWR}s are being predicted properly.  \todo[inline]{look up
-paper that uses only U/Pu to predict, because that would be the only way these
-505 cases would be able to be predicted without having so much missing
-information. MLL essentially does this for 0 null case which is why it does
-better than the rest}
+proportion of \gls{PWR}s are being predicted properly.  
 
 \subsubsection{Regression Cases}
 \label{sec:sfcoreg}
@@ -416,4 +409,3 @@ absolute error statistics provides a fuller picture of the regression of the
 of the scikit algorithms outperform \gls{MLL} calculations for the zero-nulls
 test set, since they tended to have lower errors using the imputed nulls test
 set. 
-

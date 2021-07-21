@@ -51,3 +51,79 @@ Section \ref{sec:eval1}, and the updates to the approach is shown in Section
 \section{Performance Evaluation}
 \label{sec:eval2}
 \input{chapters/exp2/evaluation}
+
+\section{Summary}
+
+This chapter covers the details of the methodology in four main sections:
+training set simulations, information reduction, statistical methods
+implementation, and performance evaluation. This approach focuses on the
+situation where there are only nuclides present in the training sets that 
+are measured in a non-destructive manner, i.e., via gamma detectors. 
+
+First, in Section \ref{sec:training2}, the training data is simulated using the
+same inputs as in Section \ref{sec:training1}. For this training set, however,
+the features tracked are 32 radionuclides.
+
+Second, in Section \ref{sec:inforeduc2}, information reduction on the training
+set is carried out using computationally generated gamma spectra.  The training
+set is initially comprised of nuclide activities, and \gls{GADRAS} is used to
+compute the gamma spectra via \gls{DRF}s for six detectors \cite{gadras} using
+the inputs of the nuclide activity measurements for each \gls{SNF} entry.
+Next, each detector-based training set undergoes three different methods of
+processing the gamma spectra. First, an automatic peak search determines which
+peaks will be tracked, which is different for each detector. Second, a list of
+target gamma energies is created using an arbitrary intensity threshold, so
+that the most likely te be detected gamma energies are tracked. Third, the
+intensity threshold is increased so that the gamma energies list will both be
+shorter and more likely to result in photopeaks at those locations.  The target
+gamma energies are then found on each spectrum, then the counts over a window
+are summed (the window size is determined by detector energy resolution). The
+three lists are thus denoted as the auto, short, and long energy windows lists
+in the upcoming discussion.  These training sets are intended to answer the
+question of whether field-deployable detectors can give enough information
+about radionuclides to be able to successfully attribute \gls{SNF}. 
+
+Third, in Section \ref{sec:statmodel2}, the updates to the algorithm
+implementation from Section \ref{sec:statmodel1} are covered. The three
+algorithms, \textit{k}-nearest neighbors, decision trees, and \gls{MLL}
+calculations, are used to train models to predict the four reactor parameters
+of interest. The hyperparameter optimization was carried out with the new
+training sets, and the values were averaged across detectors for each of the
+three energy windows lists.  The scikit-learn predictions and the \gls{MLL}
+calculations were deployed using \gls{UW}--Madison's \gls{CHTC} resources, the
+\gls{UW} campus grid, and the \gls{OSG} \cite{osg07, osg09}.  
+
+Fourth, in Section \ref{sec:eval2}, the prediction errors are presented to
+evaluate the ability of this methodology to attribute \gls{SNF} with
+non-destructive measurements of radionuclides. The reactor type classification
+is discussed in Section \ref{sec:exp2_rxtr} and the regression cases are
+discussed in Section \ref{sec:exp2_reg}.  The performance of the prediction of
+reactor parameters is measured by using test cases drawn from the training set,
+where there is a training set for each detector in this study.  Again, the
+testing of the algorithms is accomplished using 5-fold \gls{CV} for the
+scikit-learn algorithms, and by removing one test sample at a time from the
+training set for the \gls{MLL} calculations.
+
+The reactor type classification results are presented in Section
+\ref{sec:exp2_rxtr}.  The \gls{MLL} calculations consistently perform the best
+across the algorithms, and the short energy windows list has the best
+performance across the energy windows lists.  Most of the misclassifications are
+\gls{PWR} and \gls{PHWR} being labeled as \gls{BWR}.  The automatic peak
+searching results in erratic behavior for the scikit-learn algorithms because
+the high energy resolution detectors perform poorly but one of the lower energy
+resolution detectors performed very well. 
+
+Next, the regression cases are shown in Section \ref{sec:exp2_reg}.  The burnup
+predictions for all the algorithms and energy windows lists outperform the
+baseline, except in one case of \textit{k}-nearest neighbors being used with
+the auto energy windows list.  The enrichment predictions for the set of six
+detectors all falls below the baseline, however, and the time since irradiation
+predictions all are very close to the baseline, with some points right above it
+and some right below it.  The spread of outliers encompasses $3-17\%$ of the
+training set depending on the case, and in most cases the magnitude of the
+outlier errors is of significant concern, although most of the median errors
+paint a better picture of the performance.  For all three regression cases,
+there is little contrast among the three energy windows lists. The auto list
+has more erratic behavior, and the short list has a slight but not significant
+average performance over the long list. 
+

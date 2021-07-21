@@ -1,4 +1,4 @@
-\setlength\abovedisplayskip{2.5pt}
+%\setlength\abovedisplayskip{2.5pt}
 
 For relevant nuclear forensics predictions, both classification and regression
 algorithms must be used.  For example, one may want to predict the reactor type
@@ -156,9 +156,10 @@ class.
 The \gls{MLL} calulations approach applied here is based on a method developed
 to do similar work \cite{mll_method, mll_validate, mll_sensitivity}.  That work
 involved matching nuclear material samples based on some select measurements to
-entries in a database of containing those measurements.\todo{keep vague or no?}
-Each database entry also has a similar list of labels to the labels being
-predicted in this work: reactor type, burnup, and time since irradiation.
+entries in a database of containing those measurements (see Section
+\ref{sec:stats4nf}).  Each database entry also has a similar list of labels to
+the labels being predicted in this work: reactor type, burnup, and time since
+irradiation.
 
 Interestingly, the \gls{MLL} calculations method works like \textit{k}-nearest
 neighbors, where there is no model but a prediction according to the closest
