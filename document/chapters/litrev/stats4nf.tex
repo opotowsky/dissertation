@@ -34,7 +34,7 @@ reprocessing into account requires more isotopic measurements.
 \noindent \textbf{Factor Analysis Work}
 
 In addition to the immediately aforementioned work, there is a suite of work on
-this topic doing classification using factor analysis or isoptic ratios with
+this topic doing classification using factor analysis or isotopic ratios with
 visual distinction.  Although factor analysis explicitly requires the input of
 domain knowledge, it is a valuable first step towards understanding how
 statistical methods can provide insightful models to classify materials.  This
@@ -46,7 +46,7 @@ samples, as pictured in Figure \ref{fig:nico}.
   \centering
   \includegraphics[width=0.5\linewidth]{./chapters/litrev/nicolaou.png}
   \caption{Example from Reference \cite{nicolaou_pu} on using factor analysis 
-           to show similaries between classes of \gls{SNF} for visual 
+           to show similarities between classes of \gls{SNF} for visual 
            identification.}
   \label{fig:nico}
 \end{figure}
@@ -82,7 +82,7 @@ There are other papers on statistical methods that focus on the classification
 of the reactor type for unknown samples that helped frame this work.  One study
 simulated and tracked 34 nuclides of a set of typical commercial nuclear power
 reactors and their operation parameters, but first used statistical
-dimensionality reduction (via Laplacian eignmaps) before subjecting the
+dimensionality reduction (via Laplacian eigenmaps) before subjecting the
 training data to reactor type classification, comparing linear discriminant
 analysis, quadratic discriminant analysis, random forests, and Parzen window
 classifiers \cite{jones_snf_2014}.  Condensing the 34 features into three has
@@ -94,7 +94,7 @@ between \gls{SNF} from \glspl{PWR} and \glspl{BWR}.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\linewidth]{./chapters/litrev/jones.png}
-  \caption{Results of leveraging a pre-processing step of dimansionality 
+  \caption{Results of leveraging a pre-processing step of dimensionality 
            reduction for visualization purposes, from Reference 
            \cite{jones_snf_2014}.}
   \label{fig:jones}
@@ -102,11 +102,11 @@ between \gls{SNF} from \glspl{PWR} and \glspl{BWR}.
 
 Another paper compared principal components analysis and partial least squares
 discriminant analysis to classify reactor type. As with the above, a set of
-\gls{SNF} from typical commerial power reactors from around the world were
+\gls{SNF} from typical commercial power reactors from around the world were
 simulated and used as test samples for this attribution step, but unlike the
 above they chose to focus on uranium and plutonium isotopes to address the
 challenge of identifying chemically separated uranium or plutonium. This work
-uses a qualitiative visual distinguishability discussion to choose the better
+uses a qualitative visual distinguishability discussion to choose the better
 method of partial least squares discriminant analysis.
 
 \noindent \textbf{Regression Work}
@@ -130,9 +130,9 @@ analysis-derived shortened nuclide list.
 \end{figure}
 
 Using these various feature sets, three methods were also compared. First and
-second, the nearest neighbor algorithm with two differnt distance metrics was
+second, the nearest neighbor algorithm with two different distance metrics was
 used: Manhattan distance ($L_1$ norm, or sum of absolute differences of
-Cartesian coordinates) and Euclidian distance ($L_2$ norm, or square root of
+Cartesian coordinates) and Euclidean distance ($L_2$ norm, or square root of
 the sum of squared differences of Cartesian coordinates).  The nearest neighbor
 approaches classified reactor type and predicted burnup.  Third, ridge
 regression with an $L_2$ norm for regularization was only applied to burnup
@@ -171,7 +171,7 @@ focuses on \gls{SNF}.
 Figure \ref{fig:tamu} shows one of the results, where a simulated sample of
 $4.39\:GWd/MTU$ burnup and $3652\:days$ time since irradiation is tested
 against the training database via likelihood calculations of the feature set of
-10 isotope ratios; the maximum is visibly close to the grouth truths.  This
+10 isotope ratios; the maximum is visibly close to the ground truths.  This
 method was later validated with experimental samples, in Reference
 \cite{mll_validate}. 
 

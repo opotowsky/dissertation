@@ -6,7 +6,7 @@ long).  Figure \ref{fig:rxtr} shows the balanced accuracy of reactor type
 classification for the previously described \textit{x}-axis, where a score of
 $1$ is perfect prediction and a score of $0$ is random classification. The
 error bars (which are not visible past the marker size on the plots) reflect a
-99\% confidence interval.  The red baseline that indicates a minumum acceptable
+99\% confidence interval.  The red baseline that indicates a minimum acceptable
 performance is at 0.84 balanced accuracy, which is based on the lowest
 performance of all three algorithms at 20\% training set error for the 29
 nuclide mass training set in Figure \ref{fig:randrxtr}.  
@@ -50,7 +50,7 @@ which to distinguish "acceptable" performance, but given its location, only the
 lab-based \gls{HPGe} detector with \gls{MLL} calculations performs at an
 acceptable level.
 
-Next, the comparison of the gamma spectra processing will be dicussed,
+Next, the comparison of the gamma spectra processing will be discussed,
 neglecting the baseline.  The short energy windows list performs the best
 across the three methods used to process the gamma spectra. The auto energy
 windows lists has one of the scintillator detectors (\gls{SrI2}) outperform the
@@ -125,7 +125,7 @@ bar range is much wider (-0.65 to 0.65) than with the more accurate results in
 Figure \ref{fig:cm_nucs_acts}. 
 
 In Figure \ref{fig:cm_auto}, the two poorly performing \textit{k}-nearest
-neighbors \gls{HPGe} cases are the most noticable confusion matrices visually.
+neighbors \gls{HPGe} cases are the most noticeable confusion matrices visually.
 The \textit{k}-nearest neighbors performances for the two \gls{HPGe}s were
 notably poor in the plot, and the confusion matrices for these two cases
 explains why: not only are 40.8\% and 62.1\% of \gls{PHWR}s being misclassified
@@ -138,12 +138,12 @@ set, for all three algorithms, can be seen in its panel that is paler in over
 color than its surroundings.  The confusion matrix (in the fourth panel) for
 those data points show no more than 16\% of \gls{BWR}-misclassified \gls{PWR}s
 and \gls{PHWR}s for \textit{k}-nearest neighbors, no more than 23\% for
-decision treesm and no more than 13\% for \gls{MLL} calculations. 
+decision trees and no more than 13\% for \gls{MLL} calculations. 
 
 Aside from the two poorly performing \textit{k}-nearest neighbors cases, the
 decision trees column has the boldest colors/poorest performance.  The lowest
 \gls{BWR} misclassification value is 22\%.  Additionally, it can be visually
-percieved at a glance that the \gls{MLL} column has better performance than the
+perceived at a glance that the \gls{MLL} column has better performance than the
 other two algorithms. This is expected from the higher balanced accuracy scores
 in Figure \ref{fig:rxtr}.  Throughout all six panels, the highest
 misclassification value is 25\%.

@@ -29,7 +29,7 @@ models. Moreover, there are potential degeneracies in the solution space. This
 is because most inverse problems are \textit{ill-posed}, because the solution
 is not guaranteed to be unique \cite{skutnik_2016}.  Evaluating not only the
 solution, but the confidence in the solution, is therefore prudent. While the
-two scikit-implemented aglorithms do not provide this information, the
+two scikit-implemented algorithms do not provide this information, the
 \gls{MLL} calculation method provides a likelihood with an uncertainty. This
 provides a measure of distinguishability that many machine learning approaches
 do not provide. \todo[inline]{check back on this and take it out if you don't 
@@ -46,7 +46,7 @@ fraction of the entire sample set.
 \end{equation}
 
 But training sets can have an uneven number of classes represented.  A more
-fair scoring system for imbalanced datasets is instead balanced accuracy, which
+fair scoring system for imbalanced data sets is instead balanced accuracy, which
 averages the accuracy of each class. This would provide a range from 0 to 1. In
 this work, however, the balanced accuracy is used with \texttt{adjusted=True}
 in scikit-learn. This rescales the range to $\frac{1}{1-N_\text{classes}}$ to
@@ -68,7 +68,7 @@ misclassifications. Confusion matrices show the both the true positive
 predictions and the false positive predictions, which can be useful information
 in understanding an imperfect accuracy or balanced accuracy score. For example,
 Figure \ref{fig:cm_ex} pictures an example confusion matrix that could result
-from this dataset, where a fraction of 1 \gls{PHWR}s are correctly predicted,
+from this data set, where a fraction of 1 \gls{PHWR}s are correctly predicted,
 but a fraction of 0.1 \gls{PWR}s and \gls{BWR}s get misclassified as the other.
 \todo[inline]{fix plural acro situation here}
 
@@ -194,7 +194,7 @@ bottom plot.  The negative prediction error is plotted on the \textit{y}-axis
 so that the orientation of higher is better is maintained.  A parameter
 influencing model complexity is on the \textit{x}-axis.  The testing error is
 typically low for the high bias and high variance models, but there usually
-exists an optimum parameter for model complexity for most training datasets. 
+exists an optimum parameter for model complexity for most training data sets. 
 
 Another parameter indirectly influencing model complexity is the training set
 size.  When the training set size is plotted on the \textit{x}-axis as either

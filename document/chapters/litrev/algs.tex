@@ -22,7 +22,7 @@ still be analyzed, however, since the procedures are so simple.
 \subsubsection{Nearest Neighbor Methods}
 
 Nearest neighbors classification and regression are unique algorithms in
-that thay are instance-based; they do not actually generalize, but instead
+that they are instance-based; they do not actually generalize, but instead
 track the observations in the training set.  The main metric for this algorithm
 is distance (or dissimilarity) between the test sample and the closest training
 sample(s) in the vicinity.  During prediction, the algorithm will calculate a
@@ -30,12 +30,12 @@ value based on the instance that is closest to the current test sample. Thus,
 there is not any learning, but instead a direct comparison between an unknown
 sample and the space that the training set populates. The predictions from
 nearest neighbors can be quite accurate, but are highly unstable to
-peturbations \cite{elements_stats}.
+perturbations \cite{elements_stats}.
 
 The process of prediction with \textit{k}-nearest neighbors is as follows.
 First, the distances between the test sample and each of the training set
-instances are calculated.  Most commonly the Euclidian distance is used, but
-this walkthrough uses the Manhattan distance:
+instances are calculated.  Most commonly the Euclidean distance is used, but
+this walk-through uses the Manhattan distance:
 \begin{equation}
   d_{i} = \sum_{j=1}^{N_{feats}} |x_{j,train} - x_{j,test}|
   \label{eq:l1}
@@ -63,7 +63,7 @@ $w_i$ is $1/d{i}$ the weighted mode is used to choose the predicted label.
   \label{fig:nn}
 \end{figure}
 
-Figure \ref{fig:nn} provides a pictoral explanation of Equation \ref{eq:knn}
+Figure \ref{fig:nn} provides a pictorial explanation of Equation \ref{eq:knn}
 for a prediction where there is one feature. In this figure, there is a test
 sample with a feature, valued at $x_i$, indicated with the grey dotted line.
 The three circles represent the neighborhood given by the value of \textit{k},
@@ -77,7 +77,7 @@ values of $k$ can be useful, and will be discussed in Section
 
 Decision trees are a common choice because they are simple to implement and
 provide an interpretable model. However, the predictions from decision trees,
-similar to \textit{k}-nearest neighbors, are unstable to peturbations.  What
+similar to \textit{k}-nearest neighbors, are unstable to perturbations.  What
 follows is a highly simplified explanation of the Classification and Regression
 Trees algorithm for growing decision trees, showing only the equations for
 splitting criteria.  A more complete treatment can be found in Reference
@@ -124,7 +124,7 @@ make the split.  This will partition the feature space and the splitting
 process will continue until a pre-defined tree size or number of samples per
 node. Without a pre-defined stopping point the tree will grow until there is
 one sample per node. This process can be understood more intuitively by
-stuyding Figure \ref{fig:dtr}. Note that this tree was created using a maximum
+studying Figure \ref{fig:dtr}. Note that this tree was created using a maximum
 tree depth of $2$ for visualization purposes in order to explain the process,
 so is not indicative of a real decision tree.
 
@@ -132,7 +132,7 @@ so is not indicative of a real decision tree.
   \centering
   \includegraphics[width=\linewidth]{./chapters/litrev/dtree.png}
   \caption{Example of a decision tree process, where maximum tree depth was 
-           limited to 2 for vizualization purposes.}
+           limited to 2 for visualization purposes.}
   \label{fig:dtr}
 \end{figure}
 
@@ -153,7 +153,7 @@ class.
 
 \subsubsection{Maximum Log-Likelihood Calculations}
 
-The \gls{MLL} calulations approach applied here is based on a method developed
+The \gls{MLL} calculations approach applied here is based on a method developed
 to do similar work \cite{mll_method, mll_validate, mll_sensitivity}.  That work
 involved matching nuclear material samples based on some select measurements to
 entries in a database of containing those measurements (see Section
