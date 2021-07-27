@@ -7,17 +7,19 @@ This would require a classification algorithm. Or perhaps the input fuel
 composition is relevant to an investigation on weapons intent, so a regression
 algorithm would be used. 
 
-There are three algorithms presented in this section: \textit{k}-nearest
-neighbors, decision trees, and \gls{MLL} calculations. They were chosen based
-on their simplicity; this work has yet to be benchmarked using simple
-algorithms so a more complex treatment of the training sets in this work would
-be premature. Additionally, in part because of their simplicity, they are all
-"white box" methods.  This is unique in the \gls{ML} universe, since most
-algorithms create a black box model that is unable to be analyzed by a human.
-The  decision trees method provides an output model that can be used to discern
-behavior and understand predictions, and \textit{k}-nearest neighbors and
-\gls{MLL} calculations do not create a model at all. Individual predictions can
-still be analyzed, however, since the procedures are so simple. 
+To limit the scope of this work, it cannot be an exhaustive study of \gls{ML}
+methods.  Therefore, three algorithms are presented in this section:
+\textit{k}-nearest neighbors, decision trees, and \gls{MLL} calculations
+\todo{update if ness}. They were chosen based on their simplicity; this work
+has yet to be benchmarked using simple algorithms so a more complex treatment
+of the training sets in this work would be premature. Additionally, in part
+because of their simplicity, they are all "white box" methods.  This is unique
+in the \gls{ML} universe, since most algorithms create a black box model that
+is unable to be analyzed by a human.  The  decision trees method provides an
+output model that can be used to discern behavior and understand predictions,
+and \textit{k}-nearest neighbors and \gls{MLL} calculations do not create a
+model at all. Individual predictions can still be analyzed, however, since the
+procedures are so simple. 
 
 \subsubsection{Nearest Neighbor Methods}
 
@@ -44,7 +46,7 @@ where $i$ is each training set instance, and $j$ refers to each feature in the
 training set.  The lowest \textit{k} $d_{i}$ are chosen. For \textit{k}-nearest
 neighbors regression, the value, $y$ is predicted using the following equation.
 \begin{equation}
-  y(\boldsymbol{x}) = \frac{1}{k} \sum_{i=1}^{k} w_i \cdot y_i
+  y(\boldsymbol{x}) = \frac{1}{\sum_{i}{w_i}} \sum_{i=1}^{k} w_i \cdot y_i
   \label{eq:knn}
 \end{equation}
 where $w_{i}$ is either uniform and takes on a value of $1$ or is
@@ -53,7 +55,7 @@ full set of features. The regression equation averages the closest \textit{k}
 neighbors for an estimate of the unknown sample.  In \textit{k}-nearest
 neighbors classification, the class label $y$ is predicted using the mode of
 the nearest neighbors selected using the \textit{k} smallest $d_i$, or when
-$w_i$ is $1/d{i}$ the weighted mode is used to choose the predicted label.
+$w_i$ is $1/d_i$, the weighted mode is used to choose the predicted label.
 
 \begin{figure}[!htb]
   \centering
@@ -96,18 +98,20 @@ by continuing to create splits.
 Each split creates two new nodes on the tree, where the node has to find a new
 splitting criterion. In the math that follows, there are nodes given by $m$,
 and a number of samples in each node given by $N_{\text{samples}, m}$. The
-individual node samples are given by $i$. The impurity at the node is denoted
-as $H(m)$. In classification, the node impurity can be measured by the Gini
-index, where $p_{m, k}$ is the proportion of class $k$ observations at the
-node:
+individual node samples are counted by $i$, and so the sample labels are $y_i$.
+The impurity at the node is denoted as $H(m)$.  In classification, the node
+impurity $H(m)$ can be measured by the Gini index, where $p_{m, k}$ is the
+proportion of class $k$ observations at the node:
 \begin{equation}
   \begin{aligned}
     p_{m, k} &= \frac{1}{N_{\text{samples}, m}} \sum_{i=1}^{N_{\text{samples}, m}}
-              I(y = k)
+                \mathbb{I}(y_i = k)
     \\
     H(m) &= \sum_k p_{m, k} (1 - p_{m, k})
   \end{aligned}
 \end{equation}
+Note that $\mathbb{I}()$ here is being used to refer to the indicator function,
+where when $y=k$ it takes a value of 1 and when $y \neq k$ it takes a value of 0.
 And in regression, the node impurity $H(m)$ can be measured by the mean squared
 error, where $\bar{y}_m$ is the average value of the samples in the node.
 \begin{equation}
@@ -116,7 +120,7 @@ error, where $\bar{y}_m$ is the average value of the samples in the node.
                  y_{i, m}
     \\
     H(m) &= \frac{1}{N_{\text{samples}, m}} \sum_{i=1}^{N_{\text{samples}, m}}
-              (y_i - \bar{y}_{i, m})^2
+            (y_i - \bar{y}_{i, m})^2
   \end{aligned}
 \end{equation}
 The splitting criterion with the lowest impurity is the one that is chosen to
@@ -161,16 +165,17 @@ entries in a database of containing those measurements (see Section
 the labels being predicted in this work: reactor type, burnup, and time since
 irradiation.
 
-Interestingly, the \gls{MLL} calculations method works like \textit{k}-nearest
-neighbors, where there is no model but a prediction according to the closest
-match database entry.  There is one detail that differs, however. Whereas
-\textit{k}-nearest neighbors minimizes distance/dissimilarity, this approach
-instead maximizes similarity via a likelihood function. An "unknown" test
-sample is compared against the training set using the likelihood calculation
-between that sample and the training set entries.  The higher the likelihood,
-the higher the probability that the database entry represents the sample. The
-likelihood is in Equation \ref{eq:like}, whereas the log-likelihood is used
-more often in practice, shown in Equation \ref{eq:loglike}.
+Interestingly, the \gls{MLL} calculations method works exactly like
+\textit{k}-nearest neighbors with $k=1$, where there is no model but a
+prediction according to the closest match database entry.  There is one detail
+that differs, however: the selection criterion.  Whereas \textit{k}-nearest
+neighbors minimizes distance/dissimilarity, this approach instead maximizes
+similarity via a likelihood function. An "unknown" test sample is compared
+against the training set using the likelihood calculation between that sample
+and the training set entries.  The higher the likelihood, the higher the
+probability that the database entry represents the sample. The likelihood is in
+Equation \ref{eq:like}, whereas the log-likelihood is used more often in
+practice, shown in Equation \ref{eq:loglike} \cite{mll_method}.
 \begin{equation}
   L(M|x_{test}) = \prod_i \frac{1}{\sigma_{i,train} \sqrt{2\pi}} \exp{\frac{-(x_{i,test} - x_{i,train})^2}{2 \sigma_{i,train}^2}}
   \label{eq:like}
@@ -179,10 +184,13 @@ more often in practice, shown in Equation \ref{eq:loglike}.
   ln(L(M|x_{test})) = \sum_i ln(\frac{1}{\sigma_{i,train} \sqrt{2\pi}}) - \frac{(x_{i,test} - x_{i,train})^2}{2 \sigma_{i,train}^2}
   \label{eq:loglike}
 \end{equation}
-The likelihood is a measure of the probability that a model $M$ produced the
-measurements seen in the test sample, given by $L(M|x_{test})$.  In both
-Equations \ref{eq:like} and \ref{eq:loglike}, $x$ refers to the set of
-features, and $x_{i, test}$ and $x_{i,train}$ are the individual features for the
-test sample and the training set entries, respectively. The uncertainty of the
-measurement associated with each feature is represented by $\sigma_{i,train}$.
+Although these equations were borrowed directly from Reference
+\cite{mll_method}, some of the variables have been changed for better cohesion
+with the terminology in this work.  The likelihood is a measure of the
+probability that a model $M$ produced the measurements seen in the test sample,
+given by $L(M|x_{test})$.  In both Equations \ref{eq:like} and
+\ref{eq:loglike}, $x$ refers to the set of features, and $x_{i, test}$ and
+$x_{i,train}$ are the individual features for the test sample and the training
+set entries, respectively. The uncertainty of the measurement associated with
+each feature is represented by $\sigma_{i,train}$.
 

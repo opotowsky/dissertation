@@ -34,13 +34,13 @@ reprocessing into account requires more isotopic measurements.
 \noindent \textbf{Factor Analysis Work}
 
 In addition to the immediately aforementioned work, there is a suite of work on
-this topic doing classification using factor analysis or isotopic ratios with
-visual distinction.  Although factor analysis explicitly requires the input of
-domain knowledge, it is a valuable first step towards understanding how
-statistical methods can provide insightful models to classify materials.  This
-series of work seeks to accomplish classification of a reactor history (reactor
-type, enrichment, burnup) using the distinguishability between similar sets of
-samples, as pictured in Figure \ref{fig:nico}.
+performing classification using factor analysis or isotopic ratios in
+combination with visual distinction.  Although factor analysis explicitly
+requires the input of domain knowledge, it is a valuable first step towards
+understanding how statistical methods can provide insightful models to classify
+materials.  This series of work seeks to accomplish classification of a reactor
+history (reactor type, enrichment, burnup) using the distinguishability between
+similar sets of samples, as pictured in Figure \ref{fig:nico}.
 
 \begin{figure}[!htb]
   \centering
@@ -52,19 +52,22 @@ samples, as pictured in Figure \ref{fig:nico}.
 \end{figure}
 
 The chronologically earliest study in this grouping of publications
-\cite{nicolaou_2006} uses \gls{ORIGEN}-simulated uranium and plutonium (U234,
-U235, U236, U238, Pu238, Pu239, Pu240, Pu241 and Pu242) of various \gls{SNF}
-designations.  These simulated measurements are subject to factor analysis and
-the results usually plotted.  The unknown samples in this work are in visual
-alignment with the factor-analysis-determined groupings.  Reference
+\cite{nicolaou_2006} uses \gls{ORIGEN}-simulated uranium and plutonium
+(${}^{234}\text{U}$, ${}^{235}\text{U}$, ${}^{236}\text{U}$,
+${}^{238}\text{U}$, ${}^{238}\text{Pu}$, ${}^{239}\text{Pu}$,
+${}^{240}\text{Pu}$, ${}^{241}\text{Pu}$ and ${}^{242}\text{Pu}$) of various
+\gls{SNF} designations.  These simulated measurements are subject to factor
+analysis and the results usually plotted.  The unknown samples in this work are
+in visual alignment with the factor-analysis-determined groupings.  Reference
 \cite{nicolaou_2014} extends that study (same statistical method, same list of
 isotopes) to real measured samples from the \gls{SFCOMPO} database
 \cite{sfcompo, valid_sfco}.  The goal here was to determine whether the factor
 analysis approach could distinguish the chosen \gls{SFCOMPO} entries well, and
 the results confirm the goal was achieved.  Reference \cite{nicolaou_2015} uses
-three plutonium ratios (Pu242/Pu240, Pu238/Pu Total, and Pu239/Pu240) to
-accomplish the same goal with simulated \gls{SNF} without factor analysis, and
-the results are similar. 
+three plutonium ratios (${}^{242}\text{Pu}$/${}^{240}\text{Pu}$,
+${}^{238}\text{Pu}$/${}^{Total}\text{Pu}$, and
+${}^{239}\text{Pu}$/${}^{240}\text{Pu}$) to accomplish the same goal with
+simulated \gls{SNF} without factor analysis, and the results are similar. 
 
 This work mostly relies on actinides for identifying \gls{SNF}
 \cite{nicolaou_2006, nicolaou_pu, nicolaou_2014, nicolaou_2015}, but the use of
@@ -74,7 +77,7 @@ products to represent a typical mass spectrometry assay (Cs133, Ce140, Sm150,
 Sm152, Nd144, Nd145, Nd146, Nd148, Nd150), and another set to represent what
 could be determined from a gamma detector (Zr95, Nb95, Ru106, Cs134, Cs137,
 Ce144).  This approach is successful when the simulation uncertainty is below
-3\% \cite{nicolaou_2009}.
+3\% \cite{nicolaou_2009}.\todo{fix isos here}
 
 \noindent \textbf{Other Classification Work}
 

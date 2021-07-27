@@ -52,19 +52,21 @@ parameters of interest.  However, while this nondestructive analysis is rapid,
 it is also difficult to evaluate because of the presence of overlapping peaks
 and the fact that uncertainties differ significantly because of the detector
 response, environment, storage, electronics, etc. Broadly speaking, there is a
-time/cost and information tradeoff: gamma spectra give less information at a
-higher uncertainty than the near-perfect results of the destructive mass
-spectrometry techniques used for characterization, such as inductively coupled
-plasma mass spectrometry \cite{iaea_nf}.
+time/cost and information tradeoff. On one hand, gamma spectra give less
+information at a higher uncertainty than the near-perfect results of the
+destructive mass spectrometry techniques used for characterization, such as
+inductively coupled plasma mass spectrometry \cite{iaea_nf}. On the other hand,
+gamma detection is both faster and cheaper than mass spectrometry techniques. \todo{Check edit w/ Paul}
 
-Second, forensics databases present challenges; this is three-fold.  Because of
-the values needed for material provenance, forensics databases are highly
-multidimensional. Also because of the number of measurement types, the
+Second, forensics databases present challenges; this is three-fold.  Because
+these databases are kept by individual countries and the reactor operation
+history information is well-guarded, it may be difficult to study \gls{SNM}
+from a country that has a different fuel cycle.  It is proposed that using
+simulated \gls{SNF} may be able to combat this issue.  Next, because of the
+values needed for material provenance, forensics databases are highly
+multidimensional. Additionally, because of the number of measurement types, the
 forensics databases have inconsistent uncertainties or missing data entries
 \cite{nf_missingdata}.  Thus, direct comparison between measurement results and
-a database therefore may not yield accurate parameter predictions.
-Furthermore, these databases are kept by individual countries, and the reactor
-operation history information is well-guarded, so it may be difficult to study
-\gls{SNM} from a country that has a different fuel cycle.  It is proposed that
-using a statistical model generated using simulated \gls{SNF} may be able to
-combat these issues; this is introduced next in Section \ref{sec:statscontrib}. 
+a database therefore may not yield accurate parameter predictions. Using
+statistical models may be able to overcome these two challenges, and is
+introduced next in Section \ref{sec:statscontrib}. 

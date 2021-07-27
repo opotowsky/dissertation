@@ -15,14 +15,14 @@ Section \ref{sec:testerr} before the causes of error are discussed in Section
 \label{sec:testerr}
 
 The creation of an \gls{ML} model is (usually) a hidden process. Although the
-model emerges from a black box, there are ways to evaluate the generalization
-(i.e., prediction) capability of it.  This is done by removing a small portion
-of the database for use as a testing set.  The rest of the data set is known as
-the training set and is used to train a model. After training, the test set is
-used to calculate the model's error to unseen test samples.  This error
-is typically referred to as the \textit{testing error}, as it is measuring the
-ability of the model to predict future cases that were not introduced in the
-training phase. 
+model emerges from a black box, there are ways to evaluate its generalization
+(i.e., prediction) capability.  This is done by removing a small portion of the
+database for use as a testing set.  The rest of the data set is known as the
+training set and is used to train a model. After training, the test set is used
+to calculate the model's error to unseen test samples.  This error is typically
+referred to as the \textit{testing error}, as it is measuring the ability of
+the model to predict future cases that were not introduced in the training
+phase. 
 
 In addition to evaluating a single learned model, it is beneficial to compare
 models. Moreover, there are potential degeneracies in the solution space. This
@@ -42,8 +42,11 @@ for classification, where the total number of correct predictions is taken as a
 fraction of the entire sample set.
 \begin{equation}
   \textit{accuracy} = \frac{1}{N_\text{samples}} \sum_{i=1}^{N_\text{samples}} 
-                      I(y_{pred,i} = y_{true,i})
+                      \mathbb{I}(y_{pred,i} = y_{true,i})
 \end{equation}
+Note that $\mathbb{I}(x)$ here is being used to refer to the indicator
+function, where when $x$ is true it takes a value of 1 and when $x$ is false it
+takes a value of 0.
 
 But training sets can have an uneven number of classes represented.  A more
 fair scoring system for imbalanced data sets is instead balanced accuracy, which
@@ -51,26 +54,32 @@ averages the accuracy of each class. This would provide a range from 0 to 1. In
 this work, however, the balanced accuracy is used with \texttt{adjusted=True}
 in scikit-learn. This rescales the range to $\frac{1}{1-N_\text{classes}}$ to
 1, where 0 is considered random scoring.  This is done by defining a sample
-weight as the following, based on its class frequency: \cite{scikit}
+weight as the following, based on its class frequency \cite{scikit}:
+\todo[inline]{fix adjusted sample weight equation and maybe take w\_j 
+out since that is class weight and isn't used here}
 \begin{equation}
-  w_i = \frac{1}{\sum_j{1(y_j = y_i) w_j}}
+  w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i) w_j}}
 \end{equation}
 for \textit{j} classes and \textit{i} samples. Thus, the balanced accuracy is 
 the following with the adjusted weights.
 \begin{equation}
   \textit{balanced-accuracy} = \frac{1}{\sum_{i}{w_i}} \sum_{i=1}^{N_\text{samples}}
-                               w_i \cdot I(y_{pred, i} = y_{true_i})
+                               w_i \cdot \mathbb{I}(y_{pred, i} = y_{true_i})
 \end{equation}
 
 In addition to the metrics which combine the knowledge of true positive and
 true negative predictions, it is also important to study the
-misclassifications. Confusion matrices show the both the true positive
-predictions and the false positive predictions, which can be useful information
-in understanding an imperfect accuracy or balanced accuracy score. For example,
+misclassifications. Confusion matrices show both the true positive predictions
+and the false positive predictions, which can be useful information in
+understanding an imperfect accuracy or balanced accuracy score. For example,
 Figure \ref{fig:cm_ex} pictures an example confusion matrix that could result
-from this data set, where a fraction of 1 \gls{PHWR}s are correctly predicted,
-but a fraction of 0.1 \gls{PWR}s and \gls{BWR}s get misclassified as the other.
-\todo[inline]{fix plural acro situation here}
+from this data set, where a fraction of \gls{PHWR}s are correctly predicted
+(0.9), but there are some misclassified as \gls{BWR} (0.1).  While there are no
+\gls{PWR}s or \gls{BWR}s misclassified as \gls{PHWR}, they do get misclassified
+as each other: 0.3 \gls{PWR}s and 0.1 \gls{BWR}s get misclassified as the
+other.  Note that each row must add up to 1, since those are the true class
+labels. The columns do not add up to 1 (unless there are no
+misclassifications).  \todo[inline]{fix plural acro situation here}
 
 \begin{figure}[!htb]
   \centering
@@ -90,7 +99,8 @@ majority behavior. Also, the relative error via \gls{MAPE} can provide insight
 especially when there is a large span of values for a regression case; a large
 absolute error could be a small relative error. Therefore, they are all
 tracked.  The \gls{MAE}, \gls{MedAE}, and \gls{MAPE} are calculated as follows,
-respectively.
+respectively, for each label $j$ (which is suppressed in the math below for
+clarity).
 \begin{equation}
   \textit{MAE} = \frac{1}{N_{\text{samples}}} \sum_{i=1}^{N_{\text{samples}}} 
                  \left| y_{true, i} - y_{pred, i} \right|
@@ -119,21 +129,22 @@ small testing set.
   \label{fig:cverror}
 \end{figure}
 
-However, in practice, multiple rounds of \gls{CV} steps are used provide the
-fastest convergence.  This is referred to as \textit{k-fold cross-validation}
-and allows a user to have all training data entries be a testing entry once,
-bettering model evaluation.  An example where $k=3$ is illustrated in Figure
-\ref{fig:cverror}.  One partition of the training set is designated as the
-testing set, and a model is trained with the rest. This returns the testing
-error for that first testing partition.  Following the first training phase,
-another begins, this time with a different subset as the testing set.  In
-total, this process is performed $3$ times, giving $3$ models.  
-
-Since each partition becomes a testing set at one point, all entries in the
-training set are tested.  While in most applications the metrics of model
-performance are averaged by taking the mean of the accuracy/error of
-predictions, this work instead focuses on the aggregate statistics of all the
-testing errors taken together, regardless of which partition they were in.
+However, in practice, multiple rounds of \gls{CV} steps are used provide a
+better estimate of model performance by increasing the number of testing sets.
+This is referred to as \textit{k-fold cross-validation}.  An example where
+$k=3$ is illustrated in Figure \ref{fig:cverror}.  One partition of the
+training set is designated as the testing set, and a model is trained with the
+rest. This returns the testing error for that first testing partition.
+Following the first training phase, another begins, this time with a different
+subset as the testing set.  In total, this process is performed three times,
+giving three models. Since each partition becomes a testing set at one point,
+all entries in the training set are tested, which reduces the chance that the
+model is being tested with a misrepresentative testing set. In most
+applications, the testing error results from each partition (which are an
+average of all test cases in that partition) are averaged to provide a picture
+of the model performance. However, this work instead focuses on the aggregate
+statistics of all the \textit{individual} test case errors taken together,
+regardless of which partition they were in.
 
 \subsubsection{Model Complexity}
 \label{sec:complexity}

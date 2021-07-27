@@ -8,7 +8,7 @@ The realm of nuclear security involves parallel efforts in nonproliferation
 (verification of treaty compliance, monitoring for smuggling, proper storage and
 transportation of nuclear materials), cyber security, minimizing stocks of
 weaponizable materials, disaster response training, and nuclear forensics. All
-of these efforts have been continually improving, but there was a gap regarding
+of these efforts have been continually improving, but there was \todo{is? has been?} a gap regarding
 the ability of the \gls{US} to coordinate and respond to a nuclear incident,
 especially with the technical portion of nuclear forensics: characterization and
 analysis. After all, the first textbook on the topic was published in 2005
@@ -23,11 +23,11 @@ within the \gls{DOE} \gls{NNSA}.
 Multiple fields contribute to a nuclear forensics capability, such as
 radiochemical separations, material collection techniques, detector technology,
 material library development, and identifying forensic signatures. These needs
-vary based on whether the material being collected is post-detonation (e.g.,
-bomb debris) or pre-detonation (e.g., \gls{SNF}).  In the
-pre-detonation realm, this project focuses on statistical methods to to model
-the production history of a nuclear material using measurements of nuclides
-present in the \gls{SNF}.
+vary based on whether the material being collected is pre-detonation (e.g.,
+\gls{SNF}) or post-detonation (e.g., bomb debris).  In the pre-detonation
+realm, this project focuses on statistical methods to to model the production
+history of a nuclear material using measurements of nuclides present in the
+\gls{SNF}.
 
 \gls{SNF} is identified in this work by focusing on four characteristics in
 particular that can potentially provide material attribution: reactor type,
@@ -36,13 +36,13 @@ burnup, initial \gls{U235} enrichment, and time since fuel irradiation.
   \item The \textbf{reactor type} is classified as one of the three most common
         types of commercial power reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}.
   \item The \textbf{burnup} describes how much energy was produced by the fuel,
-        taking on the units \textit{megawatt-days (or gigawatt-days) per metric 
-        ton of heavy metal (or initial uranium)}; it is referred to in this work 
+        taking on the units megawatt-days (or gigawatt-days) per metric 
+        ton of heavy metal (or initial uranium); it is referred to in this work 
         as $MWd/MTU$, and sometimes $GWd/MTU$.  
   \item The \textbf{enrichment} is the percentage of \gls{U235} with respect to
         the entire amount of uranium in the fuel, and is reported as $\%U235$. 
   \item Lastly, the \textbf{time since irradiation} is defined as how long the
-        fuel has been out of the reactor core, and is discussed usually in $days$,
+        fuel has been out of the reactor core, and is measured usually in $days$,
         but sometimes $years$. It may also be referred to as cooling time. 
 \end{enumerate}
 
@@ -212,16 +212,16 @@ available?}.
 The main purpose of this work is to evaluate the utility of statistical methods
 as an approach to determine nuclear forensics-relevant quantities as less
 information is available. \Gls{ML} algorithms (\textit{k}-nearest neighbors,
-decision trees, and \gls{MLL} calculations) are used to train models to provide
+decision trees, and \gls{MLL} \todo{check after MLL=ML disc} calculations) are used to train models to provide
 these categories (reactor type) and values (burnup, enrichment, and time since
 irradiation) from the available information.  The training data is simulated,
-which provides an array of nuclide measurements as the features ($X$). The
-prediction parameters of interest ($y$) are provided from the simulation
-inputs. Information reduction on $X$ is carried out using artificially injected
-random error or computationally generated gamma spectra. The prediction errors
-($y_{true}$ versus $y_{pred}$) will be studied to draw conclusions about the
-capability of statistical methods to inform nuclear material attribution with
-less precise detection techniques.
+which provides an array of nuclide measurements as the features ($\vec{X}$).
+The prediction parameters of interest ($\vec{y}$) are provided from the
+simulation inputs. Information reduction on $\vec{X}$ is carried out using
+artificially injected random error or computationally generated gamma spectra.
+The prediction errors ($\vec{y}_{true}$ versus $\vec{y}_{pred}$) will be
+studied to draw conclusions about the capability of statistical methods to
+inform nuclear material attribution with less precise detection techniques.
 
 The necessary background is covered in Chapter \ref{ch:litrev}.  First, an
 introduction to the broader field of nuclear forensics is in Section
