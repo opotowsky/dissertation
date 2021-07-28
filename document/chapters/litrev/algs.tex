@@ -109,6 +109,7 @@ proportion of class $k$ observations at the node:
     \\
     H(m) &= \sum_k p_{m, k} (1 - p_{m, k})
   \end{aligned}
+  \label{eq:gini}
 \end{equation}
 Note that $\mathbb{I}()$ here is being used to refer to the indicator function,
 where when $y=k$ it takes a value of 1 and when $y \neq k$ it takes a value of 0.
@@ -122,6 +123,7 @@ error, where $\bar{y}_m$ is the average value of the samples in the node.
     H(m) &= \frac{1}{N_{\text{samples}, m}} \sum_{i=1}^{N_{\text{samples}, m}}
             (y_i - \bar{y}_{i, m})^2
   \end{aligned}
+  \label{eq:mse}
 \end{equation}
 The splitting criterion with the lowest impurity is the one that is chosen to
 make the split.  This will partition the feature space and the splitting

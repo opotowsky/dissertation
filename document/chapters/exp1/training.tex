@@ -138,12 +138,12 @@ reasonable computational limitations.
     \centering
     \begin{tabular}{@{}llll@{}}
       \toprule
-                              & \textbf{PWR}                     & \textbf{BWR}                     & \textbf{PHWR} \\ \toprule
-      Power Density [MW/MTU]  & 25, 35, 41                       & 10, 22                           & 2.2, 18, 22   \\
-      Burnup [GWd/MTU]        & 2--68                            & 1--68                            & 0.45--12.6    \\
-      Moderator Density [g/cc]& 0.71                             & \{0.1, 0.3, 0.5, 0.7\}           & 0.84          \\
-      Enrichment [\% U235]    & \{0.5, 1.5, 2, 3, 4, 5\}         & \{0.5, 1.5, 2, 3, 4, 5\}         & 0.711         \\
-      Cooling Time [days]     & \multicolumn{3}{c}{\{0--6000\} in 100-day steps}                                    \\ \bottomrule
+                               & \textbf{PWR}                     & \textbf{BWR}                     & \textbf{PHWR} \\ \toprule
+      Power Density [MW/MTU]   & 25, 35, 41                       & 10, 22                           & 2.2, 18, 22   \\
+      Burnup [GWd/MTU]         & 2--68                            & 1--68                            & 0.45--12.6    \\
+      Moderator Density [g/cc] & 0.71                             & \{0.1, 0.3, 0.5, 0.7\}           & 0.84          \\
+      Enrichment [\%\gls{U235}]& \{0.5, 1.5, 2, 3, 4, 5\}         & \{0.5, 1.5, 2, 3, 4, 5\}         & 0.711         \\
+      Cooling Time [days]      & \multicolumn{3}{c}{\{0--6000\} in 100-day steps}                                    \\ \bottomrule
     \end{tabular}
     \caption{Simulation parameters for \gls{ORIGEN} input files.}
     \label{tbl:rxtrparam}
@@ -205,28 +205,40 @@ masses are necessary, and the most common measurements in \gls{SFCOMPO} guide
 the list of nuclides tracked.  
 
 The set of training features of 29 nuclide masses listed in Table
-\ref{tbl:nucmass} was designed with the following reasons in mind.  
-First, the units in mass is to represent the scenario of "perfect knowledge", where a full
-assay is done via mass spectrometry techniques.  
-\todo{check edit w Paul} 
-Second, this is to have the
-training set units convertable to those present in the external, real-world
-test set: the \gls{SFCOMPO} database.  The \gls{ORIGEN} simulations output the
-nuclide masses in $grams$, and they are converted to the units of
-\textit{milligrams per gram of initial uranium}, $mg/gU_i$, when the models are
-externally tested against \gls{SFCOMPO}. Lastly, the 29 nuclides chosen were
-based on the presence of measurements in \gls{SFCOMPO}, where these were
-present in at least 100 of the samples in the database.  The external test set
-is described in more detail in Section \ref{sec:sfcompo}.
+\ref{tbl:nucmass} was designed with the following reasons in mind.  First, the
+training set feature measurement units are chosen to be convertable to those
+present in the external, real-world test set: the \gls{SFCOMPO} database.  The
+\gls{ORIGEN} simulations output the nuclide masses in grams, $g$, and they are
+converted to the units of milligrams per gram of initial uranium, $mg/gU_i$,
+when the models are externally tested against \gls{SFCOMPO}.  Second, the 29
+nuclides chosen were based on the presence of measurements in \gls{SFCOMPO},
+where these were present in at least 100 of the samples in the database.  The
+external test set is described in more detail in Section \ref{sec:sfcompo}.
+These choices are made so that the training set entries mimic a full assay
+being done via mass spectrometry techniques, and thus represents what this work
+refers to as "perfect knowledge" scenario.  
 
 \begin{table}[!htb]
   \centering
   \begin{tabular}{@{}|l|l|l|l|l|l|l|l|@{}}
     \hline
-    \textbf{Am241}&Am242m        &\textbf{Am243}&Cm242&\textbf{Cm244}&\textbf{Cs134}&\textbf{Cs137}&\textbf{Eu154} \\ \hline
-    Nd143         &Nd144         &Nd145         &Nd146&Nd148         &Nd150         &\textbf{Np237}&\textbf{Pu238} \\ \hline
-    \textbf{Pu239}&\textbf{Pu240}&Pu241         &Pu242&Sm147         &Sm149         &Sm150         &Sm151          \\ \hline
-    Sm152         &\textbf{U234} &\textbf{U235} &U236 &U238          &              &              &               \\ \hline
+    \allbold{${}^{241}\text{Am}$} & ${}^{242m}\text{Am}$ &
+    \allbold{${}^{243}\text{Am}$} & ${}^{242}\text{Cm}$ &
+    \allbold{${}^{244}\text{Cm}$} & \allbold{${}^{134}\text{Cs}$} &
+    \allbold{${}^{137}\text{Cs}$} & \allbold{${}^{154}\text{Eu}$} \\  
+    \hline
+    ${}^{143}\text{Nd}$ & ${}^{144}\text{Nd}$ & ${}^{145}\text{Nd}$ &
+    ${}^{146}\text{Nd}$ & ${}^{148}\text{Nd}$ & ${}^{150}\text{Nd}$ &
+    \allbold{${}^{237}\text{Np}$} & \allbold{${}^{238}\text{Pu}$} \\ 
+    \hline
+    \allbold{${}^{239}\text{Pu}$} & \allbold{${}^{240}\text{Pu}$} &
+    ${}^{241}\text{Pu}$ & ${}^{242}\text{Pu}$ & ${}^{147}\text{Sm}$ &
+    ${}^{149}\text{Sm}$ & ${}^{150}\text{Sm}$ & ${}^{151}\text{Sm}$ \\ 
+    \hline
+    ${}^{152}\text{Sm}$ & \allbold{${}^{234}\text{U}$} &
+    \allbold{${}^{235}\text{U}$} & ${}^{236}\text{U}$ & ${}^{238}\text{U}$ &  &
+    & \\  
+    \hline
   \end{tabular}
   \caption{Set of features saved for the first experiment, nuclide masses 
            measured in $grams$. The bold nuclide masses overlap with the 
@@ -234,20 +246,22 @@ is described in more detail in Section \ref{sec:sfcompo}.
   \label{tbl:nucmass}
 \end{table}
 
-Many \gls{ML} algorithms are dependent on a presumed feature distribution.
-Figure \ref{fig:nucshist} is a set of histograms for each feature, showing the
-spread of each nuclide mass measurement across the entire training set.  While
-a few nuclides have a normal distribution (the most common presumption), many
-do not. Fortunately, both \textit{k}-nearest neighbors and decision trees are
-non-parametric methods that do not make any underlying assumptions about
-feature probability distributions. The \gls{MLL} method, however, does make the
-assumption of a normal distribution. Any poor performance could therefore be
-explained by this underlying assumption being an inaccurate representation of
-the features in the training set.
+% Edit: None of the algs are dependent on feature distributions, so leaving out
 
-\begin{figure}[!htb]
-  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp1/histograms_trainset_features_nucs.png}}
-  \caption{Histograms of each of the 29 nuclide masses.}
-  \label{fig:nucshist}
-\end{figure}
+%Many \gls{ML} algorithms are dependent on a presumed feature distribution.
+%Figure \ref{fig:nucshist} is a set of histograms for each feature, showing the
+%spread of each nuclide mass measurement across the entire training set.  While
+%a few nuclides have a normal distribution (the most common presumption), many
+%do not. Fortunately, both \textit{k}-nearest neighbors and decision trees are
+%non-parametric methods that do not make any underlying assumptions about
+%feature probability distributions. The \gls{MLL} method, however, does make the
+%assumption of a normal distribution. Any poor performance could therefore be
+%explained by this underlying assumption being an inaccurate representation of
+%the features in the training set.
+%
+%\begin{figure}[!htb]
+%  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp1/histograms_trainset_features_nucs.png}}
+%  \caption{Histograms of each of the 29 nuclide masses.}
+%  \label{fig:nucshist}
+%\end{figure}
 

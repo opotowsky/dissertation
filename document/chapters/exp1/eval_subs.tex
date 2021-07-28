@@ -144,15 +144,15 @@ performance differences can be looked at in more detail.
     \begin{tabular}[c]{@{}l@{}}Prediction\\ Parameter\end{tabular} &
     \begin{tabular}[c]{@{}l@{}}Reactor \\ Type\end{tabular} &
     K & U &  K & U & K & U \\ \midrule
-    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Burnup \\ \% {[MWd/MTU]} \end{tabular}}
+    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Burnup \\ \% {$[MWd/MTU]$} \end{tabular}}
      & PWR  & 0.60  & 0.66  & 0.54 & 0.75 & 0.24 & 0.25 \\
      & BWR  & 0.88  & 0.90  & 0.60 & 0.66 & 0.40 & 0.40 \\
      & PHWR & 0.66  & 1.27  & 0.14 & 0.54 & 0.28 & 0.28 \\ \hline
-    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Enrichment \\ \% {[\% U235]} \end{tabular}}
+    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Enrichment \\ \% {$[\%\:{}^{235}\text{U}]$} \end{tabular}}
      & PWR  & 0.85  & 0.99  & 0.36 & 0.48 & 0.26 & 0.29 \\
      & BWR  & 1.14  & 1.16  & 0.51 & 0.54 & 0.45 & 0.46 \\
      & PHWR & 0.00  & 0.00  & 0.00 & 0.02 & 0.00 & 0.00 \\ \hline
-    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Time Since \\ Irradiation \\ \% {[days]} \end{tabular}}
+    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Time Since \\ Irradiation \\ \% {$[days]$} \end{tabular}}
      & PWR  & 11.44 & 10.48 & 2.35 & 2.19 & 1.55 & 1.46 \\
      & BWR  & 15.39 & 15.48 & 2.27 & 2.28 & 2.06 & 2.05 \\
      & PHWR & 19.32 & 34.41 & 4.96 & 4.52 & 2.30 & 2.30 \\ \bottomrule
@@ -166,7 +166,7 @@ performance differences can be looked at in more detail.
 
 To better see these performance differences, the percent change in prediction
 \gls{MAE} for each algorithm and reactor type between the reactor type being
-known versus unknown prior to prediction was calculated as: $100 *
+known versus unknown prior to prediction was calculated as: $100 \cdot
 \frac{MAE_{unknown} - MAE_{known}}{MAE_{unknown}}$.  This was chosen to be
 relative to the unknown error since that is the benchmark in this case.  Figure
 \ref{fig:knownrxtr} is three heatmaps that show this percent change for each
@@ -226,15 +226,15 @@ those from \gls{MLL} calculations).
 %    \begin{tabular}[c]{@{}l@{}}Prediction\\ Parameter\end{tabular} &
 %    \begin{tabular}[c]{@{}l@{}}Reactor \\ Type\end{tabular} &
 %    K & U &  K & U & K & U \\ \midrule
-%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Burnup \\ \% {[MWd/MTU]} \end{tabular}}
+%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Burnup \\ \% {$[MWd/MTU]$} \end{tabular}}
 %     & PWR  & 0.08  & 0.08  & 0.03 & 0.04 & 0.24 & 0.25 \\ 
 %     & BWR  & 0.11  & 0.10  & 0.03 & 0.03 & 0.40 & 0.40 \\ 
 %     & PHWR & 0.13  & 0.19  & 0.01 & 0.03 & 0.29 & 0.29 \\ \hline
-%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Enrichment \\ \% {[\% U235]} \end{tabular}}
+%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Enrichment \\ \% {$[\%\:{}^{235}\text{U}]$} \end{tabular}}
 %     & PWR  & 0.10  & 0.11  & 0.02 & 0.02 & 0.26 & 0.29 \\ 
 %     & BWR  & 0.12  & 0.12  & 0.02 & 0.02 & 0.46 & 0.46 \\ 
 %     & PHWR & 0.00  & 0.00  & 0.00 & 0.00 & 0.00 & 0.00 \\ \hline
-%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Time Since \\ Irradiation \\ \% {[days]} \end{tabular}}
+%    \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Time Since \\ Irradiation \\ \% {$[days]$} \end{tabular}}
 %     & PWR  & 6.47  & 6.13  & 1.50 & 1.43 & 1.55 & 1.46 \\ 
 %     & BWR  & 9.18  & 9.15  & 1.56 & 1.53 & 2.07 & 2.05 \\ 
 %     & PHWR & 13.78 & 18.62 & 4.51 & 3.71 & 2.30 & 2.30 \\ \bottomrule

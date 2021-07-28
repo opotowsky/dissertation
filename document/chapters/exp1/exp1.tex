@@ -28,13 +28,13 @@ predicted are as follows:
         most common commercial power reactors: \gls{PWR}, \gls{BWR}, or 
         \gls{PHWR}.
   \item The \textbf{burnup} describes how much energy was produced by the fuel
-        and has the units : $MWd/MTU$ (or $GWd/MTU$), mega (or giga) 
+        and has the units: $MWd/MTU$ (or $GWd/MTU$), mega (or giga) 
         watt-days per metric ton of initial uranium.
   \item The \textbf{enrichment} is the percentage of \gls{U235} with respect to
-        the entire amount of uranium in the fuel: $\%U235$. 
+        the entire amount of uranium in the fuel: $\%\:{}^{235}\text{U}$. 
   \item Lastly, the \textbf{time since irradiation}, or cooling time, is
         defined as how long the fuel has been out of the reactor core: $days$ 
-        or $years$.
+        (or $years$).
 \end{enumerate}
 
 Next, the information reduction step is covered in Section
@@ -86,13 +86,13 @@ parameters are the simulation inputs: reactor type, burnup, \gls{U235}
 enrichment, and time since irradiation.  The reactor types are one of three
 common commercial reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}.  The burnup is
 measured in $MWd/MTU$ and ranges from 0 to about $68,000$ in 21-28 timesteps
-depending on the reactor type.  The enrichment is $\%U235$ and is centered
-around the following percentages: 0.5, 1.5, 2.0, 3.0, 4.0, 5.0, and 0.711
-(natural \gls{U235} enrichment for the \gls{PHWR}s).  The time since
-irradiation is measured in $days$ and ranges from 0 to 6000, or 16 years, in
-$100-day$ time steps with 61 total steps. Given these simulation inputs, the
-makeup of 4.5e5 \gls{SNF} entries are simulated using \gls{ORIGEN} \cite{scale,
-origen, origenarp}.
+depending on the reactor type.  The enrichment is $\%\:{}^{235}\text{U}$ and is
+centered around the following percentages: 0.5, 1.5, 2.0, 3.0, 4.0, 5.0, and
+0.711 (natural \gls{U235} enrichment for the \gls{PHWR}s).  The time since
+irradiation is measured in $days$ and ranges from 0 to 6000, or $16\:years$, in
+$100\:day$ time steps with 61 total steps. Given these simulation inputs, the
+makeup of $4.5 \times 10^5$ \gls{SNF} entries are simulated using \gls{ORIGEN}
+\cite{scale, origen, origenarp}.
 
 Second, in Section \ref{sec:inforeduc1}, information reduction on the training
 set is carried out using randomly injected uniform error. The random error is

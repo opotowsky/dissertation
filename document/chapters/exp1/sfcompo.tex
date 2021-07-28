@@ -23,10 +23,10 @@ visualized in Figure \ref{fig:sfcoscatter}. These are sufficiently represented
 in the training set design, as pictured in Figure \ref{fig:trainhist}, although
 the proportions of \gls{PWR} and \gls{BWR} are approximately opposite to the
 training set. The assays in \gls{SFCOMPO} are presented as nuclide
-concentrations with the units \textit{milligrams per grams of initial uranium},
-or $mg/gU_i$. The training set of nuclide measurements in \textit{grams} is
-converted to these concentration units prior to prediction is converted to
-these concentration units prior to prediction. 
+concentrations with the units milligrams per grams of initial uranium, or
+$mg/gU_i$. The training set of nuclide measurements in $grams$ is converted to
+these concentration units prior to prediction is converted to these
+concentration units prior to prediction. 
 
 There is one main issue with using \gls{SFCOMPO} as a testing set: missing
 nuclide measurements.  The feature set of 29 nuclides in Table
@@ -47,16 +47,16 @@ present at a much lower rate.
                   >{\raggedleft}m{0.6in}
                                 m{0.4in}}
     \toprule
-    \rowcolor[gray]{0.88} am241  & 237 & nd145 & 162 & sm147 & 97  \\  
-    \rowcolor[gray]{0.95} am242m & 110 & nd146 & 139 & sm149 & 97  \\ 
-    \rowcolor[gray]{0.88} am243  & 203 & nd148 & 275 & sm150 & 97  \\ 
-    \rowcolor[gray]{0.95} cm242  & 214 & nd150 & 121 & sm151 & 97  \\ 
-    \rowcolor[gray]{0.88} cm244  & 269 & np237 & 155 & sm152 & 97  \\ 
-    \rowcolor[gray]{0.95} cs134  & 113 & pu238 & 369 & u234  & 355 \\ 
-    \rowcolor[gray]{0.88} cs137  & 185 & pu239 & 505 & u235  & 479 \\ 
-    \rowcolor[gray]{0.95} eu154  & 100 & pu240 & 505 & u236  & 462 \\ 
-    \rowcolor[gray]{0.88} nd143  & 162 & pu241 & 504 & u238  & 433 \\ 
-    \rowcolor[gray]{0.95} nd144  & 113 & pu242 & 505 &       &     \\ \bottomrule
+    \rowcolor[gray]{0.88} ${}^{241}\text{Am}$  & 237 & ${}^{145}\text{Nd}$ & 162 & ${}^{147}\text{Sm}$ & 97  \\  
+    \rowcolor[gray]{0.95} ${}^{242m}\text{Am}$ & 110 & ${}^{146}\text{Nd}$ & 139 & ${}^{149}\text{Sm}$ & 97  \\ 
+    \rowcolor[gray]{0.88} ${}^{243}\text{Am}$  & 203 & ${}^{148}\text{Nd}$ & 275 & ${}^{150}\text{Sm}$ & 97  \\ 
+    \rowcolor[gray]{0.95} ${}^{242}\text{Cm}$  & 214 & ${}^{150}\text{Nd}$ & 121 & ${}^{151}\text{Sm}$ & 97  \\ 
+    \rowcolor[gray]{0.88} ${}^{244}\text{Cm}$  & 269 & ${}^{237}\text{Np}$ & 155 & ${}^{152}\text{Sm}$ & 97  \\ 
+    \rowcolor[gray]{0.95} ${}^{134}\text{Cs}$  & 113 & ${}^{238}\text{Pu}$ & 369 & ${}^{234}\text{U}$  & 355 \\ 
+    \rowcolor[gray]{0.88} ${}^{137}\text{Cs}$  & 185 & ${}^{239}\text{Pu}$ & 505 & ${}^{235}\text{U}$  & 479 \\ 
+    \rowcolor[gray]{0.95} ${}^{154}\text{Eu}$  & 100 & ${}^{240}\text{Pu}$ & 505 & ${}^{236}\text{U}$  & 462 \\ 
+    \rowcolor[gray]{0.88} ${}^{143}\text{Nd}$  & 162 & ${}^{241}\text{Pu}$ & 504 & ${}^{238}\text{U}$  & 433 \\ 
+    \rowcolor[gray]{0.95} ${}^{144}\text{Nd}$  & 113 & ${}^{242}\text{Pu}$ & 505 &       &     \\ \bottomrule
   \end{tabular}
   \caption{Number of assays each nuclide is measured for in the \gls{SFCOMPO}
            database.}
@@ -219,10 +219,12 @@ figure, there is one outlier for \textit{k}-nearest neighbors and 39 for
   \centering
   \begin{tabular}{@{}m{1.5in}llllll@{}}
     \toprule
-                     & \multicolumn{3}{m{2in}}{Mean Errors [GWd/MTU]} & \multicolumn{3}{c}{Median Errors [GWd/MTU]} \\ \toprule
-    Null Handling    & kNN           & DTree         & MLL           & kNN            & DTree          & MLL    \\ \midrule
-    Imputed Nulls    & 9.43          & 10.89         & 13.17         & 7.26           & 8.28           & 10.84  \\
-    Zero-value Nulls & 14.88         & 15.18         & 3.53          & 11.47          & 8.79           & 1.70   \\ \bottomrule
+                     & \multicolumn{3}{m{2in}}{Mean Errors $[GWd/MTU]$} 
+                     & \multicolumn{3}{c}{Median Errors $[GWd/MTU]$} 
+                     \\ \toprule
+    Null Handling    & kNN   & DTree & MLL   & kNN   & DTree & MLL    \\ \midrule
+    Imputed Nulls    & 9.43  & 10.89 & 13.17 & 7.26  & 8.28  & 10.84  \\
+    Zero-value Nulls & 14.88 & 15.18 & 3.53  & 11.47 & 8.79  & 1.70   \\ \bottomrule
   \end{tabular}
   \caption{Mean and median errors for burnup prediction of the \gls{SFCOMPO} 
            test cases.}
@@ -321,10 +323,12 @@ has worse performance and \gls{MLL} calculations has better performance.
   \centering
   \begin{tabular}{@{}m{1.5in}llllll@{}}
     \toprule
-                     & \multicolumn{3}{m{2in}}{Mean Errors [\% U235]} & \multicolumn{3}{l}{Median Errors [\% U235]} \\ \toprule
-    Null Handling    & kNN           & DTree          & MLL          & kNN            & DTree          & MLL    \\ \midrule
-    Imputed Nulls    & 0.72          & 0.31           & 1.25         & 0.50           & 0.22           & 1.13   \\
-    Zero-value Nulls & 1.67          & 0.36           & 0.49         & 2.02           & 0.22           & 0.35   \\ \bottomrule
+                     & \multicolumn{3}{m{2in}}{Mean Errors [$\%\:{}^{235}\text{U}$]} 
+                     & \multicolumn{3}{l}{Median Errors [$\%\:{}^{235}\text{U}$]} 
+                     \\ \toprule
+    Null Handling    & kNN  & DTree & MLL  & kNN   & DTree & MLL    \\ \midrule
+    Imputed Nulls    & 0.72 & 0.31  & 1.25 & 0.50  & 0.22  & 1.13   \\
+    Zero-value Nulls & 1.67 & 0.36  & 0.49 & 2.02  & 0.22  & 0.35   \\ \bottomrule
   \end{tabular}
   \caption{Mean and median errors for enrichment prediction of the \gls{SFCOMPO} 
            test cases.}

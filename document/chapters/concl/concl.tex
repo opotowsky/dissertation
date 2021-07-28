@@ -20,10 +20,11 @@ measurements as the features. The prediction parameters are the simulation
 inputs: reactor type, burnup, \gls{U235} enrichment, and time since
 irradiation.  The reactor types are one of three common commercial reactors:
 \gls{PWR}, \gls{BWR}, or \gls{PHWR}.  The burnup is measured in $MWd/MTU$ , the
-enrichment is measured in $\%U235$, and the time since irradiation is measured
-in $days$. The size of the training set is 4.5e5 \gls{SNF} entries, which were
-simulated using \gls{ORIGEN} \cite{scale, origen, origenarp}.  These steps are
-covered in Sections \ref{sec:training1} and \ref{sec:training2}.
+enrichment is measured in $\%{}^{235}\text{U}$, and the time since irradiation
+is measured in $days$. The size of the training set is $4.5 \times 10^5$
+\gls{SNF} entries, which were simulated using \gls{ORIGEN} \cite{scale, origen,
+origenarp}.  These steps are covered in Sections \ref{sec:training1} and
+\ref{sec:training2}.
 
 Second, information reduction on the training set is carried out using randomly
 injected uniform error or computationally generated gamma spectra. For the

@@ -15,20 +15,33 @@ are being predicted are the same:
 \begin{enumerate}
   \item The classification of the \textbf{reactor type}: \gls{PWR}, \gls{BWR}, 
         or \gls{PHWR}.
-  \item The \textbf{burnup}: $MWd/MTU$ or $GWd/MTU$, \textit{mega (or giga) 
-        watt-days per metric ton of initial uranium}.
-  \item The \gls{U235} \textbf{enrichment}: $\%U235$. 
-  \item The \textbf{time since irradiation}, or cooling time: $days$ or $years$.
+  \item The \textbf{burnup}: $MWd/MTU$ (or $GWd/MTU$), mega (or giga) 
+        watt-days per metric ton of initial uranium.
+  \item The \gls{U235} \textbf{enrichment}: $\%\:{}^{235}\text{U}$. 
+  \item The \textbf{time since irradiation}, or cooling time: $days$ (or $years$).
 \end{enumerate}
 
 \begin{table}[!htb]
   \centering
   \begin{tabular}{@{}|l|l|l|l|l|l|l|l|@{}}
     \hline
-    Ac227&\textbf{Am241}&\textbf{Am243}&Ba133&Cf249         &Cf252          &Cm243         &\textbf{Cm244} \\ \hline
-    Cm245&\textbf{Cs134}&\textbf{Cs137}&Eu152&\textbf{Eu154}&Ho166m         &Kr85          &Nb94           \\ \hline
-    Np236&\textbf{Np237}&Pa231         &Pm146&Pu236         &\textbf{Pu238} &\textbf{Pu239}&\textbf{Pu240} \\ \hline
-    Ra226&Sb125         &Th228         &Th229&U232          & U233          &\textbf{U234} &\textbf{U235}  \\ \hline
+    ${}^{227}\text{Ac}$ & \allbold{${}^{241}\text{Am}$} &
+    \allbold{${}^{243}\text{Am}$} & ${}^{133}\text{Ba}$ & ${}^{249}\text{Cf}$ &
+    ${}^{252}\text{Cf}$ & ${}^{243}\text{Cm}$ & \allbold{${}^{244}\text{Cm}$} \\ 
+    \hline
+    ${}^{245}\text{Cm}$ & \allbold{${}^{134}\text{Cs}$} &
+    \allbold{${}^{137}\text{Cs}$} & ${}^{152}\text{Eu}$ &
+    \allbold{${}^{154}\text{Eu}$} & ${}^{166m}\text{Ho}$ & ${}^{85}\text{Kr}$ &
+    ${}^{94}\text{Nb}$ \\ 
+    \hline
+    ${}^{236}\text{Np}$ & \allbold{${}^{237}\text{Np}$} & ${}^{231}\text{Pa}$ &
+    ${}^{146}\text{Pm}$ & ${}^{236}\text{Pu}$ & \allbold{${}^{238}\text{Pu}$} &
+    \allbold{${}^{239}\text{Pu}$} & \allbold{${}^{240}\text{Pu}$} \\ 
+    \hline
+    ${}^{226}\text{Ra}$ & ${}^{125}\text{Sb}$ & ${}^{228}\text{Th}$ &
+    ${}^{229}\text{Th}$ & ${}^{232}\text{U}$  & ${}^{233}\text{U}$ &
+    \allbold{${}^{234}\text{U}$}  & \allbold{${}^{235}\text{U}$}  \\ 
+    \hline
   \end{tabular}
   \caption{Set of features saved for the second experiment, nuclide activities
            measured in $Ci$. The bold nuclide activities overlap with the 
@@ -45,8 +58,8 @@ is detailed in \ref{sec:inforeduc2}.  Second, these specific nuclides were
 chosen because they remained after four steps of filtering:
 \begin{enumerate}
   \item They exist in the 196-long radionuclide list in \gls{GADRAS}.
-  \item They have an activity above $1e-7\:Ci$ (cutoff chosen to filter out
-  nuclides that are unlikely to produce gamma energy peaks).
+  \item They have an activity above $1 \times 10^{-7}\:Ci$ (cutoff chosen to 
+  filter out nuclides that are unlikely to produce gamma energy peaks).
   \item They have a half-life longer than $1\:year$ (cutoff chosen based on
   maximum time since irradiation of $16\:years$).
   \item They have at least one gamma energy line above $200\:keV$ (cutoff
@@ -54,22 +67,24 @@ chosen because they remained after four steps of filtering:
   some detectors).
 \end{enumerate}
 
-As discussed in Section \ref{sec:snffeats}, the \gls{MLL} method presumes the
-features have a normal distribution. Figure \ref{fig:actshist} shows the
-distribution of each radionuclide in the training set. Compared to the features
-in Figure \ref{fig:nucshist}, there seem to be even fewer features with a
-normal distribution, with Pu239 being perhaps the only feature fitting this
-assumption. The information-reduced training sets covered next have a similar
-profile of distributions to Figure \ref{fig:actshist}, but with a higher
-percentage of exponential distributions.  Again, this should not impact the
-scikit-learn algorithms but may impact the performance of the \gls{MLL}
-calculations. \todo[inline]{or if I say it do I have to show some?} 
+% As before, no presumption of normal distrib is needed
 
-\begin{figure}[!htb]
-  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp2/histograms_trainset_features_acts.png}}
-  \caption{Histograms of each of the 32 nuclide activities.}
-  \label{fig:actshist}
-\end{figure}
+%As discussed in Section \ref{sec:snffeats}, the \gls{MLL} method presumes the
+%features have a normal distribution. Figure \ref{fig:actshist} shows the
+%distribution of each radionuclide in the training set. Compared to the features
+%in Figure \ref{fig:nucshist}, there seem to be even fewer features with a
+%normal distribution, with Pu239 being perhaps the only feature fitting this
+%assumption. The information-reduced training sets covered next have a similar
+%profile of distributions to Figure \ref{fig:actshist}, but with a higher
+%percentage of exponential distributions.  Again, this should not impact the
+%scikit-learn algorithms but may impact the performance of the \gls{MLL}
+%calculations. 
+%
+%\begin{figure}[!htb]
+%  \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp2/histograms_trainset_features_acts.png}}
+%  \caption{Histograms of each of the 32 nuclide activities.}
+%  \label{fig:actshist}
+%\end{figure}
 
 This one initial training set will undergo several transformations to become
 six training sets (one for each detector) for each spectra-processing approach
