@@ -1,7 +1,7 @@
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\linewidth]{./chapters/exp1/methodology1.png}
-  \caption{First portion of the flowchart from Figure \ref{fig:method} being 
+  \includegraphics[width=0.7\linewidth]{./chapters/exp1/methodology1_1.png}
+  \caption{First portion of the flowchart from Figure \ref{fig:method1} being 
            described in this section.}
 \end{figure}
 
@@ -111,10 +111,10 @@ scope of this work.
 
 The design of the training set is dependent on a number of factors.  First, it
 must have a sufficient number of burnup sets and time since irradiation steps
-to provide robust prediction. This is decided upon by maximizing the steps for
-both parameters, while balancing the computational limitations of a large
-training set. Through previous experience, an approximate limit would be around
-$1e6$ database entries for the specific calculations in this work and employing
+to provide robust prediction. This is chosen by maximizing the steps for both
+parameters, while balancing the computational limitations of a large training
+set. Through previous experience, an approximate limit would be around $10^6$
+database entries for the specific calculations in this work and employing
 reasonable computational limitations.
 
 \begin{table}[!htb]
@@ -169,33 +169,32 @@ is both the moderator and coolant in all simulated reactor types.)
   \label{fig:trainhist}
 \end{figure}
 
-The third factor influencing database design is ensuring ideal \gls{ML}
-algorithm performance.  As mentioned in Section \ref{sec:errs}, many algorithms
-are developed with the assumption that the training set will be
-\acrfull{i.i.d.}.  This is important so that the model does not overvalue or
-overfit a certain area in the training space. With the training set design,
-there are predetermined values for enrichment, burnup, and time since
-irradiation.  While there are $21-28$ burnup steps \todo{add full lists?}
-(depending on the reactor type) and 61 cooling time steps, there are only 6
-values for enrichment. This creates the risk that the algorithm will end up
-being unable to generalize outside of those discrete values. Therefore, the
-burnup steps and time steps are perturbed randomly in a range that is $\pm10\%$
-and $\pm30\%$ from the originally defined values, respectively.  The enrichment
-also gets perturbed by $\pm10\%$, and not more because the cross-section
-libraries in \gls{ORIGEN-ARP} are pre-calculated for those enrichment values,
-so deviating too far from them would result in inaccurate \gls{SNF}
-simulations. The power densities and moderator densities were kept at the
-values defined in Table \ref{tbl:rxtrparam}. The 0-valued burnup and cooling
-time entries were then filtered out so that the future calculations of relative
-error would be possible for all predictions.  The resulting training set is
-$450240$ (or $4.5e5$) entries.  Figure \ref{fig:trainhist} visualizes the
-somewhat even distribution of the burnup and cooling time parameters, and shows
-the lack of even distribution of the enrichment parameter through a combination
-of scatter plots and histograms.  Note that there are many more \gls{BWR}s
-present in the histograms because of the multiple moderator densities simulated
-(see Table \ref{tbl:rxtrparam}). The number of \gls{PWR}, \gls{BWR}, and
-\gls{PHWR} entries in the training set is 120960 (26.8\%), 322560 (71.6\%), and
-6720 (1.5\%), respectively.
+The third factor influencing database design is \gls{ML} algorithm performance.
+As mentioned in Section \ref{sec:errs}, many algorithms are developed with the
+assumption that the training set will be \acrfull{i.i.d.}.  This is important
+so that the model does not overvalue or overfit a certain area in the training
+space. With the training set design, there are predetermined values for
+enrichment, burnup, and time since irradiation.  While there are $21-28$ burnup
+steps \todo{add full lists?} (depending on the reactor type) and 61 cooling
+time steps, there are only 6 values for enrichment. This creates the risk that
+the algorithm will end up being unable to generalize outside of those discrete
+values. Therefore, the burnup steps and time steps are perturbed randomly in a
+range that is $\pm10\%$ and $\pm30\%$ from the originally defined values,
+respectively.  The enrichment also gets perturbed by $\pm10\%$, and not more
+because the cross-section libraries in \gls{ORIGEN-ARP} are pre-calculated for
+those enrichment values, so deviating too far from them would result in
+inaccurate \gls{SNF} simulations. The power densities and moderator densities
+were kept at the values defined in Table \ref{tbl:rxtrparam}. The 0-valued
+burnup and cooling time entries were then filtered out so that the future
+calculations of relative error would be possible for all predictions.  The
+resulting training set is $450240$ (or $4.5 \times 10^5$) entries.  Figure
+\ref{fig:trainhist} visualizes the somewhat even distribution of the burnup and
+cooling time parameters, and shows the lack of even distribution of the
+enrichment parameter through a combination of scatter plots and histograms.
+Note that there are many more \gls{BWR}s present in the histograms because of
+the multiple moderator densities simulated (see Table \ref{tbl:rxtrparam}). The
+number of \gls{PWR}, \gls{BWR}, and \gls{PHWR} entries in the training set is
+120960 (26.8\%), 322560 (71.6\%), and 6720 (1.5\%), respectively.
 
 \subsection{Training Set Features}
 \label{sec:snffeats}
@@ -206,9 +205,11 @@ masses are necessary, and the most common measurements in \gls{SFCOMPO} guide
 the list of nuclides tracked.  
 
 The set of training features of 29 nuclide masses listed in Table
-\ref{tbl:nucmass} was designed with the following reasons in mind.  First, the
-units in mass is to represent the scenario of "perfect knowledge", where a full
-assay is done via mass spectrometry techniques.  Second, this is to have the
+\ref{tbl:nucmass} was designed with the following reasons in mind.  
+First, the units in mass is to represent the scenario of "perfect knowledge", where a full
+assay is done via mass spectrometry techniques.  
+\todo{check edit w Paul} 
+Second, this is to have the
 training set units convertable to those present in the external, real-world
 test set: the \gls{SFCOMPO} database.  The \gls{ORIGEN} simulations output the
 nuclide masses in $grams$, and they are converted to the units of

@@ -8,13 +8,13 @@ This chapter covers the parameter prediction workflow using nuclide masses as
 the input features. The methodology is introduced by detailing each
 experimental component and its implementation. This is split into four
 sections, which correspond to the four steps summarized in Figure
-\ref{fig:method}.
+\ref{fig:method1}.
 
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.7\linewidth]{./chapters/exp1/methodology.png}
+  \includegraphics[width=0.7\linewidth]{./chapters/exp1/methodology1.png}
   \caption{Flowchart of the experimental methodology and the way each step is being implemented.}
-  \label{fig:method}
+  \label{fig:method1}
 \end{figure}
 
 Section \ref{sec:training1} discusses how the training data set is obtained
@@ -28,8 +28,8 @@ predicted are as follows:
         most common commercial power reactors: \gls{PWR}, \gls{BWR}, or 
         \gls{PHWR}.
   \item The \textbf{burnup} describes how much energy was produced by the fuel
-        and has the units : $MWd/MTU$ or $GWd/MTU$, \textit{mega (or giga) 
-        watt-days per metric ton of initial uranium}.
+        and has the units : $MWd/MTU$ (or $GWd/MTU$), mega (or giga) 
+        watt-days per metric ton of initial uranium.
   \item The \textbf{enrichment} is the percentage of \gls{U235} with respect to
         the entire amount of uranium in the fuel: $\%U235$. 
   \item Lastly, the \textbf{time since irradiation}, or cooling time, is
