@@ -84,11 +84,11 @@ Training databases were created for the six detectors outlined in Table
 detector, a lab-based \gls{HPGe}, against the rest, in order of decreasing
 energy resolution: portable \gls{HPGe}, \gls{CZT}, \gls{SrI2}, \gls{LaBr3}, and
 \gls{NaI} detectors. This is displayed in the table by including the \gls{FWHM}
-of the $661\:keV$ peak for Cs137. At this point, there are six versions of the
-original database for each detector setup, but there is a full gamma spectrum
-for each \gls{SNF} entry. It is not computationally prudent to use full gamma
-spectra for training and testing, and so these spectra are processed; this is
-step \ref{itm:3} from above, and is outlined as follows.
+of the $661\:keV$ peak for ${}^{137}\text{Cs}$. At this point, there are six
+versions of the original database for each detector setup, but there is a full
+gamma spectrum for each \gls{SNF} entry. It is not computationally prudent to
+use full gamma spectra for training and testing, and so these spectra are
+processed; this is step \ref{itm:3} from above, and is outlined as follows.
 
 \noindent \textbf{Step 3: Processing Gamma Spectra}
 
@@ -107,14 +107,14 @@ each detector.  The different energy window widths are listed in Table
     \multirow{2}{*}{\textbf{Detector}} &
     \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}l@{}}Energy Window\\ Size {[keV]}\end{tabular}}} &
     \multicolumn{3}{c}{\textbf{Energy Window List Length}} \\ \cmidrule(l){3-5}
-                  &    & Auto & Short & Long \\
+                     &    & Auto & Short & Long \\
     \toprule
-    In-Lab HPGe   & 2  & 206  & 42    & 151  \\
-    Portable HPGe & 3  & 120  & 42    & 151  \\
-    CZT           & 8  & 30   & 42    & 151  \\
-    SrI2          & 10 & 17   & 42    & 151  \\
-    LaBr3         & 12 & 19   & 42    & 151  \\
-    NaI           & 12 & 9    & 42    & 151  \\ 
+    In-Lab HPGe      & 2  & 206  & 42    & 151  \\
+    Portable HPGe    & 3  & 120  & 42    & 151  \\
+    CZT              & 8  & 30   & 42    & 151  \\
+    $\text{SrI}_2$   & 10 & 17   & 42    & 151  \\
+    $\text{LaBr}_3$  & 12 & 19   & 42    & 151  \\
+    NaI              & 12 & 9    & 42    & 151  \\ 
     \bottomrule
   \end{tabular}
   \caption{Energy window sizes and list lengths for 6 detector setups used to 
@@ -136,10 +136,10 @@ on the gamma energies most likely to be detected, which is independent of the
 detector quality. To obtain these lists, the expected number of decays of each
 gamma energy is calculated based on the activities of the 32 tracked nuclides
 using the Python for Nuclear Engineering toolkit \cite{pyne}.  An arbitrary
-minimum number of decays is chosen at $5e8$ decays, and the long list of 151
-gamma energies that remain above this cutoff is created. A higher arbitrary
-minimum of $5e10$ decays is also chosen; this threshold creates the short list
-of 42 gamma energies. 
+minimum number of decays is chosen at $5 \times 10^8$ decays, and the long list
+of 151 gamma energies that remain above this cutoff is created. A higher
+arbitrary minimum of $5 \times 10^{10}$ decays is also chosen; this threshold
+creates the short list of 42 gamma energies. 
 
 The short and long lists of gamma energies correspond to the nuclides in Table
 \ref{tbl:enlistnucs}. The 12 nuclides listed come from the long list, and the
@@ -156,10 +156,10 @@ is thus chosen for the second method, discussed next.
   \centering
   \begin{tabular}{@{}|l|l|l|@{}}
     \hline
-    \textbf{Am241} & \textbf{Am243} & Cm243          \\ \hline
-    Cm244          & Cm245          & \textbf{Cs134} \\ \hline
-    \textbf{Cs137} & Eu152          & \textbf{Eu154} \\ \hline
-    \textbf{Kr85}  & Pu238          & \textbf{Sb125} \\ \hline
+    \allbold{${}^{241}\text{Am}$} & \allbold{${}^{243}\text{Am}$} & ${}^{243}\text{Cm}$           \\ \hline
+    ${}^{244}\text{Cm}$           & ${}^{245}\text{Cm}$           & \allbold{${}^{134}\text{Cs}$} \\ \hline
+    \allbold{${}^{137}\text{Cs}$} & ${}^{152}\text{Eu}$           & \allbold{${}^{154}\text{Eu}$} \\ \hline
+    \allbold{${}^{85}\text{Kr}$}  & ${}^{238}\text{Pu}$           & \allbold{${}^{125}\text{Sb}$} \\ \hline
   \end{tabular}
   \caption{Nuclides that are represented by the gamma energy lines in the 
            energy lists. The entire set of 12 nuclides belongs to the long 

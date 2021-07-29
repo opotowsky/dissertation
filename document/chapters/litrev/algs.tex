@@ -131,31 +131,54 @@ process will continue until a pre-defined tree size or number of samples per
 node. Without a pre-defined stopping point the tree will grow until there is
 one sample per node. This process can be understood more intuitively by
 studying Figure \ref{fig:dtr}. Note that this tree was created using a maximum
-tree depth of $2$ for visualization purposes in order to explain the process,
+tree depth of $3$ for visualization purposes in order to explain the process,
 so is not indicative of a real decision tree.
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\linewidth]{./chapters/litrev/dtree.png}
-  \caption{Example of a decision tree process, where maximum tree depth was 
-           limited to 2 for visualization purposes.}
+  \caption{Example of a decision tree process, where maximum tree depth is 
+           limited to 3.}
   \label{fig:dtr}
 \end{figure}
 
-In Figure \ref{fig:dtr}, the first split is determined to occur at the feature
-Sm149 on whether the nuclide measurement is above a value of $-1.33$. Note that
+In Figure \ref{fig:dtr}, each node has the following information: the splitting
+criterion, Gini impurity value, percentage of samples in the training set in
+the node, a value list (explained below), and the majority class present in the
+node.  In the visualization, the shading of the colors in the tree are bolder
+for there being a higher fraction of a single class.
+
+The first split is determined to occur at the feature ${}^{149}\text{Sm}$ on
+whether the nuclide measurement is above or below a value of $-1.33$. Note that
 this value is negative because of the scaling process the training set is put
-through, described in Section \ref{sec:statmodel1}. The majority class at this
+through, described in Section \ref{sec:statmodel1}.  The majority class at this
 node is \gls{BWR} which is expected since the training set is 72\% \gls{BWR}.
 The values list indicates the fraction of each class in the node, which is
-alphabetically ordered \texttt{[bwr, phwr, pwr]}. It is even among the three
-because the class weights were told to be balanced.  This splitting criterion
-provides a Gini impurity score of 0.67, which represents the minimum Gini
-impurity of all the candidate splits, but also indicates there are multiple
-classes represented in this node (again, expected).  It would be 0 if there
-were only one class in the node.  In the visualization, the shading of the
-colors in the tree are bolder for there being a higher fraction of a single
-class.
+alphabetically ordered by \texttt{[BWR, PHWR, PWR]}. It is even among the three
+because the class weights are balanced.  This splitting criterion provides a
+Gini impurity score of 0.67, which represents the minimum Gini impurity of all
+the candidate splits, but also indicates there are multiple classes represented
+in this node (again, expected).  It would be 0 if there were only one class in
+the node.  
+
+The next level of the decision tree in Figure \ref{fig:dtr} has two nodes. The
+top node has a splitting criterion of whether ${}^{239}\text{Pu}$ is above or
+below a value of $-0.91$.  This node contains a majority of the \gls{PHWR}
+class, but also a fraction of 0.08 of the \gls{BWR} class.  Even though the
+\gls{PHWR} class is only 1.5\% of the training set (see Section
+\ref{sec:training1}), this node has 7.9\% of the training set samples.  The
+lower node has a splitting criterion of whether ${}^{242m}\text{Am}$ is above
+or below 0.68.  The remaining 92.1\% of the training set is in this node, and
+there is only a slight majority of the (balanced) \gls{PWR} class, which is why
+the shading is nearly white. The Gini impurity for the top node is 0.15. This
+is much lower than the Gini impurity of 0.5 for the bottom node, which is more
+evenly split between two classes. The next level split for the top node has
+fractions of 0.97 \gls{PHWR} and 1.0 \gls{BWR} in the next two nodes, with Gini
+impurities of 0.06 and 0.0, respectively. This is a rapid approach to zero
+considering the size of the training set and number of features. The next level
+split for the bottom node made modest improvements over the Gini impurity of
+0.5, and would need to go much deeper to properly classify \gls{PWR} versus
+\gls{BWR}.
 
 \subsubsection{Maximum Log-Likelihood Calculations}
 

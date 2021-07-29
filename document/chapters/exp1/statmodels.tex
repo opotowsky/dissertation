@@ -97,15 +97,39 @@ for prediction of "unseen" test samples.
 Introduced in Section \ref{sec:testerr}, these algorithms provide predictions
 based on the \textit{k}-fold \gls{CV} approach (not to be confused with the
 \textit{k} in \textit{k}-nearest neighbors). Tested were 5, 10, and 15 \gls{CV}
-folds and they all performed similarly because the training set is large.
-Given the equal performance among several options, the number of \gls{CV} folds
-was chosen to be 5 based on computational expediency. The \texttt{KFold}
-cross-validator with observation shuffling (i.e., the data set was shuffled
-prior to splitting) in the scikit package carried out this task for the
-regression prediction cases.  For reactor type classification, the
+folds and they all performed similarly because the training set is large.  The
+results shown in Table \ref{tbl:cvdiff} show the percent change in the accuracy
+score or \gls{MAE} relative to when $k=5$.  This means that the accuracy score
+is under $0.5\%$ higher for reactor type predictions for both
+\textit{k}-nearest neighbors and decision trees changing \textit{k} folds from
+5 to 10 or 15.  And the \gls{MAE}s are slightly lower (under $7\%$ difference)
+when changing \textit{k} folds to 10 or 15.  Given the close performance, the
+number of \gls{CV} folds was chosen to be 5 based on computational expediency.
+The \texttt{KFold} cross-validator with observation shuffling (i.e., the data
+set was shuffled prior to splitting) in the scikit package carried out this
+task for the regression prediction cases.  For reactor type classification, the
 \texttt{StratifiedKFold} cross-validator was used since there is an imbalance
-of classes in the training database.  \todo[inline]{show quickly how they
-performed} 
+of classes in the training database.  
+
+\begin{table}
+  \centering
+  \begin{tabular}{@{}lllll@{}}
+    \toprule
+      & \multicolumn{2}{l}{\textbf{\begin{tabular}[c]{@{}l@{}}\% Difference, \\
+                                   \textit{k}=5 to \textit{k}=10\end{tabular}}}
+      & \multicolumn{2}{l}{\textbf{\begin{tabular}[c]{@{}l@{}}\% Difference, \\ 
+                                   \textit{k}=5 to \textit{k}=15\end{tabular}}} \\
+        \toprule
+                           & kNN    & DTree  & kNN    & DTree  \\ \midrule
+    Reactor Type           & 0.4    & 0.2    & 0.4    & 0.4    \\
+    Burnup                 & -4.0   & -2.1   & -5.2   & -2.6   \\
+    Enrichment             & -5.1   & -6.1   & -6.6   & -6.7   \\
+    Time Since Irradiation & -1.8   & -3.1   & -2.3   & -3.8   \\ \bottomrule
+  \end{tabular}
+  \caption{Comparison of prediction errors between different \textit{k}-fold 
+           \gls{CV} implementations.}
+  \label{tbl:cvdiff}
+\end{table}
 
 Because the performance needs to be compared to the \gls{MLL} predictions, the
 scikit method \texttt{cross\_val\_predict} was used, as it returns the
