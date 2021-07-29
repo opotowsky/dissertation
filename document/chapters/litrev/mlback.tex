@@ -35,7 +35,8 @@ perform either supervised or unsupervised learning.\cite{elements_stats}
 
 \begin{figure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=\textwidth]{./chapters/litrev/SupervisedRegression.png}}
-  \caption{Diagram of a supervised machine learning process: a model 
+  \caption[Schematic of supervised machine learning process]
+          {Diagram of a supervised machine learning process: a model 
            created from a training data set and a statistical learner (with
            an optional dimensionality reduction step) allows a prediction
            when introduced with a test sample. If the actual label is known,
@@ -45,9 +46,10 @@ perform either supervised or unsupervised learning.\cite{elements_stats}
 
 As shown in Figure \ref{fig:supervised}, a typical (supervised) machine
 learning workflow begins with a training data set, which has a number of
-\textit{instances}, or rows of \textit{observations}.\todo{check language from later on; I think I use entries and samples a lot}  Each instance has some
-\textit{attributes}, also referred to as \textit{features}. It also has a
-\textit{label}, which can be a categorical label or discrete/continuous values.  
+\textit{instances}, or rows of \textit{samples}, commonly referred to as
+\textit{entries} later in this work.  Each entry has some \textit{attributes},
+also referred to as \textit{features}. It also has a \textit{label}, which can
+be a categorical label or discrete/continuous values.  
 
 The training data are then inserted into a statistical learner, where the
 learner is capable of predicting labels given a set of features. The algorithm
@@ -58,7 +60,7 @@ observations). The comparison of what the model predicts and the actual label
 gives the \textit{testing error}.  Depending on the performance and
 application, the model may need improvement from more training and/or some
 changes in the algorithm parameters. Once the model is performing well enough
-and validated, it is finalized; then a user can provide a single observation
+and validated, it is finalized; then a user can provide a single test sample
 and a value can be predicted from that. 
 
 This study performs regression tasks using supervised learning algorithms.

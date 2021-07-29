@@ -2,7 +2,8 @@
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\linewidth]{./chapters/exp1/methodology1_4.png}
-  \caption{Fourth portion of the flowchart from Figure \ref{fig:method1} being 
+  \caption[Fourth portion of the flowchart from Figure \ref{fig:method1}]
+          {Fourth portion of the flowchart from Figure \ref{fig:method1} being 
            described in this section.}
 \end{figure}
 
@@ -27,6 +28,9 @@ poorer performance and higher is better performance. This is why Figures
 \textit{y}-axis. Additionally, the data points on all the plots have a small
 $\Delta x$ to show error bars that are otherwise impossible to see.
 
+In all of the results in this section, the statistics being reported is on all
+$4.5 \times 10^5$ entries in the training set.
+
 \subsubsection{Reactor Type Classification}
 \label{sec:randerrA}
 
@@ -45,7 +49,9 @@ type prediction.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.5\textwidth]{./chapters/exp1/randerr_compare_nuc29_BalAcc_rxtr.png}
-  \caption{Prediction performance of reactor type as measured by balanced 
+  \caption[Prediction performance of reactor type classification with increasing
+           training set error]
+          {Prediction performance of reactor type as measured by balanced 
            accuracy with respect to uniform/random error applied to the nuclide 
            mass measurements in the training set.}
   \label{fig:randrxtr}
@@ -54,7 +60,8 @@ type prediction.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_nuc29_3errs.png}
-  \caption{Confusion matrices of reactor type prediction for each algorithm 
+  \caption[Confusion matrices of reactor type classification]
+          {Confusion matrices of reactor type prediction for each algorithm 
            at three training set error levels: 1\%, 10\%, and 20\%, in the 
            top, middle, and bottom panels, respectively.}
   \label{fig:cm_nuc29}
@@ -158,7 +165,9 @@ algorithm when faced with training set noise.  As previously mentioned, the
              random error.}
     \label{fig:burnmae}
   \end{subfigure}
-  \caption{Prediction performance of burnup as measured by relative and 
+  \caption[Prediction performance of burnup regression with increasing training 
+           set error]
+          {Prediction performance of burnup as measured by relative and 
            absolute errors with respect to uniform/random error applied to the 
            nuclide mass measurements in the training set.}
   \label{fig:randburn}
@@ -195,7 +204,9 @@ set error for \gls{MAPE} and \gls{MAE}, but at 10\% training set error for the
              respect to random error.}
     \label{fig:enrimae}
   \end{subfigure}
-  \caption{Prediction performance of enrichment as measured by relative and 
+  \caption[Prediction performance of enrichment regression with increasing 
+           training set error]
+          {Prediction performance of enrichment as measured by relative and 
            absolute errors with respect to uniform/random error applied to the 
            nuclide mass measurements in the training set.}
   \label{fig:randenri}
@@ -230,7 +241,9 @@ performance as compared to the \gls{MAE}s. The scikit-learn algorithms and the
              respect to random error.} 
     \label{fig:coolmae}
   \end{subfigure}
-  \caption{Prediction performance of time since irradiation as measured by 
+  \caption[Prediction performance of time since irradiation regression with 
+           increasing training set error]
+          {Prediction performance of time since irradiation as measured by 
            relative and absolute errors with respect to uniform/random error 
            applied to the nuclide mass measurements in the training set.}
   \label{fig:randcool}

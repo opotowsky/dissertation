@@ -1,7 +1,9 @@
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\linewidth]{./chapters/exp2/methodology2_2.png}
-  \caption{Second portion of the flowchart from Figure \ref{fig:method2} being 
+  \caption[Second portion of the flowchart from Figure \ref{fig:method2}]
+          {Second portion of the flowchart from Figure \ref{fig:method2} being 
            described in this section.}
 \end{figure}
 
@@ -74,7 +76,8 @@ of $20\:minutes$ provides the expected peaks.
     LaBr\textsubscript{3} & 3.63 & 213.0 & 84.5  & 2400 & 1024 \\
     NaI                   & 7.74 & 213.0 & 85.4  & 2400 & 1024 \\ \bottomrule
   \end{tabular}
-  \caption{Select details of 6 detector setups used to obtain gamma 
+  \caption[Details of detector setups]
+          {Select details of 6 detector setups used to obtain gamma 
            spectra-based training databases.}
   \label{tbl:detsetups}
 \end{table}
@@ -117,7 +120,8 @@ each detector.  The different energy window widths are listed in Table
     NaI              & 12 & 9    & 42    & 151  \\ 
     \bottomrule
   \end{tabular}
-  \caption{Energy window sizes and list lengths for 6 detector setups used to 
+  \caption[Energy window sizes and list lengths for processing gamma spectra]
+          {Energy window sizes and list lengths for 6 detector setups used to 
            process the gamma spectra-based training databases.}
   \label{tbl:enwindows}
 \end{table}
@@ -135,11 +139,21 @@ the length of these lists are the same for all detectors because they are based
 on the gamma energies most likely to be detected, which is independent of the
 detector quality. To obtain these lists, the expected number of decays of each
 gamma energy is calculated based on the activities of the 32 tracked nuclides
-using the Python for Nuclear Engineering toolkit \cite{pyne}.  An arbitrary
-minimum number of decays is chosen at $5 \times 10^8$ decays, and the long list
-of 151 gamma energies that remain above this cutoff is created. A higher
-arbitrary minimum of $5 \times 10^{10}$ decays is also chosen; this threshold
-creates the short list of 42 gamma energies. 
+using the Python for Nuclear Engineering toolkit \cite{pyne} from a reference
+sample in the training set.  This reference sample emerged as the sample of
+choice because it contains the superset of gamma energies of all tested
+samples, of which there were nine (three for each reactor type).
+
+After the expected number of decays for each gamma energy for all 32 nuclides
+are calculated, an arbitrary minimum number of decays is selected to filter out
+the gamma energies that are unlikely to produce counts high enough to be
+detected. The first arbitrary minimum number of decays is set at $5 \times
+10^8$ decays, and the long list of 151 gamma energies that remain above this
+cutoff is created.  A list of length 151 is likely to contain many features
+that do not contribute discrimination to the models, and thus they may add
+noise to the training set, so a shorter list is needed.  So, a higher arbitrary
+minimum of $5 \times 10^{10}$ decays is chosen; this threshold creates the
+short list of 42 gamma energies. 
 
 The short and long lists of gamma energies correspond to the nuclides in Table
 \ref{tbl:enlistnucs}. The 12 nuclides listed come from the long list, and the
@@ -161,7 +175,9 @@ is thus chosen for the second method, discussed next.
     \allbold{${}^{137}\text{Cs}$} & ${}^{152}\text{Eu}$           & \allbold{${}^{154}\text{Eu}$} \\ \hline
     \allbold{${}^{85}\text{Kr}$}  & ${}^{238}\text{Pu}$           & \allbold{${}^{125}\text{Sb}$} \\ \hline
   \end{tabular}
-  \caption{Nuclides that are represented by the gamma energy lines in the 
+  \caption[Nuclides that are represented by the short and long energy windows 
+           lists]
+          {Nuclides that are represented by the gamma energy lines in the 
            energy lists. The entire set of 12 nuclides belongs to the long 
            list, and the 7 bold nuclides belong to the short list.}
   \label{tbl:enlistnucs}
@@ -175,11 +191,15 @@ using the SciPy toolkit \cite{scipy} is applied. Using the peak search on the
 six different spectra for the same sample, the resulting number of energy
 windows for each detector is in Table \ref{tbl:enwindows}.  
 
+%this is idx 66796
 \begin{figure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp2/energy_window_example.png}}
-  \caption{Slice of an example gamma spectrum in one of the training databases
-           showing the windows over the gamma energy peaks.}
-  \todo[inline]{this is the portable hpge with the auto energy window list, idx 66796 if relevant}
+  \caption[Portion of gamma spectrum with windows, which shows summation regions 
+           for spectra processing]
+          {Slice of an example gamma spectrum in one of the training databases
+           showing the windows over the gamma energy peaks. This is the portable
+           \acrshort{HPGe} with the auto energy window list and the reference 
+           sample's spectrum.}
   \label{fig:enwindows}
 \end{figure}
 

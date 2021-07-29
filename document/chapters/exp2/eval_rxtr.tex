@@ -14,7 +14,9 @@ nuclide mass training set in Figure \ref{fig:randrxtr}.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\textwidth]{./chapters/exp2/detector_preds_wrt_enlist_BalAcc_rxtr.png}
-  \caption{Prediction performance of reactor type as measured by balanced 
+  \caption[Prediction performance of reactor type classification with decreasing
+           detector energy resolution]
+          {Prediction performance of reactor type as measured by balanced 
            accuracy with respect to decreasing detector energy resolution 
            for three types of processed gamma spectra.}
   \label{fig:rxtr}
@@ -62,14 +64,16 @@ automatic peak search should not be discarded as a method.  The auto energy
 windows list set of points for \gls{SrI2} outperforms even the portable
 \gls{HPGe} on the short energy windows list.  The slightly worse outcomes for
 the long energy windows list are to be expected from the algorithms having to
-deal with a lot of non-useable features, \todo{add this warning to i-reduc}
-especially for the last four detectors, since their spectra will not contain
-measurable peaks from many of the gamma energies in that list. 
+deal with a lot of non-useable features, especially for the last four
+detectors, since their spectra will not contain measurable peaks from many of
+the gamma energies in that list. 
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=\textwidth]{./chapters/exp2/confusion_matrix_nucs_acts.png}
-  \caption{Confusion matrices of reactor type prediction for each algorithm 
+  \caption[Confusion matrices of reactor type classification for non-detector 
+           training sets]
+          {Confusion matrices of reactor type prediction for each algorithm 
            for different training sets (all at a 1\% error level): 29 nuclide 
            masses, 32 nuclide activities, 12 nuclide activities, and 7 nuclide 
            activities.}
@@ -99,21 +103,24 @@ the same misclassification is 3\% for \textit{k}-nearest neighbors and 1\% for
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.83\textwidth]{./chapters/exp2/confusion_matrix_6dets_auto.png}
-  \caption{Confusion matrices for auto energy window list training sets.}
+  \caption[Confusion matrices for auto energy window list training sets.]
+          {Confusion matrices for auto energy window list training sets.}
   \label{fig:cm_auto}
 \end{figure}
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.83\textwidth]{./chapters/exp2/confusion_matrix_6dets_short.png}
-  \caption{Confusion matrices for short energy window list training sets.}
+  \caption[Confusion matrices for short energy window list training sets.]
+          {Confusion matrices for short energy window list training sets.}
   \label{fig:cm_short}
 \end{figure}
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.83\textwidth]{./chapters/exp2/confusion_matrix_6dets_long.png}
-  \caption{Confusion matrices for long energy window list training sets.}
+  \caption[Confusion matrices for long energy window list training sets.]
+          {Confusion matrices for long energy window list training sets.}
   \label{fig:cm_long}
 \end{figure}
 

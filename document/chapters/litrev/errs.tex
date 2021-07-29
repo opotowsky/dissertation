@@ -54,13 +54,12 @@ averages the accuracy of each class. This would provide a range from 0 to 1. In
 this work, however, the balanced accuracy is used with \texttt{adjusted=True}
 in scikit-learn. This rescales the range to $\frac{1}{1-N_\text{classes}}$ to
 1, where 0 is considered random scoring.  This is done by defining a sample
-weight as the following, based on its class frequency \cite{scikit}:
-\todo[inline]{fix adjusted sample weight equation and maybe take w\_j 
-out since that is class weight and isn't used here}
+weight as the following, based on its class frequency $w_j$ \cite{scikit}:
+\todo[inline]{double check sample weight equation, it doesn't match scikit documentation}
 \begin{equation}
   w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i) w_j}}
 \end{equation}
-for \textit{j} classes and \textit{i} samples. Thus, the balanced accuracy is 
+for \textit{j} classes and \textit{i} samples. Thus, the balanced accuracy is
 the following with the adjusted weights.
 \begin{equation}
   \textit{balanced-accuracy} = \frac{1}{\sum_{i}{w_i}} \sum_{i=1}^{N_\text{samples}}
@@ -84,7 +83,8 @@ misclassifications).
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.4\linewidth]{./chapters/litrev/cm_example.png}
-  \caption{Example of a confusion matrix for the three reactor types}
+  \caption[Example of a confusion matrix]
+          {Example of a confusion matrix for the three reactor types}
   \label{fig:cm_ex}
 \end{figure}
 
@@ -126,7 +126,9 @@ small testing set.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.85\linewidth]{./chapters/litrev/cverror.png}
-  \caption{Illustration of two ways of performing cross-validation.}
+  \caption[Illustration of cross validation]
+          {Illustration of two ways of performing \gls{CV}: a one-time split, 
+           or \textit{k}-fold \gls{CV}.}
   \label{fig:cverror}
 \end{figure}
 
@@ -162,8 +164,10 @@ sample?
 
 \begin{figure}[!htb]
   \makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{./chapters/litrev/BVtradeoff.png}}
-  \caption{Schematic showing the sources of error, bias and variance, and how 
-           they behave with respect to model complexity.}
+  \caption[Schematic of the bias-variance trade-off]
+          {Schematic showing the sources of error, bias and variance, and how 
+           they behave with respect to model complexity in the bias-variance 
+           trade-off.}
   \label{fig:bvtradeoff}
 \end{figure}
 
@@ -188,8 +192,9 @@ approximately well-fit model.
 \begin{figure}[!htb]
   \centering
   \makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{./chapters/litrev/ValidationCurve.png}}
-  \caption{Schematic showing effect of model complexity/regularization on model 
-           performance.}
+  \caption[Diagram of model performance with respect to model complexity]
+          {Diagram showing effect of model complexity/regularization at three 
+           different levels on model performance.}
   \label{fig:complex}
 \end{figure}
 

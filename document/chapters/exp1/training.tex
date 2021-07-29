@@ -1,7 +1,8 @@
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\linewidth]{./chapters/exp1/methodology1_1.png}
-  \caption{First portion of the flowchart from Figure \ref{fig:method1} being 
+  \caption[First portion of the flowchart from Figure \ref{fig:method1}]
+          {First portion of the flowchart from Figure \ref{fig:method1} being 
            described in this section.}
 \end{figure}
 
@@ -59,9 +60,10 @@ an option.
 \begin{table}[!htbp]
   \centering
   \includegraphics[width=\linewidth]{./chapters/exp1/pwr_benchmark.png}
-  \caption{Example set of results from work that uses \gls{SFCOMPO} test cases 
-           for \gls{PWR} simulation benchmarking in Reference 
-           \cite{pwr_benchmark_2010}.}
+  \caption[Example of \acrshort{SCALE} simulation benchmarking results]
+          {Example set of results from work that uses \acrshort{SFCOMPO} test 
+           cases for \acrshort{PWR} simulation benchmarking of \acrshort{SCALE} 
+           in Reference \cite{pwr_benchmark_2010}.}
   \label{tbl:pwr_bench}
 \end{table}
 
@@ -130,7 +132,7 @@ reasonable computational limitations.
       BW15x15      & SVEA64-1      &               \\
       VVER440      &               &               \\ \bottomrule
     \end{tabular}
-    \caption{\gls{ORIGEN} designations for reactor technologies and fuel assembly design.}
+    \caption{\acrshort{ORIGEN} designations for reactor technologies and fuel assembly design.}
     \label{tbl:rxtrtype}
     \vspace*{5mm}
   \end{subtable}
@@ -145,10 +147,12 @@ reasonable computational limitations.
       Enrichment [\% \gls{U235}]& \{0.5, 1.5, 2, 3, 4, 5\}  & \{0.5, 1.5, 2, 3, 4, 5\}  & 0.711         \\
       Cooling Time [days]       & \multicolumn{3}{c}{\{0--6000\} in 100-day steps}                      \\ \bottomrule
     \end{tabular}
-    \caption{Simulation parameters for \gls{ORIGEN} input files.}
+    \caption{Simulation parameters for \acrshort{ORIGEN} input files.}
     \label{tbl:rxtrparam}
   \end{subtable}%
-  \caption{Training set database design and parameters for \gls{ORIGEN} input files.}
+  \caption[Training set database design for \acrshort{ORIGEN} input files.]
+          {Training set database design and parameters for \acrshort{ORIGEN} 
+           input files.}
   \label{tbl:train}
 \end{table}
 
@@ -164,7 +168,8 @@ is both the moderator and coolant in all simulated reactor types.)
 
 \begin{figure}[!hbt]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/exp1/histogram_scatter_trainset_viz.png}}
-  \caption{A combination of histograms and scatter plots to visualize the 
+  \caption[Visualization of training set labels distributions]
+          {A combination of histograms and scatter plots to visualize the 
            distribution of prediction labels in the training set.}
   \label{fig:trainhist}
 \end{figure}
@@ -240,7 +245,8 @@ refers to as "perfect knowledge" scenario.
     & \\  
     \hline
   \end{tabular}
-  \caption{Set of features saved for the first experiment, nuclide masses 
+  \caption[Set of nuclide features for first experiment]
+          {Set of features saved for the first experiment, nuclide masses 
            measured in $grams$. The bold nuclide masses overlap with the 
            nuclides in Table \ref{tbl:nucacts}.}
   \label{tbl:nucmass}

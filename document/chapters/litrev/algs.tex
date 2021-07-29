@@ -9,19 +9,19 @@ algorithm would be used.
 
 To limit the scope of this work, it cannot be an exhaustive study of \gls{ML}
 methods.  Therefore, three algorithms are presented in this section:
-\textit{k}-nearest neighbors, decision trees, and \gls{MLL} calculations
-\todo{update if ness}. They were chosen based on their simplicity; this work
-has yet to be benchmarked using simple algorithms so a more complex treatment
-of the training sets in this work would be premature. Additionally, in part
-because of their simplicity, they are all "white box" methods.  This is unique
-in the \gls{ML} universe, since most algorithms create a black box model that
-is unable to be analyzed by a human.  The  decision trees method provides an
-output model that can be used to discern behavior and understand predictions,
-and \textit{k}-nearest neighbors and \gls{MLL} calculations do not create a
-model at all. Individual predictions can still be analyzed, however, since the
+\textit{k}-nearest neighbors, decision trees, and \gls{MLL} calculations. They
+were chosen based on their simplicity; this work has yet to be benchmarked
+using simple algorithms so a more complex treatment of the training sets in
+this work would be premature. Additionally, in part because of their
+simplicity, they are all "white box" methods.  This is unique in the \gls{ML}
+universe, since most algorithms create a black box model that is unable to be
+analyzed by a human.  The  decision trees method provides an output model that
+can be used to discern behavior and understand predictions, and
+\textit{k}-nearest neighbors and \gls{MLL} calculations do not create a model
+at all. Individual predictions can still be analyzed, however, since the
 procedures are so simple. 
 
-\subsubsection{Nearest Neighbor Methods}
+\subsubsection{Nearest Neighbors}
 
 Nearest neighbors classification and regression are unique algorithms in
 that they are instance-based; they do not actually generalize, but instead
@@ -60,7 +60,8 @@ $w_i$ is $1/d_i$, the weighted mode is used to choose the predicted label.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.8\linewidth]{./chapters/litrev/nn-fig.png}
-  \caption{Schematic of \textit{k}-nearest neighbors regression, showing how 
+  \caption[Schematic of \textit{k}-nearest neighbors regression]
+          {Schematic of \textit{k}-nearest neighbors regression, showing how 
            changing \textit{k} alters the predicted label value $y$.}
   \label{fig:nn}
 \end{figure}
@@ -137,7 +138,8 @@ so is not indicative of a real decision tree.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\linewidth]{./chapters/litrev/dtree.png}
-  \caption{Example of a decision tree process, where maximum tree depth is 
+  \caption[Example of a decision tree]
+          {Example of a decision tree process, where maximum tree depth is 
            limited to 3.}
   \label{fig:dtr}
 \end{figure}

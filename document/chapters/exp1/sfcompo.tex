@@ -11,12 +11,14 @@ here.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.7\textwidth]{./chapters/exp1/sfcompo_scatter_viz.png}
-  \caption{Scatter plot showing the range of reactor operation parameters in 
-           the \gls{SFCOMPO} testing set that are being predicted.}
+  \caption[Scatter plot of distribution of \acrshort{SFCOMPO} testing set 
+           labels]
+          {Scatter plot showing the range of reactor operation parameters in 
+           the \acrshort{SFCOMPO} testing set that are being predicted.}
   \label{fig:sfcoscatter}
 \end{figure}
 
-There are 505 test cases that are able to be compared against the training
+There are 505 test cases that are able to compare against the training
 database.  The number of each reactor type is as follows: 312 \gls{PWR}s, 165
 \gls{BWR}s, and 28 \gls{PHWR}s. The space of enrichment and burnup values is
 visualized in Figure \ref{fig:sfcoscatter}. These are sufficiently represented
@@ -58,8 +60,9 @@ present at a much lower rate.
     \rowcolor[gray]{0.88} ${}^{143}\text{Nd}$  & 162 & ${}^{241}\text{Pu}$ & 504 & ${}^{238}\text{U}$  & 433 \\ 
     \rowcolor[gray]{0.95} ${}^{144}\text{Nd}$  & 113 & ${}^{242}\text{Pu}$ & 505 &       &     \\ \bottomrule
   \end{tabular}
-  \caption{Number of assays each nuclide is measured for in the \gls{SFCOMPO}
-           database.}
+  \caption[Number of assays each nuclide is measured for in \acrshort{SFCOMPO}]
+          {Number of assays each nuclide is measured for in the 
+           \acrshort{SFCOMPO} database.}
   \label{tbl:missing}
 \end{table}
 
@@ -106,15 +109,19 @@ necessary.
     Imputed Nulls    & 0.52  & 0.60   & 0.39  & 0.09  & 0.12   & -0.01  \\
     Zero-value Nulls & 0.45  & 0.42   & 0.72  & 0.21  & 0.30   & 0.63   \\ \bottomrule
     \end{tabular}
-  \caption{Accuracy and balanced accuracy scores for reactor type prediction 
-           of the \gls{SFCOMPO} test cases.}
+  \caption[Performance of reactor type classification of \acrshort{SFCOMPO} 
+           entries]
+          {Accuracy and balanced accuracy scores for reactor type prediction 
+           of the \acrshort{SFCOMPO} test cases.}
   \label{tbl:sfcorxtr}
 \end{table}
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\textwidth]{./chapters/exp1/confusion_matrix_sfco.png}
-  \caption{Confusion matrices of reactor type prediction for each algorithm 
+  \caption[Confusion matrices of reactor type classification of 
+           \acrshort{SFCOMPO} entries]
+          {Confusion matrices of reactor type prediction for each algorithm 
            using two missing entry techniques: imputation with mean values (top 
            panel) and replacement with zero (bottom panel).}
   \label{fig:cm}
@@ -226,8 +233,9 @@ figure, there is one outlier for \textit{k}-nearest neighbors and 39 for
     Imputed Nulls    & 9.43  & 10.89 & 13.17 & 7.26  & 8.28  & 10.84  \\
     Zero-value Nulls & 14.88 & 15.18 & 3.53  & 11.47 & 8.79  & 1.70   \\ \bottomrule
   \end{tabular}
-  \caption{Mean and median errors for burnup prediction of the \gls{SFCOMPO} 
-           test cases.}
+  \caption[Performance of burnup regression of \acrshort{SFCOMPO} entries]
+          {Mean and median errors for burnup prediction of the 
+          \acrshort{SFCOMPO} test cases.}
   \label{tbl:sfcoburn}
 \end{table}
 
@@ -270,7 +278,8 @@ test database) for the \textit{k}-nearest neighbors, decision trees, and
     \caption{Box plots of burnup percentage errors using zero-replaced null values.}
     \label{fig:burn0pct}
   \end{subfigure}
-  \caption{Box plots of burnup prediction errors and percentage errors for each 
+  \caption[Box plots of burnup regression of \acrshort{SFCOMPO} entries]
+          {Box plots of burnup prediction errors and percentage errors for each 
            algorithm using two missing entry techniques: imputation with mean 
            values and replacement with zero.}
   \label{fig:sfcoburn}
@@ -330,7 +339,8 @@ has worse performance and \gls{MLL} calculations has better performance.
     Imputed Nulls    & 0.72 & 0.31  & 1.25 & 0.50  & 0.22  & 1.13   \\
     Zero-value Nulls & 1.67 & 0.36  & 0.49 & 2.02  & 0.22  & 0.35   \\ \bottomrule
   \end{tabular}
-  \caption{Mean and median errors for enrichment prediction of the \gls{SFCOMPO} 
+  \caption[Performance of enrichment regression of \acrshort{SFCOMPO} entries]
+          {Mean and median errors for enrichment prediction of the \gls{SFCOMPO} 
            test cases.}
   \label{tbl:sfcoenri}
 \end{table}
@@ -375,7 +385,8 @@ has a larger spread of absolute error.
     \caption{Box plots of enrichment percentage errors using zero-replaced null values.}
     \label{fig:enri0pct}
   \end{subfigure}
-  \caption{Box plots of enrichment prediction errors and percentage errors for 
+  \caption[Box plots of enrichment regression of \acrshort{SFCOMPO} entries]
+          {Box plots of enrichment prediction errors and percentage errors for 
            each algorithm using two missing entry techniques: imputation with 
            mean values and replacement with zero.}
   \label{fig:sfcoenri}
