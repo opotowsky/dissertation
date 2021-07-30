@@ -82,23 +82,24 @@ the gamma energies in that list.
 
 As in Section \ref{sec:randerr}, the reactor type classification performance
 discussion would not be complete without the added detail that confusion
-matrices supply. First, the four "full knowledge" training sets are presented
-in Figure \ref{fig:cm_nucs_acts}.  Note that the color bar extends from -0.1 to
-0.1, which is a very small range.  The results in all four panels are all quite
-accurate, so a small color bar range is necessary to make a visual distinction
-of performance relative to the other full knowledge cases.  The 29 nuclide mass
-training set (top panel) is repeated from the 1\% training set error case in
-Figure \ref{fig:cm_nuc29}.  For the 32 nuclide activity training set (second
-panel), the numbers are approximately the same, but interestingly, they improve
-slightly for \textit{k}-nearest neighbors and \gls{MLL} calculations.  A
-visible increase in misclassification is clear with the 12 and 7 nuclide
-activity training sets, especially for decision trees. The starkest increase in
-misclassification is with \gls{PWR}s being classified as \gls{BWR}s. This
-increases from about 5\% to about 10\% from the 12 nuclides set to the 7
-nuclides set. For the 7 nuclides set decision trees classification, the
-misclassification of \gls{PHWR}s as \gls{BWR}s reaches about 5\%. By contrast,
-the same misclassification is 3\% for \textit{k}-nearest neighbors and 1\% for
-\gls{MLL} calculations. 
+matrices supply (see Sections \ref{sec:testerr} and \ref{sec:randerrA} for an
+introduction to confusion matrices).  First, the four "full knowledge" training
+sets are presented in Figure \ref{fig:cm_nucs_acts}.  Note that the color bar
+extends from -0.1 to 0.1, which is a very small range.  The results in all four
+panels are all quite accurate, so a small color bar range is necessary to make
+a visual distinction of performance relative to the other full knowledge cases.
+The 29 nuclide mass training set (top panel) is repeated from the 1\% training
+set error case in Figure \ref{fig:cm_nuc29}.  For the 32 nuclide activity
+training set (second panel), the numbers are approximately the same, but
+interestingly, they improve slightly for \textit{k}-nearest neighbors and
+\gls{MLL} calculations.  A visible increase in misclassification is clear with
+the 12 and 7 nuclide activity training sets, especially for decision trees. The
+starkest increase in misclassification is with \gls{PWR}s being classified as
+\gls{BWR}s. This increases from about 5\% to about 10\% from the 12 nuclides
+set to the 7 nuclides set. For the 7 nuclides set decision trees
+classification, the misclassification of \gls{PHWR}s as \gls{BWR}s reaches
+about 5\%. By contrast, the same misclassification is 3\% for
+\textit{k}-nearest neighbors and 1\% for \gls{MLL} calculations. 
 
 \begin{figure}[!htbp]
   \centering

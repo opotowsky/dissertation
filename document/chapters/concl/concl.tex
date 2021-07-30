@@ -150,7 +150,13 @@ the outliers shows that there is a significant portion of the training set that
 is being predicted with very large errors; the spread of outliers encompassed
 $3-17\%$ of the training set depending on the case.  Studying these results
 with respect to the \gls{MedAE}, the burnup and time since irradiation
-predictions do well with respect to their baselines.
+predictions do well with respect to their baselines. 
+
+\todo[inline]{Maybe relevant: Nicolaou 2009: Mass spectrometry provides
+information on the whole range of fission products among them several stable
+ones whose content is independent of the cooling of the spent fuel. On the
+other hand, gamma-spectrometry identifies few radionuclides relying on their
+natural decay, hence been dependent on the cooling of the material}
 
 \noindent \textbf{Post-Summary Statements}
 
@@ -200,6 +206,9 @@ scintillator detectors with the auto energy windows list).  It is possible that
 even the short list with 42 features has too high of a dimension for these
 methods to perform well. \todo{unfinished}
 
+Reminder than equal error in training and testing is not realistic. Training
+data should be as perfect as possible bc its stagnant
+
 \section{Future Work}
 \label{sec:future}
 
@@ -215,7 +224,9 @@ methods to perform well. \todo{unfinished}
 
 High variance algorithms, not much optimization work done
 
-Could implement k-best loglike for MLL!
+Could implement kNN with loglike distance for MLL or MLL-weighted kNN (keeping 
+distance metrics as distance). -- Can't report LL plus unc for this though? Can
+those values be averaged?
 
 \noindent \textbf{Serial Prediction}
 

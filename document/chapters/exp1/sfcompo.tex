@@ -128,22 +128,24 @@ necessary.
 \end{figure}
 
 Figure \ref{fig:cm} allows for a deeper look into what is happening with the
-reactor type predictions for both of the \gls{SFCOMPO} test sets.  The matrices
-from using mean-imputed null values are in the top panel and the matrices from
-using zero-filled null values are in the bottom panel.  The scikit-learn
-algorithms have a higher accuracy for the imputed null values test set than
-their zero-null values counterparts, but the balanced accuracies follow the
-opposite direction. For \textit{k}-nearest neighbors, imputed nulls cause more
-than half of the \gls{PWR}s and all of the \gls{PHWR}s to be misclassified as
-\gls{BWR}s. Additionally, 28.5\% \gls{BWR}s are misclassified as \gls{PWR}s.
-For the zero-nulls test set, there is a much larger correct \gls{BWR}
-classification percentage, but also a much larger \gls{PWR} misclassification
-percentage. The \gls{PHWR} true positive percentage increases from 0 to 25\%.
-\Gls{BWR} (32\% of test cases) and \gls{PHWR} (5.5\% of test cases) are the two
-minority classes in the database.  Because they both have higher true positive
-fractions but there were overall fewer correct predictions (from a much higher
-\gls{PWR} misclassification) from the imputed nulls to the zero-nulls, the
-accuracy went down but the balanced accuracy went up.
+reactor type predictions for both of the \gls{SFCOMPO} test sets by studying
+the confusion matrices, which are introduced in Sections \ref{sec:testerr} and
+\ref{sec:randerrA}.  The matrices from using mean-imputed null values are in
+the top panel and the matrices from using zero-filled null values are in the
+bottom panel.  The scikit-learn algorithms have a higher accuracy for the
+imputed null values test set than their zero-null values counterparts, but the
+balanced accuracies follow the opposite direction. For \textit{k}-nearest
+neighbors, imputed nulls cause more than half of the \gls{PWR}s and all of the
+\gls{PHWR}s to be misclassified as \gls{BWR}s. Additionally, 28.5\% \gls{BWR}s
+are misclassified as \gls{PWR}s.  For the zero-nulls test set, there is a much
+larger correct \gls{BWR} classification percentage, but also a much larger
+\gls{PWR} misclassification percentage. The \gls{PHWR} true positive percentage
+increases from 0 to 25\%.  \Gls{BWR} (32\% of test cases) and \gls{PHWR} (5.5\%
+of test cases) are the two minority classes in the database.  Because they both
+have higher true positive fractions but there were overall fewer correct
+predictions (from a much higher \gls{PWR} misclassification) from the imputed
+nulls to the zero-nulls, the accuracy went down but the balanced accuracy went
+up.
 
 Decision trees follows a similar pattern the the \textit{k}-nearest neighbors
 example.  The \gls{PWR} misclassification increases from the imputed nulls to

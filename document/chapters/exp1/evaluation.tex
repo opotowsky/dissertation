@@ -71,18 +71,27 @@ Although the balanced accuracy score provides more information about
 classification performance for an imbalanced data set (the training set is
 26.8\% \gls{PWR}, 71.6\% \gls{BWR}, and 1.5\% \gls{PHWR}), it still does not
 provide much detail about what is being misclassified. To probe this further,
-Figure \ref{fig:cm_nuc29} shows three sets of confusion matrices.  The diagonal
-squares are the fraction of true positives for each reactor type, where the
-predicted label (\textit{x}-axis) is equal to the true label (\textit{y}-axis).
-The off diagonal squares are the fraction of false positives for each reactor
-type, where the predicted label is something other than the true label.  These
-fractions inside the pixels show the raw numbers of each position normalized to
-the number of true labels.  It is ideal to have the diagonal be as close to 1
-as possible and the off-diagonal pixels be as close to 0 as possible.  In
-addition to the fractions being included in the matrices, the raw count values
-are also displayed. To allow the fractions to be rapidly perceived, a colorbar
-provides perceptually uniform shading for these true positive and false
-positive fractions. 
+Figure \ref{fig:cm_nuc29} shows three sets of confusion matrices, originally
+introduced in Section \ref{sec:testerr}.  The off-diagonal squares are the
+fraction of false positives for each reactor type, where the predicted label
+(\textit{x}-axis) is something other than the true label (\textit{y}-axis).
+The false positive fractions are normalized to the number of true labels.
+Below the fractions inside the pixels are the raw numbers of false positives.
+The diagonal squares have three numbers in them. The top numbers are the
+fraction of true positives for each reactor type (normalized to true labels),
+where the predicted label (\textit{x}-axis) is equal to the true label
+(\textit{y}-axis).  The middle number in parentheses is the true positive
+fraction subtracted by one: $\text{TP} - 1$.  Again, the bottom number is the
+raw number of true positives.  
+
+It is ideal to have the diagonal be as close to 1 as possible and the
+off-diagonal pixels be as close to 0 as possible.  To allow the fractions to be
+rapidly perceived, a colorbar provides perceptually uniform shading for these
+true positive and false positive fractions.  The $TP - 1$ along the diagonal is
+done so that deviation from perfect classification performance of 1.0 is shaded
+a different color (brown) than the off-diagonal pixels that deviate from
+perfect classification performance of 0.0 (teal). Perfect performance in both
+cases is the middle of the colorbar, white.  
 
 In the top panel of Figure \ref{fig:cm_nuc29}, the three algorithms are
 presented for the 1\% random error case. In Figure \ref{fig:randrxtr}, one can

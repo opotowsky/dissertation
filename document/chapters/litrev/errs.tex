@@ -22,18 +22,18 @@ training set and is used to train a model. After training, the test set is used
 to calculate the model's error to unseen test samples.  This error is typically
 referred to as the \textit{testing error}, as it is measuring the ability of
 the model to predict future cases that were not introduced in the training
-phase. 
+phase. Next, the various metrics used to evaluate classification and regression
+are covered.
 
-In addition to evaluating a single learned model, it is beneficial to compare
-models. Moreover, there are potential degeneracies in the solution space. This
-is because most inverse problems are \textit{ill-posed}, because the solution
-is not guaranteed to be unique \cite{skutnik_2016}.  Evaluating not only the
-solution, but the confidence in the solution, is therefore prudent. While the
-two scikit-implemented algorithms do not provide this information, the
-\gls{MLL} calculation method provides a likelihood with an uncertainty. This
-provides a measure of distinguishability that many machine learning approaches
-do not provide. \todo[inline]{check back on this and take it out if you don't 
-look at MLL confidence}
+%In addition to evaluating a single learned model, it is beneficial to compare
+%models. Moreover, there are potential degeneracies in the solution space. This
+%is because most inverse problems are \textit{ill-posed}, because the solution
+%is not guaranteed to be unique \cite{skutnik_2016}.  Evaluating not only the
+%solution, but the confidence in the solution, is therefore prudent. While the
+%two scikit-implemented algorithms do not provide this information, the
+%\gls{MLL} calculation method provides a likelihood with an uncertainty. This
+%provides a measure of distinguishability that many machine learning approaches
+%do not provide. 
 
 \noindent \textbf{Reactor Type Classification}
 
@@ -49,13 +49,15 @@ function, where when $x$ is true it takes a value of 1 and when $x$ is false it
 takes a value of 0.
 
 But training sets can have an uneven number of classes represented.  A more
-fair scoring system for imbalanced data sets is instead balanced accuracy, which
-averages the accuracy of each class. This would provide a range from 0 to 1. In
-this work, however, the balanced accuracy is used with \texttt{adjusted=True}
-in scikit-learn. This rescales the range to $\frac{1}{1-N_\text{classes}}$ to
-1, where 0 is considered random scoring.  This is done by defining a sample
-weight as the following, based on its class frequency $w_j$ \cite{scikit}:
-\todo[inline]{double check sample weight equation, it doesn't match scikit documentation}
+fair scoring system for imbalanced data sets is instead balanced accuracy,
+which averages the accuracy of each class. This would provide a range from 0 to
+1. In this work, however, the balanced accuracy is used with
+\texttt{adjusted=True} in scikit-learn. This rescales the range to
+$\frac{1}{1-N_\text{classes}}$ to 1, where 0 is considered random scoring.
+This is done by defining a sample weight as the following, based on its class
+frequency $w_j$ \cite{scikit}. This differs from the definition in the
+scikit-learn documentation because it presumes a previous sample weight,
+whereas this work does not pre-define sample weights.
 \begin{equation}
   w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i) w_j}}
 \end{equation}
@@ -65,6 +67,14 @@ the following with the adjusted weights.
   \textit{balanced-accuracy} = \frac{1}{\sum_{i}{w_i}} \sum_{i=1}^{N_\text{samples}}
                                w_i \cdot \mathbb{I}(y_{pred, i} = y_{true_i})
 \end{equation}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.4\linewidth]{./chapters/litrev/cm_example.png}
+  \caption[Example of a confusion matrix]
+          {Example of a confusion matrix for the three reactor types}
+  \label{fig:cm_ex}
+\end{figure}
 
 In addition to the metrics which combine the knowledge of true positive and
 true negative predictions, it is also important to study the
@@ -79,14 +89,6 @@ misclassified as each other: 0.3 \glspl{PWR} and 0.1 \glspl{BWR} get
 misclassified as the other.  Note that each row must add up to 1, since those
 are the true class labels. The columns do not add up to 1 (unless there are no
 misclassifications).  
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=0.4\linewidth]{./chapters/litrev/cm_example.png}
-  \caption[Example of a confusion matrix]
-          {Example of a confusion matrix for the three reactor types}
-  \label{fig:cm_ex}
-\end{figure}
 
 \noindent \textbf{Regression Mean Error Calculations}
 
