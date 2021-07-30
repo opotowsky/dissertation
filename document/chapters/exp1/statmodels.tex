@@ -20,26 +20,34 @@ The machine learning toolkit chosen for this work is scikit-learn
 will have acceptably fast and reliable algorithms, but the use of python
 provides a platform for seamless integration of all the tools in the workflow.
 This section walks through the implementation of the two scikit algorithms. 
-
-\todo[inline]{warning: discuss training set scaling}
 \todo[inline]{is more detail, i.e. code snippets from scripts, needed?}
 
-The first step is splitting the training set into the features ($X$, with 29
-nuclide mass measurements), and a single set of labels ($y$, e.g., burnup).
-Next, the two algorithms are initialized.  The labels that require regression
-analysis (burnup, enrichment, cooling time) are predicted using the
+The first step is splitting the training set into the features ($\vec{X}$, with
+29 nuclide mass measurements), and a single set of labels ($\vec{y}$, e.g.,
+burnup). After this, the set of features $\vec{X}$ is scaled so that there is a
+zero mean and unit variance; this is done because the magnitude of the features
+vary widely and it can be either helpful or required for many scikit-learn
+algorithms. Next, the two algorithms are initialized.  The labels that require
+regression analysis (burnup, enrichment, cooling time) are predicted using the
 \texttt{KNeighborsRegressor} and \texttt{DecisionTreeRegressor} in
 scikit-learn. The reactor type label uses classifiers:
-\texttt{KNeighborsClassifier} and \texttt{DecisionTreeClassifier}.  Each
-algorithm has a list of hyperparameters that impact the model complexity and
-prediction performance, as discussed in Section \ref{sec:complexity}. Since
+\texttt{KNeighborsClassifier} and \texttt{DecisionTreeClassifier}.  
+
+Each algorithm has a list of hyperparameters that impact the model complexity
+and prediction performance, as discussed in Section \ref{sec:complexity}. Since
 this work is a demonstrative investigation, many of the default choices are
 retained. However, some of these were tuned using hyperparameter optimization,
-shown in Table \ref{tbl:exp1hypparam}.  The choices for each of these
-algorithms is summarized below (note this is just a subset of all available
-hyperparameters \cite{scikit}):
-\todo[inline]{describe optimization in detail or no?}
-
+shown in Table \ref{tbl:exp1hypparam}.  Hyperparameter optimization involves
+completing the training, predicting, and error evaluation process for a list of
+parameters that are of a continuous nature.  This process is carried out with
+\textit{k} for \textit{k}-nearest neighbors, choosing the value that provides
+the best results. For decision trees, the maximum features was chosen to be 29
+because the performance was highly variable otherwise, but this is not
+necessarily ideal for the best performance. Instead, only the maximum depth was
+tuned via optimization.  There are also other parameters governing algorithm
+behavior that have a discrete set of choices.  The selections made for each of
+these algorithms is summarized below (note this is just a subset of all
+available hyperparameters \cite{scikit}):
 \begin{enumerate}
   \item \texttt{KNeighborsClassifier} \& \texttt{KNeighborsRegressor}
     \begin{itemize}

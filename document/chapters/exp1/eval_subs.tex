@@ -2,9 +2,6 @@
 \subsubsection{Model Generalization}
 \label{sec:randerrC}
 
-\todo[inline]{add details about stratifying the t-set and using the same ones
-for all algs}
-
 Although a key takeaway from Section \ref{sec:randerr} is that the \gls{MLL}
 calculations are the most resilient to introduced error in the training set
 features for all four prediction categories, there is another aspect of the
@@ -58,7 +55,16 @@ where $k=1$ (burnup and cooling time, as seen in Table \ref{tbl:exp1hypparam}).
 One way to show that an algorithm is generalizing well in comparison to others
 is to view the shape of its learning curve (introduced in Section
 \ref{sec:complexity}): the prediction performance with respect to training set
-size.  Learning curves were constructed for all four prediction categories,
+size.  It is crucial to have the training sets be identical for each algorithm,
+so they were created in advance and the learning curves are constructed
+manually rather than relying on the scikit-learn method.  Smaller training sets
+were created from the original one by taking 80\%, 60\%, 40\%, and 20\% of the
+entries. The training sets are all stratified so that the original fractions of
+\gls{BWR}, \gls{PWR}, and \gls{PHWR} are retained. They are also built on top
+of one another, so the 20\%-size training set is contained within the 40\%-size
+set, and so forth.
+
+Learning curves were constructed for all four prediction categories,
 demonstrated in Figure \ref{fig:learns}. As in Figures
 \ref{fig:randrxtr}--\ref{fig:randcool} , the \textit{y}-axis is always oriented
 so that lower is poorer performance and higher is better performance; also, the

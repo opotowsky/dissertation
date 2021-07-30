@@ -15,7 +15,7 @@ Section \ref{sec:inverse} as a way to frame the forensics problem.
 \subsection{Types of Nuclear Forensics Investigations}
 \label{sec:types}
 
-The technical programs researching improvements to the \gls{US}'s nuclear
+The technical programs researching improvements to the \acrshort{US}'s nuclear
 forensics capabilities are split between the type of material being
 investigated. The analysis of irradiated debris from a weapon has different
 collection and measurement requirements than a mass of \gls{SNM}. This
@@ -89,10 +89,6 @@ signatures with modeling, simulation, or statistical methods.
 \subsection{Nuclear Forensics as an Inverse Problem}
 \label{sec:inverse}
 
-\todo[inline]{Needs a revamp, but still useful way to frame the problem and/or
-describe other approaches.  Double check Bayes explanation. have 2 papers that
-might help}
-
 Nuclear forensics is a traditional inverse problem, which has been well
 documented mathematically and applied to a range of scientific disciplines.
 Understanding inverse problem theory can help systematically define the
@@ -112,26 +108,30 @@ areas:
 First, this shows that it is important to consider the parameters that comprise
 a model; this is denoted as the \textit{model space}. This is not every
 measurable quantity; domain knowledge is necessary to determine the model
-space. In the nuclear forensics context for \gls{SNF}, this would consist of,
-e.g., the cooling time because the \gls{SNF} decays and material measurements
-are different depending on when the measurement is taken.
+space. In the nuclear forensics context for \gls{SNF}, this would consist of
+the reactor operation history parameters. For example, this could be the time
+since irradiation because the \gls{SNF} decays and material measurements are
+different depending on when the measurement is taken.
 
 Second, understanding the physical system also requires an understanding of the
 forward problem. Predicting how a certain set of values of model parameters
 will affect the resulting measurements is a problem with a unique solution.
 The breadth of these end measurements provides the \textit{data space}, which
 are all the conceivable results of a given forward problem. So for \gls{SNF}
-this would be, perhaps, the range of isotopic ratios typical of a commercial
+this would be, e.g., the range of nuclide measurements typical of a commercial
 reactor. 
 
-Lastly, the inverse problem is predicting the model parameters given a
-solution.  It is statistical in nature; there is a probability that the
-measured isotopes are caused by some value of a model parameter. Thus, the
-problem is \textit{ill-posed} because a prediction is not guaranteed to be
-unique. 
+Lastly, the inverse problem is predicting the model parameters (like time since
+irradiation) given a solution (like an assay of nuclide measurements).  It is
+statistical in nature; there is a probability that the measured nuclides are
+caused by some value of a model parameter. Thus, the problem is
+\textit{ill-posed} because a prediction is not guaranteed to be unique. 
 
-Further, including measurement uncertainties broadens the linear model
-to probability densities of the parameters. The opposite is also true in the
+\cite{inverse_select}
+\cite{inverse_compare}
+
+Further, including measurement uncertainties broadens the linear model to
+probability densities of the parameters. The opposite is also true in the
 forward case: including parameter uncertainties broadens the forward problem
 results to probability densities of the potential measurement values.
 \cite{inverse_theory}

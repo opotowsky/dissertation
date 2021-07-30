@@ -226,10 +226,10 @@ The baseline performance for the enrichment predictions in Figure
 \ref{fig:enri} is at -6\% \gls{MAPE}, chosen by the lowest performance of the
 three algorithms at the reference point of 20\% training set error for the 29
 nuclide mass training set in in Figure \ref{fig:enrimape}. In Figures
-\ref{fig:enribox} and \ref{fig:enriboxfly}, the red baseline is at $0.17\:\%
-U235$, from the reference point in Figure \ref{fig:enrimae}.  In these two
-sets of plots, the baseline is at a positive value because the box plots do not
-have a negative \textit{y}-axis. 
+\ref{fig:enribox} and \ref{fig:enriboxfly}, the red baseline is at
+$0.17\:\%\:{}^{235}\text{U}$, from the reference point in Figure
+\ref{fig:enrimae}.  In these two sets of plots, the baseline is at a positive
+value because the box plots do not have a negative \textit{y}-axis. 
 
 Figure \ref{fig:enri} shows discouraging results about the \gls{U235}
 enrichment prediction for all three algorithms and all three energy windows
@@ -262,20 +262,20 @@ red line appears to run across the bottom quartile for the \textit{k}-nearest
 neighbor predictions for all three energy windows lists, which indicates about
 25\% of those predictions are below the level considered acceptable here.  
 
-The range of errors reaches to about $3\:\%U235$ without outliers, which is a
-large magnitude since the maximum enrichment is about $5\:\%U235$. All nine
-combinations of algorithm and energy windows list in Figure
-\ref{fig:enriboxfly} have outliers that reach the full $5\:\%U235$, indicating
-that some of the 0.5\% enriched fuels are being mispredicted at a 5\% level.
-Furthermore, an error that large is of the magnitude of the highest enrichment
-level in the training set.  The number of outliers ranges from an average of
-about $18k$ for the \textit{k}-nearest neighbors boxes, and about $14k$ per box
-for the decision trees and \gls{MLL} calculations, meaning about 3-4\% of the
-training set samples are outliers.  Although there are much fewer outliers than
-with the burnup predictions, the wide range of \gls{MAE} magnitudes and the
-large \gls{MAPE}s contribute to the large standard deviations in Figure
-\ref{fig:enri}. Again, the standard deviations are so large that it is
-difficult to conclusively define a trend.
+The range of errors reaches to about $3\:\%\:{}^{235}\text{U}$ without
+outliers, which is a large magnitude since the maximum enrichment is about
+$5\:\%\:{}^{235}\text{U}$. All nine combinations of algorithm and energy
+windows list in Figure \ref{fig:enriboxfly} have outliers that reach the full
+$5\:\%\:{}^{235}\text{U}$, indicating that some of the 0.5\% enriched fuels are
+being mispredicted at a 5\% level.  Furthermore, an error that large is of the
+magnitude of the highest enrichment level in the training set.  The number of
+outliers ranges from an average of about $18k$ for the \textit{k}-nearest
+neighbors boxes, and about $14k$ per box for the decision trees and \gls{MLL}
+calculations, meaning about 3-4\% of the training set samples are outliers.
+Although there are much fewer outliers than with the burnup predictions, the
+wide range of \gls{MAE} magnitudes and the large \gls{MAPE}s contribute to the
+large standard deviations in Figure \ref{fig:enri}. Again, the standard
+deviations are so large that it is difficult to conclusively define a trend.
 
 \subsubsection{Time Since Irradiation Regression}
 

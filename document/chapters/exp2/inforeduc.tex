@@ -8,15 +8,15 @@
 \end{figure}
 
 The overall goal of this project is to determine how much information to what
-quality is needed to train an \todo{edit doc for a/an w/ acronyms} \gls{ML}
-model that can provide \gls{SNF} attribution by correctly predicting the
-reactor type, burnup, \gls{U235} enrichment, and time since irradiation.  In
-this section, the information quality is treated as the information reduction
-(i.e. decreasing energy resolution) of processed gamma spectra in the training
-database.  This detector-based treatment was not applied to the mass
-measurements from the first experiment in Chapter \ref{ch:exp1} because
-studying measurement techniques that can only be done in a lab is not the goal
-of this work.  Instead, field-deployable detectors are of interest.
+quality is needed to train a  \gls{ML} model that can provide \gls{SNF}
+attribution by correctly predicting the reactor type, burnup, \gls{U235}
+enrichment, and time since irradiation.  In this section, the information
+quality is treated as the information reduction (i.e. decreasing energy
+resolution) of processed gamma spectra in the training database.  This
+detector-based treatment was not applied to the mass measurements from the
+first experiment in Chapter \ref{ch:exp1} because studying measurement
+techniques that can only be done in a lab is not the goal of this work.
+Instead, field-deployable detectors are of interest.
 
 This process is outlined here for the second experiment, in which a gamma
 spectrum is computed for each sample in the database from the nuclide
@@ -34,6 +34,14 @@ gamma spectra:
   \item \label{itm:4} The $\sqrt{n}$ error of counts-based detection is included. 
 \end{enumerate}
 
+There is much ongoing work on the topic of attributing \gls{SNF} using gamma
+detection using targeted or advanced measurement techniques \cite{snf_gamma,
+compton_supp, bwr_high-res_gamma, pwr_bwr_gamma} and using innovative spectra
+evaluation and radioisotope identification methods \cite{riid_09,
+rapid_riid_18, sull_gen_07, sull_valid_15, sull_auto_17, sull_unc_17}.  Since
+this is a topic of active research and the approaches are heavily
+detector-dependent, a simple processing approach is described below.
+
 \noindent \textbf{Steps 1 \& 2: Choosing Radionuclides \& Computational Gamma Detection}
 
 Step \ref{itm:1} is covered in Section \ref{sec:training2}.  Step \ref{itm:2}
@@ -49,8 +57,6 @@ $1\:MT$ of initial uranium-based fuel. Not only is this quantity an unlikely
 amount to be smuggled, it would overwhelm a detector at the default/calibrated
 source-detector distances in \gls{GADRAS}.  Therefore, the material (and
 resulting nuclide activities) are scaled to be $1\:g$ of \gls{SNF}.
-\todo[inline]{fix this to be better technical explanation of dead time and pile
-up} 
 
 Regarding the input information for the \gls{GADRAS} calculations, the sources
 are provided without any background; this is because any spectrum would undergo

@@ -152,12 +152,6 @@ $3-17\%$ of the training set depending on the case.  Studying these results
 with respect to the \gls{MedAE}, the burnup and time since irradiation
 predictions do well with respect to their baselines. 
 
-\todo[inline]{Maybe relevant: Nicolaou 2009: Mass spectrometry provides
-information on the whole range of fission products among them several stable
-ones whose content is independent of the cooling of the spent fuel. On the
-other hand, gamma-spectrometry identifies few radionuclides relying on their
-natural decay, hence been dependent on the cooling of the material}
-
 \noindent \textbf{Post-Summary Statements}
 
 There is a clear leader throughout all of the results in terms of being a
@@ -196,7 +190,13 @@ it is still a major difference in implementation.
 
 The methods in this work all have high variance, and so it would have seemed
 prudent to apply regularization. However, hyperparameter optimization did not
-shift the high variance defaults much towards more bias. \todo{unfinished} 
+shift the high variance defaults much towards more bias. Bad generalization,
+possibly contributed to poor sfcompo results.  \todo{unfinished} 
+
+Note for nuclides: feature importance work gave different lists for each label,
+but since each training set is designed to be able to predict all four
+different labels, not all features are relevant to a given label. This adds a
+lot of noise for a given label prediction. 
 
 With respect to the number of features affecting the prediction performance,
 the overall similarity of performance among the three energy windows lists
@@ -219,6 +219,8 @@ data should be as perfect as possible bc its stagnant
 2. Increase simulation fidelity
 
 3. Feature set study: using iso ratios, filtering out noise for auto peak search approach
+
+4. Processing gamma spectra according to literature, and or updating GADRAS sims to match advanced techniques
 
 \noindent \textbf{Statistical Method Optimization}
 
