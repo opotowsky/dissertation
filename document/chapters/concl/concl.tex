@@ -212,17 +212,82 @@ data should be as perfect as possible bc its stagnant
 \section{Future Work}
 \label{sec:future}
 
-\noindent \textbf{Training Set Features}
+When designing any study, simplifications and assumptions must be made to take
+a first-order look at the problem. Additionally, any good exploration is likely
+to generate more questions than answers. This final section covers a list of
+future work based on the the simplifications made and questions created.
 
-1. Study on badly-simulated nucs, and filtering those out
+\subsection{Training Set Features}
 
-2. Increase simulation fidelity
+\noindent \textbf{Simulation Fidelity}
 
-3. Feature set study: using iso ratios, filtering out noise for auto peak search approach
+\gls{ORIGEN-ARP} not only offers computational expediency, but the training set
+creation was able to be fully scripted and automatically carried out. The $4.5
+\times 10^5$ entries in the training set were simulated in a matter of hours on
+a personal computer.  
 
-4. Processing gamma spectra according to literature, and or updating GADRAS sims to match advanced techniques
+Section \ref{sec:fidelity} discusses the fidelity of the simulations used to
+create the training database, and how the ground truth in this work is
+therefore not perfect truth.  The first improvement to be made with the
+training set is filtering out problematic-to-simulate nuclides, such as
+${}{125}\text{Sb}$. An exercise was carried out to compare \gls{ORIGEN-ARP}
+simulations to an entry in \gls{SFCOMPO}, and there were some nuclide
+discrepancies that reached 40\%. It would be better to remove these from
+consideration if they are systematically poorly simulated.
 
-\noindent \textbf{Statistical Method Optimization}
+One level beyond this would be to forego the convenience that \gls{ORIGEN-ARP}
+provides and use higher fidelity simulations in \gls{SCALE}. 
+
+\noindent \textbf{Feature Set Study}
+
+The lists of training set features in this work were not chosen based on
+knowledge of nuclear reactor operation and the best signatures for the various
+labels being predicted (reactor type, burnup, ${}^{235}\text{U}$ enrichment,
+time since irradiation).  Instead, they were chosen based on the nuclide
+availability in the \gls{SFCOMPO} database and the computational gamma spectra
+tool, \gls{GADRAS}, which gave 29 and 32 nuclides, respectively. 
+
+For the 29 nuclide mass training set, a small feature importance exercise was
+carried out to determine if these lists could be reduced further. This was
+carried out by using \texttt{SelectKBest(score\_func=f\_regression,
+k=29).fit(X,y)} (or \texttt{f\_classif} for reactor type classification),
+sorting the scores of the features, choosing the top $N$ features for each
+label, and taking the set of features together for all labels.  The resulting
+set of best-scoring features for all the labels included most or all of the
+original list depending on the arbitrary decision of $N$.  This could be
+further refined by combining domain knowledge of reactor physics and a more
+structured statistical feature importance approach. Furthermore, because mass
+spectrometry provides ratios of nuclides, studying how various ratios perform
+versus nuclide masses or nuclide concentrations with respect to initial uranium
+mass would be prudent. 
+
+\noindent \textbf{Gamma Spectra Processing}
+
+For the 32 nuclide activity training set, the most detectable gamma energies
+energed from the short and long energy windows lists to include from 7 and 12
+nuclides, respectively, shown in Table \ref{tbl:enlistnucs}. So in this way,
+nuclear physics performed the feature selection.  It is clear from the results
+that the 7- and 12-nuclide lists performed quite well, and exceeded the
+baseline for all four prediction scenarios.  However, there were many high
+energy photopeaks excluded from these lists that might provide more
+information. These were captured via the auto peak search method, but the
+resulting energy windows list did not provide better results (and in some cases
+with \textit{k}-nearest neighbors, provided worse performance).  This simple
+approach should be refined with a study on the latest gamma spectra
+processesing tools. 
+
+There are also more advanced detection techniques being studied, some which
+could be simulated with \gls{GADRAS}.  This would provide easier peak
+processing for nuclides of interest, e.g., with peaks at the high energy end of
+the spectrum.
+
+Copy of citations:
+detection using targeted or advanced measurement techniques \cite{snf_gamma,
+compton_supp, bwr_high-res_gamma, pwr_bwr_gamma} and using innovative spectra
+evaluation and radioisotope identification methods \cite{riid_09,
+rapid_riid_18, sull_gen_07, sull_valid_15, sull_auto_17, sull_unc_17}.  Since
+
+\subsection{Statistical Method Optimization}
 
 High variance algorithms, not much optimization work done
 
@@ -230,7 +295,7 @@ Could implement kNN with loglike distance for MLL or MLL-weighted kNN (keeping
 distance metrics as distance). -- Can't report LL plus unc for this though? Can
 those values be averaged?
 
-\noindent \textbf{Serial Prediction}
+\subsection{Serial Prediction}
 
 Rxtr type first, then regression cases. 
 
@@ -238,7 +303,7 @@ Implement ROC studies to vary the decision threshold for PHWR/PWRs to avoid
 misclassifications as BWR. Goal here is perfecto rxtr type classification if
 it comes first. 
 
-\noindent \textbf{\gls{SFCOMPO}}
+\subsection{SFCOMPO}
 
 Serial prediction (rxtr type first, then regression cases)
 
