@@ -114,15 +114,14 @@ than the simple scikit-learn algorithms.
 There is similar work being done to this work that focuses on similar
 prediction categories but in a serial manner, i.e., first determining the
 reactor type before moving forward with other predictions \cite{serial_ml}.
-This makes a lot of sense intuitively, that knowing the reactor type could
-allow a more accurate reporting of the other reactor operation parameters,
-rather than trying to predict them while blind to the reactor type, which is
-what this work does. Therefore, the change in regression performance from the
-reactor type-blind predictions to having prior knowledge of the reactor type is
-discussed.
+This work predicts reactor operation parameters while blind to the reactor
+type, but it makes sense intuitively that having previous knowledge of the
+reactor type would allow more accurate regression of these parameters.
+Therefore, the change in regression performance from the reactor type-blind
+predictions to having prior knowledge of the reactor type is discussed.
 
 The workflow was repeated for the three regression cases where they were
-trained on reactor type-filtered training sets. A 5\% random error was applied
+trained on reactor type-specific training sets. A 5\% random error was applied
 to these training sets, and the 5\% random error full training set was used as
 comparison. The errors for each algorithm (\textit{k}-nearest neighbors,
 decision trees, and \gls{MLL} calculations) were tallied for each regression
@@ -136,9 +135,9 @@ and within that, for each reactor type (\gls{PWR}, \gls{BWR}, \gls{PHWR}).  The
 columns are separated first by the algorithms and second by whether the reactor
 type was known or unknown prior to prediction, denoted as \textit{K} and
 \textit{U}, respectively. Most of these relative errors are quite low, and
-around or under 2\%.  So, e.g., despite burnup from \gls{PHWR}s improving, it
-was by 0.61\%, a precision of which may not be of concern. Still, these
-performance differences can be looked at in more detail.  
+around or under 2\%.  So, e.g., despite burnup prediction from \glspl{PHWR}s
+improving, it was by 0.61\%, a precision of which may not be of concern. Still,
+these performance differences can be looked at in more detail.  
 
 \begin{table}[!htb]
   \centering
@@ -200,13 +199,13 @@ case.
 
 For burnup prediction, most differences are within $\pm10\%$ except for three
 scenarios.  The decision tree algorithm has improved burnup prediction for
-\gls{PWR}s by 22.0\% and for \gls{PHWR}s by 71.1\% given a known reactor type.
-The \textit{k}-nearest neighbors algorithm has 49.5\% improved burnup
+\glspl{PWR}s by 22.0\% and for \glspl{PHWR}s by 71.1\% given a known reactor
+type.  The \textit{k}-nearest neighbors algorithm has 49.5\% improved burnup
 prediction for the \gls{PHWR}. For \gls{U235} enrichment, the \gls{PWR}
 predictions improve by approximately 18\% for the scikit-learn algorithms.
 Even though the value is within $\pm10\%$, this is the only scenario where
 there is an appreciable difference in \gls{MLL} performance. The decision tree
-enrichment prediction of \gls{PHWR}s also has a sizeable improvement of
+enrichment prediction of \glspl{PHWR}s also has a sizeable improvement of
 100.0\%.  The time since irradiation predictions for the most part do not show
 improvement outside of $\pm10\%$. Of note is some volatile behavior for the
 \gls{PHWR} case with the scikit-learn algorithms.  While \textit{k}-nearest

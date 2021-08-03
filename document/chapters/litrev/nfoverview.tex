@@ -22,7 +22,8 @@ collection and measurement requirements than a mass of \gls{SNM}. This
 separates the field into post-detonation and pre-detonation nuclear forensics.
 While both are discussed below in Sections \ref{sec:postdet} and
 \ref{sec:predet}, respectively, there is more focus on pre-detonation topics
-since this work is based on \gls{SNF}.
+since this work is based on \gls{SNF}. \todo{check notes for more sources, use
+nonpro NF paper too}
 
 \subsubsection{Post-Detonation}
 \label{sec:postdet}
@@ -188,3 +189,14 @@ measurements \cite{bayes_compare}.  In the nuclear forensics context of
 pre-detonated materials, this would be a a set of probabilities for different
 parameters of interest, e.g., reactor type, burnup, cooling time, and
 enrichment of some interdicted \gls{SNF}.
+
+%In addition to evaluating a single learned model, it is beneficial to compare
+%models. Moreover, there are potential degeneracies in the solution space. This
+%is because most inverse problems are \textit{ill-posed}, because the solution
+%is not guaranteed to be unique \cite{skutnik_2016}.  Evaluating not only the
+%solution, but the confidence in the solution, is therefore prudent. While the
+%two scikit-implemented algorithms do not provide this information, the
+%\gls{MLL} calculation method provides a likelihood with an uncertainty. This
+%provides a measure of distinguishability that many machine learning approaches
+%do not provide. 
+

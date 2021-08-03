@@ -1,11 +1,10 @@
 
 In this section, the results of the regression cases (burnup, enrichment, and
 time since irradiation) are presented. For each prediction parameter, the plot
-format described in Figure \ref{fig:detdemo} is used to show both the
-\gls{MAPE} for each of the three energy window lists.  However, while seeing
-the performance decrease with all three algorithms on the same plot is helpful
-for getting a bigger picture of the results, a more detailed visual is also
-helpful. 
+format described in Figure \ref{fig:detdemo} is used to show the \gls{MAPE} for
+each of the three energy window lists.  However, while seeing the performance
+decrease with all three algorithms on the same plot is helpful for getting a
+bigger picture of the results, a more detailed visual is also helpful. 
 
 Introduced in Section \ref{sec:sfcoreg}, box plots provide increased
 statistical detail and a direct comparison of mean and median error for each
@@ -68,7 +67,7 @@ figures.
   \end{subfigure}
   \caption[Box plots (without outliers) of burnup regression for six detectors]
           {Prediction performance of burnup for six detectors as shown by box 
-           plots without outliers shown.}
+           plots \emph{without} outliers shown.}
   \label{fig:burnbox}
 \end{figure}
 
@@ -96,7 +95,7 @@ figures.
   \end{subfigure}
   \caption[Box plots (with outliers) of burnup regression for six detectors]
           {Prediction performance of burnup for six detectors as shown by box 
-           plots with outliers shown.}
+           plots \emph{with} outliers shown.}
   \label{fig:burnboxfly}
 \end{figure}
 
@@ -132,8 +131,8 @@ The burnup predictions for the most part perform better than the red line, for
 all algorithms and gamma spectra-processing methods.  Of course, the \gls{MLL}
 calculations consistently have the lowest errors. In all but the two \gls{HPGe}
 cases with the auto energy windows list, the \gls{MedAE}s are close to zero.
-This indicates that there are a majority \todo{is majority true?} of very good
-predictions. However, the \gls{MAE}s are all above the 75\% quartile, which
+This indicates that there are very good predictions for at least half of the
+training set.  However, the \gls{MAE}s are all above the 75\% quartile, which
 suggests the errors that do exist are quite large relative to the interquartile
 range.  
 
@@ -189,7 +188,7 @@ large that it is difficult to conclusively define a trend.
   \caption[Box plots (without outliers) of \acrshort{U235} enrichment regression 
            for six detectors]
           {Prediction performance of \acrshort{U235} enrichment for six detectors 
-           as shown by box plots without outliers shown.}
+           as shown by box plots \emph{without} outliers shown.}
   \label{fig:enribox}
 \end{figure}
 
@@ -218,7 +217,7 @@ large that it is difficult to conclusively define a trend.
   \caption[Box plots (with outliers) of \acrshort{U235} enrichment regression
            for six detectors] 
           {Prediction performance of \acrshort{U235} enrichment for six 
-           detectors as shown by box plots with outliers shown.}
+           detectors as shown by box plots \emph{with} outliers shown.}
   \label{fig:enriboxfly}
 \end{figure}
 
@@ -315,7 +314,7 @@ deviations are so large that it is difficult to conclusively define a trend.
   \caption[Box plots (without outliers) of time since irradiation regression 
            for six detectors]
           {Prediction performance of time since irradiation for six detectors as 
-           shown by box plots without outliers shown.}
+           shown by box plots \emph{without} outliers shown.}
   \label{fig:coolbox}
 \end{figure}
 
@@ -344,7 +343,7 @@ deviations are so large that it is difficult to conclusively define a trend.
   \caption[Box plots (with outliers) of time since irradiation regression for 
            six detectors]
           {Prediction performance of time since irradiation for six detectors as 
-           shown by box plots with outliers shown.}
+           shown by box plots \emph{with} outliers shown.}
   \label{fig:coolboxfly}
 \end{figure}
 
@@ -381,7 +380,7 @@ previously mentioned issues with this algorithm's performance with this
 particular prediction parameter.  For reactor type, burnup, and enrichment, the
 predictions using \textit{k}-nearest neighbors for the two \gls{HPGe} detectors
 processed with the auto energy windows list performed drastically worse than
-the rest of the scenarios. For time sine irradiation, however, this is only
+the rest of the scenarios. For time since irradiation, however, this is only
 true for the portable \gls{HPGe}.  The reason for this behavior is discussed at
 the end of Section \ref{sec:exp2_rxtr}. 
 

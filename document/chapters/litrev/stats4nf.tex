@@ -119,10 +119,10 @@ to choose the better method of partial least squares discriminant analysis.
 
 \subsection{Regression Work}
 
-A paper that greatly influenced the development of this study involves not only
-statistical methods but an investigation of those methods when faced with
-information reduction via random nuclide measurement errors in the training
-data set \cite{dayman_feasibility_2013}.  Additionally, feature reduction was
+Switching the focus to regression, one work combines the use of statistical
+methods with an investigation of those methods when faced with information
+reduction via random nuclide measurement errors in the training data set
+\cite{dayman_feasibility_2013}.  Additionally, feature reduction was
 investigated by using various nuclide compositions: the top 200 nuclides by
 concentration in each vector, fission products only, and a principal components
 analysis-derived shortened nuclide list.  
@@ -151,7 +151,9 @@ All other nuclide lists quickly devolved to random guesses with an increase in
 nuclide error in the case of reactor prediction, and more than 100\% error in
 the case of burnup prediction. Figure \ref{fig:dayman} shows the behavior of
 burnup prediction at low training set error (under 1\%) for the various methods
-with feature set combinations. 
+with feature set combinations.
+
+\todo[inline]{have several more papers to add here}
 
 \subsection{Maximum Log-Likelihood Calculations}
 
@@ -199,34 +201,71 @@ method was later validated with experimental samples, in Reference
 
 After experimental validation, sensitivity studies were conducted in Reference
 \cite{mll_sensitivity}.  Figure \ref{fig:tamu2} shows a set of results from the
-increasing of uncertainty. It is interesting that the likelihood decrease
-happens faster on the time since irradiation axis than on the burnup axis. The
-main result from the sensitivity studies is that while one sample was robust to
-the increased uncertainty and still gave a prediction at the 99\% confidence
-level even at the highest uncertainty (28\%), the other sample provided a prediction
-at only a 68\% confidence level at the highest uncertainty.
+increasing of uncertainty for the same sample being predicted in Figure
+\ref{fig:tamu}.  It is interesting that the likelihood decrease happens faster
+on the time since irradiation axis than on the burnup axis. The main result
+from the sensitivity studies is that while a different sample was robust to the
+increased uncertainty and was predicted at the 99\% confidence level even at
+the highest uncertainty (28\%), the sample shown here was predicted at only a
+68\% confidence level at the highest uncertainty.
 
 \subsection{Summary}
 
 The factor analysis works \cite{nicolaou_2006, nicolaou_pu, nicolaou_2009,
-nicolaou_2014, nicolaou_2015} and other visualization- and
-classification-based works \cite{pu_discrimination, jones_snf_2014,
-jones_viz_2014} helped provide a foundation by which to understand the scope of
-problem of attributing \gls{SNF}. Additionally, some of these use the
-\gls{SFCOMPO} database in their study design \cite{nicolaou_2014,
-jones_viz_2014}.
+nicolaou_2014, nicolaou_2015} and other visualization- and classification-based
+works \cite{pu_discrimination, jones_snf_2014, jones_viz_2014} helped provide a
+foundation by which to understand the scope of problem of attributing
+\gls{SNF}. Additionally, some of these use the \gls{SFCOMPO} database in their
+study design \cite{nicolaou_2014, jones_viz_2014}. While Reference
+\cite{nicolaou_2014} uses the factor analysis method directly on some subset of
+\gls{SFCOMPO} database entries, Reference \cite{jones_viz_2014} uses nine
+samples from the database as test cases for both reactor type classification
+and burnup/${}^{235}\text{U}$ enrichment.  This work instead tests all
+available \gls{SFCOMPO} entries after some filtering steps are carried out to
+remove cases that are not approximated by the training set.  Reference
+\cite{nicolaou_2009} chooses a set of nuclides based on a comparison of mass
+spectrometry to gamma spectroscopy, which also happens in this work. However,
+there is no indication that there is a gamma detector-based treatment of the
+chosen fission products. It is presumed they are using msas or activity-based
+values to represent the features in their training set. 
 
 Reference \cite{robel_2009} performs prediction of \gls{UOC} provenance,
 comparing a newly developed method against two simple algorithms; this informed
-the method of choosing of algorithms in this work. It is important to first create a
-benchmark a simple approach before scaling up to more complex treatments of the
-data. 
+the method of choosing of algorithms in this work. It is important to first
+create a benchmark a simple approach before scaling up to more complex
+treatments of the data. The approach in this reference used \textit{k}-nearest
+neighbors, decision trees, and a unique iterative method.  It is actually a
+coincidence that the first two methods match the ones chosen for this work,
+because other methods were tested before deciding to use both
+\textit{k}-nearest neighbors and decision trees. Still, this work chooses a
+different third method to implement and shifts the focus to \gls{SNF}. 
 
-The mathematical framework for \gls{MLL} calculations is in
-Section \ref{sec:algs}.  
-Additionally, the time steps are much smaller than what exists in the
-training set in this work, and these publications focus on a set of 10 isotope
-ratios as the feature set.  Despite these differences, this approach is still
-applicable to this work, which focuses on \gls{SNF}. 
+This third method is the \gls{MLL} calculations developed in References
+\cite{mll_method, mll_validate, mll_sensitivity}.  The mathematical framework
+for \gls{MLL} calculations is in Section \ref{sec:algs}.  There are a few
+differences in implementation. This work focuses on \gls{SNF} instead of a
+material source presumed to be separated plutonium.  Additionally, the time
+steps in the references are much smaller than what exists in the training set
+in this work, and these publications focus on a set of 10 isotope ratios as the
+feature set.  Also, instead of studying two well-characterized samples (that
+were at first simulated but then irradiated and real measurements were taken),
+this work instead is focused on the aggregate statistics of many predictions.
+Despite these differences, this approach is still applicable to and an asset
+for this work. 
 
-The study design of Reference \cite{dayman_feasibility_2013} 
+A paper that greatly influenced the development of this study
+\cite{dayman_feasibility_2013} seeded the decision to evaluate the effect of
+information reduction on the predictive capabilities of the statistical methods
+used.  While the first experiment in Chapter \ref{ch:exp1} uses a similar
+application of random error, the experiment in Chapter \ref{ch:exp2} instead
+uses detectors with decreasing energy resolution to accomplish information
+reduction.
+
+In summary, there is limited treatment of statistical methods predicting any
+nuclear material's attributes when facing information reduction in the
+literature.  There is also limited use of the \gls{SFCOMPO} database as a
+testing set.  The first experiment in Chapter \ref{ch:exp1} addresses these
+thin areas of previous work.  There is no work to the author's knowledge using
+a gamma detector-based treatment for the measurement of nuclides for use in
+statistical approaches, and the second experiment in Chapter \ref{ch:exp2}
+concentrates on this.

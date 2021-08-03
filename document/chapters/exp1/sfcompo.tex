@@ -18,27 +18,36 @@ here.
   \label{fig:sfcoscatter}
 \end{figure}
 
-There are 505 test cases that are able to compare against the training
-database.  The number of each reactor type is as follows: 312 \gls{PWR}s, 165
-\gls{BWR}s, and 28 \gls{PHWR}s. The space of enrichment and burnup values is
-visualized in Figure \ref{fig:sfcoscatter}. These are sufficiently represented
-in the training set design, as pictured in Figure \ref{fig:trainhist}, although
-the proportions of \gls{PWR} and \gls{BWR} are approximately opposite to the
-training set. The assays in \gls{SFCOMPO} are presented as nuclide
+The database used in this work is a filtered version of all the entries in the
+original database. First, only the nuclide concentration measurements are kept
+so that the training set measurements could be converted to the units in
+\gls{SFCOMPO}.  The assays in \gls{SFCOMPO} are presented as nuclide
 concentrations with the units milligrams per grams of initial uranium, or
 $mg/gU_i$. The training set of nuclide measurements in $grams$ is converted to
 these concentration units prior to prediction is converted to these
-concentration units prior to prediction. 
+concentration units prior to prediction. Second, only the \gls{PWR}, \gls{BWR},
+and \gls{PHWR} entries are retained and all other reactor types are excluded.
+Third, uranium-gadolinium fuels are not simulated in the training set and
+therefore are also removed from the testing set. Last, duplicate entries for
+some measurements exist and the first entry is kept in these cases. 
+
+In all, there are 505 test cases that are able to compare against the training
+database.  The number of each reactor type is as follows: 312 \glspl{PWR}s, 165
+\glspl{BWR}s, and 28 \glspl{PHWR}s. The space of enrichment and burnup values
+is visualized in Figure \ref{fig:sfcoscatter}. These are sufficiently
+represented in the training set design, as pictured in Figure
+\ref{fig:trainhist}, although the proportions of \gls{PWR} and \gls{BWR} are
+approximately opposite to the training set. 
 
 There is one main issue with using \gls{SFCOMPO} as a testing set: missing
 nuclide measurements.  The feature set of 29 nuclides in Table
 \ref{tbl:nucmass} was chosen based on the frequency of these measurements being
 present in the database at an arbitrary level of 100 measurements. This
-happened before filtering, so there are some nuclide measurements present at
-under 100 counts.  Each nuclide's frequency in \gls{SFCOMPO} is listed in Table
-\ref{tbl:missing}.  While every assay contains several plutonium measurements
-and most contain uranium measurements as well, the remaining nuclides are
-present at a much lower rate. 
+happened before filtering the uranium-gadolinium fuel, so there are some
+nuclide measurements present at under 100 counts.  Each nuclide's frequency in
+\gls{SFCOMPO} is listed in Table \ref{tbl:missing}.  While every assay contains
+several plutonium measurements and most contain uranium measurements as well,
+the remaining nuclides are present at a much lower rate. 
 
 \begin{table}[!htb]
   \centering
@@ -66,17 +75,18 @@ present at a much lower rate.
   \label{tbl:missing}
 \end{table}
 
-Although some algorithms in theory can handle null values in the training
-stage, scikit-learn does not currently include this capability. The \gls{MLL}
-method is designed to handle null values, however. This is done by converting
-them to zero and filtering out all zero-valued nuclides during the likelihood
+Although some algorithms in theory can handle null values in the testing stage,
+scikit-learn does not currently include this capability. The \gls{MLL} method
+is designed to handle null values, however. This is done by converting them to
+zero and filtering out all zero-valued nuclides during the likelihood
 calculations. But there is a technique more commonly applied than converting
 missing values to zero: imputation. This involves taking the mean or median of
-the existing features and applying that value to the assays in which it is
-missing.  The remainder of this section discusses using the three algorithms to
-predict the \gls{SFCOMPO} test cases where the nulls are both converted to zero
-and imputed using the mean.  \todo[inline]{is converting to zero technically
-imputation as well?}
+the existing features in the testing set \todo{check w/ paul} and applying that
+value to the assays in which it is missing.  The remainder of this section
+discusses using the three algorithms to predict the \gls{SFCOMPO} test cases
+where the nulls are both converted to zero and imputed using the mean.
+\todo[inline]{is converting to zero technically imputation as well?--> yes and
+so update the language to reflect that}
 
 \subsubsection{Reactor Type Classification}
 
@@ -205,9 +215,9 @@ median value.  The white triangles represent the mean error, and the white line
 in notched box is the median error. The box itself is the 25\% (Q1) and 75\%
 (Q3) quartiles at the bottom and top, respectively. The error bars or whiskers
 are meant to represent the spread of all errors minus the outliers.  The bottom
-whisker reaches to $Q1 - 1.5*(Q3-Q1)$ and the top whisker reaches to $Q3 +
-1.5*(Q3-Q1)$. Any values outside of this range are considered outliers.
-\cite{matplotlib}
+whisker reaches to $Q1 - 1.5(Q3-Q1)$ and the top whisker reaches to $Q3 +
+1.5(Q3-Q1)$. Any values outside of the total whisker range, $4(Q3-Q1)$, are
+considered outliers.  \cite{matplotlib} 
 
 \noindent \textbf{Burnup}
 
@@ -218,11 +228,15 @@ in both the mean and median burnup errors from the imputed nulls to the
 zero-nulls, the \gls{MLL} calculations have an order of magnitude decrease in
 error when moving in that same direction.  Seeing this trend between Figures
 \ref{fig:burnimp} and \ref{fig:burn0} is a little difficult due to the
-different ranges on the \textit{y}-axes, but the drastic improvement in
+different ranges on the vertical axes, but the drastic improvement in
 \gls{MLL} burnup error from the imputed nulls in Figure \ref{fig:burnimp} to
 the zero-nulls in Figure \ref{fig:burn0} is still visually clear. In the latter
 figure, there is one outlier for \textit{k}-nearest neighbors and 39 for
 \gls{MLL} calculations.
+\todo[inline]{here and ch 5 -- remove units from rel err plots}
+\todo[inline]{make some error versus burnup (and other labels) plots; useful
+when discussing high relative error cases; check to see if this would be useful
+in Ch 5 too}
 
 \begin{table}[!htb]
   \centering
@@ -287,9 +301,9 @@ test database) for the \textit{k}-nearest neighbors, decision trees, and
   \label{fig:sfcoburn}
 \end{figure}
 
-The ranges seen for the imputed nulls test set in Figure \ref{fig:burnimppct}
-are as large as they are from low burnups ($< 10\:GWd/MTU$) being far
-overpredicted, since a small number in the denominator will yield a high
+The large ranges seen for the imputed nulls test set in Figure
+\ref{fig:burnimppct} are because of large overpredictions of low burnups ($<
+10\:GWd/MTU$), since a small number in the denominator will yield a high
 percentage error. A large subset of the low burnup cases are \gls{PHWR}s.
 Their burnups are also unlikely to be predicted well because of the inability
 of \gls{PHWR} reactors to be represented accurately with this methodology.
@@ -323,7 +337,7 @@ the real picture of this unique testing scenario.
 For both reactor type classification and burnup regression, the zero-nulls
 test set predicted by \gls{MLL} calculations far outperform all other
 algorithm/test set scenarios. However, the enrichment regression results break
-this trend.  Table \ref{fig:sfcoenri} shows that decision trees outperform the
+this trend.  Table \ref{tbl:sfcoenri} shows that decision trees outperform the
 other methods, and furthermore, there isn't a large difference in performance
 between the two test sets, especially seeing that the median absolute error is
 the same for both test sets.  The other two algorithms follow their previous
@@ -426,3 +440,5 @@ absolute error statistics provides a fuller picture of the regression of the
 of the scikit algorithms outperform \gls{MLL} calculations for the zero-nulls
 test set, since they tended to have lower errors using the imputed nulls test
 set. 
+
+\todo[inline]{speak your conclusions here, only did a results discussion}

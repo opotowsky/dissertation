@@ -25,16 +25,6 @@ the model to predict future cases that were not introduced in the training
 phase. Next, the various metrics used to evaluate classification and regression
 are covered.
 
-%In addition to evaluating a single learned model, it is beneficial to compare
-%models. Moreover, there are potential degeneracies in the solution space. This
-%is because most inverse problems are \textit{ill-posed}, because the solution
-%is not guaranteed to be unique \cite{skutnik_2016}.  Evaluating not only the
-%solution, but the confidence in the solution, is therefore prudent. While the
-%two scikit-implemented algorithms do not provide this information, the
-%\gls{MLL} calculation method provides a likelihood with an uncertainty. This
-%provides a measure of distinguishability that many machine learning approaches
-%do not provide. 
-
 \noindent \textbf{Reactor Type Classification}
 
 For the classification of reactor type, it is typical to use an accuracy score

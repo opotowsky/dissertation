@@ -16,12 +16,25 @@ The \gls{MLL} calculations are implemented identically to Chapter
 undergo a new round of hyperparameter optimization.
 
 The full list of 22 training sets that undergo training and prediction are as
-follows: 29 nuclide masses (from Chapter \ref{ch:exp1}), 32 nuclide activities
-(full knowledge scenario for all nuclides, whether or not they are present in a
-quantity able to be detected), 7 \& 12 nuclide activities (full knowledge for
-short and long energy window lists, respectively), and auto, short, and long
-energy window lists applied to the six detectors (lab-based \gls{HPGe},
-portable \gls{HPGe}, \gls{CZT}, \gls{SrI2}, \gls{LaBr3}, \gls{NaI}). 
+follows: 
+\begin{itemize}
+  \item 29 nuclide masses (from Chapter \ref{ch:exp1})
+  \item 3 sets of nuclide activities
+    \begin{itemize}
+      \item 32 nuclide activities (full knowledge scenario for all nuclides, 
+            whether or not they are present in a quantity able to be detected)
+      \item 12 nuclide activities (full knowledge for long energy windows list)
+      \item 7 nuclide activities (full knowledge for short energy windows list)
+    \end{itemize}
+  \item 18 detector-based processed spectra sets
+    \begin{itemize}
+      \item Auto energy windows lists applied to six detectors (lab-based 
+            \gls{HPGe}, portable \gls{HPGe}, \gls{CZT}, \gls{SrI2}, \gls{LaBr3}, 
+            \gls{NaI})
+      \item Short energy windows lists applied to six detectors above
+      \item Long energy windows lists applied to six detectors above
+    \end{itemize}
+\end{itemize}
 
 \begin{table}[!htb]
   \centering

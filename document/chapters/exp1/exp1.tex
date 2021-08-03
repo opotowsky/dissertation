@@ -75,6 +75,8 @@ discussed in Section \ref{sec:sfcompo}.
 
 \section{Summary}
 
+\todo[inline]{reduce verbosity and detail of summary, and add more firm conclusions}
+
 This chapter covers the details of the methodology in four main sections:
 training set simulations, information reduction, statistical methods
 implementation, and performance evaluation. This approach focuses on the
@@ -141,7 +143,11 @@ each algorithm's performance degradation for reactor type, burnup, and
 enrichment all behave in a similar fashion. But the \textit{k}-nearest
 neighbors prediction of time since irradiation has a drastic drop that
 starts with even 1\% introduced training set error. The prediction performance
-at 20\% training set error is used as a baseline for future work. 
+at 20\% training set error is used as a baseline for future work.
+
+\todo[inline]{Paul brought up the upper bound performance of MLL since the test
+case is removed. but 20\% of training set is removed for scikit preds, so at
+least for $k=1$ the upper bound is potentially worse for kNN}
 
 In Section \ref{sec:randerrC}, the impacts of fewer training set entries are
 implemented to investigate how the algorithms each generalize to unseen samples. Using the

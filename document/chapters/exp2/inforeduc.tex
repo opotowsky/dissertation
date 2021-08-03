@@ -13,14 +13,16 @@ attribution by correctly predicting the reactor type, burnup, \gls{U235}
 enrichment, and time since irradiation.  In this section, the information
 quality is treated as the information reduction (i.e. decreasing energy
 resolution) of processed gamma spectra in the training database.  This
-detector-based treatment was not applied to the mass measurements from the
-first experiment in Chapter \ref{ch:exp1} because studying measurement
-techniques that can only be done in a lab is not the goal of this work.
-Instead, field-deployable detectors are of interest.
+detector-based information reduction-focused treatment was not applied to the
+mass measurements from the first experiment in Chapter \ref{ch:exp1} because
+studying measurement techniques that can only be done in a lab is not the goal
+of this work. \todo{check w/ paul -- trying to say I don't care about mass spec
+errors and detection quality} Instead, field-deployable detectors are of
+interest.
 
 This process is outlined here for the second experiment, in which a gamma
 spectrum is computed for each sample in the database from the nuclide
-activities in Section \ref{sec:training2}.  The code \gls{GADRAS} \cite{gadras}
+activities in Section \ref{sec:training2}.  The \gls{GADRAS} code \cite{gadras}
 developed at Sandia National Laboratories will provide computational gamma
 spectra.  This adds more than one layer of reduced information quality, which
 are listed here, and also serve as an outline of the steps taken to process the 
@@ -30,7 +32,7 @@ gamma spectra:
         radionuclides.
   \item \label{itm:2} Instead of "perfect" radionuclide activity knowledge, 
         they are being measured by a gamma detector.
-  \item \label{itm:3} The processing of the gamma spectra can be highly variable.
+  \item \label{itm:3} The processing of the gamma spectra can be highly variable.\todo{fix me}
   \item \label{itm:4} The $\sqrt{n}$ error of counts-based detection is included. 
 \end{enumerate}
 
@@ -42,14 +44,17 @@ rapid_riid_18, sull_gen_07, sull_valid_15, sull_auto_17, sull_unc_17}.  Since
 this is a topic of active research and the approaches are heavily
 detector-dependent, a simple processing approach is described below.
 
-\noindent \textbf{Steps 1 \& 2: Choosing Radionuclides \& Computational Gamma Detection}
+\noindent \textbf{Step 1 : Choosing Radionuclides}
 
-Step \ref{itm:1} is covered in Section \ref{sec:training2}.  Step \ref{itm:2}
-refers to obtaining a gamma spectrum for every \gls{SNF} entry in the database.
-This is done using the \gls{GADRAS} tool, which applies a \gls{DRF} to the
-gamma lines from these radionuclides. The input is a nuclide activity vector,
-and the output is an array of energy bins (measured in $keV$), and the counts
-per energy bin.
+Step \ref{itm:1} is covered in Section \ref{sec:training2}.  
+
+\noindent \textbf{Step 2: Computational Gamma Detection}
+
+Step \ref{itm:2} refers to obtaining a gamma spectrum for every \gls{SNF} entry
+in the database.  This is done using the \gls{GADRAS} tool, which applies a
+\gls{DRF} to the gamma lines from these radionuclides. The input is a nuclide
+activity vector, and the output is an array of energy bins (measured in $keV$),
+and the counts per energy bin.
 
 The nuclide activity data requires some processing to be used in this way.  The
 activities that come from the \gls{ORIGEN} simulations are based on there being
@@ -58,12 +63,16 @@ amount to be smuggled, it would overwhelm a detector at the default/calibrated
 source-detector distances in \gls{GADRAS}.  Therefore, the material (and
 resulting nuclide activities) are scaled to be $1\:g$ of \gls{SNF}.
 
+\todo[inline]{GADRAS overview here. also be clear about the required inputs and
+what I gave for those inputs}
+
 Regarding the input information for the \gls{GADRAS} calculations, the sources
 are provided without any background; this is because any spectrum would undergo
 background subtraction before further analysis. Additionally, the nuclides are
 pre-decayed in \gls{ORIGEN} to correspond to various cooling times, but the
 source age provided to \gls{GADRAS} needs to be a non-zero value. A source age
-of $20\:minutes$ provides the expected peaks.
+of $20\:minutes$ \todo{not super sensitive? tested this in 5 or 10 minute
+steps?} provides the expected peaks.
 
 \begin{table}[!htb]
   \centering
@@ -95,19 +104,23 @@ energy resolution: portable \gls{HPGe}, \gls{CZT}, \gls{SrI2}, \gls{LaBr3}, and
 \gls{NaI} detectors. This is displayed in the table by including the \gls{FWHM}
 of the $661\:keV$ peak for ${}^{137}\text{Cs}$. At this point, there are six
 versions of the original database for each detector setup, but there is a full
-gamma spectrum for each \gls{SNF} entry. It is not computationally prudent to
-use full gamma spectra for training and testing, and so these spectra are
-processed; this is step \ref{itm:3} from above, and is outlined as follows.
+gamma spectrum for each \gls{SNF} entry.\todo{fix confusing sentence} It is not
+computationally prudent to use full gamma spectra for training and testing,
+since the spectra returned have 1024 or 8192 bins, and machine learning
+algorithms are not designed to handle thousands of features.  Thus, these
+spectra are processed; this is step \ref{itm:3} from above, and is outlined as
+follows.
 
 \noindent \textbf{Step 3: Processing Gamma Spectra}
 
 Step \ref{itm:3} covers the steps taken to process the gamma spectrum generated
 for each \gls{SNF} entry into a training set where the features are now summed
-windows of a range of energy bins.  There are two main design choices here: the
-width of the energy windows and the number of energy windows to include. The
-energy window width is a value that was manually chosen and does not change for
-each detector.  The different energy window widths are listed in Table
-\ref{tbl:enwindows}.
+windows of a range of energy bins.\todo{be clear about why this choice makes
+sense}  There are two main design choices here: the width of the energy windows
+and the number of energy windows to include. The energy window width is a value
+that was manually chosen \todo{say how you chose the window size clearly} and
+does not change for each detector.  The different energy window widths are
+listed in Table \ref{tbl:enwindows}.
 
 \begin{table}[!htb]
   \centering
@@ -115,7 +128,7 @@ each detector.  The different energy window widths are listed in Table
     \toprule
     \multirow{2}{*}{\textbf{Detector}} &
     \multirow{2}{*}{\textbf{\begin{tabular}[c]{@{}l@{}}Energy Window\\ Size {[keV]}\end{tabular}}} &
-    \multicolumn{3}{c}{\textbf{Energy Window List Length}} \\ \cmidrule(l){3-5}
+    \multicolumn{3}{c}{\textbf{\# of Energy Windows}} \\ \cmidrule(l){3-5}
                      &    & Auto & Short & Long \\
     \toprule
     In-Lab HPGe      & 2  & 206  & 42    & 151  \\
