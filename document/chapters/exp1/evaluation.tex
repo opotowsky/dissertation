@@ -21,11 +21,11 @@ as \textit{Dec Tree} or \textit{DTree}), and \gls{MLL} calculations.
 To judge the degradation of predictions of the algorithms with increasing
 nuclide mass measurement error (i.e., reduced information quality, detailed in
 Section \ref{sec:inforeduc1}), several plots are made with the introduced error
-on the \textit{x}-axis and a prediction performance metric on the
-\textit{y}-axis.  The \textit{y}-axis is always oriented so that lower is
+on the horizontal axis and a prediction performance metric on the
+vertical axis.  The vertical axis is always oriented so that lower is
 poorer performance and higher is better performance. This is why Figures
 \ref{fig:randburn}--\ref{fig:randcool} present a negative error on the
-\textit{y}-axis. Additionally, the data points on all the plots have a small
+vertical axis. Additionally, the data points on all the plots have a small
 $\Delta x$ to show error bars that are otherwise impossible to see.
 
 In all of the results in this section, the statistics being reported is on all
@@ -74,13 +74,13 @@ provide much detail about what is being misclassified. To probe this further,
 Figure \ref{fig:cm_nuc29} shows three sets of confusion matrices, originally
 introduced in Section \ref{sec:testerr}.  The off-diagonal squares are the
 fraction of false positives for each reactor type, where the predicted label
-(\textit{x}-axis) is something other than the true label (\textit{y}-axis).
+(horizontal axis) is something other than the true label (vertical axis).
 The false positive fractions are normalized to the number of true labels.
 Below the fractions inside the pixels are the raw numbers of false positives.
 The diagonal squares have three numbers in them. The top numbers are the
 fraction of true positives for each reactor type (normalized to true labels),
-where the predicted label (\textit{x}-axis) is equal to the true label
-(\textit{y}-axis).  The middle number in parentheses is the true positive
+where the predicted label (horizontal axis) is equal to the true label
+(vertical axis).  The middle number in parentheses is the true positive
 fraction subtracted by one: $\text{TP} - 1$.  Again, the bottom number is the
 raw number of true positives.  
 
@@ -155,7 +155,7 @@ to the \gls{MAE} on the second plot for each regression case, the \gls{MedAE}
 is represented as a triangle on the plot as well. These three errors taken
 together provide more detailed information about the performance of each
 algorithm when faced with training set noise.  As previously mentioned, the
-\textit{x}-axis has negative errors, so that higher is always better.  
+vertical axis has negative errors, so that higher is always better.  
 
 \begin{figure}[!htb]
   \centering

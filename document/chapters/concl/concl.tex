@@ -184,14 +184,11 @@ Another way in which the implementation differed was the 5-fold \gls{CV} being
 used as the testing protocol for the scikit-learn algorithms. For 5 rounds,
 20\% of the training set is removed as a testing set, where eventually all 5
 folds are tested.  By contrast, the \gls{MLL} test samples get removed a single
-entry at a time.  From the learning curves, it appears that reducing the
+entry at a time.  If the training set were to be more sparsely populated with
+the same range of each label, this would be of larger concern.  From the
+learning curves in Figure \ref{fig:learns}, it appears that reducing the
 training set by 20\% would in theory not impact the \gls{MLL} performance, but
 it is still a major difference in implementation. 
-
-The methods in this work all have high variance, and so it would have seemed
-prudent to apply regularization. However, hyperparameter optimization did not
-shift the high variance defaults much towards more bias. Bad generalization,
-possibly contributed to poor sfcompo results.  \todo{unfinished} 
 
 Note for nuclides: feature importance work gave different lists for each label,
 but since each training set is designed to be able to predict all four
@@ -264,7 +261,7 @@ mass would be prudent.
 \noindent \textbf{Gamma Spectra Processing}
 
 For the 32 nuclide activity training set, the most detectable gamma energies
-energed from the short and long energy windows lists to include from 7 and 12
+emerged from the short and long energy windows lists to include from 7 and 12
 nuclides, respectively, shown in Table \ref{tbl:enlistnucs}. So in this way,
 nuclear physics performed the feature selection.  It is clear from the results
 that the 7- and 12-nuclide lists performed quite well, and exceeded the
@@ -274,39 +271,133 @@ information. These were captured via the auto peak search method, but the
 resulting energy windows list did not provide better results (and in some cases
 with \textit{k}-nearest neighbors, provided worse performance).  This simple
 approach should be refined with a study on the latest gamma spectra
-processesing tools. 
+processing tools. 
 
 There are also more advanced detection techniques being studied, some which
 could be simulated with \gls{GADRAS}.  This would provide easier peak
 processing for nuclides of interest, e.g., with peaks at the high energy end of
-the spectrum.
+the spectrum. \todo{finish}
 
-Copy of citations:
-detection using targeted or advanced measurement techniques \cite{snf_gamma,
-compton_supp, bwr_high-res_gamma, pwr_bwr_gamma} and using innovative spectra
-evaluation and radioisotope identification methods \cite{riid_09,
-rapid_riid_18, sull_gen_07, sull_valid_15, sull_auto_17, sull_unc_17}.  Since
+Citations:
+
+targeted or advanced measurement techniques \cite{snf_gamma, compton_supp,
+bwr_high-res_gamma, pwr_bwr_gamma}
+
+innovative spectra evaluation and radioisotope identification methods
+\cite{riid_09, rapid_riid_18, sull_gen_07, sull_valid_15, sull_auto_17,
+sull_unc_17}.
 
 \subsection{Statistical Method Optimization}
 
-High variance algorithms, not much optimization work done
+The methods in this work all have high variance, and so it would have seemed
+prudent to apply regularization. However, hyperparameter optimization did not
+shift the high variance defaults much towards more bias.  The resulting
+inability to generalize likely was a contributing factor to the large errors in
+the results when using the \gls{SFCOMPO} database as a testing set. A closer
+look at optimization is warranted in tandem with the above work on the feature
+sets for each label.
 
-Could implement kNN with loglike distance for MLL or MLL-weighted kNN (keeping 
-distance metrics as distance). -- Can't report LL plus unc for this though? Can
-those values be averaged?
+Since the \gls{MLL} approach is essentially \textit{k}-nearest neighbors with
+$k=1$ and a different loss metric, the \gls{MLL} calculations could be expanded
+to include the option to have \textit{k} samples averaged for a response, which
+would increase the bias.  Another option would be to use the likelihood
+calculations as custom sample weights within the \textit{k}-nearest neighbors
+algorithm. The implementation of \textit{k}-nearest neighbors in this work used
+Manhattan distance $d_i$ with samples weighted by $1/d_i$. This would change
+the sample weights to $L(M|x_{test})$, the likelihood as calculated in Equation
+\ref{eq:like}.
+
+It is entirely possible that optimizing the methods in this work can only
+improve the prediction performance by a minimal amount, and that more complex
+methods could be beneficial. \todo{finish}
 
 \subsection{Serial Prediction}
 
-Rxtr type first, then regression cases. 
+Figure \ref{fig:knownrxtr} shows that for some combinations of prediction label
+and algorithm, there is an improvement in the regression performance for the
+\gls{PHWR} class, and less so for some \gls{PWR} cases.  (There was no
+significant improvement seen for any reactor type/regression case combination
+for the \gls{MLL} calculations.) Given the majority of the database is
+comprised of \gls{BWR} entries, the improvement is not surprising; it is the
+lack of improvement in the other cases that is unexpected. Either way, it makes
+sense to first determine the reactor type before performing the other
+predictions if not using the \gls{MLL} approach. One example of this being
+done is in Reference \cite{serial_ml}.
 
-Implement ROC studies to vary the decision threshold for PHWR/PWRs to avoid
-misclassifications as BWR. Goal here is perfecto rxtr type classification if
-it comes first. 
+Performing regression after first classifying the reactor type means much care
+should be taken to have a robust reactor type classification algorithm. One way
+to ensure better classification is by implementing a study that leverages
+\gls{ROC} curves. \Gls{ROC} curves plot the true positive rate (vertical axis,
+$\frac{\text{True Positives}}{\text{True Positives + False Negatives}}$) with
+respect to the false positive rate (horizontal axis, $\frac{\text{False
+Positives}}{\text{False Positives + True Negatives}}$) for various
+\textit{decision thresholds}, as shown in Figure \ref{fig:roc} \cite{roc}.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.8\linewidth]{./chapters/concl/roc.png}
+  \caption[Example of an \acrshort{ROC} curve]
+          {Example of an \acrshort{ROC} curve showing the decision threshold 
+           (probability of class belonging) changing from $\infty$ to 0.1; this 
+           is borrowed from Reference \cite{roc}.}
+  \label{fig:roc}
+\end{figure}
+
+During prediction of a test sample, the scikit-learn classifiers calculate a
+probability that the sample belongs to a given class. In binary prediction, the
+default threshold is 0.5. A probability above this threshold means the sample
+will be predicted to belong to the positive class, and below that the sample
+will belong to the negative class.  In multi-class prediction, the highest
+probability is chosen as the predicted class.
+
+An ideal classifier would have values along the vertical axis and then straight
+across the top, meaning beyond some threshold value there are zero false
+positives. On the other end of the spectrum, if the classifier being used in
+Figure \ref{fig:roc} were only choosing classes randomly, it would follow an
+$x=y$ diagonal line. The one shown here performs somewhere in between these two
+extremes. 
+
+If the algorithm returns the probabilities of class belonging instead of the
+predicted class, the threshold can be tuned after the fact to complete
+predictions.  With this work, e.g., the decision threshold  could be manually
+tuned to require a higher threshold for \gls{BWR} classification. If that were
+the case, there could be fewer misclassifications of \glspl{PHWR}s and
+\glspl{PWR}s as \glspl{BWR}s. The issues with regression of \glspl{PHWR}s could
+then be resolved if they were accurately classified as such beforehand. T
 
 \subsection{SFCOMPO}
 
-Serial prediction (rxtr type first, then regression cases)
+The \gls{SFCOMPO} database being used as an external test set within the
+framework of this methodology performed poorly in the sense that some relative
+errors were extremely large. \todo{is this OK to say?} Section
+\ref{sec:sfcompo} shows the results using two different methods for handling
+the missing measurement values: imputation with the mean value of a given
+nuclide, and replacing the null values with zero. 
 
-Nulls imputation can be accomplished via kNN separately, but 0s still would
-still likely work best for MLL
+One way to improve the results is using the previously discussed serial
+prediction approach, where the reactor type is first determined before the
+regression cases are predicted using training sets that only include entries
+from the predicted reactor type.  This was partially touched on in Section
+\ref{sec:sfcompo} by discussing the largest relative errors disappearing when
+\glspl{PHWR}s were removed from consideration.  Another way that might improve
+the results is with better simulation fidelity, also previously discussed. 
+
+A third approach is revisiting the method by which the missing measurements are
+handled.  One option is to side-step the missing nuclide measurements all
+together.  Reducing the training set to only consider uranium and plutonium
+isotopes accomplishes this; the majority of measurements in the training set
+would exist and there would be very few missing measurements.  This is
+essentially what the zero-valued nulls with \gls{MLL} calculations does, and
+likely why it performed the best for the reactor type and burnup predictions
+(and a close second for the ${}^{235}\text{U}$ enrichment prediction). 
+
+Although the zero-null values approach is likely to always perform the best
+with \gls{MLL} calculations, there are better approaches than mean (or median)
+null value imputation. For example, one could take a \textit{k}-nearest
+neighbors approach to imputation where the mean, median, or mode of the
+\textit{k}-closest samples are used for imputation (rather than the mean,
+median, or mode of the entire column in that testing set). Another approach for
+handling missing values is outlined in Reference \cite{nf_missingdata}, where a
+novel imputation approach for the \gls{SFCOMPO} database, called Monte Carlo
+Bayesian Database Generation, is discussed.
 

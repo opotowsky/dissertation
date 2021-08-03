@@ -29,9 +29,9 @@
 \newcounter {lotpage}
 \newcounter {listofheading}
 
-\newcommand\@thesistitlesmallskip{0.15in}
-\newcommand\@thesistitlemedskip{0.3in} 
-\newcommand\@thesistitlebigskip{0.5in} 
+\newcommand\@thesistitlesmallskip{0.2in}
+\newcommand\@thesistitlemedskip{0.4in} 
+\newcommand\@thesistitlebigskip{0.8in} 
 \newcommand{\degree}[1]{\gdef\@degree{#1}}
 \newcommand{\project}{\gdef\@doctype{A masters project report}}
 \newcommand{\prelim}{\gdef\@doctype{A preliminary report}}
@@ -51,13 +51,13 @@
 \gdef\@department{Nuclear Engineering \& Engineering Physics} 
 \gdef\@defensedate{16 August 2021}
 \gdef\@committee{
-  %\setstretch{1.0}
+  \setstretch{1.0}
   \footnotesize
-  Sunil S. Chirayath, Professor, Nuclear Engineering, Texas A\&M University\\
-  Douglass L. Henderson, Professor, Nuclear Engineering \& Engineering Physics\\
-  Benjamin A. Lindley, Professor, Nuclear Engineering \& Engineering Physics\\
-  Robert D. Nowak, Professor, Electrical \& Computer Engineering\\
-  Paul P.H. Wilson, Professor, Nuclear Engineering \& Engineering Physics
+  Sunil S. Chirayath, Associate Professor, Nuclear Engineering, Texas A\&M University\\
+  Douglass L. Henderson, Spangler Professor, Nuclear Engineering \& Engineering Physics\\
+  Benjamin A. Lindley, Assistant Professor, Nuclear Engineering \& Engineering Physics\\
+  Robert D. Nowak, Nosbusch Professor, Electrical \& Computer Engineering\\
+  Paul P.H. Wilson, Grainger Professor, Nuclear Engineering \& Engineering Physics
   }
 
 \renewcommand{\maketitle}{%
@@ -83,7 +83,7 @@
       \\[\@thesistitlebigskip]
     \end{center}
     \hspace*{-0.5cm}Date of final oral examination: \@defensedate \\[\@thesistitlesmallskip]
-    \hspace*{-0.5cm}{\small Oral Examination Committee:}\\
+    \hspace*{-0.5cm}{\small The dissertation is approved by the following members of the Final Oral Committee:}\\
     \@committee
   \end{titlepage}
   \setcounter{footnote}{0}
@@ -289,12 +289,17 @@
 % - center the text vertically
 % - include the text in a center environment
 %=============================================================================
+%\def\dedication{
+%  \newpage
+%  \null\vfil
+%  \begin{center}}
+%\def\enddedication{\end{center}\par\vfil\newpage}
+
 \def\dedication{
   \newpage
   \null\vfil
-  \begin{center}}
-\def\enddedication{\end{center}\par\vfil\newpage}
-
+  }
+\def\enddedication{\par\vfil\newpage}
 %=============================================================================
 % DATE
 %=============================================================================

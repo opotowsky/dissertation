@@ -3,7 +3,7 @@ To judge the degradation of algorithm predictions with decreasing information
 quality (detailed in Section \ref{sec:inforeduc2}), a plot based on Figure
 \ref{fig:detdemo} is presented for each energy window list (auto, short, and
 long).  Figure \ref{fig:rxtr} shows the balanced accuracy of reactor type
-classification for the previously described \textit{x}-axis, where a score of
+classification for the previously described horizontal axis, where a score of
 $1$ is perfect prediction and a score of $0$ is random classification. The
 error bars (which are not visible past the marker size on the plots) reflect a
 99\% confidence interval.  The red baseline that indicates a minimum acceptable
@@ -36,7 +36,7 @@ baseline, there is only one instance of \textit{k}-nearest neighbors being
 above it: the lab-based \gls{HPGe} with the short energy windows list. 
 
 There are no detector-based training sets at all for which decision trees
-performs above the baseline. For the last four detectors on the \textit{x}-axis
+performs above the baseline. For the last four detectors on the horizontal axis
 and all three energy windows lists, decision trees almost consistently performs
 the worst. 
 
@@ -45,7 +45,7 @@ For the auto energy windows list, the lab-based \gls{HPGe} and \gls{SrI2}
 detector-based training sets perform above the baseline. For the short and long
 energy windows lists, only the lab-based \gls{HPGe} is above the baseline. 
 
-Only the first three \textit{x}-axis categories exceed the baseline for all
+Only the first three horizontal axis categories exceed the baseline for all
 three algorithms, which is expected for the various levels of full-knowledge
 represented. The baseline may or may not be drawn at a reasonable level with
 which to distinguish "acceptable" performance, but given its location, only the
@@ -127,7 +127,7 @@ about 5\%. By contrast, the same misclassification is 3\% for
 
 Next, Figures \ref{fig:cm_auto}, \ref{fig:cm_short}, and \ref{fig:cm_long} show
 the confusion matrices for all six detectors (in the same order top-to-bottom
-as the \textit{x}-axis in Figure \ref{fig:rxtr}) for the auto, short, and long
+as the horizontal axis in Figure \ref{fig:rxtr}) for the auto, short, and long
 energy windows list training sets, respectively. For these figures, the color
 bar range is much wider (-0.65 to 0.65) than with the more accurate results in
 Figure \ref{fig:cm_nucs_acts}. 

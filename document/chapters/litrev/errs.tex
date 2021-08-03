@@ -201,22 +201,22 @@ approximately well-fit model.
 \end{figure}
 
 Diagnostic plots show the testing errors with respect to some variable on the
-\textit{x}-axis.  Typically this variable is related in some way to the model
+horizontal axis.  Typically this variable is related in some way to the model
 complexity. This provides insight into the model's fitness, and whether small
 tweaks can be made to increase bias or variance to improve testing performance.
 Put another way, these approaches can evaluate under- or over-fitting.  When
-the \textit{x}-axis is related to regularization parameters, often referred to
+the horizontal axis is related to regularization parameters, often referred to
 as algorithm hyperparameters in this work, it is known as a \textit{validation
 curve}. A full treatment of validation curves is not considered here, but
 Figure \ref{fig:complex} shows the portion relevant to the discussion in the
-bottom plot.  The negative prediction error is plotted on the \textit{y}-axis
+bottom plot.  The negative prediction error is plotted on the vertical axis
 so that the orientation of higher is better is maintained.  A parameter
-influencing model complexity is on the \textit{x}-axis.  The testing error is
+influencing model complexity is on the horizontal axis.  The testing error is
 typically low for the high bias and high variance models, but there usually
 exists an optimum parameter for model complexity for most training data sets. 
 
 Another parameter indirectly influencing model complexity is the training set
-size.  When the training set size is plotted on the \textit{x}-axis as either
+size.  When the training set size is plotted on the horizontal axis as either
 the percentage of the training set used or the absolute number of observations,
 it is called a \textit{learning curve}.  These allow for the user to evaluate
 the optimum number of training set observations to include in the training
@@ -234,7 +234,7 @@ create an \gls{i.i.d.} training set, which is covered in Section
 
 Another area worthy of investigation is the other dimension of the training
 set: the number of features included for model training. This is not usually a
-value that would be plotted on the \textit{x}-axis of a diagnostic plot (unless
+value that would be plotted on the horizontal axis of a diagnostic plot (unless
 one's data is predisposed to this kind of study), but is considered in this
 work. The feature set selection is discussed in Sections \ref{sec:snffeats},
 \ref{sec:training2}, and \ref{sec:inforeduc2}.
