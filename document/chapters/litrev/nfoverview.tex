@@ -89,6 +89,7 @@ signatures with modeling, simulation, or statistical methods.
 
 \subsection{Nuclear Forensics as an Inverse Problem}
 \label{sec:inverse}
+\todo[inline]{still in progress}
 
 Nuclear forensics is a traditional inverse problem, which has been well
 documented mathematically and applied to a range of scientific disciplines.
@@ -128,24 +129,26 @@ statistical in nature; there is a probability that the measured nuclides are
 caused by some value of a model parameter. Thus, the problem is
 \textit{ill-posed} because a prediction is not guaranteed to be unique. 
 
+
+SNL papers:
 \cite{inverse_select}
 \cite{inverse_compare}
 
-Further, including measurement uncertainties broadens the linear model to
-probability densities of the parameters. The opposite is also true in the
-forward case: including parameter uncertainties broadens the forward problem
-results to probability densities of the potential measurement values.
-\cite{inverse_theory}
-
-In this way, we can define some probability that an answer is correct, given a
-set of measurements and their uncertainties, the calculated model parameters,
-the spread of the data space, and the spread of the model space. Inverse
-problem theory connects these values to the general form of Bayes' theorem,
-which is commonly expressed as follows:
-\begin{equation}
-  \label{eq:bayes}
-  P(A|B) = \frac{P(B|A)P(A)}{P(B)}
-\end{equation}
+%Further, including measurement uncertainties broadens the linear model to
+%probability densities of the parameters. The opposite is also true in the
+%forward case: including parameter uncertainties broadens the forward problem
+%results to probability densities of the potential measurement values.
+%\cite{inverse_theory}
+%
+%In this way, we can define some probability that an answer is correct, given a
+%set of measurements and their uncertainties, the calculated model parameters,
+%the spread of the data space, and the spread of the model space. Inverse
+%problem theory connects these values to the general form of Bayes' theorem,
+%which is commonly expressed as follows:
+%\begin{equation}
+%  \label{eq:bayes}
+%  P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+%\end{equation}
 
 %Here, $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that
 %events $A$ and $B$ will occur, representing the model and data spaces,
@@ -161,34 +164,34 @@ which is commonly expressed as follows:
 %the measurements (i.e., the inverse problem) \cite{inverse_theory,
 %gentle_bayes}. 
 
-This is can be mapped easily to the inverse physical system problem scenario.
-$A$ would represent an occurrence of a parameter in the model space, and $B$
-would represent the measurement of some value. Thus, $P(A)$ is the probability
-of a parameter existing without any knowledge of $B$. This is known as the
-prior probability, usually given by some theory about the system. $P(B)$ is the
-probability of some measurement existing without any knowledge of $A$. This is
-known as the marginal likelihood, which is some homogeneous concept for the
-potential measurements that could be made (this only serves to scale to
-absolute probabilities and does not affect the relative probabilities). The
-likelihood, $P(B|A)$, is the chance that a measurement is observed from a given
-parameter, representing the forward problem.  Lastly, the posterior probability
-is the chance of some parameter existing given some measurement, representing
-the inverse problem solution \cite{inverse_theory, gentle_bayes}.  
-
-Given the above, it is more intuitive to consider the conceptual version of
-Bayes' theorem in Equation \ref{eq:bayes_words}.
-\begin{equation}
-  \label{eq:bayes_words}
-  \text{Posterior} = \frac{\text{Likelihood} \cdot \text{Prior}}
-                          {\text{Marginal \ Likelihood}} 
-\end{equation} 
-
-This framework is helpful for an experiment that intends to compare different
-methods for calculating the posterior probability of a system given some
-measurements \cite{bayes_compare}.  In the nuclear forensics context of
-pre-detonated materials, this would be a a set of probabilities for different
-parameters of interest, e.g., reactor type, burnup, cooling time, and
-enrichment of some interdicted \gls{SNF}.
+%This is can be mapped easily to the inverse physical system problem scenario.
+%$A$ would represent an occurrence of a parameter in the model space, and $B$
+%would represent the measurement of some value. Thus, $P(A)$ is the probability
+%of a parameter existing without any knowledge of $B$. This is known as the
+%prior probability, usually given by some theory about the system. $P(B)$ is the
+%probability of some measurement existing without any knowledge of $A$. This is
+%known as the marginal likelihood, which is some homogeneous concept for the
+%potential measurements that could be made (this only serves to scale to
+%absolute probabilities and does not affect the relative probabilities). The
+%likelihood, $P(B|A)$, is the chance that a measurement is observed from a given
+%parameter, representing the forward problem.  Lastly, the posterior probability
+%is the chance of some parameter existing given some measurement, representing
+%the inverse problem solution \cite{inverse_theory, gentle_bayes}.  
+%
+%Given the above, it is more intuitive to consider the conceptual version of
+%Bayes' theorem in Equation \ref{eq:bayes_words}.
+%\begin{equation}
+%  \label{eq:bayes_words}
+%  \text{Posterior} = \frac{\text{Likelihood} \cdot \text{Prior}}
+%                          {\text{Marginal \ Likelihood}} 
+%\end{equation} 
+%
+%This framework is helpful for an experiment that intends to compare different
+%methods for calculating the posterior probability of a system given some
+%measurements \cite{bayes_compare}.  In the nuclear forensics context of
+%pre-detonated materials, this would be a a set of probabilities for different
+%parameters of interest, e.g., reactor type, burnup, cooling time, and
+%enrichment of some interdicted \gls{SNF}.
 
 %In addition to evaluating a single learned model, it is beneficial to compare
 %models. Moreover, there are potential degeneracies in the solution space. This

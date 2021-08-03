@@ -432,13 +432,19 @@ scenarios. Although there was a slightly worse mean absolute error for the
 zero-nulls test set (the median absolute error was the same), the relative
 error remains below 100\% for all outliers, as seen in Figure
 \ref{fig:enri0pct}.  This makes the decision trees algorithm with the
-zero-nulls test set the best performing case for enrichment regression.
+zero-nulls test set the best performing case for enrichment regression.  It is
+an unexpected result to have either one of the scikit algorithms outperform
+\gls{MLL} calculations for the zero-nulls test set, since they tended to have
+lower errors using the imputed nulls test set. But decision trees are capable
+of ignoring certain features if they do not lower the node impurity (recall
+Equations \ref{eq:gini} and \ref{eq:mse}), so it is not an unexpected result
+without an explanation.
 
-It is again true that investigating relative error statistics alongside
-absolute error statistics provides a fuller picture of the regression of the
-\gls{SFCOMPO} database entries.  It is an unexpected result to have either one
-of the scikit algorithms outperform \gls{MLL} calculations for the zero-nulls
-test set, since they tended to have lower errors using the imputed nulls test
-set. 
+Overall, as with the case with burnup, the mean and median absolute errors in
+Table \ref{tbl:sfcoenri} tell a much more encouraging story than the box plots
+in Figure \ref{fig:sfcoenri}.  Looking at the spread of abolute errors and the
+large relative errors gives the sense that the enrichment predictions are quite
+poor as a whole. This does not mean it is hopeless; the decision tree approach
+here warrants more investigation since the spread of errors in Figure
+\ref{fig:enri0} is under $1.0\%\:{}^{235}\text{U}$.
 
-\todo[inline]{speak your conclusions here, only did a results discussion}

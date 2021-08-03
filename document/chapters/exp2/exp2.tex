@@ -63,8 +63,6 @@ Section \ref{sec:eval1}, and the updates to the approach is shown in Section
 
 \section{Summary}
 
-\todo[inline]{reduce verbosity and detail of summary, and add more firm conclusions}
-
 This chapter covers the details of the methodology in four main sections:
 training set simulations, information reduction, statistical methods
 implementation, and performance evaluation. This approach focuses on the
@@ -75,54 +73,65 @@ First, in Section \ref{sec:training2}, the training data is simulated using the
 same inputs as in Section \ref{sec:training1}. For this training set, however,
 the features tracked are 32 radionuclides.
 
+%Second, in Section \ref{sec:inforeduc2}, information reduction on the training
+%set is carried out using computationally generated gamma spectra.  The training
+%set is initially comprised of nuclide activities, and \gls{GADRAS} is used to
+%compute the gamma spectra via \gls{DRF}s for six detectors \cite{gadras} using
+%the inputs of the nuclide activity measurements for each \gls{SNF} entry.
+%Next, each detector-based training set undergoes three different methods of
+%processing the gamma spectra. First, an automatic peak search determines which
+%peaks will be tracked, which is different for each detector. Second, a list of
+%target gamma energies is created using an arbitrary intensity threshold, so
+%that the most likely to be detected gamma energies are tracked. Third, the
+%intensity threshold is increased so that the gamma energies list will both be
+%shorter and more likely to result in photopeaks at those locations.  The target
+%gamma energies are then found on each spectrum, then the counts over a window
+%are summed (the window size is determined by detector energy resolution). The
+%three lists are thus denoted as the auto, short, and long energy windows lists
+%in the upcoming discussion.  These training sets are intended to answer the
+%question of whether field-deployable detectors can give enough information
+%about radionuclides to be able to successfully attribute \gls{SNF}. 
+
 Second, in Section \ref{sec:inforeduc2}, information reduction on the training
 set is carried out using computationally generated gamma spectra.  The training
-set is initially comprised of nuclide activities, and \gls{GADRAS} is used to
-compute the gamma spectra via \gls{DRF}s for six detectors \cite{gadras} using
-the inputs of the nuclide activity measurements for each \gls{SNF} entry.
-Next, each detector-based training set undergoes three different methods of
-processing the gamma spectra. First, an automatic peak search determines which
-peaks will be tracked, which is different for each detector. Second, a list of
-target gamma energies is created using an arbitrary intensity threshold, so
-that the most likely to be detected gamma energies are tracked. Third, the
-intensity threshold is increased so that the gamma energies list will both be
-shorter and more likely to result in photopeaks at those locations.  The target
-gamma energies are then found on each spectrum, then the counts over a window
-are summed (the window size is determined by detector energy resolution). The
-three lists are thus denoted as the auto, short, and long energy windows lists
-in the upcoming discussion.  These training sets are intended to answer the
+set is initially comprised of nuclide activities, and \gls{GADRAS} computes the
+gamma spectra via \gls{DRF}s for six detectors \cite{gadras} using the inputs
+of the nuclide activity measurements for each \gls{SNF} entry.  Each
+detector-based training set undergoes processing by summing the counts of the
+bins of each energy window from three different lists: the auto, short, and
+long energy windows lists.  These training sets are intended to answer the
 question of whether field-deployable detectors can give enough information
-about radionuclides to be able to successfully attribute \gls{SNF}. 
+about radionuclides to successfully attribute \gls{SNF}. 
 
 Third, in Section \ref{sec:statmodel2}, the updates to the algorithm
 implementation from Section \ref{sec:statmodel1} are covered. The three
 algorithms, \textit{k}-nearest neighbors, decision trees, and \gls{MLL}
 calculations, are used to train models to predict the four reactor parameters
-of interest. The hyperparameter optimization was carried out with the new
-training sets, and the values were averaged across detectors for each of the
-three energy windows lists.  The scikit-learn predictions and the \gls{MLL}
-calculations were deployed using \gls{UW}--Madison's \gls{CHTC} resources, the
-\gls{UW} campus grid, and the \gls{OSG} \cite{osg07, osg09}.  
+of interest. The new training sets also first underwent hyperparameter
+optimization.
 
 Fourth, in Section \ref{sec:eval2}, the prediction errors are presented to
 evaluate the ability of this methodology to attribute \gls{SNF} with
 non-destructive measurements of radionuclides. The reactor type classification
 is discussed in Section \ref{sec:exp2_rxtr} and the regression cases are
 discussed in Section \ref{sec:exp2_reg}.  The performance of the prediction of
-reactor parameters is measured by using test cases drawn from the training set,
-where there is a training set for each detector in this study.  Again, the
-testing of the algorithms is accomplished using 5-fold \gls{CV} for the
-scikit-learn algorithms, and by removing one test sample at a time from the
-training set for the \gls{MLL} calculations.
+reactor parameters is measured by using test cases drawn from the training set.
 
 The reactor type classification results are presented in Section
 \ref{sec:exp2_rxtr}.  The \gls{MLL} calculations consistently perform the best
 across the algorithms, and the short energy windows list has the best
-performance across the energy windows lists.  Most of the misclassifications are
-\gls{PWR} and \gls{PHWR} being labeled as \gls{BWR}.  The automatic peak
+performance across the energy windows lists.  Most of the misclassifications
+are \gls{PWR} and \gls{PHWR} being labeled as \gls{BWR}.  The automatic peak
 searching results in erratic behavior for the scikit-learn algorithms because
 the high energy resolution detectors perform poorly but one of the lower energy
-resolution detectors performed very well. 
+resolution detectors performed very well. Most of the algorithm-detector
+combinations do not exceed the baseline, and the only cases that do are the
+\gls{MLL} calculations for the lab-based \gls{HPGe} with all three energy
+windows lists and the \gls{MLL} calculations for the \gls{SrI2} detector with
+the auto energy windows list. \textit{Since most of the detector-based data
+points do not exceed the baseline for balanced accuracy, reactor type
+classification is only acceptable for the four aforementioned cases and the
+three full-knowledge training sets.}
 
 Next, the regression cases are shown in Section \ref{sec:exp2_reg}.  The burnup
 predictions for all the algorithms and energy windows lists outperform the
@@ -133,8 +142,15 @@ predictions all are very close to the baseline, with some points right above it
 and some right below it.  The spread of outliers encompasses $3-17\%$ of the
 training set depending on the case, and in most cases the magnitude of the
 outlier errors is of significant concern, although most of the median errors
-paint a better picture of the performance.  For all three regression cases,
-there is little contrast among the three energy windows lists. The auto list
-has more erratic behavior, and the short list has a slight but not significant
-average performance over the long list. 
+paint a better picture of the performance.  \textit{Based on the performances
+relative to the baseline for each regression case, burnup performs acceptably
+well, enrichment performs far under an acceptable level, and time since
+irradiation has several cases that perform on or near the baseline and thus are
+very close to being considered acceptable.}
+
+For all three regression cases, there is little contrast among the three energy
+windows lists. The auto list has more erratic behavior, and the short list has
+a slight but not significant average performance over the long list.
+\textit{This indicates that the performance of the methodology in this work is
+indepedent of the gamma spectra processing approaches.}
 
