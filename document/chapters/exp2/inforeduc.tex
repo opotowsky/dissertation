@@ -11,68 +11,69 @@ The overall goal of this project is to determine how much information to what
 quality is needed to train a  \gls{ML} model that can provide \gls{SNF}
 attribution by correctly predicting the reactor type, burnup, \gls{U235}
 enrichment, and time since irradiation.  In this section, the information
-quality is treated as the information reduction (i.e. decreasing energy
-resolution) of processed gamma spectra in the training database.  This
-detector-based information reduction-focused treatment was not applied to the
-mass measurements from the first experiment in Chapter \ref{ch:exp1} because
-studying measurement techniques that can only be done in a lab is not the goal
-of this work. \todo{check w/ paul -- trying to say I don't care about mass spec
-errors and detection quality} Instead, field-deployable detectors are of
-interest.
+quality is treated as the energy resolution of gamma spectra from several
+detectors.  This is because field-deployable detectors are of interest.
 
 This process is outlined here for the second experiment, in which a gamma
 spectrum is computed for each sample in the database from the nuclide
 activities in Section \ref{sec:training2}.  The \gls{GADRAS} code \cite{gadras}
 developed at Sandia National Laboratories will provide computational gamma
-spectra.  This adds more than one layer of reduced information quality, which
-are listed here, and also serve as an outline of the steps taken to process the 
-gamma spectra:
-\begin{enumerate}
-  \item \label{itm:1} The list of nuclides is limited to manually chosen 
-        radionuclides.
-  \item \label{itm:2} Instead of "perfect" radionuclide activity knowledge, 
-        they are being measured by a gamma detector.
-  \item \label{itm:3} The processing of the gamma spectra can be highly variable.\todo{fix me}
-  \item \label{itm:4} The $\sqrt{n}$ error of counts-based detection is included. 
-\end{enumerate}
+spectra. There are four steps to this process: choosing radionuclides,
+inputting the radionuclide activities into a \gls{DRF} to compute gamma
+spectra, processing the gamma spectra into a smaller feature set, and applying
+a statistical counting error to those features.
 
-There is much ongoing work on the topic of attributing \gls{SNF} using gamma
-detection using targeted or advanced measurement techniques \cite{snf_gamma,
-compton_supp, bwr_high-res_gamma, pwr_bwr_gamma} and using innovative spectra
-evaluation and radioisotope identification methods \cite{riid_09,
-rapid_riid_18, sull_gen_07, sull_valid_15, sull_auto_17, sull_unc_17}.  Since
-this is a topic of active research and the approaches are heavily
-detector-dependent, a simple processing approach is described below.
+\noindent \textbf{Step 1: Choosing Radionuclides}
 
-\noindent \textbf{Step 1 : Choosing Radionuclides}
-
-Step \ref{itm:1} is covered in Section \ref{sec:training2}.  
+The first step of is covered in Section \ref{sec:training2}.  
 
 \noindent \textbf{Step 2: Computational Gamma Detection}
 
-Step \ref{itm:2} refers to obtaining a gamma spectrum for every \gls{SNF} entry
-in the database.  This is done using the \gls{GADRAS} tool, which applies a
-\gls{DRF} to the gamma lines from these radionuclides. The input is a nuclide
-activity vector, and the output is an array of energy bins (measured in $keV$),
-and the counts per energy bin.
+The second step is obtaining a gamma spectrum for every \gls{SNF} entry in the
+database; this is done using \gls{GADRAS}. The \gls{GADRAS} tool includes many
+capabilities related to radiation detection and spectra analysis; its
+predominant use is related to the simulation of the detection of gamma rays and
+neutrons from user-defined sources and detector configurations.  A combined
+first principles and empirical modeling approach based on interaction cross
+sections and radiation scattering inform the \glspl{DRF} code to calculate
+typical gamma detector spectrum features, e.g., photopeaks and the Compton
+continuum.  Although new detectors can be created and calibrated within the
+software, this work employs the use of pre-calibrated detectors.  Thus, given a
+source, which is a list of radionuclides and their activities in this case,
+\gls{GADRAS} applies a \gls{DRF} from a given detector configuration to the
+gamma energy lines from these radionuclides and models the spectrum.
+\cite{gadras} 
 
 The nuclide activity data requires some processing to be used in this way.  The
 activities that come from the \gls{ORIGEN} simulations are based on there being
 $1\:MT$ of initial uranium-based fuel. Not only is this quantity an unlikely
-amount to be smuggled, it would overwhelm a detector at the default/calibrated
+amount to be smuggled, it would overwhelm a detector at the calibrated
 source-detector distances in \gls{GADRAS}.  Therefore, the material (and
 resulting nuclide activities) are scaled to be $1\:g$ of \gls{SNF}.
 
-\todo[inline]{GADRAS overview here. also be clear about the required inputs and
-what I gave for those inputs}
+For the \gls{GADRAS} calculations, the primary input is a nuclide activity
+vector as the source, and the output is an array of energy bins (measured in
+$keV$) and the counts per energy bin as the spectrum.  The sources are provided
+without any background; this is because any spectrum would undergo background
+subtraction before further analysis. Additionally, the nuclides are pre-decayed
+in \gls{ORIGEN} to correspond to various cooling times, but a source age must
+be provided to \gls{GADRAS} as a non-zero value (otherwise, important decay
+transitions are missed). Various source times ($10\:sec$, $30\:sec$, $1\:min$,
+$5\:min$, $10\:min$, $20\:min$, $30\:min$, $1\:hr$, $2\:hr$) were tested for
+two samples, and both a qualitative visual analysis of the major photopeaks
+plus a study of the total counts leveling off was used to choose a nonzero age
+for the material.  At a source age of $20\:minutes$, the expected peaks are
+visible and the total counts had reached a value similar to the longer ages
+tested.
 
-Regarding the input information for the \gls{GADRAS} calculations, the sources
-are provided without any background; this is because any spectrum would undergo
-background subtraction before further analysis. Additionally, the nuclides are
-pre-decayed in \gls{ORIGEN} to correspond to various cooling times, but the
-source age provided to \gls{GADRAS} needs to be a non-zero value. A source age
-of $20\:minutes$ \todo{not super sensitive? tested this in 5 or 10 minute
-steps?} provides the expected peaks.
+The other input information is related to the detector configuration.
+User-chosen variables are the source-detector distance $[cm]$, height of
+source-detector setup from nearest surface $[cm]$, the live time $[s]$, and the
+number of channels for the detector. The detector configuration file in
+\gls{GADRAS} contains much more information, however.  In it, there are a
+number of parameters from calibration results, detector geometry, information
+about scattering, and shielding information (shielding is not considered in
+this work).
 
 \begin{table}[!htb]
   \centering
@@ -102,25 +103,46 @@ Training databases were created for the six detectors outlined in Table
 detector, a lab-based \gls{HPGe}, against the rest, in order of decreasing
 energy resolution: portable \gls{HPGe}, \gls{CZT}, \gls{SrI2}, \gls{LaBr3}, and
 \gls{NaI} detectors. This is displayed in the table by including the \gls{FWHM}
-of the $661\:keV$ peak for ${}^{137}\text{Cs}$. At this point, there are six
-versions of the original database for each detector setup, but there is a full
-gamma spectrum for each \gls{SNF} entry.\todo{fix confusing sentence} It is not
-computationally prudent to use full gamma spectra for training and testing,
-since the spectra returned have 1024 or 8192 bins, and machine learning
-algorithms are not designed to handle thousands of features.  Thus, these
-spectra are processed; this is step \ref{itm:3} from above, and is outlined as
-follows.
+of the $661\:keV$ peak for ${}^{137}\text{Cs}$. \Gls{GADRAS} is used to create
+a spectrum for every \gls{SNF} entry in the 32 nuclide activity training
+database using these six detector configurations.  At this point, there are six
+versions of the original database, one for each detector.  The database entries
+are each a full gamma spectrum of a given \gls{SNF} sample for the detector
+setup in that training set. 
 
 \noindent \textbf{Step 3: Processing Gamma Spectra}
 
-Step \ref{itm:3} covers the steps taken to process the gamma spectrum generated
-for each \gls{SNF} entry into a training set where the features are now summed
-windows of a range of energy bins.\todo{be clear about why this choice makes
-sense}  There are two main design choices here: the width of the energy windows
-and the number of energy windows to include. The energy window width is a value
-that was manually chosen \todo{say how you chose the window size clearly} and
-does not change for each detector.  The different energy window widths are
-listed in Table \ref{tbl:enwindows}.
+The third step covers the processing of the gamma spectrum generated for each
+\gls{SNF} entry into a training set.  It is not computationally prudent to use
+full gamma spectra for training and testing, since the spectra returned have
+1024 or 8192 bins, and machine learning algorithms are not designed to handle
+thousands of features.  Thus, these spectra are processed into fewer features; 
+this is outlined as follows.
+
+There is much ongoing work on the topic of attributing \gls{SNF} with gamma
+detection using targeted or advanced measurement techniques \cite{snf_gamma,
+compton_supp, bwr_high-res_gamma, pwr_bwr_gamma} and using innovative spectra
+evaluation and radioisotope identification methods \cite{riid_09,
+rapid_riid_18, sull_gen_07, sull_valid_15, sull_auto_17, sull_unc_17}.  Since
+this is a topic of active research and the approaches are heavily
+detector-dependent, a simple processing approach is developed here.  Since all
+entries in a given training set are background-subtracted spectra using the
+same detector setup and calibration for the same measurement duration, each
+photopeak can be directly compared to other photopeaks in the training set.
+This is accomplished by comparing them via an area under the curve: placing an
+energy window on a peak, and summing the counts of the bins within that energy
+window. 
+
+There are two main design choices here: the width of the energy windows and the
+number of energy windows to include. First, the energy window width is a value
+that is fixed for each detector prior to processing.  The different energy
+window widths are listed in Table \ref{tbl:enwindows}.  They are chosen
+manually; the spectra were plotted and different values were tested and
+visually analyzed to be sure the windows were encompassing the peaks. This was
+preferable to some linear function based on the detector energy resolution
+because, e.g., the \gls{LaBr3} and \gls{NaI} detectors have the same
+human-chosen window but the energy resolutions are different (see Table
+\ref{tbl:detsetups}). 
 
 \begin{table}[!htb]
   \centering
@@ -145,7 +167,8 @@ listed in Table \ref{tbl:enwindows}.
   \label{tbl:enwindows}
 \end{table}
 
-Table \ref{tbl:enwindows} lists three energy window list length columns,
+The second design decision is the number of energy windows to include.  Table
+\ref{tbl:enwindows} lists three energy window list length columns,
 \textit{Auto}, \textit{Short}, and \textit{Long}. These correspond to different
 processed training sets that have a different number of energy windows
 included.  There are two approaches taken: a nuclear physics-based method that
@@ -153,15 +176,16 @@ generates an energy window list based on the gamma energies expected to be
 detected (short and long), and an automatic peak search of a manually chosen
 gamma spectrum in the full gamma spectra training database (auto). 
 
-The first method creates the short and long lists in Table \ref{tbl:enwindows};
-the length of these lists are the same for all detectors because they are based
-on the gamma energies most likely to be detected, which is independent of the
-detector quality. To obtain these lists, the expected number of decays of each
-gamma energy is calculated based on the activities of the 32 tracked nuclides
-using the Python for Nuclear Engineering toolkit \cite{pyne} from a reference
-sample in the training set.  This reference sample emerged as the sample of
-choice because it contains the superset of gamma energies of all tested
-samples, of which there were nine (three for each reactor type).
+The first energy window list method provides the short and long lists in Table
+\ref{tbl:enwindows}; the length of these lists are the same for all detectors
+because they are based on the gamma energies most likely to be detected, which
+is independent of the detector quality. To obtain these lists, the expected
+number of decays of each gamma energy is calculated based on the activities of
+the 32 tracked nuclides using the Python for Nuclear Engineering toolkit
+\cite{pyne} from a reference sample in the training set.  This reference sample
+emerged as the sample of choice because it contains the superset of gamma
+energies of all tested samples, of which there were nine (three for each
+reactor type).
 
 After the expected number of decays for each gamma energy for all 32 nuclides
 are calculated, an arbitrary minimum number of decays is selected to filter out
@@ -222,22 +246,35 @@ windows for each detector is in Table \ref{tbl:enwindows}.
   \label{fig:enwindows}
 \end{figure}
 
-After the three energy window lists are created, the full gamma spectra are
-processed into three training sets, one for each list.  The energy window width
-for each detector is used to sum the binned counts for each list entry; that
-is, the counts are summed for each gamma energy in the list $\pm E_{width}$.
-This is visualized in Figure \ref{fig:enwindows}, where a portion of a portable
+After the three energy window lists are created, the full gamma spectra
+database of a given detector are processed into three training sets, one for
+each list.  Next, as previously mentioned, the energy window width for each
+detector is used to sum the binned counts for each energy window list entry.
+this is visualized in Figure \ref{fig:enwindows}, where a portion of a portable
 \gls{HPGe} spectrum is shown with the $\pm3\:keV$ windows from the auto energy
 window list.  Three training sets are created for each detector, resulting in
 18 detector-based processed gamma spectra training sets.
 
 \noindent \textbf{Step 4: Apply Statistical Counting Error}
 
-Lastly, step \ref{itm:4} involves the inclusion of the counting error for the
-summed energy windows. This is quite simple, as statistical counting error of
-$n$ counts is $\sqrt{n}$.  As in Section \ref{sec:inforeduc1}, this error gets
-applied in the same way for the scikit-learn algorithms, where the uniform
-error is applied randomly within the range $[x_i - \sqrt{x_i}, x_i +
-\sqrt{x_i}]$ for each summed energy window $x_i$. For the \gls{MLL}
-calculations, Equation \ref{eq:mllunc} is used, where $\sigma_{i} =
-\sqrt{x_i}$.  
+Lastly, the fourth step involves the inclusion of the counting error for the
+summed energy windows. This is quite simple mathematically speaking, as
+statistical counting error of $n$ counts is $\sqrt{n}$.  As in Section
+\ref{sec:inforeduc1}, this error gets applied in the same way for the
+scikit-learn algorithms, where the uniform error is applied randomly within the
+range $[x_i - \sqrt{x_i}, x_i + \sqrt{x_i}]$ for each summed energy window
+$x_i$. For the \gls{MLL} calculations, Equation \ref{eq:mllunc} is used, where
+$\sigma_{i} = \sqrt{x_i}$.  
+
+In summary, there are four steps taken to arrive at training databases based on
+gamma spectra from six chosen detectors. Unlike the simple increase in training
+set error applied in Chapter \ref{ch:exp1}, each step of the process adds an
+additional layer of reduced information quality, which are listed here:
+\begin{enumerate}
+  \item The list of nuclides is limited to manually chosen radionuclides.
+  \item Instead of "perfect" radionuclide activity knowledge, they are being 
+        measured by a gamma detector.
+  \item The processing of the gamma spectra can be highly variable.
+  \item The $\sqrt{n}$ error of counts-based detection is included. 
+\end{enumerate}
+
