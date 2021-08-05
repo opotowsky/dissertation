@@ -161,14 +161,9 @@ predictions do well with respect to their baselines.  \textit{Relative to the
 baseline, the burnup prediction performs well over an acceptable level,
 enrichment prediction performs well under an acceptable level, and time since
 irradiation prediction has several cases that perform at or near the acceptable
-level.} 
-
-For all three regression cases, there is little contrast among the three energy
-windows lists. The auto list has more erratic behavior, and the short list has
-a slight but not significant average performance over the long list.
-\textit{This indicates that the performance of the methodology in this work is
-indepedent of the gamma spectra processing approaches.} \todo{just copied from
-ch 5 summary}
+level.} Additionally, there is not a large difference in performance among the
+three energy windows lists.  \textit{This suggests that the performance is
+indepedent of the gamma spectra processing approaches.} 
 
 \noindent \textbf{Post-Summary Statements}
 
@@ -308,13 +303,14 @@ energy photopeaks excluded from these lists that might provide more
 information. These were captured via the auto peak search method, but the
 resulting energy windows list did not provide better results (and in some cases
 with \textit{k}-nearest neighbors, provided worse performance).  This simple
-approach should be refined with a study on the latest gamma spectra
-processing tools. 
+approach should be refined with a study on the latest gamma spectra processing
+tools and which are suitable to process a training set of $4.5 \times 10^5$
+spectra within a reasonable amount of time. 
 
 There are also more advanced detection techniques being studied, some which
 could be simulated with \gls{GADRAS}.  This would provide easier peak
 processing for nuclides of interest, e.g., with peaks at the high energy end of
-the spectrum. \todo{finish}
+the spectrum.
 
 Citations:
 
@@ -325,11 +321,13 @@ innovative spectra evaluation and radioisotope identification methods
 \cite{riid_09, rapid_riid_18, sull_gen_07, sull_valid_15, sull_auto_17,
 sull_unc_17}.
 
+\todo{finish and update citations}
+
 \subsection{Statistical Method Optimization}
 
 The methods in this work all have high variance, and so it would have seemed
-prudent to apply regularization. However, hyperparameter optimization did not
-shift the high variance defaults much towards more bias.  The resulting
+prudent to apply stronger regularization. However, hyperparameter optimization
+did not shift the high variance defaults much towards more bias.  The resulting
 inability to generalize likely was a contributing factor to the large errors in
 the results when using the \gls{SFCOMPO} database as a testing set. A closer
 look at optimization is warranted in tandem with the above work on the feature
@@ -347,7 +345,8 @@ the sample weights to $L(M|x_{test})$, the likelihood as calculated in Equation
 
 It is entirely possible that optimizing the methods in this work can only
 improve the prediction performance by a minimal amount, and that more complex
-methods could be beneficial. \todo{finish}
+methods could be beneficial. Because of this possibility, a broader survey of
+statistical methods with this training set is another possible next step. 
 
 \subsection{Serial Prediction}
 

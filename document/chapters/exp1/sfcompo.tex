@@ -233,10 +233,6 @@ different ranges on the vertical axes, but the drastic improvement in
 the zero-nulls in Figure \ref{fig:burn0} is still visually clear. In the latter
 figure, there is one outlier for \textit{k}-nearest neighbors and 39 for
 \gls{MLL} calculations.
-\todo[inline]{here and ch 5 -- remove units from rel err plots}
-\todo[inline]{make some error versus burnup (and other labels) plots; useful
-when discussing high relative error cases; check to see if this would be useful
-in Ch 5 too}
 
 \begin{table}[!htb]
   \centering
@@ -326,6 +322,28 @@ lower relative error, then that would be an acceptable result.  However, while
 the \gls{MLL} calculations have a percentage error below 20\% at the 75\%
 quartile, the non-outlier data reaches almost 40\% and the 8\% of the data
 reaches 100\%.
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[b]{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_truey_vs_predy_impnull__burn.png}
+    \caption{True versus predicted burnup using mean-imputed null values.}
+    \label{fig:yvy_burnimp}
+  \end{subfigure}
+  \vskip\baselineskip
+  \begin{subfigure}[b]{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_truey_vs_predy_0null__burn.png}
+    \caption{True versus predicted burnup using zero-replaced null values.}
+    \label{fig:yvy_burn0}
+  \end{subfigure}
+  \caption[True versus predicted burnup of \acrshort{SFCOMPO} test cases]
+          {True versus predicted burnup for each algorithm using two missing 
+           entry techniques for \acrshort{SFCOMPO}: imputation with mean 
+           values and replacement with zero.}
+  \label{fig:yvy_sfcoburn}
+\end{figure}
 
 Overall, the absolute errors in Table \ref{tbl:sfcoburn} tell a much more
 encouraging story than the box plots in Figure \ref{fig:sfcoburn}, so
@@ -439,6 +457,28 @@ lower errors using the imputed nulls test set. But decision trees are capable
 of ignoring certain features if they do not lower the node impurity (recall
 Equations \ref{eq:gini} and \ref{eq:mse}), so it is not an unexpected result
 without an explanation.
+
+\begin{figure}[!htb]
+  \centering
+  \begin{subfigure}[b]{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_truey_vs_predy_impnull__enri.png}
+    \caption{True versus predicted enrichment using mean-imputed null values.}
+    \label{fig:yvy_enriimp}
+  \end{subfigure}
+  \vskip\baselineskip
+  \begin{subfigure}[b]{\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./chapters/exp1/sfcompo_truey_vs_predy_0null__enri.png}
+    \caption{True versus predicted enrichment using zero-replaced null values.}
+    \label{fig:yvy_enri0}
+  \end{subfigure}
+  \caption[True versus predicted enrichment of \acrshort{SFCOMPO} test cases]
+          {True versus predicted enrichment for each algorithm using two missing
+           entry techniques for \acrshort{SFCOMPO}: imputation with mean 
+           values and replacement with zero.}
+  \label{fig:yvy_sfcoenri}
+\end{figure}
 
 Overall, as with the case with burnup, the mean and median absolute errors in
 Table \ref{tbl:sfcoenri} tell a much more encouraging story than the box plots
