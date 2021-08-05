@@ -111,15 +111,15 @@ external test set is used that is comprised of measurements from real
 commercial power \gls{SNF} from around the world: the \gls{SFCOMPO} database.
 The main challenge with this database are that many entries only contain
 measurements for uranium and plutonium isotopes, and the missing measurements
-are inconsistent. Two methods were implemented: imputing the null values and
-replacing the null values with zero.  The reactor type classification results
-are very poor except for the \gls{MLL} predictions using zero-valued nulls.
-This combination also best predicts the burnup, but oddly, the decision trees
-for both methods of null handling best predicts the enrichment.
-\textit{Overall, the errors are still quite large, so the \gls{SFCOMPO}
-database presents challenges to being used with this methodology. The
-techniques for improving the performance are discussed next in the future work
-suggestions, Section \ref{sec:future}.}
+are inconsistent. Two methods were implemented: imputing the null values with
+the mean of a given feature, and imputing the null values with zero.  The
+reactor type classification results are very poor except for the \gls{MLL}
+predictions using zero-valued nulls.  This combination also best predicts the
+burnup, but oddly, the decision trees for both methods of null handling best
+predicts the enrichment.  \textit{Overall, the errors are still quite large, so
+the \gls{SFCOMPO} database presents challenges to being used with this
+methodology. The techniques for improving the performance are discussed next in
+the future work suggestions, Section \ref{sec:future}.}
 
 \noindent \textbf{Reactor Parameter Prediction Using Processed Gamma Spectra}
 

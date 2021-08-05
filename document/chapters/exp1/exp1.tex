@@ -242,14 +242,17 @@ training set design spans the label space that exists in \gls{SFCOMPO}, there
 are many missing measurements from the features in the training set, which is
 comprised of 29 nuclide masses.  Because of an imbalanced training set and the
 method used to handle the null values, the reactor type classification results
-are mostly poor (except for the \gls{MLL} calculations with the zero-valued
+are mostly poor (except for the \gls{MLL} calculations with the zero-imputed
 nulls testing set with a balanced accuracy score of 0.63), which extends to the
 regression cases. It is again true that investigating relative error statistics
 alongside absolute error statistics provides a fuller picture of the regression
 of the \gls{SFCOMPO} database entries.  The \gls{MLL} calculations perform the
 best for burnup and the decision trees perform the best for ${}^{235}\text{U}$
-enrichment (both with the zero-valued nulls testing set), but many of the
-prediction errors are still large. 
+enrichment (both with the zero-imputed nulls testing set), but many of the
+prediction errors are still large. An investigation into the true versus
+predicted values (especially for burnup) shows that \textit{the mean-imputed
+nulls database is clearly not worth further investigation, but much improvement
+could be made to the zero-imputed nulls method}.
 
 It is possible that because most of the 505 entries contain many of the
 of-interest uranium and plutonium isotopes, that this testing set should be
@@ -261,5 +264,4 @@ and uranium isotopes, different approaches to null value imputation) and
 improving the simulation fidelity of the training set. \textit{The
 \gls{SFCOMPO} database has challenges to being used as an external testing set
 with this methodology, but could be improved with more consideration.}
-
 
