@@ -10,8 +10,6 @@ could pursue, so this is discussed in Section \ref{sec:future}.
 \section{Conclusions}
 \label{sec:concl}
 
-\todo[inline]{reduce verbosity and detail of summary, and add more firm conclusions. what have we learned}
-
 The main research question that this work addresses is as follows: \textit{How
 does the ability to determine forensic-relevant spent nuclear fuel attributes
 using machine-learning techniques degrade as less information is available?}. 
@@ -66,42 +64,47 @@ calculations.  These results are presented in Sections \ref{sec:eval1} and
 \noindent \textbf{Reactor Parameter Prediction Using Nuclide Masses}
 
 Here, the results from the experimental procedure in Chapter \ref{ch:exp1} are
-discussed.  This experiment is a demonstration of the methodology with the
-"perfect knowledge" of nuclide masses. Information reduction is accomplished by
-adding noise to the training set in the form of randomly applied uniform error.
-The results are in Sections \ref{sec:randerrA} and \ref{sec:randerrB}.  In
-order to understand the ability of the models to generalize, the performance
-with respect to training set size is studied in Section \ref{sec:randerrC}.
-Section \ref{sec:randerrD} introduces the impacts of having prior knowledge of
-the reactor type on the quality of prediction of the regression cases.  Last,
-the external testing set, the \gls{SFCOMPO} database, is used to test this
-methodology against sometimes complicated real world data sets in Section
-\ref{sec:sfcompo}. 
+reviewed.  
+
+%This experiment is a demonstration of the methodology with the
+%"perfect knowledge" of nuclide masses. Information reduction is accomplished by
+%adding noise to the training set in the form of randomly applied uniform error.
+%The results are in Sections \ref{sec:randerrA} and \ref{sec:randerrB}.  In
+%order to understand the ability of the models to generalize, the performance
+%with respect to training set size is studied in Section \ref{sec:randerrC}.
+%Section \ref{sec:randerrD} introduces the impacts of having prior knowledge of
+%the reactor type on the quality of prediction of the regression cases.  Last,
+%the external testing set, the \gls{SFCOMPO} database, is used to test this
+%methodology against sometimes complicated real world data sets in Section
+%\ref{sec:sfcompo}. 
 
 Sections \ref{sec:randerrA} and \ref{sec:randerrB} demonstrate the impacts of
 injected training set noise on the prediction parameters. Aside from the
 \textit{k}-nearest neighbors prediction of time since irradiation, all of the
 algorithms follow a similar pattern for each prediction scenario.  The
 \gls{MLL} calculations are the most resilient to introduced error, followed by
-decision trees then \textit{k}-nearest neighbors.  It is difficult to state
-whether or not these results are "good enough" on their own, but they do serve
-as a useful baseline for the results in Chapter \ref{ch:exp2}. 
+decision trees then \textit{k}-nearest neighbors.  \textit{It is difficult to
+state whether or not these results are "good enough" on their own, but they do
+serve as a useful baseline for the results in Chapter \ref{ch:exp2}.} 
 
 Next, the model generalization is studied in Section \ref{sec:randerrC} by
 creating learning curves using $20-100\%$ of the training set.  It shows that
 the training set is large enough for the \gls{MLL} calculations to remain the
-best performing until the 20\% level, when those data points dip below one or
-both of the scikit-learn algorithms depending on the prediction parameter. It
-should be noted that this performance is highly dependent on the training set
-design because these are qualitatively high variance methods (compared to
-common algorithms not shown in this work) that do not generalize well. 
+best performing method until the 20\% training set size, when those data points
+dip below one or both of the scikit-learn algorithms depending on the
+prediction parameter.  \textit{This performance is highly dependent on the
+training set design because these are qualitatively high variance methods
+(compared to common algorithms not shown in this work) that do not generalize
+well.}
 
 Section \ref{sec:randerrD} investigates the effect of having reactor type prior
 knowledge on burnup, enrichment, and time since irradiation prediction.  There
 is modest and significant improvement for \gls{PWR} and \gls{PHWR} cases,
 respectively, since they are both the minority classes in the training set.
 These improvements only exist for the scikit-learn algorithms, since the
-\gls{MLL} calculations are not affected by reactor type knowledge.
+\gls{MLL} calculations are not affected by reactor type knowledge. \textit{The
+key takeaway is that regression cases linked to \glspl{PHWR}s are not expected
+to perform well.}
 
 The last study in this chapter is in Section \ref{sec:sfcompo}, where an
 external test set is used that is comprised of measurements from real
@@ -112,20 +115,23 @@ are inconsistent. Two methods were implemented: imputing the null values and
 replacing the null values with zero.  The reactor type classification results
 are very poor except for the \gls{MLL} predictions using zero-valued nulls.
 This combination also best predicts the burnup, but oddly, the decision trees
-for both methods of null handling best predicts the enrichment.  The
+for both methods of null handling best predicts the enrichment.
+\textit{Overall, the errors are still quite large, so the \gls{SFCOMPO}
+database presents challenges to being used with this methodology. The
 techniques for improving the performance are discussed next in the future work
-suggestions, Section \ref{sec:future}.
+suggestions, Section \ref{sec:future}.}
 
 \noindent \textbf{Reactor Parameter Prediction Using Processed Gamma Spectra}
 
 Next the results of the second experimental procedure from Chapter
-\ref{ch:exp2} are discussed.  This experiment's purpose is to probe the
-usefulness of field-deployable detectors for giving rapid information about
-presumed \gls{SNF}. The information reduction is achieved by using
-computational gamma spectra of various detectors with decreasing detector
-energy resolution.  The gamma spectra of each \gls{SNF} entry are
-processed in three different manners, resulting in three energy windows lists,
-denoted by auto, short, and long.  
+\ref{ch:exp2} are discussed.  
+%This experiment's purpose is to probe the
+%usefulness of field-deployable detectors for giving rapid information about
+%presumed \gls{SNF}. The information reduction is achieved by using
+%computational gamma spectra of various detectors with decreasing detector
+%energy resolution.  The gamma spectra of each \gls{SNF} entry are processed in
+%three different manners, resulting in three energy windows lists, denoted by
+%auto, short, and long.  
 
 The reactor type classification results are first covered in Section
 \ref{sec:exp2_rxtr}.  Unsurprisingly, the \gls{MLL} calculations consistently
@@ -133,14 +139,13 @@ perform the best across the algorithms. There is a slightly better overall
 performance by the short energy windows list as compared to the others,
 although the large variation by the auto energy windows lists has some data
 points performing better.  The confusion matrices show the details of every
-data point, but most of the misclassifications are \gls{PWR} and \gls{PHWR} being
-labeled as \gls{BWR}.  The automatic peak searching results in erratic behavior
-for the scikit-learn algorithms, noting the poor performance of the high energy
-resolution detectors, presumably from the added noise of including all peaks
-instead of just targeted peaks like the other two lists.  It is still a
-promising approach for the lower energy resolution detectors, and possibly even
-the high energy resolution detectors since in theory one could filter the noise
-from the detector peak searches. 
+data point, but most of the misclassifications are \gls{PWR} and \gls{PHWR}
+being labeled as \gls{BWR}.  The only algorithm-detector combinations that
+exceed the baseline are the \gls{MLL} calculations for the lab-based \gls{HPGe}
+with all three energy windows lists and the \gls{MLL} calculations for the
+\gls{SrI2} detector with the auto energy windows list. \textit{Given the choice
+in baseline, reactor type classification is only acceptable for the four cases
+exceeding it and the three full-knowledge training sets.}
 
 Next, the regression cases are shown in Section \ref{sec:exp2_reg}.  Regardless
 of the energy windows list, the detector-based training sets all do the
@@ -152,22 +157,36 @@ the outliers shows that there is a significant portion of the training set that
 is being predicted with very large errors; the spread of outliers encompassed
 $3-17\%$ of the training set depending on the case.  Studying these results
 with respect to the \gls{MedAE}, the burnup and time since irradiation
-predictions do well with respect to their baselines. 
+predictions do well with respect to their baselines.  \textit{Relative to the
+baseline, the burnup prediction performs well over an acceptable level,
+enrichment prediction performs well under an acceptable level, and time since
+irradiation prediction has several cases that perform at or near the acceptable
+level.} 
+
+For all three regression cases, there is little contrast among the three energy
+windows lists. The auto list has more erratic behavior, and the short list has
+a slight but not significant average performance over the long list.
+\textit{This indicates that the performance of the methodology in this work is
+indepedent of the gamma spectra processing approaches.} \todo{just copied from
+ch 5 summary}
 
 \noindent \textbf{Post-Summary Statements}
 
+Despite many of the nuclides that are included in the short and long energy
+windows lists having known poor simulation quality \cite{pwr_benchmark_2010,
+skutnik_2021}, the burnup prediction clearly had enough information to do well.
+The poor enrichment prediction is likely because the detected radionuclides are
+not enrichment indicators, although ${}{152}\textit{Eu}$ is and should be
+included in the long energy windows list.\todo{152Eu was in top feature impt
+list} The time steps in the training set being about $100\:days$ was a limiting
+factor in its quality of prediction; many of the \gls{MAE} values were around
+this level in the second experiment. 
+
 There is a clear leader throughout all of the results in terms of being a
 consistent best performer: the \gls{MLL} calculations. The reason it can
-perform well, though, is because of the large number of simulations.  The time
-steps in the training set being about $100\:days$ was a limiting factor in its
-quality of prediction; many of the \gls{MAE} values were around this level in
-the second experiment. The poor enrichment prediction is likely because the
-detected radionuclides are not enrichment indicators \todo{check}, and despite
-many of the nuclides that are included in the short and long energy windows
-lists having known poor simulation quality, the burnup prediction clearly had
-enough information to do well.  If there were to be a training set of much
-higher fidelity but larger steps between the training set labels, it is
-possible \gls{MLL} would not be a top performer. 
+perform well, though, is because of the large number of simulations.  If there
+were to be a training set of much higher fidelity but larger steps between the
+training set labels, it is possible \gls{MLL} would not be a top performer. 
 
 The two scikit-learn algorithms still had some interesting variation in their
 prediction capabilities despite usually under-performing. Decision trees best
@@ -192,21 +211,36 @@ learning curves in Figure \ref{fig:learns}, it appears that reducing the
 training set by 20\% would in theory not impact the \gls{MLL} performance, but
 it is still a major difference in implementation. 
 
-Note for nuclides: feature importance work gave different lists for each label,
-but since each training set is designed to be able to predict all four
-different labels, not all features are relevant to a given label. This adds a
-lot of noise for a given label prediction. 
+It should be noted that the injection of error in the training set in the same
+manner as the test samples is not necessarily realistic. In a real-world
+scenario, the training database would be quite accurate and the testing samples
+might have variable error. 
 
-With respect to the number of features affecting the prediction performance,
-the overall similarity of performance among the three energy windows lists
-might mean that the feature numbers are not impacting the algorithms much.
-Another explanation is that they all include too many features (outside of the
-scintillator detectors with the auto energy windows list).  It is possible that
-even the short list with 42 features has too high of a dimension for these
-methods to perform well. \todo{unfinished}
+The nuclide-based feature sets (i.e., 29 nuclide masses and 32 nuclide
+activities) in both experiments were determined by external factors, i.e., the
+\gls{SFCOMPO} database measurements and the radionuclides available in
+\gls{GADRAS}.  Since each training set is designed to be able to predict all
+four labels, not all features are relevant to a given label. This could add
+noise for a given label prediction if there are only a handful of relevant
+features. 
 
-Reminder than equal error in training and testing is not realistic. Training
-data should be as perfect as possible bc its stagnant
+With respect to the number of features affecting the prediction performance for
+the detector-based training sets, the overall similarity of performance among
+the three energy windows lists might mean that the feature numbers are not
+impacting the algorithms much.  Another explanation is that they all include
+too many features (outside of the scintillator detectors with the auto energy
+windows list).  It is possible that even the short list with 42 features has
+too high of a dimension for these methods to perform well. The statement from
+above also applies, that if only a few features are relevant, the remaining
+ones only add noise. 
+
+The automatic peak searching approach results in erratic behavior for the
+scikit-learn algorithms. Noting the poor performance of the high energy
+resolution detectors, this is presumably from the added noise of including all
+peaks instead of just targeted peaks like the other two lists.  It is still a
+promising approach for the lower energy resolution detectors, and possibly even
+the high energy resolution detectors since in theory one could filter the noise
+from the detector peak searches. 
 
 \section{Future Work}
 \label{sec:future}
@@ -235,7 +269,9 @@ discrepancies that reached 40\%. It would be better to remove these from
 consideration if they are systematically poorly simulated.
 
 One level beyond this would be to forego the convenience that \gls{ORIGEN-ARP}
-provides and use higher fidelity simulations in \gls{SCALE}. 
+provides and use higher fidelity simulations in \gls{SCALE}.  Maximizing the
+accuracy of the training set is worthwhile, since it is a static entity that is
+only simulated once. 
 
 \noindent \textbf{Feature Set Study}
 
