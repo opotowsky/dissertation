@@ -1,14 +1,15 @@
 \chapter{Conclusions and Future Work}
 \label{ch:concl}
 
-This chapter focuses on concluding remarks and future work.  First in Section
-\ref{sec:concl}, the main experimental results from each section are brought
-together to discuss the bigger picture of this work.  Additionally, there are
-areas of the methodology that are simplified and several avenues this work
-could pursue, so this is discussed in Section \ref{sec:future}.
+This chapter focuses on concluding remarks and future work.  First, a summary
+is outlined in Section \ref{sec:summary}, Next, in Section \ref{sec:concl}, the
+main experimental results from each section are brought together to discuss the
+bigger picture of this work.  Additionally, there are areas of the methodology
+that are simplified and several avenues this work could pursue, so this is
+discussed in Section \ref{sec:future}.
 
-\section{Conclusions}
-\label{sec:concl}
+\section{Summary}
+\label{sec:summary}
 
 The main research question that this work addresses is as follows: \textit{How
 does the ability to determine forensic-relevant spent nuclear fuel attributes
@@ -61,10 +62,10 @@ algorithms and by testing one training set entry at a time for the \gls{MLL}
 calculations.  These results are presented in Sections \ref{sec:eval1} and
 \ref{sec:eval2}, and are summarized as follows.
 
-\noindent \textbf{Reactor Parameter Prediction Using Nuclide Masses}
+\section{Conclusions}
+\label{sec:concl}
 
-Here, the results from the experimental procedure in Chapter \ref{ch:exp1} are
-reviewed.  
+\noindent \textbf{Reactor Parameter Prediction Using Nuclide Masses}
 
 %This experiment is a demonstration of the methodology with the
 %"perfect knowledge" of nuclide masses. Information reduction is accomplished by
@@ -123,8 +124,6 @@ the future work suggestions, Section \ref{sec:future}.}
 
 \noindent \textbf{Reactor Parameter Prediction Using Processed Gamma Spectra}
 
-Next the results of the second experimental procedure from Chapter
-\ref{ch:exp2} are discussed.  
 %This experiment's purpose is to probe the
 %usefulness of field-deployable detectors for giving rapid information about
 %presumed \gls{SNF}. The information reduction is achieved by using
@@ -165,13 +164,13 @@ level.} Additionally, there is not a large difference in performance among the
 three energy windows lists.  \textit{This suggests that the performance is
 indepedent of the gamma spectra processing approaches.} 
 
-\noindent \textbf{Post-Summary Statements}
+\noindent \textbf{Post-Conclusions Discussion}
 
 Despite many of the nuclides that are included in the short and long energy
 windows lists having known poor simulation quality \cite{pwr_benchmark_2010,
 skutnik_2021}, the burnup prediction clearly had enough information to do well.
 The poor enrichment prediction is likely because the detected radionuclides are
-not enrichment indicators, although ${}{152}\textit{Eu}$ is and should be
+not enrichment indicators, although ${}^{152}\textit{Eu}$ is and should be
 included in the long energy windows list.\todo{152Eu was in top feature impt
 list} The time steps in the training set being about $100\:days$ was a limiting
 factor in its quality of prediction; many of the \gls{MAE} values were around

@@ -18,18 +18,14 @@ This process is outlined here for the second experiment, in which a gamma
 spectrum is computed for each sample in the database from the nuclide
 activities in Section \ref{sec:training2}.  The \gls{GADRAS} code \cite{gadras}
 developed at Sandia National Laboratories will provide computational gamma
-spectra. There are four steps to this process: choosing radionuclides,
-inputting the radionuclide activities into a \gls{DRF} to compute gamma
-spectra, processing the gamma spectra into a smaller feature set, and applying
-a statistical counting error to those features.
+spectra. There are three steps to this process: inputting the radionuclide
+activities into a \gls{DRF} to compute gamma spectra, processing the gamma
+spectra into a smaller feature set, and applying a statistical counting error
+to those features.
 
-\noindent \textbf{Step 1: Choosing Radionuclides}
+\noindent \textbf{Step 1: Computational Gamma Detection}
 
-The first step of is covered in Section \ref{sec:training2}.  
-
-\noindent \textbf{Step 2: Computational Gamma Detection}
-
-The second step is obtaining a gamma spectrum for every \gls{SNF} entry in the
+The first step is obtaining a gamma spectrum for every \gls{SNF} entry in the
 database; this is done using \gls{GADRAS}. The \gls{GADRAS} tool includes many
 capabilities related to radiation detection and spectra analysis; its
 predominant use is related to the simulation of the detection of gamma rays and
@@ -110,14 +106,13 @@ versions of the original database, one for each detector.  The database entries
 are each a full gamma spectrum of a given \gls{SNF} sample for the detector
 setup in that training set. 
 
-\noindent \textbf{Step 3: Processing Gamma Spectra}
+\noindent \textbf{Step 2: Processing Gamma Spectra}
 
-The third step covers the processing of the gamma spectrum generated for each
+The second step covers the processing of the gamma spectrum generated for each
 \gls{SNF} entry into a training set.  It is not computationally prudent to use
 full gamma spectra for training and testing, since the spectra returned have
 1024 or 8192 bins, and machine learning algorithms are not designed to handle
-thousands of features.  Thus, these spectra are processed into fewer features; 
-this is outlined as follows.
+thousands of features.  Thus, these spectra are processed into fewer features.
 
 There is much ongoing work on the topic of attributing \gls{SNF} with gamma
 detection using targeted or advanced measurement techniques \cite{snf_gamma,
@@ -250,28 +245,27 @@ After the three energy window lists are created, the full gamma spectra
 database of a given detector are processed into three training sets, one for
 each list.  Next, as previously mentioned, the energy window width for each
 detector is used to sum the binned counts for each energy window list entry.
-this is visualized in Figure \ref{fig:enwindows}, where a portion of a portable
+This is visualized in Figure \ref{fig:enwindows}, where a portion of a portable
 \gls{HPGe} spectrum is shown with the $\pm3\:keV$ windows from the auto energy
 window list.  Three training sets are created for each detector, resulting in
 18 detector-based processed gamma spectra training sets.
 
-\noindent \textbf{Step 4: Apply Statistical Counting Error}
+\noindent \textbf{Step 3: Apply Statistical Counting Error}
 
-Lastly, the fourth step involves the inclusion of the counting error for the
-summed energy windows. This is quite simple mathematically speaking, as
-statistical counting error of $n$ counts is $\sqrt{n}$.  As in Section
+The third step involves the inclusion of the counting error for the summed
+energy windows. This is quite simple mathematically speaking, as statistical
+counting error of $n$ counts is $\sqrt{n}$.  As in Section
 \ref{sec:inforeduc1}, this error gets applied in the same way for the
 scikit-learn algorithms, where the uniform error is applied randomly within the
 range $[x_i - \sqrt{x_i}, x_i + \sqrt{x_i}]$ for each summed energy window
 $x_i$. For the \gls{MLL} calculations, Equation \ref{eq:mllunc} is used, where
 $\sigma_{i} = \sqrt{x_i}$.  
 
-In summary, there are four steps taken to arrive at training databases based on
+In summary, there are three steps taken to arrive at training databases based on
 gamma spectra from six chosen detectors. Unlike the simple increase in training
 set error applied in Chapter \ref{ch:exp1}, each step of the process adds an
 additional layer of reduced information quality, which are listed here:
 \begin{enumerate}
-  \item The list of nuclides is limited to manually chosen radionuclides.
   \item Instead of "perfect" radionuclide activity knowledge, they are being 
         measured by a gamma detector.
   \item The processing of the gamma spectra can be highly variable.
