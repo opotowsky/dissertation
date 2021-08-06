@@ -301,26 +301,24 @@ baseline for all four prediction scenarios.  However, there were many high
 energy photopeaks excluded from these lists that might provide more
 information. These were captured via the auto peak search method, but the
 resulting energy windows list did not provide better results (and in some cases
-with \textit{k}-nearest neighbors, provided worse performance).  This simple
+with \textit{k}-nearest neighbors, provided worse performance).  
+
+There is much work on the topic of automatic radioisotope identification
+\cite{riid_09, rapid_riid_18, sull_gen_07, sull_valid_15, sull_auto_17,
+sull_unc_17, dayman_gamma_fp, dayman_gamma_auto} as well as the topic of
+elucidating typically undetectable nuclides using gamma spectroscopy with
+advanced detection techniques \cite{compton_supp, snf_gamma}.  So, this simple
 approach should be refined with a study on the latest gamma spectra processing
 tools and which are suitable to process a training set of $4.5 \times 10^5$
-spectra within a reasonable amount of time. 
+spectra within a reasonable amount of time.  
 
-There are also more advanced detection techniques being studied, some which
-could be simulated with \gls{GADRAS}.  This would provide easier peak
-processing for nuclides of interest, e.g., with peaks at the high energy end of
-the spectrum.
-
-Citations:
-
-targeted or advanced measurement techniques \cite{snf_gamma, compton_supp,
-bwr_high-res_gamma, pwr_bwr_gamma}
-
-innovative spectra evaluation and radioisotope identification methods
-\cite{riid_09, rapid_riid_18, sull_gen_07, sull_valid_15, sull_auto_17,
-sull_unc_17}.
-
-\todo{finish and update citations}
+%There are also more advanced detection techniques being studied that could
+%clarify peaks from nuclides that typically are not detectable. A Compton
+%supression measurement technique allows low-intensity peaks to be more
+%detectable \cite{compton_supp}. An Ultra-High Rate \gls{HPGe} system operates
+%such that peaks at the high energy end of the spectrum can be detected at large
+%enough counts \cite{snf_gamma}. It is possible these approaches could be
+%simulated and studied at a statistical level. 
 
 \subsection{Statistical Method Optimization}
 

@@ -149,12 +149,12 @@ implementation, and performance evaluation. This approach mimics the situation
 where there is a full set of well-measured nuclides, some of which require
 destructive techniques to measure. 
 
-First, in Section \ref{sec:training1}, the training data is simulated, which
-provides an array of nuclide measurements as the features. The prediction
-parameters are the simulation inputs: reactor type, burnup, \gls{U235}
-enrichment, and time since irradiation.  Given the chosen inputs, the makeup of
-$4.5 \times 10^5$ \gls{SNF} entries are simulated using \gls{ORIGEN}
-\cite{scale, origen, origenarp}.
+First, in Section \ref{sec:training1}, the training data is simulated. The
+features are an array of nuclide measurements, and the prediction parameters
+are the simulation inputs: reactor type, burnup, \gls{U235} enrichment, and
+time since irradiation.  Given the chosen inputs, the makeup of $4.5 \times
+10^5$ \gls{SNF} entries are simulated using \gls{ORIGEN} \cite{scale, origen,
+origenarp}.
 
 Second, in Section \ref{sec:inforeduc1}, information reduction on the training
 set is carried out using randomly injected uniform error. The random error is
