@@ -8,7 +8,7 @@
     \\~\\
     Algorithm hyperparameters:
     \begin{itemize}
-      \item k \textit{(2-5)}
+      \item k \textit{(1-7)}
       \item Distance measure \textit{(Manhattan distance)}
       \item Weight of nearest neighbors: uniform or distance \textit{(distance)}
     \end{itemize}
@@ -30,7 +30,7 @@
   \begin{minipage}{0.63\textwidth}
     \begin{figure}
       \centering
-      \includegraphics[width=\textwidth]{./figures/dtree_crop.png}
+      \includegraphics[width=\textwidth]{./figures/dtree.png}
       \caption{Cropped image of a decision tree of reactor type prediction}
     \end{figure}
   \end{minipage}%
@@ -43,8 +43,8 @@
     \end{itemize}
     Algorithm hyperparameters:
     \begin{itemize}
-      \item Maximum \# of features \textit{(num nuclides, or None)}
-      \item Maximum depth \textit{(varies, or None)}
+      \item Maximum \# of features \textit{(num nuclides, or 150)}
+      \item Maximum depth \textit{(41-78)}
       \item Criterion \textit{(Scikit defaults: gini \& mean squared error)}
     \end{itemize}
   \end{minipage}
@@ -55,11 +55,15 @@
   \frametitle{Maximum Likelihood Calculations}
 
 Likelihood calculated is as follows:
-\[L(M|r_{test}) = \prod_i \frac{1}{\sigma_{i,sim} \sqrt{2\pi}} \exp{\frac{-(r_{i,test} - r_{i,sim})^2}{2 \sigma_{i,sim}^2}}\]
+\[
+  L(M|x_{test}) = \prod_i \frac{1}{\sigma_{i,train} \sqrt{2\pi}} \exp{\frac{-(x_{i,test} - x_{i,train})^2}{2 \sigma_{i,train}^2}}
+\]
 
 Whereas the log-likelihood is used in practice:
-\[ln(L(M|r_{test})) = \sum_i ln(\frac{1}{\sigma_{i,sim} \sqrt{2\pi}}) - \frac{(r_{i,test} - r_{i,sim})^2}{2 \sigma_{i,sim}^2}\]
+\[
+  ln(L(M|x_{test})) = \sum_i ln(\frac{1}{\sigma_{i,train} \sqrt{2\pi}}) - \frac{(x_{i,test} - x_{i,train})^2}{2 \sigma_{i,train}^2}
+\]
 
-Approach based on previous work: \cite{mll_method, mll_sensitivity} \\~\\
+Approach based on previous work: \cite{mll_method} \\~\\
 
 \end{frame}

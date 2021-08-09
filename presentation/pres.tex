@@ -2,13 +2,15 @@
 \documentclass[10pt]{beamer}
 \usetheme[white]{Wisconsin}
 %\title[short title]{long title}
-\title[Information Reduction Impacts on SNF Prediction]{Information Reduction Impacts on SNF Prediction for Nuclear Forensics}
+\title[Impacts of Information Reduction SNF Attribution]
+      {\large Spent Nuclear Fuel Attribution using Statistical Methods: 
+       \normalsize Impacts of Information Reduction on Prediction Performance}
 %\subtitle[short subtitle]{long subtitle}
-\subtitle[Research Overview \& Progress Check-in]{Research Overview \& Progress Check-in}
+\subtitle[PhD Defense]{\vspace{4mm} PhD Defense}
 %\author[short name]{long name}
 \author[A. Opotowsky]{Arrielle Opotowsky}
 %\date[short date]{long date}
-\date[07.06.2021]{7 June 2021}
+\date[08.16.2021]{16 August 2021}
 %\institution[short name]{long name}
 \institute[UW-Madison]{University of Wisconsin-Madison}
 
@@ -17,10 +19,16 @@
 \usepackage{hyperref}
 \usepackage{enumerate}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{multicol}
 \usepackage{lmodern}
+\usepackage[LY1]{fontenc}
 \usepackage{mathtools}
 \usepackage{changepage}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{colortbl}
 \setbeamertemplate{footline}[page number]
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{bibliography item}[text]
@@ -39,6 +47,9 @@
 \newcommand{\boxalert}[1]{{%
   \usebeamercolor{alerted text}\colorbox{bg}{\alert{#1}}%
 }}
+
+% bold text in math environment
+\newcommand\allbold[1]{{\boldmath\textbf{#1}}}
 
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

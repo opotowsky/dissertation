@@ -4,6 +4,9 @@ latexopt   = -halt-on-error -file-line-error
 
 all: all-via-pdf
 
+quick: $(manuscript).tex
+	pdflatex $(latexopt) $(manuscript)
+
 all-via-pdf: $(manuscript).tex #$(references).bib
 	pdflatex $(latexopt) $(manuscript)
 	bibtex $(manuscript) #$<).aux

@@ -4,26 +4,25 @@
   \textbf{Maximum Log Likelihood:}
   \begin{enumerate}
     \footnotesize
-    \item Training database broken up into 10k segments
-    \item 3 samples from each segment tested (time limitations)
-    \item $7\%$ training database is tested
+    \item Training database broken up into 10k segments (CHTC)
+    \item Every training database entry is tested
     \item Testing sample removed from DB during each calculation
     \item Entire set of labels (reactor type, burnup, etc) predicted at once
   \end{enumerate}
   \textbf{Scikit-Learn Algorithms:}
   \begin{enumerate}
     \footnotesize
-    \item \texttt{train\_test\_split} used to break of $7\%$ of the database for testing
-    \item This is done in one step, so entire $7\%$ is missing from the DB 
     \item Scale training data ($0$ mean and unit variance)
+    \item 5-fold cross validation is used to iteratively remove 20\% of the training set as a testing set
     \item \texttt{fit} and \texttt{predict} takes place, ground truth and predictions are tracked
-    \item Each label is predicted on its own (thus \texttt{train\_test\_split} unlikely keeps PHWR representation in non-reactor type cases)
+    \item Each label is predicted separately
   \end{enumerate}
   \textbf{SFCOMPO Testing with Nuclide Mass Training Set:}
   \begin{enumerate}
     \footnotesize
     \item After filtering out for irrelevant cases, 505 test entries remain
-    \item In scikit, training units are converted, then the same scaling is applied to the training set and testing set features
+    \item Training set units are converted to $mg/gU_i$
+    \item In scikit, scaling is applied to the training set and testing set features
     \item MLL converts the units but doesn't require scaling
     \item Time since irradiation not included in SFCOMPO
   \end{enumerate}
