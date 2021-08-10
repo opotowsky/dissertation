@@ -1,44 +1,53 @@
 \begin{frame}
-  \frametitle{Predictions with Random Error}
-  \begin{adjustwidth}{-15pt}{0pt}
-  \begin{minipage}{0.5\textwidth}
+  \frametitle{Reactor Type Classification}
     \begin{figure}
       \centering
-      \includegraphics[width=1.03\linewidth]{./figures/randerr_compare_nuc29_rxtr.png}
+      \includegraphics[width=0.6\textwidth]{./figures/randerr_compare_nuc29_BalAcc_rxtr.png}
       \caption{Reactor type prediction (balanced) accuracy using 29 nuclide masses for 3 algorithms}
     \end{figure}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}{0.5\textwidth}
-    \begin{figure}
-      \centering
-      \includegraphics[width=1.08\linewidth]{./figures/randerr_compare_nuc29_burn.png}
-      \caption{Burnup mean absolute prediction error using 29 nuclide masses for 3 algorithms}
-    \end{figure}
-  \end{minipage}
-  \end{adjustwidth}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Predictions with Random Error}
-  \begin{adjustwidth}{-15pt}{0pt}
-  \begin{minipage}{0.5\textwidth}
+  \frametitle{Reactor Type Classification}
     \begin{figure}
       \centering
-      \includegraphics[width=1.08\linewidth]{./figures/randerr_compare_nuc29_enri.png}
-      \caption{U235 enrichment mean absolute prediction error using 29 nuclide masses for 3 algorithms}
+      \includegraphics[height=0.75\textheight]{./figures/confusion_matrix_nuc29_3errs.png}
+      \caption{Confusion matrices for three algorithms at three error levels}
     \end{figure}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}{0.5\textwidth}
-    \begin{figure}
-      \centering
-      \includegraphics[width=1.08\linewidth]{./figures/randerr_compare_nuc29_cool.png}
-      \caption{Time since irradiation mean absolute prediction error using 29 nuclide masses for 3 algorithms}
-    \end{figure}
-  \end{minipage}
-  \end{adjustwidth}
 \end{frame}
+
+  %\begin{adjustwidth}{-15pt}{0pt}
+  %\begin{minipage}{0.5\textwidth}
+  %\end{minipage}%
+  %\hfill
+  %\begin{minipage}{0.5\textwidth}
+  %  \begin{figure}
+  %    \centering
+  %    \includegraphics[width=1.08\linewidth]{./figures/randerr_compare_nuc29_burn.png}
+  %    \caption{Burnup mean absolute prediction error using 29 nuclide masses for 3 algorithms}
+  %  \end{figure}
+  %\end{minipage}
+  %\end{adjustwidth}
+%\begin{frame}
+%  \frametitle{Predictions with Random Error}
+%  \begin{adjustwidth}{-15pt}{0pt}
+%  \begin{minipage}{0.5\textwidth}
+%    \begin{figure}
+%      \centering
+%      \includegraphics[width=1.08\linewidth]{./figures/randerr_compare_nuc29_enri.png}
+%      \caption{U235 enrichment mean absolute prediction error using 29 nuclide masses for 3 algorithms}
+%    \end{figure}
+%  \end{minipage}%
+%  \hfill
+%  \begin{minipage}{0.5\textwidth}
+%    \begin{figure}
+%      \centering
+%      \includegraphics[width=1.08\linewidth]{./figures/randerr_compare_nuc29_cool.png}
+%      \caption{Time since irradiation mean absolute prediction error using 29 nuclide masses for 3 algorithms}
+%    \end{figure}
+%  \end{minipage}
+%  \end{adjustwidth}
+%\end{frame}
 
 \begin{frame}
   \frametitle{Predictions of SFCOMPO Test Cases}
