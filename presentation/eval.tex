@@ -29,31 +29,38 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Reactor Type Performance}
+  \frametitle{Reactor Type Classification Performance}
   \textbf{Accuracy Metrics:} \cite{scikit}
-  \begin{itemize}
-    \item $\textit{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)$
-    \item $\textit{balanced-accuracy}(y, \hat{y}, w) = \frac{1}{\sum{\hat{w}_i}} \sum_i 1(\hat{y}_i = y_i) \hat{w}_i$
-    \item $\text{where: } \hat{w}_i = \frac{w_i}{\sum_j{1(y_j = y_i) w_j}}$
+  \vspace{2mm}
+  \begin{itemize}\addtolength{\itemsep}{0.4\baselineskip}
+    \item $\textit{accuracy} = \frac{1}{N_\text{samples}} \sum_{i=1}^{N_\text{samples}} 
+                               \mathbb{I}(y_{pred,i} = y_{true,i})$
+    \item $\textit{balanced-accuracy} = \frac{1}{\sum_{i}{w_i}} \sum_{i=1}^{N_\text{samples}}
+                                        w_i \cdot \mathbb{I}(y_{pred, i} = y_{true, i})$ \\
+          \hspace{1.1cm} where: $w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i) w_j}}$
+    \item Confusion matrices: 
   \end{itemize}
-  \textbf{Other Evaluations:}
-  \begin{itemize}
-    \item Many other classification metrics 
-    \item Confusion matrices (shown in this presentation)
-    \item Reciever operating characteristic curves
-  \end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.34\linewidth]{./figures/cm_example.png}
+    \caption{Example of a confusion matrix for the three reactor types}
+  \end{figure}
 \end{frame}
 
 \begin{frame}
   \frametitle{Performance Measures for Regression}
   \textbf{Regression Metrics:} \cite{scikit}
-  \begin{itemize}
-    \item Mean Absolute Error:
-          $$\textit{MAE}(y, \hat{y}) = \frac{1}{n_{\text{samples}}} \sum_{i=0}^{n_{\text{samples}}-1} \left| y_i - \hat{y}_i \right|$$
-          (Standard deviation for error bars)
-    \item Median Absolute Error:
-          $$\textit{MedAE}(y, \hat{y}) = \text{median}(\mid y_1 - \hat{y}_1 \mid, \ldots, \mid y_n - \hat{y}_n \mid)$$
-          (Interquartile range for error bars)
+  \vspace{2mm}
+  \begin{itemize}\addtolength{\itemsep}{0.4\baselineskip}
+    \item Mean Absolute Error:\\ \vspace{2mm}
+          $\textit{MAE} = \frac{1}{N_{\text{samples}}} \sum_{i=1}^{N_{\text{samples}}} \left| y_{true, i} - y_{pred, i} \right|$
+    \item Median Absolute Error:\\ \vspace{2mm}
+          $\textit{MedAE} = \text{median}(\mid y_{true, 1} - y_{pred, 1} \mid, \ldots, 
+                                          \mid y_{true, n} - y_{pred, n} \mid)$
+    \item Mean Absolute Percentage Error:\\ \vspace{2mm}
+          $\textit{MAPE} =  \frac{100}{N_{\text{samples}}} \cdot 
+                            \sum_{i=1}^{N_{\text{samples}}}
+                            \frac{\left| y_{true, i} - y_{pred, i} \right|}{y_{true, i}}$
   \end{itemize}
 \end{frame}
 
