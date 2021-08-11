@@ -13,6 +13,7 @@
       \item Each label is predicted separately
     \end{enumerate}
   \end{block}
+  \pause
   \vspace{-5pt}
   \begin{block}{Maximum Log Likelihood:}
     \begin{enumerate}
@@ -24,6 +25,7 @@
       \item Entire set of labels (reactor type, burnup, etc) predicted at once
     \end{enumerate}
   \end{block}
+  \pause
   \vspace{-5pt}
   \begin{block}{SFCOMPO Testing with Nuclide Mass Training Set:}
     \begin{enumerate}
@@ -44,17 +46,22 @@
   \textbf{Accuracy Metrics:} \cite{scikit}
   \vspace{2mm}
   \begin{itemize}\addtolength{\itemsep}{0.4\baselineskip}
-    \item $\textit{accuracy} = \frac{1}{N_\text{samples}} \sum_{i=1}^{N_\text{samples}} 
-                               \mathbb{I}(y_{pred,i} = y_{true,i})$
-    \item $\textit{balanced-accuracy} = \frac{1}{\sum_{i}{w_i}} \sum_{i=1}^{N_\text{samples}}
-                                        w_i \cdot \mathbb{I}(y_{pred, i} = y_{true, i})$ \\
-          \hspace{1.1cm} where: $w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i) w_j}}$
-    \item Confusion matrices: 
+    \item $\uncover<1->{\textit{accuracy} = }
+           \uncover<4->{\frac{1}{N_\text{samples}}}
+           \uncover<3->{\sum_{i=1}^{N_\text{samples}}}
+           \uncover<2->{\mathbb{I}(y_{pred,i} = y_{true,i})}$
+    \item $\uncover<1->{\textit{balanced-accuracy} = }
+           \uncover<5->{\frac{1}{\sum_{i}{w_i}}}
+           \uncover<3->{\sum_{i=1}^{N_\text{samples}}}
+           \uncover<5->{w_i \cdot}
+           \uncover<2->{\mathbb{I}(y_{pred, i} = y_{true, i})}$ \\
+          \hspace{1.1cm} \uncover<6->{where: $w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i)w_j}}}$
+    \uncover<7->{\item Confusion matrices:}
   \end{itemize}
-  \begin{figure}
+  \invisible<-6>{\begin{figure}
     \centering
     \includegraphics[width=0.35\linewidth]{./figures/cm_example.png}
-  \end{figure}
+  \end{figure}}
 \end{frame}
 
 \begin{frame}
@@ -62,15 +69,15 @@
   \textbf{Regression Metrics:} \cite{scikit}
   \vspace{2mm}
   \begin{itemize}\addtolength{\itemsep}{0.4\baselineskip}
-    \item Mean Absolute Error:\\ \vspace{2mm}
-          $\textit{MAE} = \frac{1}{N_{\text{samples}}} \sum_{i=1}^{N_{\text{samples}}} \left| y_{true, i} - y_{pred, i} \right|$
-    \item Median Absolute Error:\\ \vspace{2mm}
+    \item \uncover<1->{Mean Absolute Error:\\ \vspace{2mm}
+          $\textit{MAE} = \frac{1}{N_{\text{samples}}} \sum_{i=1}^{N_{\text{samples}}} \left| y_{true, i} - y_{pred, i} \right|$}
+    \item \uncover<2->{Median Absolute Error:\\ \vspace{2mm}
           $\textit{MedAE} = \text{median}(\mid y_{true, 1} - y_{pred, 1} \mid, \ldots, 
-                                          \mid y_{true, n} - y_{pred, n} \mid)$
-    \item Mean Absolute Percentage Error:\\ \vspace{2mm}
+                                          \mid y_{true, n} - y_{pred, n} \mid)$}
+    \item \uncover<3->{Mean Absolute Percentage Error:\\ \vspace{2mm}
           $\textit{MAPE} =  \frac{100}{N_{\text{samples}}} \cdot 
                             \sum_{i=1}^{N_{\text{samples}}}
-                            \frac{\left| y_{true, i} - y_{pred, i} \right|}{y_{true, i}}$
+                            \frac{\left| y_{true, i} - y_{pred, i} \right|}{y_{true, i}}$}
   \end{itemize}
 \end{frame}
 

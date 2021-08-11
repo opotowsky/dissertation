@@ -17,7 +17,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Developing a Computational Methodology}
+  \frametitle{Developing a Computational Methodology} %Research Overview
   \begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\textwidth]{./figures/project_design.png}
@@ -25,27 +25,22 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Experimental Design Overview}
-  \begin{adjustwidth}{-15pt}{0pt}
-  \begin{minipage}{0.45\textwidth}
+  \frametitle{Developing a Statistical Methodology}
+  \begin{adjustwidth}{-10pt}{-10pt}
+  \begin{minipage}{0.5\textwidth}
     \begin{figure}
       \centering
-      \includegraphics[width=\textwidth]{./figures/methodology.png}
+      \includegraphics[width=\textwidth]{./figures/meth_pres.png}
     \end{figure}
   \end{minipage}%
-  \hfill
-  \begin{minipage}{0.55\textwidth}
+  %\hfill
+  \begin{minipage}{0.533\textwidth}
     \begin{itemize}
       \item Training Data: SNF recipes from SCALE/ORIGEN-ARP \cite{scale, origen}
-      \item Information Reduction
-        \begin{itemize}
-          \item Nuclide Masses: Random error injection
-          \item Nuclide Activities: Generate computational gamma spectra from GADRAS \cite{gadras}
-        \end{itemize}
       \item Statistical Methods
         \begin{itemize}
-          \item Machine learning algorithms (kNN \& Decision Trees) \cite{scikit}
-          \item Maximum likelihood calculation method \cite{mll_method, mll_sensitivity}
+          \item Scikit-learn algorithms (kNN \& Decision Trees) \cite{scikit}
+          \item Maximum log-likelihood calculation method \cite{mll_method, mll_sensitivity}
         \end{itemize}
       \item Performance
         \begin{itemize}

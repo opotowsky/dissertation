@@ -50,17 +50,13 @@
 
 \begin{frame}
   \frametitle{Maximum Likelihood Calculations}
-
-Likelihood calculated is as follows:
-\[
-  L(M|x_{test}) = \prod_i \frac{1}{\sigma_{i,train} \sqrt{2\pi}} \exp{\frac{-(x_{i,test} - x_{i,train})^2}{2 \sigma_{i,train}^2}}
-\]
-
-Whereas the log-likelihood is used in practice:
-\[
-  ln(L(M|x_{test})) = \sum_i ln(\frac{1}{\sigma_{i,train} \sqrt{2\pi}}) - \frac{(x_{i,test} - x_{i,train})^2}{2 \sigma_{i,train}^2}
-\]
-
-Approach based on previous work: \cite{mll_method} \\~\\
+  \begin{block}{Objective:}
+    Maximum log-likelihood value, calculated as follows:
+    \[
+      ln(L(M|x_{test})) = \sum_i ln(\frac{1}{\sigma_{i,train} \sqrt{2\pi}}) - 
+                          \frac{(x_{i,test} - x_{i,train})^2}{2 \sigma_{i,train}^2}
+    \]  
+  \end{block}
+  Approach based on previous work: \cite{mll_method}
 
 \end{frame}

@@ -1,3 +1,27 @@
+
+\begin{frame}
+  \frametitle{Information Reduction: Random \& Uniform Error}
+  \begin{block}{Scikit-learn Algorithms}
+    \small
+    Introduced $0\% < E_{max} < 20\%$ random error:
+    \[E_{max} = \text{0, 1, 2, 5, 8, 10, 12, 15, 18, 20}\% \]
+    Each nuclide measurement is altered by a random percentage in the range: 
+    \[[100-E_{max},100+E_{max}]\]
+  \end{block}
+  \begin{block}{Maximum Likelihood Calculations}
+  \small
+    Introduced uniform simulation uncertainty: 
+    \[\sigma_i = \text{1, 5, 10, 15, 20}\% \]
+    Each nuclide measurement is given a standard deviation via 
+    \cite{mll_sensitivity}:
+    \[\sigma_{Log L}^2 = \sum_i \left( 
+                                \frac{x_{i,test} - x_{i,train}}{\sigma_{i,train}^2}
+                                \right)^2 
+                                (\sigma_{i,train}^2 + \sigma_{i,test}^2)
+    \]
+  \end{block}
+\end{frame}
+
 \begin{frame}
   \frametitle{Reactor Type Classification}
     \begin{figure}

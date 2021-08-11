@@ -2,8 +2,7 @@
 \documentclass[10pt]{beamer}
 \usetheme[white]{Wisconsin}
 %\title[short title]{long title}
-\title[Impacts of Information Reduction on SNF Attribution]
-      {\large Spent Nuclear Fuel Attribution using Statistical Methods}
+\title{\large Spent Nuclear Fuel Attribution using Statistical Methods}
 %\subtitle[short subtitle]{long subtitle}
 \subtitle{Impacts of Information Reduction on Prediction Performance}
 %\author[short name]{long name}
@@ -11,10 +10,8 @@
 %\date[short date]{long date}
 \date{16 August 2021}
 %\institution[short name]{long name}
-\institute[UW-Madison]{University of Wisconsin-Madison}
+\institute{University of Wisconsin-Madison}
 
-\usepackage{caption}
-\usepackage{subcaption}
 \usepackage{hyperref}
 \usepackage{enumerate}
 \usepackage{amsmath}
@@ -28,10 +25,10 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{colortbl}
-\setbeamertemplate{footline}[page number]
-\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{footline}[frame number]
 \setbeamertemplate{bibliography item}[text]
 \setbeamercolor{page number in head/foot}{fg=gray}
+\setbeamercovered{transparent}
 
 % thanks to katy huff: get rid of header on title page\dots
 \makeatletter
@@ -72,23 +69,14 @@
 \end{withoutheadline}
 
 %%--------------------------------%%
-%\AtBeginSection[]{
-%\begin{frame}
-%  \frametitle{Outline}
-%  \begin{multicols}{2}
-%    \tableofcontents[currentsection]
-%  \end{multicols}
-%\end{frame}
-%}
-
-%\begin{frame}
-%  \frametitle{X}
-%  \begin{figure}[h!]
-%    \centering
-%    \includegraphics[width=0.9\textwidth]{.png}
-%    \caption{x}
-%  \end{figure}
-%\end{frame}
+\AtBeginSection[]{
+\begin{frame}
+  \frametitle{Outline}
+  %\begin{multicols}{2}
+    \tableofcontents[currentsection]
+  %\end{multicols}
+\end{frame}
+}
 
 \section{Introduction}
 \include{intro}
@@ -112,44 +100,6 @@
 \section{Conclusions}
 \input{summary}
 \input{acks}
-
-%
-%\section{Literature Review}
-%\subsection{Nuclear Forensics}
-%\input{forensics}
-%\subsection{Statistical Models}
-%\input{statmods}
-%\subsubsection{Algorithms for Prediction}
-%\input{algs}
-%\subsubsection{ML Model Assessment}
-%\input{errors}
-%\subsubsection{ML Model Validation}
-%\input{optvalid}
-%\subsection{Computational Tools}
-%\input{comptools}
-%\subsection{Previous Work}
-%\input{prevwk}
-%
-%\section{Demonstration}
-%\input{demometh}
-%\subsection{Training Data}
-%\input{training}
-%\subsection{Reactor Parameter Prediction}
-%\input{demoresults}
-%\subsection{ML Model Validation}
-%\input{demovalid}
-%
-%\section{Research Proposal}
-%\include{propprep}
-%\subsection{Experiment 1}
-%\include{exp1}
-%\subsection{Experiment 2}
-%\include{exp2}
-%\subsection{Experiment 3}
-%\include{exp3}
-%\subsection{Method Comparison}
-%\include{methcompare}
-%
 
 %%--------------------------------%%
 %%--------------------------------%%
