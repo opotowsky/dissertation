@@ -2,23 +2,22 @@
   \frametitle{k-Nearest Neighbors}
   \begin{adjustwidth}{-10pt}{0pt}
   \begin{minipage}{0.5\textwidth}
-    Objective: \\
-    Minimum distance between test sample and training instance(s) \\
-    %$$ Y(\boldsymbol{X}) = \frac{1}{k} \sum_{x_i \in N_k(\boldsymbol{X})} y_i $$
-    \\~\\
-    Algorithm hyperparameters:
-    \begin{itemize}
-      \item k \textit{(1-7)}
-      \item Distance measure \textit{(Manhattan distance)}
-      \item Weight of nearest neighbors: uniform or distance \textit{(distance)}
-    \end{itemize}
-  \end{minipage}%
+    \begin{block}{Objective}
+      Minimum distance between test sample and training instance(s)
+    \end{block}
+    \begin{block}{Algorithm hyperparameters:}
+      \begin{itemize}
+        \item k \textit{(1-7)}
+        \item Distance measure \textit{(Manhattan distance)}
+        \item Weight of nearest neighbors: uniform or distance \textit{(distance)}
+      \end{itemize}
+    \end{block}
+  \end{minipage}
   \hfill
   \begin{minipage}{0.5\textwidth}
     \begin{figure}
       \centering
       \includegraphics[height=0.5\textheight]{./figures/nn-fig.png}
-      \caption{Demonstration of the prediction variation of kNN with different values of \textit{k}}
     \end{figure}
   \end{minipage}
   \end{adjustwidth}
@@ -26,27 +25,25 @@
 
 \begin{frame}
   \frametitle{Decision Trees}
-  \begin{adjustwidth}{-15pt}{0pt}
-  \begin{minipage}{0.63\textwidth}
+  \begin{adjustwidth}{-10pt}{0pt}
+  \begin{minipage}{0.4\textwidth}
+    \begin{block}{Objective:}
+      Minimum node impurity at each split
+    \end{block}
+    \begin{block}{Algorithm hyperparameters:}
+      \begin{itemize}
+        \item Maximum \# of features \textit{(num nuclides, or 150)}
+        \item Maximum depth \textit{(41-78)}
+        \item Criterion \textit{(Scikit defaults: gini \& mean squared error)}
+      \end{itemize}
+    \end{block}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.6\textwidth}
     \begin{figure}
       \centering
       \includegraphics[width=\textwidth]{./figures/dtree.png}
-      \caption{A decision tree showing reactor type prediction}
     \end{figure}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}{0.4\textwidth}
-    Objectives: %maximize information gain for each split or minimize \\
-    \begin{itemize}
-      \item Classification: information gain
-      \item Regression: mean error
-    \end{itemize}
-    Algorithm hyperparameters:
-    \begin{itemize}
-      \item Maximum \# of features \textit{(num nuclides, or 150)}
-      \item Maximum depth \textit{(41-78)}
-      \item Criterion \textit{(Scikit defaults: gini \& mean squared error)}
-    \end{itemize}
   \end{minipage}
   \end{adjustwidth}
 \end{frame}

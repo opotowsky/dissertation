@@ -3,132 +3,56 @@
   \begin{figure}
     \centering
     \includegraphics[height=0.7\textheight]{./figures/plot_description.png}
-    \caption{Schemctic of an empty plot to describe the axes and other details}
   \end{figure}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Reactor Type Accuracy}
-  \begin{adjustwidth}{-25pt}{0pt}
+  \frametitle{Reactor Type Classification}
+  \begin{adjustwidth}{-15pt}{-10pt}
   \begin{figure}
     \centering
-    \includegraphics[width=1.15\textwidth]{./figures/detector_preds_wrt_enlist_reactor.png}
-    \captionsetup{margin=0.6cm}
-    \caption{Reactor type prediction balanced accuracy for 3 energy window lists. 
-             Red baseline is at zero-rule value of $0.76$. Blue "goal line" is set at $0.95$.}
+    \includegraphics[width=1.1\textwidth]{./figures/detector_preds_wrt_enlist_BalAcc_rxtr.png}
   \end{figure}
+  \vspace{12pt} \centering Red baseline: 0.84 balanced accuracy score
   \end{adjustwidth}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Confusion Matrices}
-  \begin{adjustwidth}{-20pt}{0pt}
-  \vspace*{-0.5cm}
-  \begin{figure}[t!]
-    \centering
-    \includegraphics[height=0.45\textheight]{./figures/confusion_matrix_n31_d1.png}
-    \includegraphics[height=0.45\textheight]{./figures/confusion_matrix_auto_d1.png}
-    %\caption{caption}
-  \end{figure}
-  \end{adjustwidth}
+  \frametitle{Reactor Type Classification}
+  Maybe conf matrices?
 \end{frame}
 
 \begin{frame}
-  \frametitle{Burnup : Mean Absolute Error}
-  \begin{adjustwidth}{-25pt}{0pt}
+  \frametitle{Burnup Regression}
+  \begin{adjustwidth}{-15pt}{-10pt}
   \begin{figure}
     \centering
-    \includegraphics[width=1.15\textwidth]{./figures/detector_preds_wrt_enlist_burnup.png}
-    \captionsetup{margin=0.6cm}
-    \caption{Burnup prediction errors for 3 energy window lists. 
-             Red baseline is at $-2000 MWd/MTU$. Blue "goal line" is at $-200 MWd/MTU$.}
+    \includegraphics[width=1.1\textwidth]{./figures/detector_preds_wrt_enlist_MAPE_burn.png}
   \end{figure}
+  \vspace{12pt} \centering Red baseline: -4\% %$1000\:MWd/MTU$
   \end{adjustwidth}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Mean or Median?}
-  \begin{adjustwidth}{0pt}{-15pt}
-  \begin{minipage}{0.49\textwidth}
-    \begin{figure}
-      \centering
-      \includegraphics[width=\textwidth]{./figures/abs_err_hist.png}
-      \caption{Histogram of absolute burnup error for the kNN prediction using the auto-processed spectra of the lab-based HPGe detector}
-    \end{figure}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}{0.49\textwidth}
-    \begin{figure}
-      \centering
-      \includegraphics[width=\textwidth]{./figures/true_v_pred.png}
-      \caption{Ground truth versus predicted burnup for the kNN prediction using the auto-processed spectra of the lab-based HPGe detector}
-    \end{figure}
-  \end{minipage}
-  \end{adjustwidth}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Burnup : Median Absolute Error}
-  \begin{adjustwidth}{-25pt}{0pt}
+  \frametitle{${}^{235}\text{U}$ Enrichment Regression}
+  \begin{adjustwidth}{-15pt}{-10pt}
   \begin{figure}
     \centering
-    \includegraphics[width=1.15\textwidth]{./figures/detector_preds_wrt_enlist_med_burnup_median_err.png}
-    \captionsetup{margin=0.6cm}
-    \caption{Burnup prediction errors for 3 energy window lists. 
-             Red baseline is at $-2000 MWd/MTU$. Blue "goal line" is at $-200 MWd/MTU$.}
+    \includegraphics[width=1.1\textwidth]{./figures/detector_preds_wrt_enlist_MAPE_enri.png}
   \end{figure}
+  \vspace{12pt} \centering Red baseline: -6\% 
   \end{adjustwidth}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Enrichment : Mean Absolute Error}
-  \begin{adjustwidth}{-25pt}{0pt}
+  \frametitle{Time Since Irradiation Regression}
+  \begin{adjustwidth}{-15pt}{-10pt}
   \begin{figure}
     \centering
-    \includegraphics[width=1.15\textwidth]{./figures/detector_preds_wrt_enlist_enrichment.png}
-    \captionsetup{margin=0.6cm}
-    \caption{U235 enrichment prediction errors for 3 energy window lists. 
-             Red baseline is at $-1.0 \%U235$. Blue "goal line" is at $-0.1 \%U235$.}
+    \includegraphics[width=1.1\textwidth]{./figures/detector_preds_wrt_enlist_MAPE_cool.png}
   \end{figure}
+  \vspace{12pt} \centering Red baseline: -6\% (Grey line is -30\%) 
   \end{adjustwidth}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Enrichment : Median Absolute Error}
-  \begin{adjustwidth}{-25pt}{0pt}
-  \begin{figure}
-    \centering
-    \includegraphics[width=1.15\textwidth]{./figures/detector_preds_wrt_enlist_med_enrichment_median_err.png}
-    \captionsetup{margin=0.6cm}
-    \caption{U235 enrichment prediction errors for 3 energy window lists. 
-             Red baseline is at $-1.0 \%U235$. Blue "goal line" is at $-0.1 \%U235$.}
-  \end{figure}
-  \end{adjustwidth}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Time Since Irradiation : Mean Absolute Error}
-  \begin{adjustwidth}{-25pt}{0pt}
-  \begin{figure}
-    \centering
-    \includegraphics[width=1.15\textwidth]{./figures/detector_preds_wrt_enlist_cooling.png}
-    \captionsetup{margin=0.6cm}
-    \caption{Time since irradiation prediction errors for 3 energy window lists. 
-             Red baseline is at $-111 days$. Blue "goal line" is at $-11 days$.}
-  \end{figure}
-  \end{adjustwidth}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Time Since Irradiation : Median Absolute Error}
-  \begin{adjustwidth}{-25pt}{0pt}
-  \begin{figure}
-    \centering
-    \includegraphics[width=1.15\textwidth]{./figures/detector_preds_wrt_enlist_med_cooling_median_err.png}
-    \captionsetup{margin=0.6cm}
-    \caption{Time since irradiation prediction errors for 3 energy window lists. 
-             Red baseline is at $-111 days$. Blue "goal line" is at $-11 days$.}
-  \end{figure}
-  \end{adjustwidth}
-\end{frame}
 

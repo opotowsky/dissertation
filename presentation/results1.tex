@@ -3,7 +3,6 @@
     \begin{figure}
       \centering
       \includegraphics[width=0.6\textwidth]{./figures/randerr_compare_nuc29_BalAcc_rxtr.png}
-      \caption{Reactor type prediction (balanced) accuracy using 29 nuclide masses for 3 algorithms}
     \end{figure}
 \end{frame}
 
@@ -11,67 +10,244 @@
   \frametitle{Reactor Type Classification}
     \begin{figure}
       \centering
-      \includegraphics[height=0.75\textheight]{./figures/confusion_matrix_nuc29_3errs.png}
-      \caption{Confusion matrices for three algorithms at three error levels}
+      \includegraphics[height=0.85\textheight]{./figures/confusion_matrix_nuc29_3errs.png}
     \end{figure}
 \end{frame}
 
-  %\begin{adjustwidth}{-15pt}{0pt}
-  %\begin{minipage}{0.5\textwidth}
-  %\end{minipage}%
-  %\hfill
-  %\begin{minipage}{0.5\textwidth}
-  %  \begin{figure}
-  %    \centering
-  %    \includegraphics[width=1.08\linewidth]{./figures/randerr_compare_nuc29_burn.png}
-  %    \caption{Burnup mean absolute prediction error using 29 nuclide masses for 3 algorithms}
-  %  \end{figure}
-  %\end{minipage}
-  %\end{adjustwidth}
-%\begin{frame}
-%  \frametitle{Predictions with Random Error}
-%  \begin{adjustwidth}{-15pt}{0pt}
-%  \begin{minipage}{0.5\textwidth}
-%    \begin{figure}
-%      \centering
-%      \includegraphics[width=1.08\linewidth]{./figures/randerr_compare_nuc29_enri.png}
-%      \caption{U235 enrichment mean absolute prediction error using 29 nuclide masses for 3 algorithms}
-%    \end{figure}
-%  \end{minipage}%
-%  \hfill
-%  \begin{minipage}{0.5\textwidth}
-%    \begin{figure}
-%      \centering
-%      \includegraphics[width=1.08\linewidth]{./figures/randerr_compare_nuc29_cool.png}
-%      \caption{Time since irradiation mean absolute prediction error using 29 nuclide masses for 3 algorithms}
-%    \end{figure}
-%  \end{minipage}
-%  \end{adjustwidth}
-%\end{frame}
-
 \begin{frame}
-  \frametitle{Predictions of SFCOMPO Test Cases}
+  \frametitle{Burnup Regression}
   \begin{adjustwidth}{-15pt}{0pt}
-  \begin{minipage}{0.85\textwidth}
-    \begin{itemize}
-      \item 505 test cases in total 
-      \item Most test samples have many features missing (see table to left)
-      \item Scikit algs don't handle null values, so the missing nuclide measurements are replaced with $0$
-    \end{itemize}
-    \bigskip
-    \begin{table}
-      %\centering
-      \includegraphics[width=\textwidth]{./figures/sfcompo_pred_results.png}
-      \caption{Accuracy (not balanced) and mean absolute errors of the test cases in the SFCOMPO database}
-    \end{table}
+  \begin{minipage}{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAPE_burn.png}
+    \end{figure}
   \end{minipage}%
   \hfill
-  \begin{minipage}{0.15\textwidth}
-    \begin{table}
-      %\centering
-      \includegraphics[height=0.89\textheight]{./figures/sfcompo_nuc_counts.png}
-      %\caption{The number of entries that includes a measurement for each nuclide}
-    \end{table}
+  \begin{minipage}{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAE_burn.png}
+    \end{figure}
   \end{minipage}
   \end{adjustwidth}
 \end{frame}
+
+\begin{frame}
+  \frametitle{${}^{235}\text{U}$ Enrichment Regression}
+  \begin{adjustwidth}{-15pt}{0pt}
+  \begin{minipage}{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAPE_enri.png}
+    \end{figure}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAE_enri.png}
+    \end{figure}
+  \end{minipage}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Time Since Irradiation Regression}
+  \begin{adjustwidth}{-15pt}{0pt}
+  \begin{minipage}{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAPE_cool.png}
+    \end{figure}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAE_cool.png}
+    \end{figure}
+  \end{minipage}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SFCOMPO Database as Test Cases}
+  \begin{adjustwidth}{-15pt}{0pt}
+  \begin{minipage}{0.45\textwidth}
+    \begin{block}{505 Test Cases}
+      Range of reactor operation parameters in SFCOMPO:
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/sfcompo_scatter_viz.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.55\textwidth}
+    \begin{block}{Many Missing Features}
+      Number of assays each nuclide is measured for in SFCOMPO:
+      \begin{table}
+        \footnotesize
+        \centering
+        \renewcommand{\arraystretch}{1.3}
+        \begin{tabular}{>{\raggedleft}m{0.36in}
+                                      m{0.18in}
+                        >{\raggedleft}m{0.36in}
+                                      m{0.18in}
+                        >{\raggedleft}m{0.36in}
+                                      m{0.18in}}
+          \toprule
+          \rowcolor[gray]{0.88} ${}^{241}\text{Am}$  & 237 & ${}^{145}\text{Nd}$ & 162 & ${}^{147}\text{Sm}$ & 97  \\  
+          \rowcolor[gray]{0.95} ${}^{242m}\text{Am}$ & 110 & ${}^{146}\text{Nd}$ & 139 & ${}^{149}\text{Sm}$ & 97  \\ 
+          \rowcolor[gray]{0.88} ${}^{243}\text{Am}$  & 203 & ${}^{148}\text{Nd}$ & 275 & ${}^{150}\text{Sm}$ & 97  \\ 
+          \rowcolor[gray]{0.95} ${}^{242}\text{Cm}$  & 214 & ${}^{150}\text{Nd}$ & 121 & ${}^{151}\text{Sm}$ & 97  \\ 
+          \rowcolor[gray]{0.88} ${}^{244}\text{Cm}$  & 269 & ${}^{237}\text{Np}$ & 155 & ${}^{152}\text{Sm}$ & 97  \\ 
+          \rowcolor[gray]{0.95} ${}^{134}\text{Cs}$  & 113 & ${}^{238}\text{Pu}$ & 369 & ${}^{234}\text{U}$  & 355 \\ 
+          \rowcolor[gray]{0.88} ${}^{137}\text{Cs}$  & 185 & ${}^{239}\text{Pu}$ & 505 & ${}^{235}\text{U}$  & 479 \\ 
+          \rowcolor[gray]{0.95} ${}^{154}\text{Eu}$  & 100 & ${}^{240}\text{Pu}$ & 505 & ${}^{236}\text{U}$  & 462 \\ 
+          \rowcolor[gray]{0.88} ${}^{143}\text{Nd}$  & 162 & ${}^{241}\text{Pu}$ & 504 & ${}^{238}\text{U}$  & 433 \\ 
+          \rowcolor[gray]{0.95} ${}^{144}\text{Nd}$  & 113 & ${}^{242}\text{Pu}$ & 505 &       &     \\ \bottomrule
+        \end{tabular}
+      \end{table}
+    \end{block}
+  \end{minipage}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SFCOMPO Prediction Results: Reactor Type}
+    \begin{figure}
+      \centering
+      \includegraphics[height=0.8\textheight]{./figures/confusion_matrix_sfco.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SFCOMPO Prediction Results: Burnup}
+  \begin{adjustwidth}{-15pt}{0pt}
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Mean-Imputed Null Values}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/sfcompo_boxplots_impnull_burn.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Zero-Imputed Null Values}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/sfcompo_boxplots_0null_burn.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SFCOMPO Prediction Results: Burnup}
+  \begin{adjustwidth}{-15pt}{0pt}
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Mean-Imputed Null Values}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/sfcompo_boxplots_impnull_pcterr_burn.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Zero-Imputed Null Values}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/sfcompo_boxplots_0null_pcterr_burn.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SFCOMPO Prediction Results: Burnup}
+  \vspace{-5pt}
+  \begin{block}{Mean-Imputed Null Values}
+    \begin{figure}
+      \centering
+      \includegraphics[height=0.35\textheight]{./figures/sfcompo_truey_vs_predy_impnull__burn.png}
+    \end{figure}
+  \end{block}
+  \vspace{-5pt}
+  \begin{block}{Zero-Imputed Null Values}
+    \begin{figure}
+      \centering
+      \includegraphics[height=0.35\textheight]{./figures/sfcompo_truey_vs_predy_0null__burn.png}
+    \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SFCOMPO Prediction Results: ${}^{235}\text{U}$ Enrichment}
+  \begin{adjustwidth}{-15pt}{0pt}
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Mean-Imputed Null Values}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/sfcompo_boxplots_impnull_enri.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Zero-Imputed Null Values}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/sfcompo_boxplots_0null_enri.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SFCOMPO Prediction Results: ${}^{235}\text{U}$ Enrichment}
+  \begin{adjustwidth}{-15pt}{0pt}
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Mean-Imputed Null Values}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/sfcompo_boxplots_impnull_pcterr_enri.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Zero-Imputed Null Values}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/sfcompo_boxplots_0null_pcterr_enri.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SFCOMPO Prediction Results: ${}^{235}\text{U}$ Enrichment}
+  \vspace{-5pt}
+  \begin{block}{Mean-Imputed Null Values}
+    \begin{figure}
+      \centering
+      \includegraphics[height=0.35\textheight]{./figures/sfcompo_truey_vs_predy_impnull__enri.png}
+    \end{figure}
+  \end{block}
+  \vspace{-5pt}
+  \begin{block}{Zero-Imputed Null Values}
+    \begin{figure}
+      \centering
+      \includegraphics[height=0.35\textheight]{./figures/sfcompo_truey_vs_predy_0null__enri.png}
+    \end{figure}
+  \end{block}
+\end{frame}
+
