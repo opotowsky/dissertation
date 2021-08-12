@@ -1,58 +1,96 @@
 
 \begin{frame}
   \frametitle{Summary: Experimental Design Overview}
-  \begin{figure}
-    \centering
-    \includegraphics[height=0.85\textheight]{./figures/methodology.png}
-  \end{figure}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Summary}
-  \begin{adjustwidth}{-10pt}{0pt}
-  \textbf{Pre-detonation nuclear forensics analysis on SNF}\\
-  \medskip
-  \begin{minipage}{0.35\textwidth}
-    \begin{figure}
-      \centering
-      \includegraphics[height=0.75\textheight]{./figures/overview.png}
-    \end{figure}
+  \begin{adjustwidth}{-10pt}{-10pt}
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Reactor Parameter Prediction Using \textbf{Nuclide Masses}}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/methodology1.png}
+      \end{figure}
+    \end{block}
   \end{minipage}%
   \hfill
-  \begin{minipage}{0.65\textwidth}
-  \begin{itemize}
-    \item Demonstrated:
-    \begin{itemize}
-      \item Simulation of training data set
-      \item Information reduction of training set
-      \item Prediction of reactor type, burnup, enrichment, and time since irradiation via:
-        \begin{itemize}
-          \item Maximum Log-Likelihood Calculations
-          \item \textit{k}-Nearest Neighbors
-          \item Decision Trees
-        \end{itemize}
-      \item Initial analysis of predictions with respect to information reduction
-    \end{itemize}
-    \item Simplifications:
-    \begin{itemize}
-      \item Simulation fidelity (ORIGEN-ARP, homogenized core)
-      \item Feature reduction lacks deep inquiry
-      \item Simple algorithms, lack of optimization
-    \end{itemize}
-  \end{itemize}
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Reactor Parameter Prediction Using \textbf{Processed Gamma Spectra}}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/methodology2.png}
+      \end{figure}
+    \end{block}
   \end{minipage}
   \end{adjustwidth}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Questions \& Next Steps}
+  \frametitle{Summary: Experimental Design Overview}
+  \begin{adjustwidth}{-15pt}{-10pt}
+  \textbf{Pre-detonation nuclear forensics analysis on SNF}\\
+  \vspace{2pt}
+  \begin{minipage}{0.38\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[height=0.78\textheight]{./figures/overview.png}
+    \end{figure}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.65\textwidth}
+    \begin{block}{Main Goal:}
+      \small
+      Is it possible to speed up a nuclear forensics investigation of spent
+      nuclear fuel with field-deployable detection?
+    \end{block}
+    \vspace{-8pt}
+    \begin{block}{Demonstrated:}
+      \small
+      \begin{itemize}
+        \itemsep 0.1em 
+        \item Simulation of training data set
+        \item Information reduction of training set
+        \item Prediction of reactor type, burnup, enrichment, and time since irradiation via:
+          \begin{itemize}
+            \item \textit{k}-Nearest Neighbors
+            \item Decision Trees
+            \item Maximum Log-Likelihood Calculations
+          \end{itemize}
+        \item Evaluation of predictions with respect to information reduction
+      \end{itemize}
+    \end{block}
+  \end{minipage}
+  \end{adjustwidth}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusions}
   \begin{itemize}
-    \item Feature reduction, or lack thereof: show approach?
-    \item Improving the comparison/ensuring PHWR representation: redo with same test set for all cases?
-    \item Alternatively, can now run 100\% testing for MLL and can use leave-one-out cross validation in scikit
-    \item SFCOMPO testing: implement with another method that can handle missing values?
-    \item Metrics \& plots: baselines, working on box plots, reactor type accuracy
-    \item Energy windows...
-  \end{itemize}
+    \item Experiment 1: Nuclide Masses
+      \begin{itemize}
+        \item Difficult to judge performance baseline, chose generous "standard" from nuclide mass results
+        \item SFCOMPO is challenging with this methodology but improvements can be made
+      \end{itemize}
+    \item Experiment 2: Processed Gamma Spectra
+      \begin{itemize}
+        \item Burnup is the only parameter to be well-predicted with gamma spectra
+        \item ${}^{235}\text{U}$ enrichment is the only parameter to have very poor performance with gamma spectra
+      \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Future Work}
+  \begin{itemize}
+    \item Based on simplifications in this work
+      \begin{itemize}
+        \item Simulation fidelity (ORIGEN-ARP, homogenized core)
+        \item Deeper study on gamma spectra processing
+        \item Deeper inquiry into feature reduction
+      \end{itemize}
+    \item Based on questions this work raised
+      \begin{itemize}
+        \item Serial prediction, with detailed classification accuracy study 
+        \item SFCOMPO improvements, novel imputation approach
+        \item Could other statistical methods perform better? Would MLL with $k>1$ perform better?
+      \end{itemize}
+    \end{itemize}
 \end{frame}
 

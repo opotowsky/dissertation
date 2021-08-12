@@ -1,5 +1,13 @@
 
 \begin{frame}
+  \frametitle{Prediction Using Processed Gamma Spectra}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{./figures/methodology2.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
   \frametitle{Information Reduction: Processed Gamma Spectra}
   \begin{enumerate}
     \item Computational gamma detection \cite{gadras} 
@@ -90,7 +98,18 @@
 
 \begin{frame}
   \frametitle{Reactor Type Classification}
-  Maybe conf matrices?
+  \begin{minipage}{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[height=0.88\textheight]{./figures/confusion_matrix_6dets_auto.png}
+    \end{figure}
+  \end{minipage}%
+  \begin{minipage}{0.5\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[height=0.88\textheight]{./figures/confusion_matrix_6dets_short.png}
+    \end{figure}
+  \end{minipage}
 \end{frame}
 
 \begin{frame}
@@ -100,7 +119,7 @@
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/detector_preds_wrt_enlist_MAPE_burn.png}
   \end{figure}
-  \vspace{12pt} \centering Red baseline: -4\% %$1000\:MWd/MTU$
+  \vspace{12pt} \centering Red baseline: -4\% 
   \end{adjustwidth}
 \end{frame}
 
@@ -111,7 +130,7 @@
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/abserror_boxplots_auto_burn.png}
   \end{figure}
-  \vspace{12pt} \centering Red baseline: $1000\:MWd/MTU$
+  \vspace{12pt} \centering Red baseline: $1000\:MWd/MTU$; Outliers: $12-17\%$
   \end{adjustwidth}
 \end{frame}
 
@@ -122,7 +141,7 @@
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/abserror_boxplots_short_burn.png}
   \end{figure}
-  \vspace{12pt} \centering Red baseline: $1000\:MWd/MTU$
+  \vspace{12pt} \centering Red baseline: $1000\:MWd/MTU$; Outliers: $12-17\%$
   \end{adjustwidth}
 \end{frame}
 
@@ -133,7 +152,7 @@
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/abserror_boxplots_long_burn.png}
   \end{figure}
-  \vspace{12pt} \centering Red baseline: $1000\:MWd/MTU$
+  \vspace{12pt} \centering Red baseline: $1000\:MWd/MTU$; Outliers: $12-17\%$
   \end{adjustwidth}
 \end{frame}
 
@@ -155,7 +174,7 @@
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/abserror_boxplots_auto_enri.png}
   \end{figure}
-  \vspace{12pt} \centering Red baseline: $0.17\%\:{}^{235}\text{U235}$
+  \vspace{12pt} \centering Red baseline: $0.17\%\:{}^{235}\text{U}$; Outliers: $3-4\%$
   \end{adjustwidth}
 \end{frame}
 
@@ -166,7 +185,7 @@
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/abserror_boxplots_short_enri.png}
   \end{figure}
-  \vspace{12pt} \centering Red baseline: $0.17\%\:{}^{235}\text{U235}$
+  \vspace{12pt} \centering Red baseline: $0.17\%\:{}^{235}\text{U}$; Outliers: $3-4\%$
   \end{adjustwidth}
 \end{frame}
 
@@ -177,7 +196,7 @@
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/abserror_boxplots_long_enri.png}
   \end{figure}
-  \vspace{12pt} \centering Red baseline: $0.17\%\:{}^{235}\text{U235}$
+  \vspace{12pt} \centering Red baseline: $0.17\%\:{}^{235}\text{U}$; Outliers: $3-4\%$
   \end{adjustwidth}
 \end{frame}
 
@@ -199,7 +218,7 @@
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/abserror_boxplots_auto_cool.png}
   \end{figure}
-  \vspace{12pt} \centering Red baseline: $120\:days$ (Grey line is $550\:days$) 
+  \vspace{12pt} \centering Red baseline: $120\:days$ (Grey line is $550\:days$); Outliers: $6-9\%$ 
   \end{adjustwidth}
 \end{frame}
 
@@ -210,7 +229,7 @@
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/abserror_boxplots_short_cool.png}
   \end{figure}
-  \vspace{12pt} \centering Red baseline: $120\:days$ (Grey line is $550\:days$) 
+  \vspace{12pt} \centering Red baseline: $120\:days$ (Grey line is $550\:days$); Outliers: $6-9\%$  
   \end{adjustwidth}
 \end{frame}
 
@@ -221,7 +240,7 @@
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/abserror_boxplots_long_cool.png}
   \end{figure}
-  \vspace{12pt} \centering Red baseline: $120\:days$ (Grey line is $550\:days$) 
+  \vspace{12pt} \centering Red baseline: $120\:days$ (Grey line is $550\:days$); Outliers: $6-9\%$  
   \end{adjustwidth}
 \end{frame}
 

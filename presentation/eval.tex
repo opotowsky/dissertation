@@ -55,7 +55,7 @@
            \uncover<3->{\sum_{i=1}^{N_\text{samples}}}
            \uncover<5->{w_i \cdot}
            \uncover<2->{\mathbb{I}(y_{pred, i} = y_{true, i})}$ \\
-          \hspace{1.1cm} \uncover<6->{where: $w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i)w_j}}}$
+          \hspace{1.1cm} \uncover<6->{where:} \uncover<6->{$w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i)w_j}}$}
     \uncover<7->{\item Confusion matrices:}
   \end{itemize}
   \invisible<-6>{\begin{figure}
@@ -83,6 +83,29 @@
 
 \begin{frame}
   \frametitle{Methodology Summary}
-  Hi Hello
+  \begin{adjustwidth}{-10pt}{-10pt}
+  \begin{minipage}{0.51\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{./figures/meth_pres.png}
+    \end{figure}
+  \end{minipage}%
+  %\hfill
+  \begin{minipage}{0.51\textwidth}
+    \begin{itemize}
+      \item Training Data: SNF recipes from SCALE/ORIGEN-ARP \cite{scale, origen}
+      \item Statistical Methods
+        \begin{itemize}
+          \item Scikit-learn algorithms (kNN \& Decision Trees) \cite{scikit}
+          \item Maximum log-likelihood calculation method \cite{mll_method, mll_sensitivity}
+        \end{itemize}
+      \item Performance
+        \begin{itemize}
+          \item Prediction error analysis
+          \item \textit{Covered later: Test cases from SFCOMPO} \cite{sfcompo}
+        \end{itemize}
+    \end{itemize}
+  \end{minipage}
+  \end{adjustwidth}
 \end{frame}
 
