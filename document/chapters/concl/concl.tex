@@ -104,7 +104,7 @@ is modest and significant improvement for \gls{PWR} and \gls{PHWR} cases,
 respectively, since they are both the minority classes in the training set.
 These improvements only exist for the scikit-learn algorithms, since the
 \gls{MLL} calculations are not affected by reactor type knowledge. \textit{The
-key takeaway is that regression cases linked to \glspl{PHWR}s are not expected
+key takeaway is that regression cases linked to \glspl{PHWR} are not expected
 to perform well.}
 
 The last study in this chapter is in Section \ref{sec:sfcompo}, where an
@@ -395,9 +395,9 @@ If the algorithm returns the probabilities of class belonging instead of the
 predicted class, the threshold can be tuned after the fact to complete
 predictions.  With this work, e.g., the decision threshold  could be manually
 tuned to require a higher threshold for \gls{BWR} classification. If that were
-the case, there could be fewer misclassifications of \glspl{PHWR}s and
-\glspl{PWR}s as \glspl{BWR}s. The issues with regression of \glspl{PHWR}s could
-then be resolved if they were accurately classified as such beforehand. T
+the case, there could be fewer misclassifications of \glspl{PHWR} and
+\glspl{PWR} as \glspl{BWR}. The issues with regression of \glspl{PHWR} could
+then be resolved if they were accurately classified as such beforehand. 
 
 \subsection{SFCOMPO}
 
@@ -413,7 +413,7 @@ prediction approach, where the reactor type is first determined before the
 regression cases are predicted using training sets that only include entries
 from the predicted reactor type.  This was partially touched on in Section
 \ref{sec:sfcompo} by discussing the largest relative errors disappearing when
-\glspl{PHWR}s were removed from consideration.  Another way that might improve
+\glspl{PHWR} were removed from consideration.  Another way that might improve
 the results is with better simulation fidelity, also previously discussed. 
 
 A third approach is revisiting the method by which the missing measurements are

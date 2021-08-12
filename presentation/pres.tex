@@ -69,17 +69,32 @@
 \end{withoutheadline}
 
 %%--------------------------------%%
-\AtBeginSection[]{
+%\AtBeginSection[]{
+%\begin{frame}
+%  \frametitle{Outline}
+%  %\begin{multicols}{2}
+%    \centering
+%    \tableofcontents[currentsection,currentsubsection]
+%  %\end{multicols}
+%\end{frame}
+%}
+
+\AtBeginSubsection[]{
 \begin{frame}
-  \frametitle{Outline}
-  %\begin{multicols}{2}
-    \tableofcontents[currentsection]
-  %\end{multicols}
+  \frametitle{Outline Progress}
+  \begin{center}
+    \begin{minipage}{0.5\textwidth}
+      \tableofcontents[currentsection,currentsubsection]
+    \end{minipage}
+  \end{center}
 \end{frame}
 }
 
 \section{Introduction}
-\include{intro}
+\subsection{Motivation}
+\include{motivation}
+\subsection{Background}
+\include{background}
 
 \section{Methodology}
 \subsection{Computational Approach}
