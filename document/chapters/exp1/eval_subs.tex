@@ -135,7 +135,7 @@ and within that, for each reactor type (\gls{PWR}, \gls{BWR}, \gls{PHWR}).  The
 columns are separated first by the algorithms and second by whether the reactor
 type was known or unknown prior to prediction, denoted as \textit{K} and
 \textit{U}, respectively. Most of these relative errors are quite low, and
-around or under 2\%.  So, e.g., despite burnup prediction from \glspl{PHWR}s
+around or under 2\%.  So, e.g., despite burnup prediction from \glspl{PHWR}
 improving, it was by 0.61\%, a precision of which may not be of concern. Still,
 these performance differences can be looked at in more detail.  
 
@@ -199,13 +199,13 @@ case.
 
 For burnup prediction, most differences are within $\pm10\%$ except for three
 scenarios.  The decision tree algorithm has improved burnup prediction for
-\glspl{PWR}s by 22.0\% and for \glspl{PHWR}s by 71.1\% given a known reactor
+\glspl{PWR} by 22.0\% and for \glspl{PHWR} by 71.1\% given a known reactor
 type.  The \textit{k}-nearest neighbors algorithm has 49.5\% improved burnup
 prediction for the \gls{PHWR}. For \gls{U235} enrichment, the \gls{PWR}
 predictions improve by approximately 18\% for the scikit-learn algorithms.
 Even though the value is within $\pm10\%$, this is the only scenario where
 there is an appreciable difference in \gls{MLL} performance. The decision tree
-enrichment prediction of \glspl{PHWR}s also has a sizeable improvement of
+enrichment prediction of \glspl{PHWR} also has a sizeable improvement of
 100.0\%.  The time since irradiation predictions for the most part do not show
 improvement outside of $\pm10\%$. Of note is some volatile behavior for the
 \gls{PHWR} case with the scikit-learn algorithms.  While \textit{k}-nearest
