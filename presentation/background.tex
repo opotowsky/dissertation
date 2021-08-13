@@ -41,37 +41,36 @@
 
 \begin{frame}
   \frametitle{Attributing Spent Nuclear Fuel}
-  \vspace{-5mm}
-  \begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{./figures/nf_and_params.png}
-    \\ \scriptsize Illustration by Anna Stephenson excluding the markup.
-  \end{figure}
+  \begin{enumerate}
+    \item \textbf{Reactor Type} \\
+          Classified as one of three common types of commercial power reactors:
+          \begin{itemize}
+            \item Pressurized water reactor (PWR)
+            \item Boiling water reactor (BWR)
+            \item Pressurized heavy water reactor (PHWR)
+          \end{itemize}
+    \item \textbf{Burnup} \\
+          How much energy was produced by the fuel: megawatt-days (or 
+          gigawatt-days) per metric ton of initial uranium: $\mathbf{MWd/MTU}$ 
+          ($GWd/MTU$)
+    \item \allbold{${}^{235}\text{U}$} \textbf{Enrichment} \\
+          Percentage of ${}^{235}\text{U}$ with respect to total uranium in 
+          fuel: \allbold{$\%\:{}^{235}\text{U}$}
+    \item \textbf{Time Since Irradiation} \\
+          How long fuel has been out of reactor core (aka cooling time): 
+          $\mathbf{days}$ or $years$
+  \end{enumerate}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Machine Learning}
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.85\textwidth]{./figures/ml_intro.png}
-    \\ \scriptsize From
-    \href{https://betterprogramming.pub/an-introduction-to-machine-learning-a4a6506c4bc7}{\color{blue}online
-    educational blog} by Ariel Jakubowski.
-  \end{figure}
-\end{frame}
 
 \begin{frame}
-  \frametitle{Supervised Regression: Training and Predicting}
+  \frametitle{Machine Learning Approach}
+  \begin{adjustwidth}{-10pt}{-10pt}
   \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{./figures/SupervisedRegression.png}
+    \includegraphics[width=1.05\textwidth]{./figures/pres_version_SupervisedRegression.png}
   \end{figure}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Introduction Summary}
-  NF, needs\\
-  ML, usefulness\\
-  Main goal, speed
+  Training and predicting using supervised regression (classification not shown)
+  \end{adjustwidth}
 \end{frame}
 

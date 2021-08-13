@@ -1,43 +1,55 @@
 
 \begin{frame}
+  \setbeamercovered{}
   \frametitle{Testing Protocol}
   \begin{adjustwidth}{-15pt}{0pt}
   \vspace{-5pt}
-  \begin{block}{Scikit-Learn Algorithms:}
-    \begin{enumerate}
-      \itemsep 0.2em 
-      \footnotesize
-      \item Scale training data ($0$ mean and unit variance)
-      \item 5-fold cross val is used to iteratively remove 20\% of the train-set as a test-set
-      \item \texttt{fit} and \texttt{predict} takes place, ground truth and predictions are tracked
-      \item Each label is predicted separately
-    \end{enumerate}
-  \end{block}
-  \pause
+  \onslide<1->{
+    \begin{block}{Scikit-Learn Algorithms:}
+      \begin{enumerate}
+        %\itemsep 0.2em 
+        \footnotesize
+        \item Scale training DB ($0$ mean and unit variance)
+        \item 5-fold cross val is used to iteratively remove 20\% of the DB as a testing set
+        \item \texttt{fit} and \texttt{predict} takes place, ground truth and predictions are tracked
+        \item Each label is predicted separately
+      \end{enumerate}
+    \end{block}
+  }
+  \only<1>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.8\textwidth]{./figures/cverror_cv_only.png}
+    \end{figure}
+  }
   \vspace{-5pt}
-  \begin{block}{Maximum Log Likelihood:}
-    \begin{enumerate}
-      \itemsep 0.2em 
-      \footnotesize
-      \item Training database broken up into 10k segments (CHTC)
-      \item Every training database entry is tested
-      \item Testing sample removed from DB during each calculation
-      \item Entire set of labels (reactor type, burnup, etc) predicted at once
-    \end{enumerate}
-  \end{block}
-  \pause
+  \onslide<2->{
+    \begin{block}{Maximum Log Likelihood:}
+      \begin{enumerate}
+        %\itemsep 0.2em 
+        \footnotesize
+        \item Single testing entry removed from DB iteratively; every DB entry is tested
+        \item Ground truth and predictions tracked
+        \item Entire set of labels (reactor type, burnup, etc) predicted at once
+      \end{enumerate}
+    \end{block}
+  }
   \vspace{-5pt}
-  \begin{block}{SFCOMPO Testing with Nuclide Mass Training Set:}
-    \begin{enumerate}
-      \itemsep 0.2em 
-      \footnotesize
-      \item After filtering out for irrelevant cases, 505 test entries remain
-      \item Training set units are converted to $mg/gU_i$
-      \item In scikit, scaling is applied to the training set and testing set features
-      \item MLL converts the units but doesn't require scaling
-      \item Time since irradiation not included in SFCOMPO
-    \end{enumerate}
-  \end{block}
+  \onslide<3->{
+    \begin{block}{SFCOMPO Testing with Nuclide Mass Training Set:}
+      \begin{enumerate}
+        %\itemsep 0.2em 
+        \footnotesize
+        \item Training set units are converted to $mg/gU_i$
+        \begin{itemize}
+          \footnotesize
+          \item For scikit-learn: scaling is applied to the training and testing set features
+          \item For MLL: no scaling is performed
+        \end{itemize}
+        \item Time since irradiation not included in SFCOMPO
+      \end{enumerate}
+    \end{block}
+  }
   \end{adjustwidth}
 \end{frame}
 
