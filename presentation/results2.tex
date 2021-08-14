@@ -1,10 +1,25 @@
 
 \begin{frame}
   \frametitle{Prediction Using Processed Gamma Spectra}
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.6\textwidth]{./figures/methodology2.png}
-  \end{figure}
+  \begin{adjustwidth}{-10pt}{-10pt}
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Reactor Parameter Prediction Using \textbf{Nuclide Masses}}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/methodology1_pres.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \begin{block}{Reactor Parameter Prediction Using \textbf{Processed Gamma Spectra}}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/methodology2_pres.png}
+      \end{figure}
+    \end{block}
+  \end{minipage}
+  \end{adjustwidth}
 \end{frame}
 
 \begin{frame}
@@ -14,29 +29,6 @@
     \item Process spectra: choose energy windows / window size
     \item Apply statistical counting error ($\sqrt{n}$) (using methods on previous slide)
   \end{enumerate}
-  \begin{table}
-    \small
-    \centering
-    \begin{tabular}{@{}lcllll@{}}
-    \toprule
-      \textbf{Detector} &
-      \textbf{\begin{tabular}[c]{@{}c@{}}\% FWHM \\ @ 661 keV\end{tabular}} &
-      \textbf{\begin{tabular}[c]{@{}l@{}}Distance \\ (cm)\end{tabular}} &
-      \textbf{\begin{tabular}[c]{@{}l@{}}Height \\ (cm)\end{tabular}} &
-      \textbf{\begin{tabular}[c]{@{}l@{}}Live Time\\ (s)\end{tabular}} &
-      \textbf{\begin{tabular}[c]{@{}l@{}}Num \\ Channels\end{tabular}} \\ \midrule
-      In-Lab HPGe           & 0.21 & 100.0 & 84.0  & 600  & 8192 \\
-      Portable HPGe         & 0.29 & 100.0 & 100.0 & 600  & 8192 \\
-      CZT                   & 1.20 & 100.0 & 100.0 & 600  & 1024 \\
-      SrI\textsubscript{2}  & 2.94 & 100.0 & 100.0 & 600  & 1024 \\
-      LaBr\textsubscript{3} & 3.63 & 213.0 & 84.5  & 2400 & 1024 \\
-      NaI                   & 7.74 & 213.0 & 85.4  & 2400 & 1024 \\ \bottomrule
-    \end{tabular}
-  \end{table}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Gamma Spectra Processing}
   \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{./figures/energy_window_example.png}
@@ -78,19 +70,12 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Predictions with Decreasing Detector Energy Resolution}
-  \begin{figure}
-    \centering
-    \includegraphics[height=0.7\textheight]{./figures/plot_description.png}
-  \end{figure}
-\end{frame}
-
-\begin{frame}
   \frametitle{Reactor Type Classification}
   \begin{adjustwidth}{-15pt}{-10pt}
   \begin{figure}
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/detector_preds_wrt_enlist_BalAcc_rxtr.png}
+    \scriptsize (99.9\% confidence interval error bars)
   \end{figure}
   \vspace{12pt} \centering Red baseline: 0.84 balanced accuracy score
   \end{adjustwidth}
@@ -118,6 +103,7 @@
   \begin{figure}
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/detector_preds_wrt_enlist_MAPE_burn.png}
+    \scriptsize (1-sigma error bars)
   \end{figure}
   \vspace{12pt} \centering Red baseline: -4\% 
   \end{adjustwidth}
@@ -129,6 +115,7 @@
   \begin{figure}
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/detector_preds_wrt_enlist_MAPE_enri.png}
+    \scriptsize (1-sigma error bars)
   \end{figure}
   \vspace{12pt} \centering Red baseline: -6\% 
   \end{adjustwidth}
@@ -140,6 +127,7 @@
   \begin{figure}
     \centering
     \includegraphics[width=1.1\textwidth]{./figures/detector_preds_wrt_enlist_MAPE_cool.png}
+    \scriptsize (1-sigma error bars)
   \end{figure}
   \vspace{12pt} \centering Red baseline: -6\% (Grey line is -30\%) 
   \end{adjustwidth}

@@ -3,7 +3,7 @@
   \frametitle{Prediction Using Nuclide Masses}
   \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{./figures/methodology1.png}
+    \includegraphics[width=0.6\textwidth]{./figures/methodology1_pres.png}
   \end{figure}
 \end{frame}
 
@@ -35,6 +35,7 @@
     \begin{figure}
       \centering
       \includegraphics[width=0.6\textwidth]{./figures/randerr_compare_nuc29_BalAcc_rxtr.png}
+      \\ \scriptsize (99.9\% confidence interval error bars)
     \end{figure}
 \end{frame}
 
@@ -48,18 +49,20 @@
 
 \begin{frame}
   \frametitle{Burnup Regression}
-  \begin{adjustwidth}{-15pt}{0pt}
+  \begin{adjustwidth}{-15pt}{-5pt}
   \begin{minipage}{0.5\textwidth}
     \begin{figure}
       \centering
       \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAPE_burn.png}
+      \scriptsize (1-sigma error bars)
     \end{figure}
   \end{minipage}%
   \hfill
   \begin{minipage}{0.5\textwidth}
     \begin{figure}
       \centering
-      \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAE_burn.png}
+      \includegraphics[width=1.05\textwidth]{./figures/randerr_compare_nuc29_MAE_burn.png}
+      \scriptsize (1-sigma error bars)
     \end{figure}
   \end{minipage}
   \end{adjustwidth}
@@ -67,18 +70,20 @@
 
 \begin{frame}
   \frametitle{${}^{235}\text{U}$ Enrichment Regression}
-  \begin{adjustwidth}{-15pt}{0pt}
+  \begin{adjustwidth}{-15pt}{-5pt}
   \begin{minipage}{0.5\textwidth}
     \begin{figure}
       \centering
       \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAPE_enri.png}
+      \scriptsize (1-sigma error bars)
     \end{figure}
   \end{minipage}%
   \hfill
   \begin{minipage}{0.5\textwidth}
     \begin{figure}
       \centering
-      \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAE_enri.png}
+      \includegraphics[width=1.05\textwidth]{./figures/randerr_compare_nuc29_MAE_enri.png}
+      \scriptsize (1-sigma error bars)
     \end{figure}
   \end{minipage}
   \end{adjustwidth}
@@ -86,18 +91,20 @@
 
 \begin{frame}
   \frametitle{Time Since Irradiation Regression}
-  \begin{adjustwidth}{-15pt}{0pt}
+  \begin{adjustwidth}{-15pt}{-5pt}
   \begin{minipage}{0.5\textwidth}
     \begin{figure}
       \centering
       \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAPE_cool.png}
+      \scriptsize (1-sigma error bars)
     \end{figure}
   \end{minipage}%
   \hfill
   \begin{minipage}{0.5\textwidth}
     \begin{figure}
       \centering
-      \includegraphics[width=\textwidth]{./figures/randerr_compare_nuc29_MAE_cool.png}
+      \includegraphics[width=1.05\textwidth]{./figures/randerr_compare_nuc29_MAE_cool.png}
+      \scriptsize (1-sigma error bars)
     \end{figure}
   \end{minipage}
   \end{adjustwidth}
@@ -105,8 +112,9 @@
 
 \begin{frame}
   \frametitle{SFCOMPO Database as Test Cases}
-  \begin{adjustwidth}{-15pt}{0pt}
-  \begin{minipage}{0.45\textwidth}
+  \begin{adjustwidth}{-10pt}{-10pt}
+  \vspace{-8pt}
+  \begin{minipage}[t]{0.45\textwidth}
     \begin{block}{505 Test Cases}
       Range of reactor operation parameters in SFCOMPO:
       \begin{figure}
@@ -116,19 +124,19 @@
     \end{block}
   \end{minipage}%
   \hfill
-  \begin{minipage}{0.55\textwidth}
+  \begin{minipage}[t]{0.57\textwidth}
     \begin{block}{Many Missing Features}
       Number of assays each nuclide is measured for in SFCOMPO:
       \begin{table}
         \footnotesize
         \centering
         \renewcommand{\arraystretch}{1.3}
-        \begin{tabular}{>{\raggedleft}m{0.36in}
-                                      m{0.18in}
-                        >{\raggedleft}m{0.36in}
-                                      m{0.18in}
-                        >{\raggedleft}m{0.36in}
-                                      m{0.18in}}
+        \begin{tabular}{>{\raggedleft}m{0.32in}
+                                      m{0.16in}|
+                        >{\raggedleft}m{0.32in}
+                                      m{0.16in}|
+                        >{\raggedleft}m{0.32in}
+                                      m{0.16in}}
           \toprule
           \rowcolor[gray]{0.88} ${}^{241}\text{Am}$  & 237 & ${}^{145}\text{Nd}$ & 162 & ${}^{147}\text{Sm}$ & 97  \\  
           \rowcolor[gray]{0.95} ${}^{242m}\text{Am}$ & 110 & ${}^{146}\text{Nd}$ & 139 & ${}^{149}\text{Sm}$ & 97  \\ 
@@ -149,10 +157,23 @@
 
 \begin{frame}
   \frametitle{SFCOMPO Prediction Results: Reactor Type}
-    \begin{figure}
-      \centering
-      \includegraphics[height=0.8\textheight]{./figures/confusion_matrix_sfco.png}
-    \end{figure}
+  \vspace{-6pt}
+  \begin{table}
+    \scriptsize
+    \begin{tabular}{@{}lllr@{}}
+      \toprule
+      & \multicolumn{3}{l}{Balanced Accuracy} \\ 
+      \toprule
+      Nulls & kNN   & DTree  & MLL    \\ \midrule
+      Mean  & 0.09  & 0.12   & -0.01  \\
+      Zero  & 0.21  & 0.30   & 0.63   \\ \bottomrule
+      \end{tabular}
+  \end{table}
+  \vspace{-6pt}
+  \begin{figure}
+    \centering
+    \includegraphics[height=0.68\textheight]{./figures/confusion_matrix_sfco.png}
+  \end{figure}
 \end{frame}
 
 \begin{frame}
