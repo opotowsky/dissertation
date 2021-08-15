@@ -157,23 +157,12 @@
 
 \begin{frame}
   \frametitle{SFCOMPO Prediction Results: Reactor Type}
-  \vspace{-6pt}
-  \begin{table}
-    \scriptsize
-    \begin{tabular}{@{}lllr@{}}
-      \toprule
-      & \multicolumn{3}{l}{Balanced Accuracy} \\ 
-      \toprule
-      Nulls & kNN   & DTree  & MLL    \\ \midrule
-      Mean  & 0.09  & 0.12   & -0.01  \\
-      Zero  & 0.21  & 0.30   & 0.63   \\ \bottomrule
-      \end{tabular}
-  \end{table}
-  \vspace{-6pt}
+  \begin{adjustwidth}{-23pt}{0pt}
   \begin{figure}
     \centering
-    \includegraphics[height=0.68\textheight]{./figures/confusion_matrix_sfco.png}
+    \includegraphics[width=1.15\textwidth]{./figures/confusion_matrix_sfco.png}
   \end{figure}
+  \end{adjustwidth}
 \end{frame}
 
 \begin{frame}

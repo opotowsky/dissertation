@@ -11,7 +11,7 @@
         \footnotesize
         \item Scale training DB ($0$ mean and unit variance)
         \item 5-fold cross val is used to iteratively remove 20\% of the DB as a testing set
-        \item \texttt{fit} and \texttt{predict} takes place, ground truth and predictions are tracked
+        \item Ground truth and predictions tracked
         \item Each label is predicted separately
       \end{enumerate}
     \end{block}
@@ -41,11 +41,8 @@
         %\itemsep 0.2em 
         \footnotesize
         \item Training set units are converted to $mg/gU_i$
-        \begin{itemize}
-          \footnotesize
-          \item For scikit-learn: scaling is applied to the training and testing set features
-          \item For MLL: no scaling is performed
-        \end{itemize}
+        \item For scikit-learn: scaling is applied to the training and 
+              testing set features (For MLL: no scaling is performed)
         \item Time since irradiation not included in SFCOMPO
       \end{enumerate}
     \end{block}
@@ -67,10 +64,11 @@
            \uncover<3->{\sum_{i=1}^{N_\text{samples}}}
            \uncover<5->{w_i \cdot}
            \uncover<2->{\mathbb{I}(y_{pred, i} = y_{true, i})}$ \\
-          \hspace{1.1cm} \uncover<6->{where:} \uncover<6->{$w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i)w_j}}$}
-    \uncover<7->{\item Confusion matrices:}
+           \uncover<6->{where:} \uncover<6->{$w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i)}}$}
+           \uncover<7->{and range is rescaled:} \uncover<7->{$[-\frac{1}{1-N_{classes}}, 1]$}
+    \uncover<8->{\item Confusion matrices:}
   \end{itemize}
-  \invisible<-6>{
+  \invisible<-7>{
     \begin{minipage}{0.5\textwidth}
       \begin{figure}
         \centering

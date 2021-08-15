@@ -1,47 +1,33 @@
 
 \begin{frame}
-  \frametitle{Nuclear Forensics Investigations}
-  \begin{adjustwidth}{-10pt}{0pt}
+  \frametitle{Pre-detonation Nuclear Forensics Investigations}
+  \begin{adjustwidth}{-15pt}{-15pt}
   \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{./figures/forensicsrealworld.png}
+    \includegraphics[width=1.1\textwidth]{./figures/forensicsrealworld.png}
   \end{figure}
-  \vspace{-3mm}
-  \begin{minipage}[t]{0.5\textwidth}
-    \begin{block}{Pre-detonation}
+  \vspace{6mm}
+  \hspace{10mm}
+  \begin{minipage}{0.85\linewidth}
+    \begin{itemize}
+      \item<1-> Collection: depends on intercepted material
+      \item<2-> Characterization: non-destructive and destructive
+      \item<3-> Goals:
       \begin{itemize}
-        \item<1-> Collection: depends on intercepted material
-        \item<2-> Characterization: non-destructive and destructive
-        \item<3-> Goals:
-        \begin{itemize}
-          \item Inverse problem: material chain of custody
-          \item Safety: material handling and security
-        \end{itemize}
-        \item<4-> Data evaluation
+        \item Inverse problem: reactor of origin, material chain of custody
+        \item Safety: material handling and security
       \end{itemize}
-    \end{block}
-  \end{minipage}%
-  \hfill
-  \begin{minipage}[t]{0.5\textwidth}
-    \begin{block}{Post-detonation}
-      \begin{itemize}
-        \item<1-> Collection: debris, swipe samples
-        \item<2-> Characterization: rapid analysis of isotope ratios
-        \item<3-> Goals
-        \begin{itemize}
-          \item Inverse problem: reconstruct weapon design/yield
-          \item Safety: informing disaster response
-        \end{itemize}
-        \item<4-> Data evaluation
-      \end{itemize}
-    \end{block}
+      \item<4-> Data evaluation
+    \end{itemize}
   \end{minipage}
   \end{adjustwidth}
 \end{frame}
 
 \begin{frame}
   \frametitle{Attributing Spent Nuclear Fuel}
+  \setbeamercovered{}
   \begin{enumerate}
+    \onslide<1->{
     \item \textbf{Reactor Type} \\
           Classified as one of three common types of commercial power reactors:
           \begin{itemize}
@@ -49,16 +35,23 @@
             \item Boiling water reactor (BWR)
             \item Pressurized heavy water reactor (PHWR)
           \end{itemize}
+    }
+    \onslide<2->{
     \item \textbf{Burnup} \\
           How much energy was produced by the fuel: megawatt-days (or 
           gigawatt-days) per metric ton of initial uranium: $\mathbf{MWd/MTU}$ 
           ($GWd/MTU$)
+    }
+    \onslide<3->{
     \item \allbold{${}^{235}\text{U}$} \textbf{Enrichment} \\
           Percentage of ${}^{235}\text{U}$ with respect to total uranium in 
           fuel: \allbold{$\%\:{}^{235}\text{U}$}
+    }
+    \onslide<4->{
     \item \textbf{Time Since Irradiation} \\
           How long fuel has been out of reactor core (aka cooling time): 
           $\mathbf{days}$ or $years$
+    }
   \end{enumerate}
 \end{frame}
 
