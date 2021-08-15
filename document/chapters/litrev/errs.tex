@@ -40,23 +40,23 @@ takes a value of 0.
 
 But training sets can have an uneven number of classes represented.  A more
 fair scoring system for imbalanced data sets is instead balanced accuracy,
-which averages the accuracy of each class. This would provide a range from 0 to
-1. In this work, however, the balanced accuracy is used with
-\texttt{adjusted=True} in scikit-learn. This rescales the range to
-$\frac{1}{1-N_\text{classes}}$ to 1, where 0 is considered random scoring.
-This is done by defining a sample weight as the following, based on its class
-frequency $w_j$ \cite{scikit}. This differs from the definition in the
-scikit-learn documentation because it presumes a previous sample weight,
-whereas this work does not pre-define sample weights.
+which averages the accuracy of each class according to its class frequency.
+This still provides a range from 0 to 1, but the meaning of the score has
+changed from the accuracy score. This is done by first defining a sample weight
+based on its class frequency $w_i$ \cite{scikit}: 
 \begin{equation}
-  w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i) w_j}}
+  w_i = \frac{1}{\sum_j{\mathbb{I}(y_j = y_i)}}
 \end{equation}
 for \textit{j} classes and \textit{i} samples. Thus, the balanced accuracy is
-the following with the adjusted weights.
+the following.
 \begin{equation}
   \textit{balanced-accuracy} = \frac{1}{\sum_{i}{w_i}} \sum_{i=1}^{N_\text{samples}}
                                w_i \cdot \mathbb{I}(y_{pred, i} = y_{true, i})
 \end{equation}
+In this work, however, the balanced accuracy is used with
+\texttt{adjusted=True} in scikit-learn. After computing the balanced accuracy,
+this rescales the range to $\frac{1}{1-N_\text{classes}}$ to 1, where 0 is
+considered random scoring.
 
 \begin{figure}[!htb]
   \centering
