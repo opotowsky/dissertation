@@ -202,18 +202,14 @@ For all four prediction categories, the \gls{MLL} calculations method is the
 most resilient to introduced error, followed by decision trees then
 \textit{k}-nearest neighbors. Interestingly, at the 1\% training set error
 level, \gls{MLL} calculations tend to do slightly worse than the scikit-learn
-algorithms.  \todo[inline]{Paul brought up the upper bound performance of MLL
-since the test case is removed. but 20\% of training set is removed for scikit
-preds, so at least for $k=1$ the upper bound is potentially worse for kNN. I
-think it's from the way the errors are applied, which I think I mentioned in
-final conclusions} The behaviors of each algorithm's performance degradation
-for reactor type, burnup, and enrichment all behave in a similar fashion. But
-for time since irradiation, the \textit{k}-nearest neighbors prediction
-performance has a drastic drop that starts with even 1\% introduced training
-set error.  \textit{While it is difficult to draw a line and say which
-algorithm's performance is acceptable or "good enough" (especially considering
-the relative errors are all under 6\%), the prediction performances at 20\%
-training set error are used as a minimum baseline for future work.}
+algorithms.  The behaviors of each algorithm's performance degradation for
+reactor type, burnup, and enrichment all behave in a similar fashion. But for
+time since irradiation, the \textit{k}-nearest neighbors prediction performance
+has a drastic drop that starts with even 1\% introduced training set error.
+\textit{While it is difficult to draw a line and say which algorithm's
+performance is acceptable or "good enough" (especially considering the relative
+errors are all under 6\%), the prediction performances at 20\% training set
+error are used as a minimum baseline for future work.}
 
 In Section \ref{sec:randerrC}, the impacts of fewer training set entries are
 implemented to investigate how the algorithms each generalize to unseen

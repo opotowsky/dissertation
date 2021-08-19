@@ -33,7 +33,10 @@ cases in the auto energy windows list).  For the lab-based and portable
 three algorithms for the auto and long lists, and drastically so for the two
 unique auto list cases of extremely poor performance.  In terms of the
 baseline, there is only one instance of \textit{k}-nearest neighbors being
-above it: the lab-based \gls{HPGe} with the short energy windows list. 
+above it: the lab-based \gls{HPGe} with the short energy windows list.
+\todo[inline]{I find this para confusing. It seems to start by saying it is
+interesting that kNN isnt doing as bad then end by saying that kNN is doing
+terribly}
 
 There are no detector-based training sets at all for which decision trees
 performs above the baseline. For the last four detectors on the horizontal axis
@@ -54,8 +57,10 @@ acceptable level.
 
 Next, the comparison of the gamma spectra processing will be discussed,
 neglecting the baseline.  The short energy windows list performs the best
-across the three methods used to process the gamma spectra. The auto energy
-windows lists has one of the scintillator detectors (\gls{SrI2}) outperform the
+across the three methods used to process the gamma spectra when considering all
+three algorithms.  But for this set of results, the \gls{MLL} calculations
+using the auto energy windows list performs the best.  The auto energy windows
+lists even has one of the scintillator detectors (\gls{SrI2}) outperform the
 baseline for \gls{MLL}, but the scikit-learn algorithms for the solid state
 detectors perform erratically.  The variable behavior of the auto energy
 windows list would require further study, but the fact that the \gls{SrI2}

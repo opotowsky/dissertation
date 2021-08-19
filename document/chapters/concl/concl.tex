@@ -176,6 +176,10 @@ list} The time steps in the training set being about $100\:days$ was a limiting
 factor in its quality of prediction; many of the \gls{MAE} values were around
 this level in the second experiment. 
 
+\todo[inline]{I think that co-detection of enrichment and burnup typically
+requires a neutron count as well as a gamma scan so it is unsurprising that
+gamma alone is struggling.}
+
 There is a clear leader throughout all of the results in terms of being a
 consistent best performer: the \gls{MLL} calculations. The reason it can
 perform well, though, is because of the large number of simulations.  If there
@@ -257,7 +261,7 @@ Section \ref{sec:fidelity} discusses the fidelity of the simulations used to
 create the training database, and how the ground truth in this work is
 therefore not perfect truth.  The first improvement to be made with the
 training set is filtering out problematic-to-simulate nuclides, such as
-${}{125}\text{Sb}$. An exercise was carried out to compare \gls{ORIGEN-ARP}
+${}^{125}\text{Sb}$. An exercise was carried out to compare \gls{ORIGEN-ARP}
 simulations to an entry in \gls{SFCOMPO}, and there were some nuclide
 discrepancies that reached 40\%. It would be better to remove these from
 consideration if they are systematically poorly simulated.

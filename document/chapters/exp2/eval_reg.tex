@@ -116,15 +116,15 @@ about -1.5\%.  There are two anomalous cases, as with the reactor type results
 in Figure \ref{fig:rxtr}: the predictions using \textit{k}-nearest neighbors
 for the two \gls{HPGe} detectors processed with the auto energy windows list.
 The reason for this behavior is discussed at the end of Section
-\ref{sec:exp2_rxtr}. 
+\ref{sec:exp2_rxtr}.  
 
 Next, in Figures \ref{fig:burnbox} and \ref{fig:burnboxfly} the vertical axis
 orientation flips to positive absolute error, so that higher values are worse
 and the goal is to have the mean and median errors be below the red line.  Most
 of the burnup errors in Figures \ref{fig:burnboxA}, \ref{fig:burnboxB}, and
 \ref{fig:burnboxC} are below the red line, except for the \gls{MAE} from the
-portable \gls{HPGe}. This set of errors from the portable\gls{HPGe} also
-encompass a range than reaches up to $>3500\:MWd/MTU$, which is about $4x$
+portable \gls{HPGe}. This set of errors from the portable \gls{HPGe} also
+encompass a range than reaches up to $>3500\:MWd/MTU$, which is about $4\times$
 higher than the other box plots in all three subfigures. 
 
 The burnup predictions for the most part perform better than the red line, for
@@ -134,7 +134,7 @@ cases with the auto energy windows list, the \gls{MedAE}s are close to zero.
 This indicates that there are very good predictions for at least half of the
 training set.  However, the \gls{MAE}s are all above the 75\% quartile, which
 suggests the errors that do exist are quite large relative to the interquartile
-range.  
+range. 
 
 Furthermore, looking at the sets of box plots with outliers present in Figure
 \ref{fig:burnboxfly} shows that there are many errors far outside of the full
@@ -149,6 +149,10 @@ calculations.  This means that $12-17\%$ of the training set samples are
 outliers.  The high magnitude errors along with the large number of outliers
 contributes to the standard deviations in Figure \ref{fig:burn}, which are so
 large that it is difficult to conclusively define a trend.
+
+The overall flatness of the boxplots and better-than-baseline performance
+indicates that the features needed to determine burnup are easily measured by
+all detector configurations. 
 
 \subsubsection{\texorpdfstring{${}^{235}\text{U}$}{U-235} Enrichment Regression}
 
@@ -276,6 +280,10 @@ Although there are much fewer outliers than with the burnup predictions, the
 wide range of \gls{MAE} magnitudes and the large \gls{MAPE}s contribute to the
 large standard deviations in Figure \ref{fig:enri}. Again, the standard
 deviations are so large that it is difficult to conclusively define a trend.
+
+The overall flatness of the boxplots and far-below-baseline performance
+indicates that the features needed to determine enrichment are not measured by
+and of the detector configurations. 
 
 \subsubsection{Time Since Irradiation Regression}
 
@@ -410,3 +418,8 @@ the training set samples are outliers.  The high magnitude errors along with
 the large number of outliers contributes to the standard deviations in Figure
 \ref{fig:cool}, which are so large that it is difficult to conclusively define
 a trend.
+
+The overall flatness of the boxplots and close-to-baseline performance
+indicates that the features needed to determine time since irradiation are
+close to adequately measured by most of the detector configurations. \todo{check last sentence for each case} 
+

@@ -31,21 +31,25 @@
 \begin{quoting}
   {
   \footnotesize
-  \textit{This chapter was written to convey my PhD work to the general public
-  and was supported by the Wisconsin Initiative for Science Literacy (WISL).}
   
-  \textit{This chapter is a result of me keeping a promise to myself, and so
-  despite its cheesy approach to telling a tale of science, it is a beautiful
-  and important moment for me. I have a lot of people to credit for helping
-  bring this story from a parallel universe into reality: Anna Stephenson for
-  the illustrations and helping me convert my graphics from sterile science to
-  adorable art; Robin Kinchen Cenac (and Reya!) and Louise Opotowsky for
-  overall creative guidance and for suffering through highly technical
-  explanations of my work to prepare me for writing this chapter; Prof. Paul
-  P.H. Wilson, Almost-Dr.  Kalin Keisling, Dr. Dinh Truong, and Dr. Richard
-  Rojas Delgado for feedback and suggestions on my fake country names; and
-  last, never least, but always the littlest, Ninjita Binjita, for the
+  \textit{This chapter was written to convey my PhD work to the general public
+  and was supported by the Wisconsin Initiative for Science Literacy (WISL).  I
+  have much gratitude to WISL and Prof. Bassam Shakashiri for the editing
+  assistance and the opportunity.}
+  
+  \textit{Writing this chapter is a also result of me keeping a promise to
+  myself, and so despite its cheesy approach to telling a tale of science, it
+  is a beautiful and important moment for me. I have a lot of people to credit
+  for helping bring this story from a parallel universe into reality: Anna
+  Stephenson for the illustrations and helping me convert my graphics from
+  sterile science to adorable art; Robin Kinchen Cenac (and Reya!) and Louise
+  Opotowsky for overall creative guidance and for suffering through highly
+  technical explanations of my work to prepare me for writing this chapter;
+  Prof. Paul P.H. Wilson, Almost-Dr.  Kalin Keisling, Dr. Dinh Truong, and Dr.
+  Richard Rojas Delgado for feedback and suggestions on my fake country names;
+  and last, never least, but always the littlest, Ninjita Binjita, for the
   all-important role of lap warmer.} 
+  
   }
 \end{quoting}
 
@@ -143,7 +147,9 @@ nuclear incident occurs, which sadly, happens. This incident can be some intact
 material drone-delivered to a friend by mistake, or it could be something even
 worse, like the detonation of a nuclear weapon. Just in 2019, the International
 Atomic Energy Agency confirmed malicious intent for six incidents of trafficked
-nuclear material.
+nuclear material\footnote{Here is the
+\href{https://www.iaea.org/sites/default/files/20/02/itdb-factsheet-2020.pdf}{\color{violet}2020
+document} that contains this information}.
 
 Most might think of forensics as catching a murderer, but this is more like
 catching the nuclear smuggler. Given some nuclear material (a body) and
@@ -320,7 +326,7 @@ the material and investigators can use that to move forward with their work.
   called a \textit{training data set}.''
   
   Pointing to the middle, ``Next, this training data is put into a
-  \textit{machine learning algorithm}\footnotemark[5], which is how people
+  \textit{machine learning algorithm}\footnotemark[6], which is how people
   teach computers to teach themselves with some software method. Using the
   training data set, the algorithm creates a model, which is usually a model we
   can't see or understand as humans. They are quite secretive creatures, don't
@@ -328,7 +334,7 @@ the material and investigators can use that to move forward with their work.
   tested out some simple ones to see if this approach is even remotely
   feasible. These also happen to be the less-secretive type of algorithms so we
   can understand what the models are doing. One seems to work really well,
-  called \gls{MLL} calculations\footnotemark[6], and I think it's good enough
+  called \gls{MLL} calculations\footnotemark[7], and I think it's good enough
   to use to save UFU.''
   
   Last, they point to the bottom of the diagram. ``So now we have the model. If
@@ -364,7 +370,7 @@ the material and investigators can use that to move forward with their work.
   lab, but our friend is all about speed. The measurements the scientist needs
   to take to match the sample with their training database involve dissolving
   the material and making many different measurements of the nuclides using a
-  technique called mass spectrometry\footnotemark[7].  It gives super accurate
+  technique called mass spectrometry\footnotemark[8].  It gives super accurate
   results that will do well with the machine learning method, but the
   measurements take weeks. 
   
@@ -378,12 +384,12 @@ the material and investigators can use that to move forward with their work.
   said, ``We choose\ldots\ldots''
 
 \end{shadequote}
-\footnotetext[5]{For a better introduction to machine learning, read
+\footnotetext[6]{For a better introduction to machine learning, read
 \href{https://towardsdatascience.com/introduction-to-machine-learning-for-beginners-eed6024fdb08}{\color{violet}this}!}
-\footnotetext[6]{If you have institutional access to journals,
+\footnotetext[7]{If you have institutional access to journals,
 \href{https://www.tandfonline.com/doi/full/10.1080/00295450.2017.1401442}{\color{violet}here's
 the method's first paper}.}
-\footnotetext[7]{I tried to find a non-company-affiliated source that explained
+\footnotetext[8]{I tried to find a non-company-affiliated source that explained
 this simply, but failed.
 \href{https://www.jeolusa.com/RESOURCES/Analytical-Instruments/Mass-Spectrometry-Basics}{\color{violet}This
 is a good explanation}, though, if you're curious about mass spectrometry.}
@@ -472,13 +478,12 @@ we also want to be right, which the scientist can most likely do.
     \end{figure}
     \vspace{-7mm}
     
-    Now they were ready to borrow our friend's machine
-    learning method to predict the parameters of the reactor operation history.
-    The scientist then took the list of 29 nuclides and their measurements and
-    compared that information against their machine-learned model that was
-    created using a training set composed of $450,000$ of the exact same 29
-    simulated measurements of different types of nuclear fuel. And out popped
-    an answer:
+    Now they were ready to borrow our friend's machine learning method to
+    predict the parameters of the reactor operation history.  The scientist
+    then took the list of 29 nuclides and their measurements and compared that
+    information against their machine-learned model that was created using a
+    training set composed of $450,000$ of the exact same 29 simulated
+    measurements of different types of nuclear fuel. And out popped an answer:
     
   \end{minipage}
 }
@@ -574,13 +579,16 @@ able to confirm the actual parameters:
   \end{tabular}
 \end{table}
 
-Our friend's experimental machine learning method isn't so bad! The scientist's
-mass spectrometry-based approach almost gave correct answers for all four
-parameters; the time since irradiation was off by 2-3 months.  Our friend's
-gamma spectroscopy-based approach predicted the correct reactor type and
-burnup, but the time since irradiation was 6 months too long. Most
-significantly, though, it could not predict the proper \gls{U235} enrichment,
-and this is what led to the false blame on the DPRT.  
+Our friend's experimental machine learning method isn't so bad for a method
+developed with little resources!  Their gamma spectroscopy-based approach
+predicted the correct reactor type and burnup.  Most significantly, though,
+their method did not predict the \gls{U235} enrichment well, and this is what
+led to the false blame on the DPRT.  (The time since irradiation was also 6
+months too long, but didn't heavily impact the false attribution like the
+enrichment did.) The scientist's mass spectrometry-based approach was clearly
+more accurate for all four parameters. The reactor type, burnup, and enrichment
+were correctly predicted. Although the time since irradiation was off by 2-3
+months, this error didn't result in any false blame being allocated.
 
 In both versions, luckily, the bomb didn't detonate and no one died. It was too
 rushed of a job, and with the nuclear test ban treaty, no one actually knows
@@ -628,7 +636,7 @@ scientific method creates more questions than answers. For example,  there are
 questions about why the gamma spectra approach gave such a wrong enrichment
 prediction (something echoed in my results, which are aggregate statistics of
 $450,000$ cases versus the one case presented here). Another question might be
-whether a 3-month or 6-month time since irradiation error prediction is too
+whether a 3-month or 6-month time since irradiation prediction error is too
 large of an error, or an acceptable error.
 
 \begin{tcolorbox}[halign=center]
@@ -639,14 +647,14 @@ large of an error, or an acceptable error.
 broader scale.}
 
 Every scientist should take note of the ethical and political implications of
-their work. Yes, I said it: science is political\footnote[8]{Everyone knows
+their work. Yes, I said it: science is political\footnote[9]{Everyone knows
 \href{https://www.scientificamerican.com/article/yes-science-is-political/}{\color{violet}it}!}!
 Although the morality of preventing or mitigating a nuclear disaster is not
 necessarily in question, the nuclear field (both commercial power and
 defense/the nuclear weapon program) is far from blameless when it comes to
 destroying human bodies and the environment. The mining industry caused uranium
 contamination and early death for many Din\'{e} in Navajo Nation and
-payouts/cleanup only began recently\footnote[9]{For more information about the
+payouts/cleanup only began recently\footnote[10]{For more information about the
 500 abandoned mines and the cleanup efforts, read more
 \href{https://www.epa.gov/navajo-nation-uranium-cleanup/abandoned-mines-cleanup}{\color{violet}here}.},
 plutonium production during World War II has resulted in the displacement and
@@ -654,15 +662,15 @@ illness of US citizens around Hanford, WA, and government-sanctioned human
 radiation experiments were conducted on unwitting people and children. None of
 this (and so much more that's not mentioned here) comes as a surprise knowing
 the entire nuclear enterprise sits on a foundation of well-documented
-racism\footnote[10]{\href{https://thebulletin.org/2020/08/a-call-for-antiracist-action-and-accountability-in-the-us-nuclear-community/}{\color{violet}Here's}
+racism\footnote[11]{\href{https://thebulletin.org/2020/08/a-call-for-antiracist-action-and-accountability-in-the-us-nuclear-community/}{\color{violet}Here's}
 a good article on nuclear's racist roots.}.  Last, the obvious must be stated:
 the US is the only country to ever deploy a nuclear weapon against another
-country, where the human toll was undeniably brutal\footnote[11]{And Black
+country, where the human toll was undeniably brutal\footnote[12]{And Black
 American journalists
 \href{https://www.nytimes.com/2021/08/09/science/charles-loeb-atomic-bomb.html?smid=url-share
 }{\color{violet}exposed the government's lies} about it}. This and much more is
 documented in a list of resources curated by Kalin Kiesling with help from the
-nuclear community\footnote[12]{The resources are curated in
+nuclear community\footnote[13]{The resources are curated in
 \href{https://docs.google.com/document/d/e/2PACX-1vQuRSix5J31G4yhH-Z0kwmlpXe6OgS9MXg6l-LBEOVNDPDAPVivPSrJ7A71TMCsW2EdvGMepZCcwdTP/pub}{\color{violet}this
 Google document}.}.
 

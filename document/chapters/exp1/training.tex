@@ -10,8 +10,9 @@ Of interest to an entity trying to create a weapon is partially irradiated fuel
 if they have plutonium separations capabilities or any radioactive substance in
 the case of a dirty bomb. Thus, this work focuses on \gls{SNF} from commercial
 power reactors. Ideally, a large enough database of \gls{SNF} nuclide assays
-would be able to be used for this work. Since that does not exist, the 
-database will be simulated via \gls{ORIGEN} \cite{origen, origenarp}.  
+would be able to be used for this work. As a sufficiently large enough database
+does not exist, the database will be simulated via \gls{ORIGEN} \cite{origen,
+origenarp}.  
 
 \subsection{Simulation Fidelity}
 \label{sec:fidelity}
@@ -103,10 +104,10 @@ both of the experiments in this work, and tend to have larger errors.  The
 first sample is a lower burnup and has the largest errors.
 
 In summary, it is important to note that that the simulated training set as
-ground truth is not perfect truth, for some nuclides more than others.  The
-prediction performance will be impacted by the poorly simulated nuclides, but a
-detailed study on  which nuclide measurements to exclude is outside of the
-scope of this work.
+ground truth is not perfect truth, with the level of inaccuracy varying for
+some nuclides more than others.  The prediction performance will be impacted by
+the poorly simulated nuclides, but a detailed study on  which nuclide
+measurements to exclude is outside of the scope of this work.
 
 \subsection{Training Set Labels}
 \label{sec:snflbls}
@@ -181,22 +182,24 @@ assumption that the training set will be \acrfull{i.i.d.}.  This is important
 so that the model does not overvalue or overfit a certain area in the training
 space. With the training set design, there are predetermined values for
 enrichment, burnup, and time since irradiation.  While there are $21-28$ burnup
-steps \todo{add full lists?} (depending on the reactor type) and 61 cooling
-time steps, there are only 6 values for enrichment. This creates the risk that
-the algorithm will end up being unable to generalize outside of those discrete
-values. Therefore, the burnup steps and time steps are perturbed randomly in a
-range that is $\pm10\%$ and $\pm30\%$ from the originally defined values,
-respectively.  The enrichment also gets perturbed by $\pm10\%$, and not more
-because the cross-section libraries in \gls{ORIGEN-ARP} are pre-calculated for
-those enrichment values, so deviating too far from them would result in
-inaccurate \gls{SNF} simulations. The power densities and moderator densities
-were kept at the values defined in Table \ref{tbl:rxtrparam}.  Additionally,
-natural variations in ${}^{234}\text{U}$ and ${}^{236}\text{U}$ were not
-considered.  The percentage of the two uranium isotopes in fresh fuel were kept
-the same for all \gls{SNF} simulations: 0.0356\% for ${}^{234}\text{U}$ and
-0.0184\% for ${}^{236}\text{U}$.  The 0-valued burnup and cooling time entries
-were then filtered out so that the future calculations of relative error would
-be possible for all predictions.  
+steps (depending on the reactor type) and 61 cooling time steps, there are only
+6 values for enrichment. This creates the risk that the algorithm will end up
+being unable to generalize outside of those discrete values. Therefore, the
+burnup steps and time steps are perturbed randomly in a range that is $\pm10\%$
+and $\pm30\%$ from the originally defined values, respectively.  The enrichment
+also gets perturbed by $\pm10\%$, \todo[inline]{Paul clarify? BL: But it will
+be calculating the perturbation by using values of enrichment a full percentage
+point higher? (I dont think this is a major issue btw, what you are doing
+overall sounds fine)} and not more because the cross-section libraries in
+\gls{ORIGEN-ARP} are pre-calculated for those enrichment values, so deviating
+too far from them would result in inaccurate \gls{SNF} simulations. The power
+densities and moderator densities were kept at the values defined in Table
+\ref{tbl:rxtrparam}.  Additionally, natural variations in ${}^{234}\text{U}$
+and ${}^{236}\text{U}$ were not considered.  The percentage of the two uranium
+isotopes in fresh fuel were kept the same for all \gls{SNF} simulations:
+0.0356\% for ${}^{234}\text{U}$ and 0.0184\% for ${}^{236}\text{U}$.  The
+0-valued burnup and cooling time entries were then filtered out so that the
+future calculations of relative error would be possible for all predictions.  
 
 The resulting training set is $450240$ (or $4.5 \times 10^5$) entries.  Figure
 \ref{fig:trainhist} visualizes the somewhat even distribution of the burnup and

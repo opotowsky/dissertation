@@ -253,9 +253,9 @@ for \gls{MLL} calculations.
   \label{tbl:sfcoburn}
 \end{table}
 
-Although the mean and median errors are contained in the range of $1-15\:
-GWd/MTU$, the large spread in burnup errors in Figures \ref{fig:burnimp} and
-\ref{fig:burn0} for all three algorithms was broad enough to warrant an
+Although the mean and median errors are contained in the range of 
+$1-15\:GWd/MTU$, the large spread in burnup errors in Figures \ref{fig:burnimp}
+and \ref{fig:burn0} for all three algorithms was broad enough to warrant an
 investigation into the range of relative errors, expressed as percent errors in
 Figures \ref{fig:burnimppct} and \ref{fig:burn0pct}.  In Figure
 \ref{fig:burnimppct} there are 75, 72, and 73 outliers (all around 15\% of the
@@ -299,17 +299,18 @@ test database) for the \textit{k}-nearest neighbors, decision trees, and
   \label{fig:sfcoburn}
 \end{figure}
 
-The large ranges seen for the mean-imputed nulls test set in Figure
-\ref{fig:burnimppct} are because of large overpredictions of low burnups ($<
-10\:GWd/MTU$), since a small number in the denominator will yield a high
-percentage error. A large subset of the low burnup cases are \gls{PHWR}s.
-Their burnups are also unlikely to be predicted well because of the inability
-of \gls{PHWR} reactors to be represented accurately with this methodology.
-Removing the \gls{PHWR} reactors from the results removes all outliers with
-percentage errors larger than 1750\%. That is still a very high relative error,
-but there are other low burnup cases in the database.  Removing \gls{PHWR}s
-does not significantly alter the zero-imputed nulls results in Figure
-\ref{fig:burn0pct}.
+\todo[inline]{BL: PHWR will build up Pu much more quickly so failure to detect
+PHWR will cause problems.} The large ranges seen for the mean-imputed nulls
+test set in Figure \ref{fig:burnimppct} are because of large overpredictions of
+low burnups ($< 10\:GWd/MTU$), since a small number in the denominator will
+yield a high percentage error. A large subset of the low burnup cases are
+\gls{PHWR}s.  Their burnups are also unlikely to be predicted well because of
+the inability of \gls{PHWR} reactors to be represented accurately with this
+methodology.  Removing the \gls{PHWR} reactors from the results removes all
+outliers with percentage errors larger than 1750\%. That is still a very high
+relative error, but there are other low burnup cases in the database.  Removing
+\gls{PHWR}s does not significantly alter the zero-imputed nulls results in
+Figure \ref{fig:burn0pct}.
 
 The range of percentage errors for the zero-imputed nulls test set in Figure
 \ref{fig:burn0pct} tells a different story. There is only one case (an

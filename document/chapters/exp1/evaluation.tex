@@ -105,32 +105,32 @@ almost-perfect performance.  (Recall that the true positive fractions in the
 confusion matrices do not map directly to the balanced accuracy score, which
 puts more weight on the underrepresented classes.) The confusion matrices give
 more dimension to this near-perfect reactor type classification performance.
-The majority of the misclassification is in \gls{PWR}s being classified as
-\gls{BWR}s: 0.4\% for \textit{k}-nearest neighbors and decision trees, and
-1.6\% for \gls{MLL} calculations. However, there are also some \gls{BWR}s that
-are misclassified as \gls{PWR}s: 0.1\% for \textit{k}-nearest neighbors and
+The majority of the misclassification is in \glspl{PWR} being classified as
+\glspl{BWR}: 0.4\% for \textit{k}-nearest neighbors and decision trees, and
+1.6\% for \gls{MLL} calculations. However, there are also some \glspl{BWR} that
+are misclassified as \glspl{PWR}: 0.1\% for \textit{k}-nearest neighbors and
 decision trees, and 0.5\% for \gls{MLL} calculations.  There are zero
 misclassified \gls{PHWR} cases and zero \gls{LWR} cases misclassified as
 \gls{PHWR}; the value of 0.000 to three decimals fraction here represents a
 real zero-count, but this is not necessarily the case for the other sets of
-confusion matrices.  The \gls{PWR}/\gls{BWR} distinction is known to be a
-difficult problem, so the correct \gls{PHWR} classifications are not
-particularly notable for this discussion. 
+confusion matrices.  The \gls{PWR}/\gls{BWR} distinction \todo{BL: explain or cite}
+is known to be a difficult problem, so the correct \gls{PHWR} classifications
+are not particularly notable for this discussion. 
 
 The middle panel of Figure \ref{fig:cm_nuc29} shows confusion matrices for the
 three algorithms for the 10\% random error case. In Figure \ref{fig:randrxtr},
 one can see these three data points on the plot, where the \gls{MLL} point is
 near a balanced accuracy score of 1, and the scikit-learn algorithms both have
 score of around 0.93. As with the 1\% error case, the majority of the
-misclassification is in \gls{PWR}s being classified as \gls{BWR}s: 11.3\% for
+misclassification is in \glspl{PWR} being classified as \glspl{BWR}: 11.3\% for
 \textit{k}-nearest neighbors, 10.3\% for decision trees, and 1.7\% for
-\gls{MLL} calculations.  The \gls{BWR}s are being misclassified as \gls{PWR}s
+\gls{MLL} calculations.  The \glspl{BWR} are being misclassified as \glspl{PWR}
 at the following percentages: 3.4\% for \textit{k}-nearest neighbors, 3.6\% for
 decision trees, and 0.5\% for \gls{MLL} calculations. Note how the performance
 of the \gls{MLL} calculations are nearly the same for both error levels, which
 is shown by the \gls{MLL} line in Figure \ref{fig:randrxtr}. Because of the
-normalization, the \gls{LWR}s that are misclassified as \gls{PHWR}s appear to
-be zero. However, this does happen, just rarely: 15 \gls{BWR}s are classified
+normalization, the \gls{LWR}s that are misclassified as \glspl{PHWR} appear to
+be zero. However, this does happen, just rarely: 15 \glspl{BWR} are classified
 as \gls{PHWR} using decision trees. Also, \textit{k}-nearest neighbors and
 decision trees misclassified \gls{PHWR} as an \gls{LWR} 2 times using the
 former and 20 times using the latter (no \gls{PHWR} misclassifications happened
@@ -141,10 +141,10 @@ three algorithms for the 20\% random error case. In Figure \ref{fig:randrxtr},
 one can see these three data points on the plot, where the \gls{MLL} point is
 near a balanced accuracy score of 0.97, \textit{k}-nearest neighbors is around
 0.83, and decision trees is around 0.86. As with the previous two error cases,
-the majority of the misclassification is in \gls{PWR}s being classified as
-\gls{BWR}s: 24.6\% for \textit{k}-nearest neighbors, 20.3\% for decision trees,
-and 5.6\% for \gls{MLL} calculations.  The \gls{BWR}s are being misclassified
-as \gls{PWR}s at the following percentages: 7.9\% for \textit{k}-nearest
+the majority of the misclassification is in \glspl{PWR} being classified as
+\glspl{BWR}: 24.6\% for \textit{k}-nearest neighbors, 20.3\% for decision trees,
+and 5.6\% for \gls{MLL} calculations.  The \glspl{BWR} are being misclassified
+as \glspl{PWR} at the following percentages: 7.9\% for \textit{k}-nearest
 neighbors, 7.3\% for decision trees, and 0.5\% for \gls{MLL} calculations.
 \Gls{PHWR}s are misclassified as an \gls{LWR} 100 times for \textit{k}-nearest
 neighbors, 82 times for decision trees, and 0 times for \gls{MLL} calculations.

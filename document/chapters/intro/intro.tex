@@ -3,7 +3,7 @@
 
 \chapter{Introduction}
 \label{ch:intro}
-\todo{edit doc for a/an w/ acronyms}
+
 The realm of nuclear security involves parallel efforts in nonproliferation
 (verification of treaty compliance, monitoring for smuggling, proper storage
 and transportation of nuclear materials), cyber security, minimizing stocks of
@@ -28,7 +28,7 @@ Both fields are concerned with radiological and isotopic measurements of
 nuclear materials. So, areas like material collection techniques and detector
 technology are broadly beneficial to both fields. However, much of the time,
 safeguards must probe a nuclear material or process in a non-destructive manner
-or in a way that does not reveal proprietary technology; safeguards has
+or in a way that does not reveal proprietary technology; hence, safeguards has
 limitations that nuclear forensics does not.  Therefore, radiochemical
 separations (a destructive process for material characterization) and
 identifying forensic signatures are areas important to nuclear forensics.
@@ -36,7 +36,7 @@ These approaches within nuclear forensics can vary based on whether the
 material being collected is pre-detonation (e.g., \gls{SNF}) or post-detonation
 (e.g., bomb debris). 
 
-In the pre-detonation realm, this project focuses on statistical methods to to
+In the pre-detonation realm, this project focuses on statistical methods to
 model the production history of a nuclear material using measurements of
 nuclides present in \gls{SNF}.  The \gls{SNF} is identified in this work by
 focusing on four characteristics in particular that can potentially provide
@@ -45,6 +45,9 @@ time since fuel irradiation.
 \begin{enumerate}
   \item The \textbf{reactor type} is classified as one of the three most common
         types of commercial power reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}.
+        These three are chosen in order to simplify the nature of this 
+        exploratory study, and there are several reactor types excluded.
+        \todo{Paul check. BL wanted a little more context here}
   \item The \textbf{burnup} describes how much energy was produced by the fuel,
         taking on the units megawatt-days (or gigawatt-days) per metric 
         ton of heavy metal (or initial uranium); it is referred to in this work 
@@ -60,14 +63,15 @@ time since fuel irradiation.
 \section{Motivation}
 \label{sec:motivation}
 
-Preventing nuclear terrorism is important work that has a role along the entire
-lifetime of nuclear material, from the beginning (e.g., enrichment facility
-inspections) to the end (e.g., \gls{SNF} management). The \gls{IAEA} tracks
-reports of radioactive material out of regulatory control via the \gls{ITDB}
-\cite{itdb}, and the incidents that are confirmed or likely to be related to
-trafficking or malicious use are summarized in Figure \ref{fig:incidents}.
-These are the circumstances in which a robust nuclear forensics capability is
-beneficial.
+Preventing nuclear terrorism is important work that has relevance along the
+entire lifetime of nuclear material, from the beginning (e.g., enrichment
+facility inspections) to the end (e.g., \gls{SNF} management). The \gls{IAEA}
+tracks reports of radioactive material out of regulatory control via the
+\gls{ITDB} \cite{itdb}, and the incidents that are confirmed or likely to be
+related to trafficking or malicious use are summarized in Figure
+\ref{fig:incidents}.  These are the circumstances in which a robust nuclear
+forensics capability is beneficial, since a combination of nuclear forensics
+and intelligence is required to investigate such incidents.  
 
 \begin{figure}[!tbh]
   \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./chapters/intro/nucleartrafficking.png}}

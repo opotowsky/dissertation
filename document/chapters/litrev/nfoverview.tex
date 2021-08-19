@@ -22,8 +22,7 @@ collection and measurement requirements than a mass of \gls{SNM}. This
 separates the field into post-detonation and pre-detonation nuclear forensics.
 While both are discussed below in Sections \ref{sec:postdet} and
 \ref{sec:predet}, respectively, there is more focus on pre-detonation topics
-since this work is based on \gls{SNF}. \todo{check notes for more sources, use
-nonpro NF paper too}
+since this work is based on \gls{SNF}. 
 
 \subsubsection{Post-Detonation}
 \label{sec:postdet}
@@ -62,10 +61,11 @@ standard materials must be both strengthened and centralized.
 
 Pre-detonation nuclear forensics investigations occur for every scenario in
 which non-detonated nuclear material has been found or intercepted. Although
-this could be an intact bomb, it is more likely that \gls{SNM} intended for a
-weapon would be the target of an investigation. Thus, the range of intact
-materials for measurement could be as small as a plutonium sample or as large
-as a shipment of \gls{UOC}.  The goal is to determine the provenance of the
+this could technically be an intact bomb, it is more likely that \gls{SNM}
+intended for a weapon would be the target of an investigation since attempts at
+materials smuggling are much more common.  The range of intact materials for
+measurement could be as small as a gram-sized plutonium sample or as large as a
+shipment of \gls{UOC}. The goal is to determine the provenance of the
 \gls{SNM}, which in the case of \gls{SNF} is generally done by reconstructing
 the irradiation process that created the material. 
 
@@ -79,16 +79,21 @@ measure these quantities.
 
 Although this is less of a humanitarian emergency than a post-detonation
 investigation, it is still important to have rapid characterization
-capabilities via on-site non-destructive analyses.  As previously discussed in
-Section \ref{sec:motivation}, however, the faster measurements result in poor
-measurement quality. Also, there is a need for research to combat the database
-issues, as an insufficient forensics database can reduce the accuracy and/or
-certainty of a reconstructed set of reactor parameters.  Another area of
-research is deeper study of known forensics signatures or discovering new
-signatures with modeling, simulation, or statistical methods. 
+capabilities via on-site non-destructive analyses.  There could be weapons
+construction already in progress that would need to be curtailed as quickly as
+possible, or other related malicious intent that a faster investigation could
+potentially derail.  As previously discussed in Section \ref{sec:motivation},
+however, the faster measurements result in poor measurement quality. Also,
+there is a need for research to combat the database issues, as an insufficient
+forensics database can reduce the accuracy and/or certainty of a reconstructed
+set of reactor parameters.  Another area of research is deeper study of known
+forensics signatures or discovering new signatures with modeling, simulation,
+or statistical methods. 
 
 \subsection{Nuclear Forensics as an Inverse Problem}
 \label{sec:inverse}
+
+\todo[inline]{physics discussion goes in this section}
 
 Nuclear forensics is a traditional inverse problem, which has been well
 documented mathematically and applied to a range of scientific disciplines.
@@ -133,13 +138,15 @@ This can be done by directly inverting the model for a solution, or it can be
 done from first principles or empirical relationships, which typically requires
 iterative forward modeling that converges upon a solution. These two approaches
 (direct inversion and forward modeling) are compared in some nuclear forensics
-work in Reference \cite{inverse_compare}, where the authors are discussing the
+work in Reference \cite{inverse_compare}, \todo[inline]{BL: a little
+elaboration on Ref might be worthwhile} where the authors are discussing the
 discrimination capability of their approach as it applies to plutonium powder
 from reprocessing. While the data set in the paper did not provide enough
 measurements to effectively discriminate, it is interesting to compare both
-inverse problem approaches in the same work.  \todo[inline]{they lead me to
-believe statistical approaches == direct inversion as a whole. Is that what
-I'm doing?! I thought direct inversion was a stricter definition.} 
+inverse problem approaches in the same work.  
+%\todo[inline]{they lead me to believe statistical approaches == direct
+%inversion as a whole. Is that what I'm doing?! I thought direct inversion was
+%a stricter definition.} 
 
 There is a suite of work approaching the nuclear forensics problem with an
 iterative forward modeling approach using \gls{INDEPTH}, a tool developed at
@@ -176,73 +183,4 @@ to use statistical methods to determine relationships between nuclide
 measurements and reactor operation parameters. The background for this is
 introduced next in Section \ref{sec:mlback} and discussed within the context of
 nuclear forensics in Section \ref{sec:stats4nf}.
-
-%Further, including measurement uncertainties broadens the linear model to
-%probability densities of the parameters. The opposite is also true in the
-%forward case: including parameter uncertainties broadens the forward problem
-%results to probability densities of the potential measurement values.
-%\cite{inverse_theory}
-%
-%In this way, we can define some probability that an answer is correct, given a
-%set of measurements and their uncertainties, the calculated model parameters,
-%the spread of the data space, and the spread of the model space. Inverse
-%problem theory connects these values to the general form of Bayes' theorem,
-%which is commonly expressed as follows:
-%\begin{equation}
-%  \label{eq:bayes}
-%  P(A|B) = \frac{P(B|A)P(A)}{P(B)}
-%\end{equation}
-
-%Here, $A$ and $B$ are events, $P(A)$ and $P(B)$ are the probabilities that
-%events $A$ and $B$ will occur, representing the model and data spaces,
-%respectively. $P(A)$ is known as the likelihood and $P(B)$ is known as the
-%marginal likelihood. The marginal likelihood is a concept of the data space
-%capturing all the possible measurement values. It is ignored here because as a
-%homogenous probability, it is only useful for determining absolute
-%probabilities and this will only be applied in a relative context.  $P(B|A)$ is
-%the prior probability that event $B$ will occur given a known result for $A$,
-%which are the measurements given the model parameters (i.e. the forward
-%problem).  $P(A|B)$ is the posterior probability that event $A$ will occur
-%given a known result for $B$, which are the predicted model parameters given
-%the measurements (i.e., the inverse problem) \cite{inverse_theory,
-%gentle_bayes}. 
-
-%This is can be mapped easily to the inverse physical system problem scenario.
-%$A$ would represent an occurrence of a parameter in the model space, and $B$
-%would represent the measurement of some value. Thus, $P(A)$ is the probability
-%of a parameter existing without any knowledge of $B$. This is known as the
-%prior probability, usually given by some theory about the system. $P(B)$ is the
-%probability of some measurement existing without any knowledge of $A$. This is
-%known as the marginal likelihood, which is some homogeneous concept for the
-%potential measurements that could be made (this only serves to scale to
-%absolute probabilities and does not affect the relative probabilities). The
-%likelihood, $P(B|A)$, is the chance that a measurement is observed from a given
-%parameter, representing the forward problem.  Lastly, the posterior probability
-%is the chance of some parameter existing given some measurement, representing
-%the inverse problem solution \cite{inverse_theory, gentle_bayes}.  
-%
-%Given the above, it is more intuitive to consider the conceptual version of
-%Bayes' theorem in Equation \ref{eq:bayes_words}.
-%\begin{equation}
-%  \label{eq:bayes_words}
-%  \text{Posterior} = \frac{\text{Likelihood} \cdot \text{Prior}}
-%                          {\text{Marginal \ Likelihood}} 
-%\end{equation} 
-%
-%This framework is helpful for an experiment that intends to compare different
-%methods for calculating the posterior probability of a system given some
-%measurements \cite{bayes_compare}.  In the nuclear forensics context of
-%pre-detonated materials, this would be a a set of probabilities for different
-%parameters of interest, e.g., reactor type, burnup, cooling time, and
-%enrichment of some interdicted \gls{SNF}.
-
-%In addition to evaluating a single learned model, it is beneficial to compare
-%models. Moreover, there are potential degeneracies in the solution space. This
-%is because most inverse problems are \textit{ill-posed}, because the solution
-%is not guaranteed to be unique \cite{skutnik_2016}.  Evaluating not only the
-%solution, but the confidence in the solution, is therefore prudent. While the
-%two scikit-implemented algorithms do not provide this information, the
-%\gls{MLL} calculation method provides a likelihood with an uncertainty. This
-%provides a measure of distinguishability that many machine learning approaches
-%do not provide. 
 

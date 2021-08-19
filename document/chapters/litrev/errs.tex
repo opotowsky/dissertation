@@ -77,8 +77,8 @@ from this data set, where a fraction of \glspl{PHWR} are correctly predicted
 \glspl{PWR} or \glspl{BWR} misclassified as \gls{PHWR}, they do get
 misclassified as each other: 0.3 \glspl{PWR} and 0.1 \glspl{BWR} get
 misclassified as the other.  Note that each row must add up to 1, since those
-are the true class labels. The columns do not add up to 1 (unless there are no
-misclassifications).  
+are the true class labels. The columns do not generally add up to 1 (unless
+there are no misclassifications or the confusion matrix is symmetric).
 
 \noindent \textbf{Regression Mean Error Calculations}
 
@@ -121,6 +121,9 @@ small testing set.
   \caption[Illustration of cross validation]
           {Illustration of two ways of performing \gls{CV}: a one-time split, 
            or \textit{k}-fold \gls{CV}.}
+   \todo[inline]{BL: This diagram is confusing because testing, CV and training are 
+   different sizes at the top and smaller sizes below. You might want to draw this 
+   diagram with k=5 and then the CV and testing bars can both be 20\% in top pic}
   \label{fig:cverror}
 \end{figure}
 
