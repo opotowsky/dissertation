@@ -1580,7 +1580,7 @@ FUNCTION {presort}
 }
 
 ITERATE {presort}
-SORT
+%SORT
 STRINGS { last.label next.extra }
 INTEGERS { last.extra.num number.label }
 FUNCTION {initialize.extra.label.stuff}
@@ -1633,7 +1633,7 @@ FUNCTION {bib.sort.order}
   'sort.key$ :=
 }
 ITERATE {bib.sort.order}
-SORT
+%SORT
 FUNCTION {begin.bib}
 { preamble$ empty$
     'skip$
