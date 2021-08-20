@@ -187,19 +187,17 @@ steps (depending on the reactor type) and 61 cooling time steps, there are only
 being unable to generalize outside of those discrete values. Therefore, the
 burnup steps and time steps are perturbed randomly in a range that is $\pm10\%$
 and $\pm30\%$ from the originally defined values, respectively.  The enrichment
-also gets perturbed by $\pm10\%$, \todo[inline]{Paul clarify? BL: But it will
-be calculating the perturbation by using values of enrichment a full percentage
-point higher? (I dont think this is a major issue btw, what you are doing
-overall sounds fine)} and not more because the cross-section libraries in
-\gls{ORIGEN-ARP} are pre-calculated for those enrichment values, so deviating
-too far from them would result in inaccurate \gls{SNF} simulations. The power
-densities and moderator densities were kept at the values defined in Table
-\ref{tbl:rxtrparam}.  Additionally, natural variations in ${}^{234}\text{U}$
-and ${}^{236}\text{U}$ were not considered.  The percentage of the two uranium
-isotopes in fresh fuel were kept the same for all \gls{SNF} simulations:
-0.0356\% for ${}^{234}\text{U}$ and 0.0184\% for ${}^{236}\text{U}$.  The
-0-valued burnup and cooling time entries were then filtered out so that the
-future calculations of relative error would be possible for all predictions.  
+also gets perturbed by $\pm10\%$, and not more because the cross-section
+libraries in \gls{ORIGEN-ARP} are pre-calculated for those enrichment values,
+so deviating too far from them would result in inaccurate \gls{SNF}
+simulations. The power densities and moderator densities were kept at the
+values defined in Table \ref{tbl:rxtrparam}.  Additionally, natural variations
+in ${}^{234}\text{U}$ and ${}^{236}\text{U}$ were not considered.  The
+percentage of the two uranium isotopes in fresh fuel were kept the same for all
+\gls{SNF} simulations: 0.0356\% for ${}^{234}\text{U}$ and 0.0184\% for
+${}^{236}\text{U}$.  The 0-valued burnup and cooling time entries were then
+filtered out so that the future calculations of relative error would be
+possible for all predictions.  
 
 The resulting training set is $450240$ (or $4.5 \times 10^5$) entries.  Figure
 \ref{fig:trainhist} visualizes the somewhat even distribution of the burnup and

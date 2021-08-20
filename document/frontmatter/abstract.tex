@@ -1,31 +1,38 @@
 Nuclear forensics is a nuclear security capability that is broadly defined as
 material attribution in the event of a nuclear incident.  Improvement and
 research is needed for technical components of this process.  One such area is
-the provenance of non-detonated \gls{SNM}; studied here is \gls{SNF}, which is
-applicable in a scenario involving the unlawful use of commercial byproducts
-from nuclear power reactors.  The experimental process involves measuring known
-forensics signatures to ascertain the reactor parameters that produced the
-material. Knowing these assists in locating the source of the material. This
-work is proposing the use of statistical methods to determine these quantities
+the provenance of non-detonated special nuclear material; studied here is
+\gls{SNF}, which is applicable in a scenario involving the unlawful use of
+commercial byproducts from nuclear power reactors.  The experimental process
+involves measuring known forensics signatures to ascertain the reactor
+parameters that produced the material, assisting in locating its source.  This
+work proposes the use of statistical methods to determine these quantities
 instead of empirical relationships. 
 
-The purpose of this work is to probe to what extent this method is feasible.
-Thus, two experiments have been designed, using simulated nuclide measurements
-as observations and reactor operation parameters as the prediction goals.
-First, machine learning algorithms are employed with full-knowledge training
-data, i.e., nuclide vectors directly from simulations.  Second, this workflow
-is performed on reduced-knowledge training data, analogous to a detector that
-can only measure certain radionuclides. The results are evaluated using the
-performance of the reactor parameter predictions.
+The purpose of this work is to probe the feasibility of this method with a
+focus on field-deployable detection.  Thus, two experiments are conducted, the
+first informing the second by providing a baseline of performance.  Both
+experiments use simulated nuclide measurements as observations and reactor
+operation parameters as the prediction goals.  First, machine learning
+algorithms are employed with full-knowledge training data, i.e., nuclide
+vectors from simulations that mimic lab-based mass spectrometry. The error in
+the mass measurements is artificially increased to probe the prediction
+performance with respect to information reduction. Second, this machine
+learning workflow is performed on training data analogous to a field-deployed
+gamma detector that can only measure radionuclides. The detector configuration
+is varied so that the information reduction now represents decreasing detector
+energy resolution.  The results are evaluated using the error of the reactor
+parameter predictions.
 
-The reactor parameters of interest are the reactor type and three quantities of
-interest describing the \gls{SNF}: burnup, initial \gls{U235} enrichment, and
+The reactor parameters of interest are the reactor type and three quantities
+that can attribute \gls{SNF}: burnup, initial \acrshort{U235} enrichment, and
 time since irradiation. The algorithms used to predict these quantities are
-\textit{k}-nearest neighbors, decision trees, and \gls{MLL} calculations. The
-first experiment predicts all of these quantities well using the three
-algorithms, except for the case of \textit{k}-nearest neighbors predicting time
-since irradiation. The second experiment has widely varying results, but two
-consistent themes: the methods predict burnup very well and enrichment poorly.
-This approach is an exploratory study; the results are promising and warrant
-further study.
+\textit{k}-nearest neighbors, decision trees, and maximum log-likelihood
+calculations. The first experiment predicts all of these quantities well using
+the three algorithms, except for \textit{k}-nearest neighbors predicting time
+since irradiation. For the second experiment, most of the detector
+configurations predict burnup well, none of them predict enrichment well, and
+the time since irradiation results perform on or near the baseline.  This
+approach is an exploratory study; the results are promising and warrant further
+study.
 

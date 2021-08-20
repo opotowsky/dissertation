@@ -171,13 +171,13 @@ windows lists having known poor simulation quality \cite{pwr_benchmark_2010,
 skutnik_2021}, the burnup prediction clearly had enough information to do well.
 The poor enrichment prediction is likely because the detected radionuclides are
 not enrichment indicators, although ${}^{152}\text{Eu}$ is and should be
-included in the long energy windows list. The time steps in the training set
-being about $100\:days$ was a limiting factor in its quality of prediction;
-many of the \gls{MAE} values were around this level in the second experiment. 
-
-\todo[inline]{Paul, is this OK to not address?  BL: I think that co-detection
-of enrichment and burnup typically requires a neutron count as well as a gamma
-scan so it is unsurprising that gamma alone is struggling.}
+included in the long energy windows list (although it is not guaranteed to be a
+well-resolved feature).  Additionally, it is likely that gamma detection alone
+cannot resolve the enrichment, and that passive neutron detection would be
+required, e.g. via measuring ${}^{244}\text{Cm}$ \cite{skutnik_2016}.  The time
+steps in the training set being about $100\:days$ was a limiting factor in its
+quality of prediction; many of the \gls{MAE} values were around this level in
+the second experiment. 
 
 There is a clear leader throughout all of the results in terms of being a
 consistent best performer: the \gls{MLL} calculations. The reason it can
@@ -315,13 +315,18 @@ approach should be refined with a study on the latest gamma spectra processing
 tools and which are suitable to process a training set of $4.5 \times 10^5$
 spectra within a reasonable amount of time.  
 
-%There are also more advanced detection techniques being studied that could
-%clarify peaks from nuclides that typically are not detectable. A Compton
-%supression measurement technique allows low-intensity peaks to be more
-%detectable \cite{compton_supp}. An Ultra-High Rate \gls{HPGe} system operates
-%such that peaks at the high energy end of the spectrum can be detected at large
-%enough counts \cite{snf_gamma}. It is possible these approaches could be
-%simulated and studied at a statistical level. 
+In addition to the gamma spectra processing itself, there are also more
+advanced detection techniques being studied that could clarify peaks from
+nuclides that typically are not detectable. A Compton supression measurement
+technique allows low-intensity peaks to be more detectable \cite{compton_supp}.
+An Ultra-High Rate \gls{HPGe} system operates such that peaks at the high
+energy end of the spectrum can be detected at large enough counts
+\cite{snf_gamma}. It is possible these approaches could be simulated and
+studied at a statistical level. 
+
+Further, adding simulated neutron detection to be able to resolve the
+\gls{U235} enrichment would be necessary if limiting the approach to passive
+radioactivity detection. This is possible in \gls{GADRAS}.
 
 \subsection{Statistical Method Optimization}
 

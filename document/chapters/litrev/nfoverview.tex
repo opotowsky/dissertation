@@ -212,17 +212,17 @@ products.
 
 In \gls{SNF}, the buildup of actinides is dependent on neutron capture (or the
 lack thereof) of (initially) uranium isotopes and the buildup of fission
-products is dependent on (mostly) \gls{U235} fissions. Thus, the neutron energy
-spectrum in the reactor affects the levels of both actinides and fission
-products.  This allows the distinguishing of different reactor types.  Their
-creation is of course also linked to the initial enrichment and initial amounts
-of various uranium isotopes via the number of fissions that can occur.  The
-burnup of the fuel also impacts the amount of these nuclides, since more are
-created as the fuel remains in the reactor core longer.  The radionuclides with
-long half lives also can contribute to the time since irradiation
-determination. While some nuclides might be a strong contributor to the
-knowledge of one of the parameters, it is more common that they contribute
-information about multiple. 
+products is dependent on initially \gls{U235} fissions, and later
+${}^{239}\text{Pu}$ fissions.  Thus, the neutron energy spectrum in the reactor
+affects the levels of both actinides and fission products.  This allows the
+distinguishing of different reactor types.  Their creation is of course also
+linked to the initial enrichment and initial amounts of various uranium
+isotopes via the number of fissions that can occur.  The burnup of the fuel
+also impacts the amount of these nuclides, since more are created as the fuel
+remains in the reactor core longer.  The radionuclides with long half lives
+also can contribute to the time since irradiation determination. While some
+nuclides might be a strong contributor to the knowledge of one of the
+parameters, it is more common that they contribute information about multiple. 
 
 The buildup of ${}^{239}\text{Pu}$ is an example, where it is formed by the
 neutron capture of ${}^{238}\text{U}$. This is dependent on the neutron energy,
@@ -232,4 +232,30 @@ initial \gls{U235} enrichment. It also will capture neutrons and make higher
 mass plutonium isotopes or fission the longer the fuel is in the reactor core.
 Therefore, it is also linked to the burnup.
 
-Two isotopes that 
+As mentioned, many of the nuclides of interest are linked to multiple reactor
+operation parameters of interest, so it can be difficult to use a small number
+of these nuclide signatures to effectively determine all four parameters.
+Reference \cite{skutnik_2016} covers the degeneracy of the solution space of
+burnup, enrichment, and time since irradiation when only one nuclide is
+measured.  Tested were long-lived nuclides such as ${}^{137}\text{Cs}$,
+${}^{154}\text{Eu}$, ${}^{244}\text{Cm}$ and short-lived nuclides such as
+${}^{134}\text{Cs}$, ${}^{144}\text{Ce}$, ${}^{106}\text{Ru}$. The degeneracy
+of the solution space decreases as more nuclides are considered. 
+
+It can also be useful to use ratios of nuclides to address the issue of
+decoupling the dependence from one parameter so that the ratio can be used as a
+signature for another parameter.  Reference \cite{mll_method} has a list of 10
+ratios used with exactly this purpose.  For example, ${}^{137}\text{Cs}$ could
+be a useful signature for time since irradiation, but it is also heavily linked
+to burnup.  Since ${}^{133}\text{Cs}$ is also a burnup indicator but is stable,
+taking their ratio removes the dependence on burnup and allows that quantity to
+be used as a time since irradiation signature.  Reactor type determination (in
+this reference, distinguishing \glspl{LWR} from fast breeder reactors) is
+similarly done with the ratio ${}^{150}\text{Sm}/{}^{149}\text{Sm}$.  The
+fission product ${}^{149}\text{Sm}$ is a neutron poison, meaning it easily
+captures many of the thermal neutrons (but not fast neutrons) that are capable
+of producing fissions in \glspl{LWR}. Thus, the ratio is dependent on the
+burnup but with a strong dependency on the neutron energy spectrum, allowing
+easy distinction between reactor types that depend on fast versus thermal
+neutrons. 
+
