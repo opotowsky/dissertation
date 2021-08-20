@@ -299,18 +299,17 @@ test database) for the \textit{k}-nearest neighbors, decision trees, and
   \label{fig:sfcoburn}
 \end{figure}
 
-\todo[inline]{BL: PHWR will build up Pu much more quickly so failure to detect
-PHWR will cause problems.} The large ranges seen for the mean-imputed nulls
-test set in Figure \ref{fig:burnimppct} are because of large overpredictions of
-low burnups ($< 10\:GWd/MTU$), since a small number in the denominator will
-yield a high percentage error. A large subset of the low burnup cases are
-\gls{PHWR}s.  Their burnups are also unlikely to be predicted well because of
-the inability of \gls{PHWR} reactors to be represented accurately with this
-methodology.  Removing the \gls{PHWR} reactors from the results removes all
-outliers with percentage errors larger than 1750\%. That is still a very high
-relative error, but there are other low burnup cases in the database.  Removing
-\gls{PHWR}s does not significantly alter the zero-imputed nulls results in
-Figure \ref{fig:burn0pct}.
+The large ranges seen for the mean-imputed nulls test set in Figure
+\ref{fig:burnimppct} are because of large overpredictions of low burnups ($<
+10\:GWd/MTU$), since a small number in the denominator will yield a high
+percentage error. A large subset of the low burnup cases are \gls{PHWR}s.
+Their burnups are also unlikely to be predicted well because of the inability
+of \gls{PHWR} reactors to be represented accurately with this methodology.
+Removing the \gls{PHWR} reactors from the results removes all outliers with
+percentage errors larger than 1750\%. That is still a very high relative error,
+but there are other low burnup cases in the database.  Removing \gls{PHWR}s
+does not significantly alter the zero-imputed nulls results in Figure
+\ref{fig:burn0pct}.
 
 The range of percentage errors for the zero-imputed nulls test set in Figure
 \ref{fig:burn0pct} tells a different story. There is only one case (an

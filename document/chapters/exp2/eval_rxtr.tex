@@ -28,15 +28,15 @@ information, and it is interesting that this pattern did not emerge with the
 detectors' performances in Figure \ref{fig:rxtr}.  Instead, for the auto and
 short energy windows lists, the \textit{k}-nearest neighbors performance is
 below \gls{MLL} calculations and above decision trees (except in the two unique
-cases in the auto energy windows list).  For the lab-based and portable
-\gls{HPGe}s, \textit{k}-nearest neighbors has the worst performance among all
-three algorithms for the auto and long lists, and drastically so for the two
-unique auto list cases of extremely poor performance.  In terms of the
-baseline, there is only one instance of \textit{k}-nearest neighbors being
-above it: the lab-based \gls{HPGe} with the short energy windows list.
-\todo[inline]{I find this para confusing. It seems to start by saying it is
-interesting that kNN isnt doing as bad then end by saying that kNN is doing
-terribly}
+cases in the auto energy windows list).  This broader trend does not hold for
+some specific cases, however.  For the lab-based and portable \gls{HPGe}s,
+\textit{k}-nearest neighbors has the worst performance among all three
+algorithms for the auto and long lists, and drastically so for the two unique
+auto list cases of extremely poor performance. In terms of the baseline, there
+is one instance of \textit{k}-nearest neighbors being above it: the lab-based
+\gls{HPGe} with the short energy windows list. This is the only instance of a
+scikit-learn algorithm out-performing the baseline for this entire set of
+results.
 
 There are no detector-based training sets at all for which decision trees
 performs above the baseline. For the last four detectors on the horizontal axis

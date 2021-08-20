@@ -36,18 +36,26 @@ These approaches within nuclear forensics can vary based on whether the
 material being collected is pre-detonation (e.g., \gls{SNF}) or post-detonation
 (e.g., bomb debris). 
 
-In the pre-detonation realm, this project focuses on statistical methods to
-model the production history of a nuclear material using measurements of
-nuclides present in \gls{SNF}.  The \gls{SNF} is identified in this work by
-focusing on four characteristics in particular that can potentially provide
-material attribution: reactor type, burnup, initial \gls{U235} enrichment, and
-time since fuel irradiation. 
+As mentioned, nuclear forensics is deployed as a response to a nuclear
+incident. Given that the incident could vary from a weapon detonation to an
+unknown type of nuclear material being found outside of regulatory control,
+there are many approaches that a nuclear forensics investigation could take.
+The incident type that this work addresses is that of interception of intact
+\gls{SNF}, perhaps being transported or smuggled into a country. The design of
+the study reflects this scenario, where there is a small amount of spent fuel
+from a common commercial reactor. This could be on its way to being reprocessed
+to extract the plutonium (in certain cases where there is enough fissile
+material), or it could be intended for a "dirty bomb", or radiological
+dispersal device. 
+
+This project uses statistical methods to model the production history of a
+nuclear material using measurements of nuclides present in \gls{SNF}. The
+\gls{SNF} is identified in this work by focusing on four characteristics in
+particular that can potentially provide material attribution: reactor type,
+burnup, initial \gls{U235} enrichment, and time since fuel irradiation. 
 \begin{enumerate}
   \item The \textbf{reactor type} is classified as one of the three most common
         types of commercial power reactors: \gls{PWR}, \gls{BWR}, or \gls{PHWR}.
-        These three are chosen in order to simplify the nature of this 
-        exploratory study, and there are several reactor types excluded.
-        \todo{Paul check. BL wanted a little more context here}
   \item The \textbf{burnup} describes how much energy was produced by the fuel,
         taking on the units megawatt-days (or gigawatt-days) per metric 
         ton of heavy metal (or initial uranium); it is referred to in this work 
@@ -59,6 +67,19 @@ time since fuel irradiation.
         fuel has been out of the reactor core, and is measured usually in $days$,
         but sometimes $years$. It may also be referred to as cooling time. 
 \end{enumerate}
+
+While the methodology in this exploratory work is limited to the scenario where
+the \gls{SNF} in question is from three chosen types of common commercial power
+reactors (\glspl{PWR}, \glspl{BWR}, \glspl{PHWR}), it could be expanded or
+applied to other scenarios. In the pre-detonation realm with \gls{SNF}, there
+are several commercial reactor types not considered, there are small modular
+reactors in development that would be of interest, and there is also the
+exclusion of research reactors. Moving beyond \gls{SNF}, other nuclear
+materials are sometimes of interest, e.g., \gls{UOC} or highly enriched
+non-irradiated uranium. This approach could also be applied to post-detonation
+as well, perhaps using measured swipe samples from a weapons detonation to
+answer questions about the where the nuclear material in the weapon may have
+come from. 
 
 \section{Motivation}
 \label{sec:motivation}

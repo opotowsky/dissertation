@@ -141,12 +141,6 @@ so is not indicative of a real decision tree.
   \caption[Example of a decision tree]
           {Example of a decision tree process, where maximum tree depth is 
            limited to 3.}
-\todo[inline]{BL: as this is a white box method it would be possible to draw
-physical insight into what is going on. E.g., the Sm being low indicates either
-a low fission cross section or a high Sm cross-section - possibly the most
-thermalized samples. (PHWR or the bottom of a BWR stack?) Pu239 is then burnup
-related giving the PHWR/BWR split. It is less clear at first glance what is
-going on with Am242. AO: address this after prev todo} 
   \label{fig:dtr}
 \end{figure}
 
@@ -154,39 +148,52 @@ In Figure \ref{fig:dtr}, each node has the following information: the splitting
 criterion, Gini impurity value, percentage of samples in the training set in
 the node, a value list (explained below), and the majority class present in the
 node.  In the visualization, the shading of the colors in the tree are bolder
-for there being a higher fraction of a single class.
+for there being a higher fraction of a single class. As a method that produces
+a model that can be understood by humans, the reasoning for the splits is also
+discussed.
 
 The first split is determined to occur at the feature ${}^{149}\text{Sm}$ on
 whether the nuclide measurement is above or below a value of $-1.33$. Note that
 this value is negative because of the scaling process the training set is put
-through, described in Section \ref{sec:statmodel1}.  The majority class at this
-node is \gls{BWR} which is expected since the training set is 72\% \gls{BWR}.
-The values list indicates the fraction of each class in the node, which is
-alphabetically ordered by \texttt{[BWR, PHWR, PWR]}. It is even among the three
-because the class weights are balanced.  This splitting criterion provides a
-Gini impurity score of 0.67, which represents the minimum Gini impurity of all
-the candidate splits, but also indicates there are multiple classes represented
-in this node (again, expected).  It would be 0 if there were only one class in
-the node.  
+through, described in Section \ref{sec:statmodel1}. This is an unsurprising
+split because the creation of ${}^{149}\text{Sm}$ is heavily dependent on the
+neutron energy spectrum and thus helps distinguish reactor types. The majority
+class at this node is \gls{BWR} which is expected since the training set is
+72\% \gls{BWR}.  The values list indicates the fraction of each class in the
+node, which is alphabetically ordered by \texttt{[BWR, PHWR, PWR]}. It is even
+among the three because the class weights are balanced.  This splitting
+criterion provides a Gini impurity score of 0.67, which represents the minimum
+Gini impurity of all the candidate splits, but also indicates there are
+multiple classes represented in this node (again, expected).  It would be 0 if
+there were only one class in the node.  
 
 The next level of the decision tree in Figure \ref{fig:dtr} has two nodes. The
 top node has a splitting criterion of whether ${}^{239}\text{Pu}$ is above or
-below a value of $-0.91$.  This node contains a majority of the \gls{PHWR}
-class, but also a fraction of 0.08 of the \gls{BWR} class.  Even though the
-\gls{PHWR} class is only 1.5\% of the training set (see Section
-\ref{sec:training1}), this node has 7.9\% of the training set samples.  The
-lower node has a splitting criterion of whether ${}^{242m}\text{Am}$ is above
-or below 0.68.  The remaining 92.1\% of the training set is in this node, and
-there is only a slight majority of the (balanced) \gls{PWR} class, which is why
-the shading is nearly white. The Gini impurity for the top node is 0.15. This
-is much lower than the Gini impurity of 0.5 for the bottom node, which is more
-evenly split between two classes. The next level split for the top node has
-fractions of 0.97 \gls{PHWR} and 1.0 \gls{BWR} in the next two nodes, with Gini
-impurities of 0.06 and 0.0, respectively. This is a rapid approach to zero
-considering the size of the training set and number of features. The next level
-split for the bottom node made modest improvements over the Gini impurity of
-0.5, and would need to go much deeper to properly classify \gls{PWR} versus
-\gls{BWR}.
+below a value of $-0.91$.  This is also an unsurprising choice for the decision
+tree because its creation and destruction is heavily dependent on the burnup,
+since \glspl{PHWR} have higher ${}^{239}\text{Pu}$ due to their lower burnup.
+This node contains a majority of the \gls{PHWR} class, but also a fraction of
+0.08 of the \gls{BWR} class.  Even though the \gls{PHWR} class is only 1.5\% of
+the training set (see Section \ref{sec:training1}), this node has 7.9\% of the
+training set samples.  The next level split for the top node has fractions of
+0.97 \gls{PHWR} and 1.0 \gls{BWR} in the next two nodes, with Gini impurities
+of 0.06 and 0.0, respectively. This is a rapid approach to zero considering the
+size of the training set and number of features. 
+
+The lower node has a splitting criterion of whether ${}^{242m}\text{Am}$ is
+above or below 0.68.  This one is less obvious of a choice, but is in the decay
+chain of ${}^{241}\text{Pu}$ (if it does not fission), which is created by a
+series of neutron captures.  This links ${}^{242m}\text{Am}$ to a dependence on
+the neutron energy spectrum and therefore makes it somewhat capable of
+distinguishing reactor type.  The remaining 92.1\% of the training set is in
+this node, and there is only a slight majority of the (balanced) \gls{PWR}
+class, which is why the shading is nearly white. The Gini impurity for the top
+node is 0.15.  This is much lower than the Gini impurity of 0.5 for the bottom
+node, which is more evenly split between two classes.  The next level split for
+the bottom node made modest improvements over the Gini impurity of 0.5, and
+would need to go much deeper to properly classify \gls{PWR} versus \gls{BWR}.
+This suggests that ${}^{242m}\text{Am}$ is only a moderate reactor type
+indicator.
 
 \subsubsection{Maximum Log-Likelihood Calculations}
 

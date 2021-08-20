@@ -93,8 +93,6 @@ or statistical methods.
 \subsection{Nuclear Forensics as an Inverse Problem}
 \label{sec:inverse}
 
-\todo[inline]{physics discussion goes in this section}
-
 Nuclear forensics is a traditional inverse problem, which has been well
 documented mathematically and applied to a range of scientific disciplines.
 Understanding inverse problem theory can help systematically define the
@@ -138,19 +136,20 @@ This can be done by directly inverting the model for a solution, or it can be
 done from first principles or empirical relationships, which typically requires
 iterative forward modeling that converges upon a solution. These two approaches
 (direct inversion and forward modeling) are compared in some nuclear forensics
-work in Reference \cite{inverse_compare}, \todo[inline]{BL: a little
-elaboration on Ref might be worthwhile} where the authors are discussing the
-discrimination capability of their approach as it applies to plutonium powder
-from reprocessing. While the data set in the paper did not provide enough
-measurements to effectively discriminate, it is interesting to compare both
-inverse problem approaches in the same work.  
-%\todo[inline]{they lead me to believe statistical approaches == direct
-%inversion as a whole. Is that what I'm doing?! I thought direct inversion was
-%a stricter definition.} 
+work in Reference \cite{inverse_compare}, where the authors are discussing the
+discrimination capability of their approaches as it applies to plutonium powder
+from reprocessing.  For forward modeling, they included two different linear
+models to obtain the parameters of interest: a frequentist linear model and a
+Bayesian linear model. For direct inversion, they employed principal components
+regression and partial least squares regression. While the data set in the
+paper did not provide enough measurements to effectively discriminate, it is
+interesting to compare both inverse problem approaches in the same work. The
+authors point out that finding agreement using several methods can be important
+to proving the predictions are robust. 
 
-There is a suite of work approaching the nuclear forensics problem with an
-iterative forward modeling approach using \gls{INDEPTH}, a tool developed at
-Oak Ridge National Laboratory \cite{grogan_sensitivity1, grogan_sensitivity2,
+Another example of iterative forward modeling being used in a nuclear forensics
+context is in a suite of work using \gls{INDEPTH}, a tool developed at Oak
+Ridge National Laboratory \cite{grogan_sensitivity1, grogan_sensitivity2,
 grogan_indepth_2018, weber_2006, weber_2010, weber_2011}.  An initial report on
 the methodology discusses the approach \gls{INDEPTH} uses \cite{weber_2006} and
 a later report discusses \gls{INDEPTH} with more detailed examples
@@ -180,7 +179,57 @@ approximately 1\% error.
 
 The iterative forward modeling approach has much merit, but another approach is
 to use statistical methods to determine relationships between nuclide
-measurements and reactor operation parameters. The background for this is
-introduced next in Section \ref{sec:mlback} and discussed within the context of
-nuclear forensics in Section \ref{sec:stats4nf}.
+measurements and reactor operation parameters. According to Reference
+\cite{inverse_compare} in which forward modeling was compared against direct
+inversion methods, the statistical approach in this work is also considered
+direct inversion. The background for this is introduced next in Section
+\ref{sec:mlback} and is later discussed within the context of nuclear forensics
+in Section \ref{sec:stats4nf}.
 
+\subsection{Nuclide Signatures for Nuclear Forensics of Spent Fuel}
+\label{sec:nucs}
+
+This work focuses on the nuclides created in the fuel (or pre-existing ones
+that remain in the fuel) from its time in a nuclear reactor as the forensic
+signatures of interest. Thus, what follows is a discussion on how some nuclides
+can provide information about reactor type, burnup, \gls{U235} enrichment, and
+time since irradiation.  Since the reactors considered here are common
+commerial reactors that use uranium-oxide fuel, this configuration is the focus
+and not, e.g., mixed-oxide fuel from reprocessing that could be used in a
+\gls{LWR}.
+
+The groups of nuclides tracked fall into two categories: actinides and fission
+products. There are isotopes of both actinides and fission products tracked for
+\gls{SNF} attribution in this work.  Few actinides are naturally occuring
+(e.g., thorium and uranium), and the rest are created in the reactor core
+through neutron captures of other actinides that do not lead to fission.
+Fission products are the fragments of fissile isotopes (they can also be
+created by neutron capture of the fragments, or radioactive decay of either of
+these), which is usually \gls{U235}, but could be ${}^{239}\text{Pu}$ or
+${}^{241}\text{Pu}$ (for uranium-oxide fuel).  The non-uranium and
+non-plutonium actinides are present in much lower quantities than the fission
+products.
+
+In \gls{SNF}, the buildup of actinides is dependent on neutron capture (or the
+lack thereof) of (initially) uranium isotopes and the buildup of fission
+products is dependent on (mostly) \gls{U235} fissions. Thus, the neutron energy
+spectrum in the reactor affects the levels of both actinides and fission
+products.  This allows the distinguishing of different reactor types.  Their
+creation is of course also linked to the initial enrichment and initial amounts
+of various uranium isotopes via the number of fissions that can occur.  The
+burnup of the fuel also impacts the amount of these nuclides, since more are
+created as the fuel remains in the reactor core longer.  The radionuclides with
+long half lives also can contribute to the time since irradiation
+determination. While some nuclides might be a strong contributor to the
+knowledge of one of the parameters, it is more common that they contribute
+information about multiple. 
+
+The buildup of ${}^{239}\text{Pu}$ is an example, where it is formed by the
+neutron capture of ${}^{238}\text{U}$. This is dependent on the neutron energy,
+so gives some indication of reactor type, but it is also dependent on the
+amount of ${}^{238}\text{U}$ in the fuel, which gives some indication of
+initial \gls{U235} enrichment. It also will capture neutrons and make higher
+mass plutonium isotopes or fission the longer the fuel is in the reactor core.
+Therefore, it is also linked to the burnup.
+
+Two isotopes that 

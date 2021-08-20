@@ -170,15 +170,14 @@ Despite many of the nuclides that are included in the short and long energy
 windows lists having known poor simulation quality \cite{pwr_benchmark_2010,
 skutnik_2021}, the burnup prediction clearly had enough information to do well.
 The poor enrichment prediction is likely because the detected radionuclides are
-not enrichment indicators, although ${}^{152}\textit{Eu}$ is and should be
-included in the long energy windows list.\todo{152Eu was in top feature impt
-list} The time steps in the training set being about $100\:days$ was a limiting
-factor in its quality of prediction; many of the \gls{MAE} values were around
-this level in the second experiment. 
+not enrichment indicators, although ${}^{152}\text{Eu}$ is and should be
+included in the long energy windows list. The time steps in the training set
+being about $100\:days$ was a limiting factor in its quality of prediction;
+many of the \gls{MAE} values were around this level in the second experiment. 
 
-\todo[inline]{I think that co-detection of enrichment and burnup typically
-requires a neutron count as well as a gamma scan so it is unsurprising that
-gamma alone is struggling.}
+\todo[inline]{Paul, is this OK to not address?  BL: I think that co-detection
+of enrichment and burnup typically requires a neutron count as well as a gamma
+scan so it is unsurprising that gamma alone is struggling.}
 
 There is a clear leader throughout all of the results in terms of being a
 consistent best performer: the \gls{MLL} calculations. The reason it can
@@ -355,12 +354,14 @@ Figure \ref{fig:knownrxtr} shows that for some combinations of prediction label
 and algorithm, there is an improvement in the regression performance for the
 \gls{PHWR} class, and less so for some \gls{PWR} cases.  (There was no
 significant improvement seen for any reactor type/regression case combination
-for the \gls{MLL} calculations.) Given the majority of the database is
-comprised of \gls{BWR} entries, the improvement is not surprising; it is the
-lack of improvement in the other cases that is unexpected. Either way, it makes
-sense to first determine the reactor type before performing the other
-predictions if not using the \gls{MLL} approach. One example of this being
-done is in Reference \cite{serial_ml}.
+for the \gls{MLL} calculations.) It is important to attribute \gls{PHWR} fuels,
+since plutonium builds up faster in these reactors and so they pose a larger
+risk than other typical commerial \gls{SNF}.  Given the majority of the
+database is comprised of \gls{BWR} entries, the improvement is not surprising;
+it is the lack of improvement in the other cases that is unexpected. Either
+way, it makes sense to first determine the reactor type before performing the
+other predictions if not using the \gls{MLL} approach. One example of this
+being done is in Reference \cite{serial_ml}.
 
 Performing regression after first classifying the reactor type means much care
 should be taken to have a robust reactor type classification algorithm. One way
